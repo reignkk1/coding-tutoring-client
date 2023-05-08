@@ -1,5 +1,5 @@
 function App() {
-  return <div className="App">게시물 페이지 개발</div>;
+  return <div className="App">깃플로우 테스트중</div>;
 }
 
 export default App;
