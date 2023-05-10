@@ -1,3 +1,5 @@
+import Wrapper from "../components/common/Wrapper";
+
 export default function Home() {
-  return <h1>홈 화면</h1>;
+  return <Wrapper>홈 화면</Wrapper>;
 }

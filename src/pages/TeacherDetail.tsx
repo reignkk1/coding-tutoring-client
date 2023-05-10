@@ -1,3 +1,5 @@
+import Wrapper from "../components/common/Wrapper";
+
 export default function TeacherDetail() {
-  return <h1>선생님 상세보기</h1>;
+  return <Wrapper>선생님 상세보기</Wrapper>;
 }
