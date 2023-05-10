@@ -11,6 +11,7 @@ import StudentDetail from "./pages/StudentDetail";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import NotFound from "./pages/NotFound";
+import GlobalStyles from "./styles/GlobalStyles";
 
 function App() {
   const Layout = () => {
@@ -69,7 +70,12 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <GlobalStyles />
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;

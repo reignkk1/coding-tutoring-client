@@ -1,3 +1,5 @@
+import Wrapper from "../components/common/Wrapper";
+
 export default function Notice() {
-  return <h1>공지사항</h1>;
+  return <Wrapper>공지사항</Wrapper>;
 }

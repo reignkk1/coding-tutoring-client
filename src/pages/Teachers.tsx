@@ -1,3 +1,5 @@
+import Wrapper from "../components/common/Wrapper";
+
 export default function Teachers() {
-  return <h1>선생님들</h1>;
+  return <Wrapper>선생님들</Wrapper>;
 }
