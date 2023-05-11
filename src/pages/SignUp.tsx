@@ -1,97 +1,113 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import Wrapper from "../components/common/Wrapper";
+import { Form, FormContainer } from "./SignIn";
 
-export default function SignUp(): JSX.Element {
-  return (
-    <Container>
-      <Form>
-        <h3>회원가입</h3>
-        <div className="social">
-          {/*아이콘을 추가 예정*/}
-          <div>구글</div>
-          <div>카카오</div>
-        </div>
-        <p>이메일을 사용해 회원가입하기</p>
-        <input type="text" placeholder="Name" />
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
-        <input type="password" placeholder="Confirm Password" />
-        <button>회원가입</button>
-      </Form>
-
-      <p className="aboutSign">
-        계정이 있으신가요? <Link to="/signin">로그인</Link>
-      </p>
-    </Container>
-  );
+interface Inputs {
+  nickname: string;
+  email: string;
+  password: string;
 }
 
-const Form = styled.form`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #697a79;
+interface Valid {
+  email: boolean;
+  password: boolean;
+}
 
-  h3 {
-    font-size: 2rem;
-  }
+export default function SignUp(): JSX.Element {
+  const [inputs, setInputs] = useState<Inputs>({
+    nickname: "",
+    email: "",
+    password: "",
+  });
 
-  .social {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-  }
+  const [valid, setValid] = useState<Valid>({
+    email: false,
+    password: false,
+  });
 
-  p {
-    font-size: 1rem;
-    margin-bottom: 0; //border-box가 아니라 그런듯 추후 삭제
-  }
+  const [formIsValid, setFormIsValid] = useState(false);
 
-  input {
-    width: 250px;
-    background-color: #f0f4f3;
-    border: none;
-    margin-top: 1rem;
-    padding: 0.8rem 1rem;
-    color: #697a79;
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log("유효성 검사중");
+      setFormIsValid(inputs.email.includes("@") && inputs.password.length >= 8);
+    }, 500);
 
-    &::placeholder {
-      opacity: 0.8;
+    return () => {
+      console.log("클린업");
+      clearTimeout(identifier);
+    };
+  }, [inputs.email, inputs.password]);
+
+  const changeHandler = (e: React.FormEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target as HTMLInputElement;
+    setInputs({ ...inputs, [name]: value });
+  };
+
+  const validHandler = (e: React.FormEvent<HTMLInputElement>): void => {
+    const { name } = e.target as HTMLInputElement;
+    if (name === "email") {
+      setValid({ ...valid, [name]: inputs.email.includes("@") });
+    } else {
+      setValid({ ...valid, [name]: inputs.password.length >= 8 });
     }
-  }
+  };
 
-  button {
-    border-radius: 1.2rem;
-    border: none;
-    background-color: #3ab19b;
-    color: #ffffff;
-    padding: 0.8rem 3rem;
-    margin-top: 1.5rem;
-    transition: transform 0.1s ease-in;
+  const submitHandler = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+  };
 
-    &:hover {
-      transform: scale(0.95);
-    }
-  }
-`;
+  return (
+    <Wrapper>
+      <FormContainer>
+        <Form onSubmit={submitHandler}>
+          <h3>회원가입</h3>
+          <div className="social">
+            {/*아이콘을 추가 예정*/}
+            <div>구글</div>
+            <div>카카오</div>
+          </div>
+          <p>이메일을 사용해 회원가입하기</p>
+          <input
+            type="text"
+            name="nickname"
+            value={inputs.nickname}
+            onChange={changeHandler}
+            placeholder="닉네임을 입력해주세요."
+          />
+          <input
+            type="email"
+            name="email"
+            value={inputs.email}
+            onChange={changeHandler}
+            onBlur={validHandler}
+            placeholder="이메일을 입력해주세요."
+          />
+          {!valid.email && <p className="warn">이메일 형식을 맞춰주세요.</p>}
+          <input
+            type="password"
+            name="password"
+            value={inputs.password}
+            onChange={changeHandler}
+            onBlur={validHandler}
+            placeholder="비밀번호를 입력해주세요. (8자 이상)"
+          />
+          {!valid.password && <p className="warn">8자리 이상 입력해주세요.</p>}
 
-const Container = styled.div`
-  min-width: 400px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 2rem;
+          <button
+            type="submit"
+            disabled={!formIsValid}
+            className={`${!formIsValid && "disabled"}`}
+          >
+            회원가입
+          </button>
+        </Form>
 
-  .aboutSign {
-    font-size: 0.8rem;
-    color: #697a79;
-    margin-top: 1.5rem;
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-  }
-`;
+        <p className="aboutSign">
+          계정이 있으신가요? <Link to="/signin">로그인</Link>
+        </p>
+      </FormContainer>
+    </Wrapper>
+  );
+}
