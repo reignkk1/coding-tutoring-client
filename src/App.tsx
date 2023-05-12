@@ -3,8 +3,6 @@ import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import User from "./pages/User";
-import Teachers from "./pages/Teachers";
-import Students from "./pages/Students";
 import Notice from "./pages/Notice";
 import TeacherDetail from "./pages/TeacherDetail";
 import StudentDetail from "./pages/StudentDetail";
@@ -12,6 +10,7 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import NotFound from "./pages/NotFound";
 import GlobalStyles from "./styles/GlobalStyles";
+import FindPage from "./pages/FindPage";
 
 function App() {
   const Layout = () => {
@@ -48,11 +47,11 @@ function App() {
         },
         {
           path: "/teachers",
-          element: <Teachers />,
+          element: <FindPage category="teachers" />,
         },
         {
           path: "/students",
-          element: <Students />,
+          element: <FindPage category="students" />,
         },
         {
           path: "/notice",
