@@ -11,6 +11,14 @@ ${reset}
 a {
     text-decoration:none;
 }
+
+button{
+    background-color: inherit;
+    padding: 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
 `;
 
 export default GlobalStyles;
