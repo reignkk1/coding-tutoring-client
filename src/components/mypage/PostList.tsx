@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 interface PostListProps {
   post: {
     id: number;
+    category: string;
     subject: string;
     intro: string;
     education?: string;
@@ -15,13 +17,30 @@ interface PostListProps {
 }
 
 export default function PostList({ post }: PostListProps) {
-  const { id, subject, intro, education, sex, age, grade, relation, address } =
-    post;
+  const {
+    id,
+    category,
+    subject,
+    intro,
+    education,
+    sex,
+    age,
+    grade,
+    relation,
+    address,
+  } = post;
+  const navigate = useNavigate();
+
   return (
-    <PostListContainer>
+    <PostListContainer onClick={() => navigate(`/view/${category}/${id}`)}>
       <p className="subject">{subject}</p>
       <p className="intro">{intro}</p>
-      <p>{education}</p>
+      {category === "students" && <p>{education}</p>}
+      {category === "teachers" && (
+        <p>
+          {sex}/{age}/{grade}/{relation}
+        </p>
+      )}
       <p>{address}</p>
     </PostListContainer>
   );

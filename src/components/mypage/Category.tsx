@@ -2,18 +2,18 @@ import { styled } from "styled-components";
 
 interface CategoryProps {
   selected: string;
-  onClick: (c: { name: string; text: string }) => void;
+  changeSelected: (categoryName: string) => void;
 }
-export default function Category({ selected, onClick }: CategoryProps) {
+export default function Category({ selected, changeSelected }: CategoryProps) {
   const categories = [
-    { name: "teacher", text: "선생님을 찾아요" },
-    { name: "student", text: "학생을 찾아요" },
+    { name: "teachers", text: "선생님을 찾아요" },
+    { name: "students", text: "학생을 찾아요" },
   ];
 
   return (
     <CategoryContianer>
       {categories.map((c) => (
-        <li onClick={() => onClick(c)}>
+        <li onClick={() => changeSelected(c.name)}>
           <button className={`${selected === c.name && "selected"}`}>
             {c.text}
           </button>

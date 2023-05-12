@@ -4,14 +4,15 @@ import { styled } from "styled-components";
 import PostList from "../components/mypage/PostList";
 import Category from "../components/mypage/Category";
 
-export default function MyPage() {
+export default function MyPage(): JSX.Element {
+  //임의로 만든 데이터
   const userData = {
     name: "한현",
     img: "https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
     posts: [
       {
         id: 1,
-        category: "student",
+        category: "students",
         subject: "수학",
         intro: "대원외고 졸 수학/영어 수업",
         education: "대학교 화학 졸업",
@@ -19,7 +20,7 @@ export default function MyPage() {
       },
       {
         id: 2,
-        category: "student",
+        category: "students",
         subject: "물리",
         intro: "대원외고 졸 수학/영어 수업",
         education: "대학교 화학 졸업",
@@ -27,7 +28,7 @@ export default function MyPage() {
       },
       {
         id: 3,
-        category: "student",
+        category: "students",
         subject: "공통과학",
         intro: "대원외고 졸 수학/영어 수업",
         education: "대학교 화학 졸업",
@@ -35,7 +36,7 @@ export default function MyPage() {
       },
       {
         id: 1,
-        category: "teacher",
+        category: "teachers",
         subject: "피아노",
         intro: "성인이고 취미로 배우고 싶어요",
         sex: "여",
@@ -46,7 +47,7 @@ export default function MyPage() {
       },
       {
         id: 2,
-        category: "teacher",
+        category: "teachers",
         subject: "중국어",
         intro: "HSK 3급 자격증 준비하고 있습니다.",
         sex: "여",
@@ -57,13 +58,13 @@ export default function MyPage() {
       },
     ],
   };
-  const [selected, setSelected] = useState<string>("teacher");
+  const [selected, setSelected] = useState("teachers");
   const [posts, setPosts] = useState(
-    userData.posts.filter((post) => post.category === "teacher")
+    userData.posts.filter((post) => post.category === "teachers")
   );
 
-  const handleClick = (c: { name: string; text: string }) => {
-    setSelected(c.name);
+  const changeSelected = (categoryName: string) => {
+    setSelected(categoryName);
   };
 
   useEffect(() => {
@@ -85,7 +86,7 @@ export default function MyPage() {
           </div>
         </Profile>
         <Find>
-          <Category selected={selected} onClick={handleClick} />
+          <Category selected={selected} changeSelected={changeSelected} />
           <Posts>
             {posts.map((post) => (
               <PostList key={post.id} post={post} />
@@ -100,7 +101,7 @@ export default function MyPage() {
 const Container = styled.div`
   width: 70%;
   margin-inline: auto;
-  padding: 2rem;
+  padding-block: 4rem;
   display: flex;
   flex-direction: column;
 `;
