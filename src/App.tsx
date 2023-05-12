@@ -3,6 +3,9 @@ import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import User from "./pages/User";
+import MyPage from "./pages/MyPage";
+import Teachers from "./pages/Teachers";
+import Students from "./pages/Students";
 import Notice from "./pages/Notice";
 import TeacherDetail from "./pages/TeacherDetail";
 import StudentDetail from "./pages/StudentDetail";
@@ -42,8 +45,8 @@ function App() {
           element: <SignIn />,
         },
         {
-          path: "/user/:userId",
-          element: <User />,
+          path: "/view/:me",
+          element: <MyPage />,
         },
         {
           path: "/teachers",
@@ -58,11 +61,11 @@ function App() {
           element: <Notice />,
         },
         {
-          path: "/teachers/:postId",
+          path: "/view/teachers/:id",
           element: <TeacherDetail />,
         },
         {
-          path: "/students/:postId",
+          path: "/view/students/:id",
           element: <StudentDetail />,
         },
       ],
