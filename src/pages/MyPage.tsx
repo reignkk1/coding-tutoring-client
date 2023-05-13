@@ -98,7 +98,7 @@ export default function MyPage(): JSX.Element {
   );
 }
 
-const Container = styled.div`
+export const Container = styled.div`
   width: 70%;
   margin-inline: auto;
   padding-block: 4rem;
@@ -123,7 +123,7 @@ const Profile = styled.div`
   }
 `;
 
-const ImgContainer = styled.div`
+export const ImgContainer = styled.div`
   width: 8rem;
   height: 8rem;
   border-radius: 100%;
