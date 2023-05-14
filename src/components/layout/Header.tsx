@@ -7,6 +7,7 @@ const Container = styled.header`
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   position: fixed;
   background-color: white;
+  z-index: 999;
 `;
 
 const NavBar = styled.nav`

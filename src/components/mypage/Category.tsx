@@ -6,8 +6,8 @@ interface CategoryProps {
 }
 export default function Category({ selected, changeSelected }: CategoryProps) {
   const categories = [
-    { name: "teachers", text: "선생님을 찾아요" },
-    { name: "students", text: "학생을 찾아요" },
+    { name: "teachers", text: "선생님을 찾아요 게시판" },
+    { name: "students", text: "학생을 찾아요 게시판" },
   ];
 
   return (

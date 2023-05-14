@@ -12,7 +12,7 @@ export default function MyPage(): JSX.Element {
     posts: [
       {
         id: 1,
-        category: "students",
+        category: "teachers",
         subject: "수학",
         intro: "대원외고 졸 수학/영어 수업",
         education: "대학교 화학 졸업",
@@ -20,7 +20,7 @@ export default function MyPage(): JSX.Element {
       },
       {
         id: 2,
-        category: "students",
+        category: "teachers",
         subject: "물리",
         intro: "대원외고 졸 수학/영어 수업",
         education: "대학교 화학 졸업",
@@ -28,7 +28,7 @@ export default function MyPage(): JSX.Element {
       },
       {
         id: 3,
-        category: "students",
+        category: "teachers",
         subject: "공통과학",
         intro: "대원외고 졸 수학/영어 수업",
         education: "대학교 화학 졸업",
@@ -36,7 +36,7 @@ export default function MyPage(): JSX.Element {
       },
       {
         id: 1,
-        category: "teachers",
+        category: "students",
         subject: "피아노",
         intro: "성인이고 취미로 배우고 싶어요",
         sex: "여",
@@ -47,7 +47,7 @@ export default function MyPage(): JSX.Element {
       },
       {
         id: 2,
-        category: "teachers",
+        category: "students",
         subject: "중국어",
         intro: "HSK 3급 자격증 준비하고 있습니다.",
         sex: "여",

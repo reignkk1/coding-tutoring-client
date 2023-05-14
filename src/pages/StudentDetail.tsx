@@ -11,17 +11,24 @@ export default function TeacherDetail() {
     setSelected(categoryName);
   };
   const post = {
-    name: "윤스맘",
+    userNum: 1087400,
+    nickName: "윤스맘",
+    name: "이윤화",
     img: "https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    id: 1,
-    category: "teachers",
-    subject: "영어",
-    intro: "고1 영어 내신 과외",
     sex: "여",
     age: "50대 중반",
     grade: "고등학생",
     relation: "자녀",
     address: "경기도 안양시 동안구 거주",
+
+    category: "students",
+    subject: "영어",
+    request: "고1 영어 내신 과외",
+    how: "오프라인",
+    times: "주당 1회",
+    cost: "비용 협의",
+    hopeTeacher: "전문교습선생님",
+    hopeTeacherSex: "남",
   };
   return (
     <Wrapper>
@@ -31,65 +38,78 @@ export default function TeacherDetail() {
             <ImgContainer>
               <img src={post.img} alt="profile-img" />
             </ImgContainer>
-            <p>{post.name}</p>
+            <p>{post.nickName}</p>
           </div>
           <div className="right">
             <p>{post.subject}</p>
             <p>
-              {post.grade}/{post.relation}
+              {post.grade} / {post.relation}
             </p>
             <p>{post.address}</p>
             <p>
-              {post.name}/{post.sex}/{post.age}
+              {post.name} 님 / {post.sex} / {post.age}
             </p>
           </div>
         </Profile>
         <SCategory selected={selected} changeSelected={changeSelected} />
         <SectionContainer>
           <Section id="request">
-            <div>영어 문법,독해,내신 수업</div>
+            <h3>교습 요청</h3>
+            <div>{post.request}</div>
           </Section>
           <Section id="info">
             <div className="border">
+              <h3>교습 희망 정보</h3>
               <div>
-                <span>교습과목</span>
-                <span>영어</span>
+                <span>교습 과목</span>
+                <span>{post.subject}</span>
               </div>
               <div>
-                <span>교습수단</span>
-                <span>오프라인 교습만 가능해요</span>
+                <span>교습 수단</span>
+                <span>{post.how}</span>
               </div>
               <div>
-                <span>교습횟수</span>
-                <span>교습 주당 2회</span>
+                <span>교습 횟수</span>
+                <span>{post.times}</span>
               </div>
               <div>
-                <span>교습비용</span>
-                <span>교습비용 협의</span>
+                <span>교습 비용</span>
+                <span>{post.cost}</span>
               </div>
               <div>
-                <span>희망선생님</span>
-                <span>전문교습선생님</span>
+                <span>희망 선생님</span>
+                <span>{post.hopeTeacher}</span>
+              </div>
+              <div>
+                <span>희망 선생님 성별</span>
+                <span>{post.hopeTeacherSex}</span>
               </div>
             </div>
           </Section>
           <Section id="studentInfo">
             <div className="border">
+              <h3>수강생 정보</h3>
               <div>
                 <span>사용자 NO / 닉네임</span>
-                <span>1087400 / 윤스맘</span>
+                <span>
+                  {post.userNum} / {post.nickName}
+                </span>
               </div>
               <div>
                 <span>이름/성별/연령대</span>
-                <span>이 ✱✱ 님 / 여 / 50대 초반</span>
+                <span>
+                  {post.name} 님 / {post.sex} / {post.age}
+                </span>
               </div>
               <div>
                 <span>교습 수강자 구분</span>
-                <span>고등학생 / 자녀</span>
+                <span>
+                  {post.grade} / {post.relation}
+                </span>
               </div>
               <div>
                 <span>거주지</span>
-                <span>경기도 안양시 동안구</span>
+                <span>{post.address}</span>
               </div>
             </div>
           </Section>
@@ -142,6 +162,12 @@ const Section = styled.section`
     .border {
       width: 70%;
 
+      h3 {
+        font-size: 2rem;
+        font-weight: bold;
+        padding: 2rem 1rem;
+      }
+
       div {
         display: flex;
         padding: 1rem;
@@ -163,7 +189,15 @@ const Section = styled.section`
 
   &#request {
     padding-inline: 1rem;
+
+    h3 {
+      font-size: 2rem;
+      font-weight: bold;
+      padding: 2rem 1rem 1rem 1rem;
+    }
+
     div {
+      padding: 1rem;
       line-height: 2rem;
     }
   }
