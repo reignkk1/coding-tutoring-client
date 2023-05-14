@@ -4,11 +4,11 @@ interface CategoryProps {
   selected: string;
   changeSelected: (categoryName: string) => void;
 }
-export default function Category({ selected, changeSelected }: CategoryProps) {
+export default function SCategory({ selected, changeSelected }: CategoryProps) {
   const categories = [
-    { name: "intro", text: "교습소개" },
-    { name: "info", text: "교습정보" },
-    { name: "teacherInfo", text: "선생님정보" },
+    { name: "request", text: "교습요청" },
+    { name: "info", text: "교습희망정보" },
+    { name: "studentInfo", text: "수강생정보" },
   ];
 
   return (

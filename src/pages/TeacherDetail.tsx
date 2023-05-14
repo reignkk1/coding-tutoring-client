@@ -2,10 +2,10 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import Wrapper from "../components/common/Wrapper";
 import { Container, ImgContainer } from "./MyPage";
-import Category from "../components/detail/Category";
+import TCategory from "../components/detail/TCategory";
 
 export default function TeacherDetail() {
-  const [selected, setSelected] = useState("teachers");
+  const [selected, setSelected] = useState("intro");
 
   const changeSelected = (categoryName: string) => {
     setSelected(categoryName);
@@ -37,16 +37,20 @@ export default function TeacherDetail() {
             <p>{post.address}</p>
           </div>
         </Profile>
-        <Category selected={selected} changeSelected={changeSelected} />
+        <TCategory selected={selected} changeSelected={changeSelected} />
         <SectionContainer>
           <Section id="intro">
             <div>
-              그러다가 또 하나의 길을 택했습니다. 먼저 길과 똑같이 아름답고,
-              아마 더 나은 듯도 했지요. 풀이 더 무성하고 사람을 부르는
-              듯했으니까요. 사람이 밟은 흔적은 먼저 길과 비슷하기는 했지만,
-              -중략- 오랜 세월이 흐른 다음 나는 한숨 지으며 이야기하겠지요. "두
-              갈래 길이 숲 속으로 나 있었다, 그래서 나는 - 사람이 덜 밟은 길을
-              택했고, 그것이 내 운명을 바꾸어 놓았다"라고
+              저는 여태까지 대학 입학 후 학림학원에수 의대반 전담 수학클리닉
+              조교를 하거나 국어학원에서 비문학 클리닉 조교로 일하는 등 가르쳐본
+              경험이 풍부합니다. 다만 조교로 일할 때 한 사람에게 전담하여
+              가르치기 힘들고 동시에 여러명을 케어해야만 한다는 점에서 성적
+              향상을 비약적으로 할 수 없었다는 점이 아쉬웠는데 개인과외 또는
+              그룹과외를 하게 된다면 빠른 성적향상을 기대해 볼 수 있을것
+              같습니다. 저는 현재 학과 내에서 과대를 맡고 있을만큼 친화력도
+              강하고 무조건 성과를 내기 위해 일에 대한 집착도 있습니다. 개념부터
+              탄탄히 하여 문제를 해석해나가 보이지 않던 문제의 풀이법까지 확실히
+              찾아내는 과정을 학생들에게 보여주고 싶습니다
             </div>
           </Section>
           <Section id="info">
@@ -80,28 +84,28 @@ export default function TeacherDetail() {
           <Section id="teacherInfo">
             <div className="border">
               <div>
-                <span>교습과목</span>
-                <span>수학</span>
+                <span>사용자 NO / 닉네임</span>
+                <span>1072061 / 헌신의굴거리나무53</span>
               </div>
               <div>
-                <span>교습수단</span>
-                <span>오프라인 교습만 가능해요</span>
+                <span>이름/성별/연령대</span>
+                <span>강 ✱✱ 선생님 / 남 / 20대 초반</span>
               </div>
               <div>
-                <span>교습가능지역</span>
-                <span>[서울] 송파구, 강남구, 서초구학</span>
+                <span>대학교 학력</span>
+                <span>서울대학교 기계공학과 휴학중</span>
               </div>
               <div>
-                <span>교습횟수</span>
-                <span>교습 주당 2회</span>
+                <span>대학원 학력</span>
+                <span>대학원 학력 없음</span>
               </div>
               <div>
-                <span>교습비용</span>
-                <span>교습비용 협의</span>
+                <span>거주지</span>
+                <span>서울특별시 노원구 중계동 거주</span>
               </div>
               <div>
-                <span>교습희망학생</span>
-                <span>무관</span>
+                <span>개인교습 경력</span>
+                <span>경력 2년</span>
               </div>
             </div>
           </Section>
@@ -140,15 +144,14 @@ export const Profile = styled.div`
   }
 `;
 
-const SectionContainer = styled.section`
-  background-color: yellow;
-`;
+const SectionContainer = styled.section``;
 
 const Section = styled.section`
-  background-color: yellow;
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(201, 201, 201, 0.701);
+  padding-block: 2rem;
+  font-size: 1.2rem;
 
   &#info,
   &#teacherInfo {
@@ -164,12 +167,20 @@ const Section = styled.section`
             width: 50%;
             font-weight: 700;
           }
+
+          &:nth-child(2) {
+            color: blue;
+            font-weight: bold;
+          }
         }
       }
     }
   }
 
   &#intro {
-    padding: 1rem;
+    padding-inline: 1rem;
+    div {
+      line-height: 2rem;
+    }
   }
 `;
