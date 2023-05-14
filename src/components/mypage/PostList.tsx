@@ -35,8 +35,8 @@ export default function PostList({ post }: PostListProps) {
     <PostListContainer onClick={() => navigate(`/view/${category}/${id}`)}>
       <p className="subject">{subject}</p>
       <p className="intro">{intro}</p>
-      {category === "students" && <p>{education}</p>}
-      {category === "teachers" && (
+      {category === "teachers" && <p>{education}</p>}
+      {category === "students" && (
         <p>
           {sex}/{age}/{grade}/{relation}
         </p>
