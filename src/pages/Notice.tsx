@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
 import PostBox from "../components/postPage/PostBox";
 import SearchBar from "../components/postPage/SearchBar";
