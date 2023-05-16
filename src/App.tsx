@@ -11,6 +11,7 @@ import Footer from "./components/layout/Footer";
 import NotFound from "./pages/NotFound";
 import GlobalStyles from "./styles/GlobalStyles";
 import FindPage from "./pages/FindPage";
+import Write from "./pages/Write";
 
 function App() {
   const Layout = () => {
@@ -64,6 +65,18 @@ function App() {
         {
           path: "/view/students/:id",
           element: <StudentDetail />,
+        },
+        {
+          path: "/teachers/write",
+          element: <Write />,
+        },
+        {
+          path: "/students/write",
+          element: <Write />,
+        },
+        {
+          path: "/notice/write",
+          element: <Write />,
         },
       ],
     },

@@ -4,6 +4,7 @@ import PostBox from "../components/postPage/PostBox";
 import SearchBar from "../components/postPage/SearchBar";
 import Button from "../components/postPage/Button";
 import TitleBox from "../components/postPage/TitleBox";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   margin-top: 50px;
@@ -29,6 +30,8 @@ const Subject = styled.div`
 `;
 
 export default function FindPage({ category }: { category: string }) {
+  const navigate = useNavigate();
+
   const Subjects = [
     `전체`,
     `국어`,
@@ -124,12 +127,14 @@ export default function FindPage({ category }: { category: string }) {
               }을 찾으시나요?`}
             />
           </Search>
+
           <Subject>
             {Subjects.map((subject) => (
               <Button>{subject}</Button>
             ))}
           </Subject>
         </SearchBox>
+        <Button onClick={() => navigate("write")}>✏️ 작성하기</Button>
         <PostBox posts={posts} />
       </Container>
     </Wrapper>

@@ -8,7 +8,18 @@ ${reset}
 
 // 여기에 스타일을 지정하시면 전역으로 적용 됩니다.
 
+.ql-editor{
+    font-size:20px;
+}
+.ql-editor strong{
+     font-weight:bold;
+     
+ }
 
+
+* {
+    box-sizing:border-box;
+}
 
 a {
     text-decoration:none;
