@@ -5,21 +5,24 @@ import { Form, FormContainer } from "../styles/Form";
 
 export default function SignIn(): JSX.Element {
   const {
-    submitHandler,
-    changeHandler,
-    validHandler,
     inputs,
     valid,
-    formIsValid,
+    validMsg,
+    validateEmail,
+    validatePwd,
+    validateUserId,
+    validNickname,
+    onSubmit,
   } = useForm({
+    userId: "",
+    pwd: "",
     email: "",
-    password: "",
+    nickname: "",
   });
-
   return (
     <Wrapper>
       <FormContainer>
-        <Form onSubmit={submitHandler}>
+        <Form onSubmit={onSubmit}>
           <h3>로그인</h3>
           <div className="social">
             {/*아이콘을 추가 예정*/}
@@ -31,24 +34,43 @@ export default function SignIn(): JSX.Element {
             type="email"
             name="email"
             value={inputs.email}
-            onChange={changeHandler}
-            onBlur={validHandler}
+            onChange={validateEmail}
             placeholder="이메일을 입력해주세요."
           />
-          {!valid.email && <p className="warn">이메일 형식을 맞춰주세요.</p>}
+          {!valid.email && <p className="warn">{validMsg.email}</p>}
+          <input
+            type="text"
+            name="userId"
+            value={inputs.userId}
+            onChange={validateUserId}
+            placeholder="아이디를 입력해주세요."
+          />
+          {!valid.userId && <p className="warn">{validMsg.userId}</p>}
           <input
             type="password"
-            name="password"
-            value={inputs.password}
-            onChange={changeHandler}
-            onBlur={validHandler}
-            placeholder="비밀번호를 입력해주세요. (8자 이상)"
+            name="pwd"
+            value={inputs.pwd}
+            onChange={validatePwd}
+            placeholder="비밀번호를 입력해주세요."
           />
-          {!valid.password && <p className="warn">8자리 이상 입력해주세요.</p>}
+          {!valid.pwd && <p className="warn">{validMsg.pwd}</p>}
+          <input
+            type="text"
+            name="nickname"
+            value={inputs.nickname}
+            onChange={validNickname}
+            placeholder="닉네임을 입력해주세요."
+          />
+          {!valid.nickname && <p className="warn">{validMsg.nickname}</p>}
           <button
             type="submit"
-            disabled={!formIsValid}
-            className={`${!formIsValid && "disabled"}`}
+            disabled={
+              !(valid.email && valid.pwd && valid.userId && valid.nickname)
+            }
+            className={`${
+              !(valid.email && valid.pwd && valid.userId && valid.nickname) &&
+              "disabled"
+            }`}
           >
             로그인
           </button>
