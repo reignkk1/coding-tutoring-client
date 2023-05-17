@@ -19,6 +19,7 @@ export default function SignIn(): JSX.Element {
     email: "",
     nickname: "",
   });
+
   return (
     <Wrapper>
       <FormContainer>

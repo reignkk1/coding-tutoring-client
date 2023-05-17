@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import axios from "axios";
 
 interface Inputs {
   userId: string;
@@ -41,6 +42,16 @@ export default function useForm(initialState: Inputs) {
     nickname: "",
   });
 
+  const handleRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputs({ ...inputs, [name]: value });
+  };
+
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const { name, value } = e.target as HTMLInputElement;
+    setInputs({ ...inputs, [name]: value });
+  };
+
   // 이메일
   const validateEmail = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +71,24 @@ export default function useForm(initialState: Inputs) {
     [inputs, valid, validMsg]
   );
 
-  const certificateEmail = async (email: string) => {};
+  //이메일 코드 인증
+  const certificateEmail = async (email: string) => {
+    try {
+      const res = await axios({
+        url: "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080/auth/mail",
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: email,
+      });
+      if (res.status === 200) {
+        alert("이메일 인증코드를 보냈습니다.");
+      }
+    } catch (error) {
+      alert("인증 과정에 문제가 생겼습니다.");
+    }
+  };
 
   // 비밀번호
   const validatePwd = useCallback(
@@ -132,6 +160,8 @@ export default function useForm(initialState: Inputs) {
 
   return {
     inputs,
+    handleChange,
+    handleRadio,
     valid,
     validMsg,
     validateEmail,

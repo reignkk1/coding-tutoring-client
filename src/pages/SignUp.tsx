@@ -6,6 +6,8 @@ import { Form, FormContainer } from "../styles/Form";
 export default function SignUp(): JSX.Element {
   const {
     inputs,
+    handleChange,
+    handleRadio,
     valid,
     validMsg,
     validateEmail,
@@ -46,6 +48,7 @@ export default function SignUp(): JSX.Element {
           <button
             disabled={!valid.email}
             onClick={() => certificateEmail(inputs.email!)}
+            className={`${!valid.email && "disabled"}`}
           >
             이메일 인증
           </button>
@@ -73,20 +76,50 @@ export default function SignUp(): JSX.Element {
             placeholder="닉네임을 입력해주세요."
           />
           {!valid.nickname && <p className="warn">{validMsg.nickname}</p>}
-          {/* <fieldset>
-            <legend>Choose your monster's features:</legend>
-
+          <fieldset>
+            <legend>학생이신가요?</legend>
             <div>
-              <input type="checkbox" id="role" name="role" />
-              <label htmlFor="role">선생님</label>
+              <input
+                type="radio"
+                id="student"
+                name="role"
+                value="student"
+                onChange={handleRadio}
+              />
+              <label htmlFor="student">학생입니다</label>
             </div>
             <div>
-              <input type="checkbox" id="horns" name="horns" />
-              <label htmlFor="horns">학생</label>
+              <input
+                type="radio"
+                id="teacher"
+                name="role"
+                value="teacher"
+                onChange={handleRadio}
+              />
+              <label htmlFor="teacher">선생님입니다</label>
+            </div>
+            <legend>성별을 선택해주세요</legend>
+            <div>
+              <input
+                type="radio"
+                id="female"
+                name="sex"
+                value="female"
+                onChange={handleRadio}
+              />
+              <label htmlFor="female">여성</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="male"
+                name="sex"
+                value="male"
+                onChange={handleRadio}
+              />
+              <label htmlFor="male">남성</label>
             </div>
           </fieldset>
-          <input type="checkbox" name="sex" value={inputs.sex} />
-          <input type="checkbox" name="age" value={inputs.age} /> */}
           <button
             type="submit"
             disabled={
