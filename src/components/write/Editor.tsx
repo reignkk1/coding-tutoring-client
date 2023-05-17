@@ -11,7 +11,7 @@ export default function Editor() {
     <ReactQuill
       theme="snow"
       value={value}
-      onChange={(prev) => console.log(prev)}
+      onChange={(prev) => setValue(prev)}
       style={{ height: "500px", marginTop: "10px", marginBottom: "80px" }}
     />
   );
