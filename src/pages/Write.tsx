@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
 import Editor from "../components/write/Editor";
 import Button from "../components/postPage/Button";

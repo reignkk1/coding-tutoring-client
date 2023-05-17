@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
 import { Container, ImgContainer } from "./MyPage";
 import TCategory from "../components/detail/TCategory";

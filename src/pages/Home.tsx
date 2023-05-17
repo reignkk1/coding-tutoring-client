@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
 
 const Banner = styled.div`

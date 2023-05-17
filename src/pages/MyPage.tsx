@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Wrapper from "../components/common/Wrapper";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import PostList from "../components/mypage/PostList";
 import Category from "../components/mypage/Category";
 
