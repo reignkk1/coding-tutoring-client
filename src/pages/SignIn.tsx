@@ -4,26 +4,56 @@ import useForm from "../hooks/useForm";
 import { Form, FormContainer } from "../styles/Form";
 
 export default function SignIn(): JSX.Element {
+  const isUserId = (userId: string): boolean => {
+    const userIdRegex = /^[a-z0-9_-]{4,20}$/;
+    return userIdRegex.test(userId);
+  };
+  const isPwd = (pwd: string): boolean => {
+    const pwdRegex = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+    return pwdRegex.test(pwd);
+  };
+
   const {
-    inputs,
-    valid,
-    validMsg,
-    validateEmail,
-    validatePwd,
-    validateUserId,
-    validNickname,
-    onSubmit,
-  } = useForm({
-    userId: "",
-    pwd: "",
-    email: "",
-    nickname: "",
-  });
+    value: userId,
+    isValid: userIdIsValid,
+    hasError: userIdHasError,
+    handleChange: handleUserIdChange,
+    handleBlur: handleUserIdBlur,
+    reset: resetUserId,
+  } = useForm(isUserId);
+
+  const {
+    value: pwd,
+    isValid: pwdIsValid,
+    hasError: pwdHasError,
+    handleChange: handlePwdChange,
+    handleBlur: handlePwdBlur,
+    reset: resetPwd,
+  } = useForm(isPwd);
+
+  let formIsValid = false;
+
+  if (userIdIsValid && pwdIsValid) {
+    formIsValid = true;
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!userIdIsValid || !pwdIsValid) {
+      return;
+    }
+
+    console.log("백엔드와 통신합니다.");
+
+    resetUserId();
+    resetPwd();
+  };
 
   return (
     <Wrapper>
       <FormContainer>
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={handleSubmit}>
           <h3>로그인</h3>
           <div className="social">
             {/*아이콘을 추가 예정*/}
@@ -31,50 +61,39 @@ export default function SignIn(): JSX.Element {
             <div>카카오</div>
           </div>
           <p>과외플랫폼 계정으로 로그인</p>
-          <input
-            type="email"
-            name="email"
-            value={inputs.email}
-            onChange={validateEmail}
-            placeholder="이메일을 입력해주세요."
-          />
-          {!valid.email && <p className="warn">{validMsg.email}</p>}
-          <input
-            type="text"
-            name="userId"
-            value={inputs.userId}
-            onChange={validateUserId}
-            placeholder="아이디를 입력해주세요."
-          />
-          {!valid.userId && <p className="warn">{validMsg.userId}</p>}
-          <input
-            type="password"
-            name="pwd"
-            value={inputs.pwd}
-            onChange={validatePwd}
-            placeholder="비밀번호를 입력해주세요."
-          />
-          {!valid.pwd && <p className="warn">{validMsg.pwd}</p>}
-          <input
-            type="text"
-            name="nickname"
-            value={inputs.nickname}
-            onChange={validNickname}
-            placeholder="닉네임을 입력해주세요."
-          />
-          {!valid.nickname && <p className="warn">{validMsg.nickname}</p>}
-          <button
-            type="submit"
-            disabled={
-              !(valid.email && valid.pwd && valid.userId && valid.nickname)
-            }
-            className={`${
-              !(valid.email && valid.pwd && valid.userId && valid.nickname) &&
-              "disabled"
-            }`}
-          >
-            로그인
-          </button>
+          <div className="control">
+            <input
+              type="text"
+              id="userId"
+              value={userId}
+              onChange={handleUserIdChange}
+              onBlur={handleUserIdBlur}
+              className={`${userIdHasError && "invalid"}`}
+            />
+
+            {userIdHasError && (
+              <p className="error">
+                숫자, 영문소문자, 언더바/하이픈 조합으로 4자 이상 입력해주세요!
+              </p>
+            )}
+          </div>
+          <div className="control">
+            <input
+              type="password"
+              id="pwd"
+              value={pwd}
+              onChange={handlePwdChange}
+              onBlur={handlePwdBlur}
+              className={`${pwdHasError && "invalid"}`}
+            />
+            {pwdHasError && (
+              <p className="error">
+                숫자, 영문자, 특수문자 조합으로 8자리 이상 입력해주세요!
+              </p>
+            )}
+          </div>
+
+          <button disabled={!formIsValid}>로그인</button>
         </Form>
         <div className="aboutSign">
           <Link to="#">비밀번호 찾기</Link>

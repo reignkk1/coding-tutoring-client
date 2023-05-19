@@ -23,40 +23,85 @@ export const Form = styled.form`
     margin-top: 2rem;
   }
 
-  .warn {
+  .auth {
+    display: none;
+    width: 250px;
     margin-top: 0.5rem;
-    color: #de3730ff;
+    color: #b40e0e;
     font-size: 0.8rem;
+    line-height: 1.2rem;
+
+    &.show {
+      display: block;
+    }
   }
 
-  input {
-    width: 250px;
-    background-color: #f0f4f3;
-    border: none;
+  .control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 1rem;
-    padding: 0.8rem 1rem;
-    color: #697a79;
 
-    &::placeholder {
-      opacity: 0.8;
+    input {
+      width: 250px;
+      background-color: #f0f4f3;
+      border: none;
+      padding: 0.8rem 1rem;
+      font: inherit;
+      border-radius: 0.5rem;
+
+      &.emailCode {
+        display: none;
+        &.show {
+          display: block;
+          margin-top: 1rem;
+        }
+      }
+
+      &:focus {
+        outline: none;
+        border: 1px solid #697a79;
+      }
+
+      &.invalid {
+        border: 1px solid #b40e0e;
+      }
+    }
+
+    .error {
+      width: 250px;
+      margin-top: 0.5rem;
+      color: #b40e0e;
+      font-size: 0.8rem;
+      line-height: 1.2rem;
+
+      &.show {
+        display: block;
+      }
     }
   }
 
   button {
-    border-radius: 1.2rem;
-    border: none;
-    background-color: #3ab19b;
-    color: #ffffff;
-    padding: 0.8rem 3rem;
-    margin-top: 1.5rem;
-    transition: transform 0.1s ease-in;
+    margin-top: 1rem;
+    background-color: green;
+    color: #fff;
+    width: 250px;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
 
-    &.disabled {
-      background-color: #de3730ff;
+    &:hover,
+    :active {
+      background-color: #005b00;
     }
 
-    &:hover {
-      transform: scale(0.95);
+    &:disabled,
+    :disabled:hover,
+    :disabled:active {
+      background-color: #ccc;
+      color: #fff;
+      border-color: #ccc;
+      cursor: not-allowed;
     }
   }
 `;
