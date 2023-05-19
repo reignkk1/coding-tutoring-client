@@ -67,11 +67,7 @@ function App() {
           element: <StudentDetail />,
         },
         {
-          path: "/teachers/write",
-          element: <Write />,
-        },
-        {
-          path: "/students/write",
+          path: "/write",
           element: <Write />,
         },
         {

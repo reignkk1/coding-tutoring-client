@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { user } from "./../../UserData";
 
 const Container = styled.header`
   width: 100%;
@@ -7,7 +8,7 @@ const Container = styled.header`
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   position: fixed;
   background-color: white;
-  z-index: 999;
+  z-index: 98;
 `;
 
 const NavBar = styled.nav`
@@ -46,6 +47,7 @@ const MenuItem = styled.li`
 export default function Header() {
   const menu = [
     { item: "공지사항", to: "/notice" },
+    { item: "글 작성", to: user.isLogin ? "/write" : "/signin" },
     { item: "선생님 찾기", to: "/teachers" },
     { item: "학생 찾기", to: "/students" },
     { item: "로그인", to: "/signin" },
@@ -60,7 +62,7 @@ export default function Header() {
         </Link>
         <Menu>
           {menu.map((list) => (
-            <Link to={list.to}>
+            <Link key={list.item} to={list.to}>
               <MenuItem>{list.item}</MenuItem>
             </Link>
           ))}
