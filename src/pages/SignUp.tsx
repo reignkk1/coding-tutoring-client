@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Wrapper from "../components/common/Wrapper";
 import useForm from "../hooks/useForm";
+import { checkCode, sendCode } from "../api/auth";
+import Wrapper from "../components/common/Wrapper";
 import { Form, FormContainer } from "../styles/Form";
 
 export default function SignUp(): JSX.Element {
@@ -21,6 +23,10 @@ export default function SignUp(): JSX.Element {
     const nicknameRegex = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
     return nicknameRegex.test(nickname);
   };
+  const [sendEmail, setSendEmail] = useState(false);
+  const [code, setCode] = useState("");
+  const [inputCode, setInputCode] = useState("");
+  const [authEmail, setAuthEmail] = useState(false);
 
   const {
     value: userId,
@@ -76,19 +82,6 @@ export default function SignUp(): JSX.Element {
     resetNickname();
   };
 
-  const userIdInputClass = userIdHasError
-    ? "form-control invalid"
-    : "form-control";
-
-  const pwdInputClass = pwdHasError ? "form-control invalid" : "form-control";
-
-  const emailInputClass = emailHasError
-    ? "form-control invalid"
-    : "form-control";
-  const nicknameInputClass = nicknameHasError
-    ? "form-control invalid"
-    : "form-control";
-
   return (
     <Wrapper>
       <FormContainer>
@@ -112,14 +105,33 @@ export default function SignUp(): JSX.Element {
             {emailHasError && (
               <p className="error">올바른 이메일 형식이 아니에요</p>
             )}
+            <input
+              placeholder="인증코드"
+              type="text"
+              id="inputCode"
+              value={inputCode}
+              onChange={(e) => setInputCode(e.target.value)}
+              className={`${sendEmail ? "emailCode show" : "emailCode"}`}
+            />
           </div>
-          {/* <button
-            disabled={!valid.email}
-            onClick={() => certificateEmail(inputs.email!)}
-            className={`${!valid.email && "disabled"}`}
+          <button
+            disabled={!emailIsValid}
+            onClick={() => {
+              if (!sendEmail) {
+                sendCode(email).then((res) => setCode(res));
+                setSendEmail(true);
+              } else {
+                setAuthEmail(checkCode(code, inputCode));
+              }
+            }}
           >
-            이메일 인증
-          </button> */}
+            {sendEmail ? "인증코드 확인" : "인증코드 보내기"}
+          </button>
+
+          <p className={`${inputCode ? "auth show" : "auth"} `}>
+            {authEmail ? "인증 성공" : "인증 실패"}
+          </p>
+
           <div className="control">
             <input
               placeholder="아이디"

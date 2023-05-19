@@ -23,7 +23,23 @@ export const Form = styled.form`
     margin-top: 2rem;
   }
 
+  .auth {
+    display: none;
+    width: 250px;
+    margin-top: 0.5rem;
+    color: #b40e0e;
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+
+    &.show {
+      display: block;
+    }
+  }
+
   .control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 1rem;
 
     input {
@@ -33,6 +49,14 @@ export const Form = styled.form`
       padding: 0.8rem 1rem;
       font: inherit;
       border-radius: 0.5rem;
+
+      &.emailCode {
+        display: none;
+        &.show {
+          display: block;
+          margin-top: 1rem;
+        }
+      }
 
       &:focus {
         outline: none;
@@ -50,6 +74,10 @@ export const Form = styled.form`
       color: #b40e0e;
       font-size: 0.8rem;
       line-height: 1.2rem;
+
+      &.show {
+        display: block;
+      }
     }
   }
 
