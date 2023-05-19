@@ -12,7 +12,7 @@ export default function Editor() {
       theme="snow"
       value={value}
       onChange={(prev) => setValue(prev)}
-      style={{ height: "500px", marginTop: "10px", marginBottom: "80px" }}
+      style={{ height: "400px", marginTop: "10px", marginBottom: "80px" }}
     />
   );
 }
