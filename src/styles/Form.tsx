@@ -129,3 +129,45 @@ export const FormContainer = styled.div`
     }
   }
 `;
+
+export const RadioContainer = styled.fieldset`
+  width: 250px;
+
+  legend {
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding-top: 1.5rem;
+  }
+
+  .radioControl {
+    display: flex;
+    align-items: center;
+    padding-top: 1.5rem;
+
+    input {
+      margin-right: 1rem;
+    }
+  }
+`;
+
+export const SelectContainer = styled.div`
+  padding-top: 1.5rem;
+  width: 250px;
+
+  select {
+    width: 100%;
+    border: 1px solid #eaeaea;
+    padding: 1rem;
+    font-size: inherit;
+    color: inherit;
+    outline: none;
+
+    &:focus {
+      border: 1px solid #5ec8d9;
+      box-shadow: 0 1px 6px 0 rgba(94, 200, 217, 0.36);
+    }
+
+    option {
+    }
+  }
+`;
