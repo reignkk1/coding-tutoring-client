@@ -1,18 +1,10 @@
 import { Link } from "react-router-dom";
 import Wrapper from "../components/common/Wrapper";
+import { isUserId, isPwd } from "../util/authRegex";
 import useForm from "../hooks/useForm";
 import { Form, FormContainer } from "../styles/Form";
 
 export default function SignIn(): JSX.Element {
-  const isUserId = (userId: string): boolean => {
-    const userIdRegex = /^[a-z0-9_-]{4,20}$/;
-    return userIdRegex.test(userId);
-  };
-  const isPwd = (pwd: string): boolean => {
-    const pwdRegex = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-    return pwdRegex.test(pwd);
-  };
-
   const {
     value: userId,
     isValid: userIdIsValid,

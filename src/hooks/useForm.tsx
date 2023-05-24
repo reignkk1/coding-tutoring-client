@@ -11,6 +11,10 @@ const useForm = (validateFcn: (value: string) => boolean) => {
     setValue(e.target.value);
   };
 
+  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setValue(e.target.value);
+  };
+
   const handleBlur = () => {
     setIsTouched(true);
   };
@@ -26,6 +30,7 @@ const useForm = (validateFcn: (value: string) => boolean) => {
     hasError,
     handleBlur,
     handleChange,
+    handleSelect,
     reset,
   };
 };

@@ -1,29 +1,25 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useForm from "../hooks/useForm";
-import { checkCode, sendCode } from "../api/auth";
+import { sendCode } from "../api/auth";
+import {
+  isEmail,
+  isUserId,
+  isPwd,
+  isNickname,
+  isRadio,
+  ageOptions,
+} from "../util/authRegex";
 import Wrapper from "../components/common/Wrapper";
-import { Form, FormContainer } from "../styles/Form";
+import {
+  Form,
+  FormContainer,
+  RadioContainer,
+  SelectContainer,
+} from "../styles/Form";
 
 export default function SignUp(): JSX.Element {
-  const isEmail = (email: string): boolean => {
-    const emailRegex =
-      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-    return emailRegex.test(email);
-  };
-  const isUserId = (userId: string): boolean => {
-    const userIdRegex = /^[a-z0-9_-]{4,20}$/;
-    return userIdRegex.test(userId);
-  };
-  const isPwd = (pwd: string): boolean => {
-    const pwdRegex = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-    return pwdRegex.test(pwd);
-  };
-  const isNickname = (nickname: string): boolean => {
-    const nicknameRegex = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/;
-    return nicknameRegex.test(nickname);
-  };
-  const [sendEmail, setSendEmail] = useState(false);
+  const [requestCode, setRequestCode] = useState(false);
   const [code, setCode] = useState("");
   const [inputCode, setInputCode] = useState("");
   const [authEmail, setAuthEmail] = useState(false);
@@ -60,17 +56,45 @@ export default function SignUp(): JSX.Element {
     handleBlur: handleNicknameBlur,
     reset: resetNickname,
   } = useForm(isNickname);
+  const { isValid: roleIsValid, handleChange: handleRoleChange } =
+    useForm(isRadio);
+  const { isValid: sexIsValid, handleChange: handleSexChange } =
+    useForm(isRadio);
+  const {
+    value: age,
+    isValid: ageIsValid,
+    hasError: ageHasError,
+    handleSelect: handleAgeChange,
+    handleBlur: handleAgeBlur,
+    reset: resetAge,
+  } = useForm(isRadio);
 
   let formIsValid = false;
 
-  if (userIdIsValid && pwdIsValid && emailIsValid && nicknameIsValid) {
+  if (
+    userIdIsValid &&
+    pwdIsValid &&
+    authEmail &&
+    nicknameIsValid &&
+    roleIsValid &&
+    sexIsValid &&
+    ageIsValid
+  ) {
     formIsValid = true;
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!userIdIsValid || !emailIsValid || !pwdIsValid || !nicknameIsValid) {
+    if (
+      !userIdIsValid ||
+      !emailIsValid ||
+      !pwdIsValid ||
+      !nicknameIsValid ||
+      !roleIsValid ||
+      !sexIsValid ||
+      !ageIsValid
+    ) {
       return;
     }
 
@@ -80,6 +104,7 @@ export default function SignUp(): JSX.Element {
     resetPwd();
     resetEmail();
     resetNickname();
+    resetAge();
   };
 
   return (
@@ -105,32 +130,40 @@ export default function SignUp(): JSX.Element {
             {emailHasError && (
               <p className="error">올바른 이메일 형식이 아니에요</p>
             )}
-            <input
-              placeholder="인증코드"
-              type="text"
-              id="inputCode"
-              value={inputCode}
-              onChange={(e) => setInputCode(e.target.value)}
-              className={`${sendEmail ? "emailCode show" : "emailCode"}`}
-            />
           </div>
           <button
             disabled={!emailIsValid}
             onClick={() => {
-              if (!sendEmail) {
-                sendCode(email).then((res) => setCode(res));
-                setSendEmail(true);
-              } else {
-                setAuthEmail(checkCode(code, inputCode));
-              }
+              sendCode(email).then((res) => setCode(res));
+              setRequestCode(true);
             }}
           >
-            {sendEmail ? "인증코드 확인" : "인증코드 보내기"}
+            인증코드 요청
           </button>
-
-          <p className={`${inputCode ? "auth show" : "auth"} `}>
-            {authEmail ? "인증 성공" : "인증 실패"}
-          </p>
+          {requestCode && (
+            <div className="control">
+              <input
+                placeholder="인증코드 입력"
+                type="text"
+                id="inputCode"
+                value={inputCode}
+                onChange={(e) => setInputCode(e.target.value)}
+              />
+              <button
+                disabled={authEmail}
+                onClick={() => {
+                  if (inputCode === code) {
+                    setAuthEmail(true);
+                    alert("이메일 인증을 성공했습니다.");
+                  } else {
+                    alert("인증코드가 다릅니다.");
+                  }
+                }}
+              >
+                인증
+              </button>
+            </div>
+          )}
 
           <div className="control">
             <input
@@ -181,50 +214,68 @@ export default function SignUp(): JSX.Element {
               </p>
             )}
           </div>
-          {/* <fieldset>
+          <RadioContainer>
             <legend>학생이신가요?</legend>
-            <div>
+            <div className="radioControl">
               <input
                 type="radio"
                 id="student"
                 name="role"
-                value="student"
-                onChange={handleRadio}
+                value="학생"
+                onChange={handleRoleChange}
               />
               <label htmlFor="student">학생입니다</label>
             </div>
-            <div>
+            <div className="radioControl">
               <input
                 type="radio"
                 id="teacher"
                 name="role"
-                value="teacher"
-                onChange={handleRadio}
+                value="선생님"
+                onChange={handleRoleChange}
               />
-              <label htmlFor="teacher">선생님입니다</label>
+              <label htmlFor="teacher">선생님입니다.</label>
             </div>
+
             <legend>성별을 선택해주세요</legend>
-            <div>
+            <div className="radioControl">
               <input
                 type="radio"
                 id="female"
                 name="sex"
-                value="female"
-                onChange={handleRadio}
+                value="여성"
+                onChange={handleSexChange}
               />
               <label htmlFor="female">여성</label>
             </div>
-            <div>
+            <div className="radioControl">
               <input
                 type="radio"
                 id="male"
                 name="sex"
-                value="male"
-                onChange={handleRadio}
+                value="남성"
+                onChange={handleSexChange}
               />
-              <label htmlFor="male">남성</label>
+              <label htmlFor="female">남성</label>
             </div>
-          </fieldset> */}
+          </RadioContainer>
+
+          <SelectContainer>
+            <select
+              name="age"
+              id="age"
+              value={age}
+              onBlur={handleAgeBlur}
+              onChange={handleAgeChange}
+            >
+              {ageOptions.map((age) => (
+                <option key={age.value} value={age.value}>
+                  {age.label}
+                </option>
+              ))}
+            </select>
+            {ageHasError && <p className="error">!필수 항목입니다</p>}
+          </SelectContainer>
           <div className="form-actions">
             <button disabled={!formIsValid}>Submit</button>
           </div>
