@@ -1,17 +1,17 @@
 import ReactQuill from "react-quill";
-import { useState } from "react";
 import "react-quill/dist/quill.snow.css";
 
-export default function Editor() {
-  const [value, setValue] = useState("");
+interface IEditor {
+  editorValue: string;
+  setEditorValue: React.Dispatch<React.SetStateAction<string>>;
+}
 
-  console.log(value);
-
+export default function Editor({ editorValue, setEditorValue }: IEditor) {
   return (
     <ReactQuill
       theme="snow"
-      value={value}
-      onChange={(prev) => setValue(prev)}
+      value={editorValue}
+      onChange={(prev) => setEditorValue(prev)}
       style={{ height: "400px", marginTop: "10px", marginBottom: "80px" }}
     />
   );

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { user } from "../UserData";
 import AddressSearch from "../components/write/AddressSearch";
 import Selector from "../components/write/Selector";
+import DesitredSubjectsList from "./../components/write/DesitredSubjectsList";
 
 const Container = styled.div`
   height: 200vh;
@@ -57,41 +58,67 @@ const UserInfo = styled.div`
   }
 `;
 
-class SelectItem {
-  name;
-  value;
-  constructor(name: string, value: string) {
-    this.name = name;
-    this.value = value;
-  }
-}
+const Required = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 50px;
+`;
 
 export default function Write() {
-  const [onOffValue, setOnOffValue] = useState("all_possibility");
-  const [subjectValue, setSubjectValue] = useState("entire");
+  const [onOffValue, setOnOffValue] = useState("모두가능");
+  const [subjectValue, setSubjectValue] = useState("");
   const [addressValue, setAddressValue] = useState("");
-  const [addressModal, setAddressModal] = useState(false);
+  const [editorValue, setEditorValue] = useState("");
+  const [titleValue, setTitleValue] = useState("");
 
-  const on_off = [
-    new SelectItem("모두 가능", "all_possibility"),
-    new SelectItem("온라인", "online"),
-    new SelectItem("오프라인", "offline"),
-  ];
+  const [addressModal, setAddressModal] = useState(false);
+  const [desiredSubjects, setDesiredSubjects] = useState<string[]>([]);
+
+  const on_off = ["모두 가능", "온라인", "오프라인"];
 
   const subjects = [
-    new SelectItem("전체", "entire"),
-    new SelectItem("국어", "korean"),
-    new SelectItem("수학", "math"),
-    new SelectItem("사회", "society"),
-    new SelectItem("과학", "science"),
-    new SelectItem("물리", "physics"),
-    new SelectItem("화학", "chemistry"),
-    new SelectItem("생물", "biology"),
-    new SelectItem("영어", "english"),
-    new SelectItem("일본어", "japanese"),
-    new SelectItem("중국어", "chinese"),
+    "전체",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Spring",
+    "Node.js",
+    "Java",
+    "Next.js",
+    "Nest.js",
+    "Go",
+    "C",
+    "Python",
+    "Django",
+    "Swift",
+    "Kotlin",
+    "MySQL",
+    "php",
+    "GraphQL",
+    "Firebase",
+    "ReactNative",
+    "Unity",
+    "Flutter",
+    "AWS",
+    "Kubernetes",
+    "Docker",
+    "Git",
+    "Figma",
+    "Zeplin",
   ];
-  console.log(onOffValue, subjectValue, addressValue);
+
+  const handleClick = () => {
+    if (desiredSubjects.includes(subjectValue))
+      return alert("이미 추가 되었습니다.");
+    if (desiredSubjects.length > 5)
+      return alert("기술스택은 최대 6개까지 선택 가능합니다.");
+    setDesiredSubjects([...desiredSubjects, subjectValue]);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <>
       <Wrapper>
@@ -108,39 +135,56 @@ export default function Write() {
               </div>
             </UserInfo>
           </UserInfoBox>
+          <Required>필수 *</Required>
+          <form onSubmit={handleSubmit}>
+            <Label>사는 곳 *</Label>
+            <TitleInput
+              name="address"
+              style={{ width: "300px" }}
+              defaultValue={addressValue}
+              readOnly
+            />
+            <Button onClick={() => setAddressModal(true)}>검색</Button>
+            <AddressSearch
+              modal={addressModal}
+              modalhandle={setAddressModal}
+              setAddressValue={setAddressValue}
+            />
 
-          <Label>사는 곳</Label>
-          <TitleInput style={{ width: "300px" }} value={addressValue} />
-          <Button onClick={() => setAddressModal(true)}>검색</Button>
-          <AddressSearch
-            modal={addressModal}
-            modalhandle={setAddressModal}
-            setAddressValue={setAddressValue}
-          />
+            <Label>희망 과목 *</Label>
+            <Selector
+              value={subjectValue}
+              setSubjectValue={setSubjectValue}
+              data={subjects}
+            />
+            <Button onClick={handleClick}>추가</Button>
+            <DesitredSubjectsList
+              desiredSubjects={desiredSubjects}
+              setDesiredSubjects={setDesiredSubjects}
+            />
 
-          <Label>희망 과목</Label>
-          <Selector
-            value={subjectValue}
-            setSubjectValue={setSubjectValue}
-            data={subjects}
-          />
+            <Label>온/오프라인 여부 *</Label>
+            <Selector
+              value={onOffValue}
+              setSubjectValue={setOnOffValue}
+              data={on_off}
+            />
 
-          <Label>온/오프라인 여부</Label>
-          <Selector
-            value={onOffValue}
-            setSubjectValue={setOnOffValue}
-            data={on_off}
-          />
+            <Label htmlFor="title">제목 *</Label>
+            <TitleInput
+              id="title"
+              placeholder="제목을 입력해주세요."
+              onChange={(e) => setTitleValue(e.target.value)}
+              value={titleValue}
+            />
 
-          <Label htmlFor="title">제목</Label>
-          <TitleInput id="title" placeholder="제목을 입력해주세요." />
+            <Label>{user.isStudent ? "학생 소개 *" : "선생님 소개 *"}</Label>
+            <Editor editorValue={editorValue} setEditorValue={setEditorValue} />
 
-          <Label>{user.isStudent ? "학생 소개" : "선생님 소개"}</Label>
-          <Editor />
-
-          <ButtonBox>
-            <Button>작성하기</Button>
-          </ButtonBox>
+            <ButtonBox>
+              <Button>작성하기</Button>
+            </ButtonBox>
+          </form>
         </Container>
       </Wrapper>
     </>
