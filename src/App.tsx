@@ -1,7 +1,5 @@
 import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
 import Home from "./pages/Home";
-import SignUp from "./pages/SignUp";
-import SignIn from "./pages/SignIn";
 import MyPage from "./pages/MyPage";
 import Notice from "./pages/Notice";
 import TeacherDetail from "./pages/TeacherDetail";
@@ -12,6 +10,8 @@ import NotFound from "./pages/NotFound";
 import GlobalStyles from "./styles/GlobalStyles";
 import FindPage from "./pages/FindPage";
 import Write from "./pages/Write";
+import SignupForm from "./pages/SignupForm";
+import SigninForm from "./pages/SigninForm";
 
 function App() {
   const Layout = () => {
@@ -36,11 +36,11 @@ function App() {
         },
         {
           path: "/signup",
-          element: <SignUp />,
+          element: <SignupForm />,
         },
         {
           path: "/signin",
-          element: <SignIn />,
+          element: <SigninForm />,
         },
         {
           path: "/view/:me",

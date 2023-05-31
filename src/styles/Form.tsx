@@ -7,19 +7,12 @@ export const Form = styled.form`
   align-items: center;
   color: #697a79;
 
-  h3 {
+  h1 {
     font-size: 2rem;
     font-weight: 600;
   }
 
-  .social {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    margin-top: 2rem;
-  }
-
-  p {
+  span {
     margin-top: 2rem;
   }
 

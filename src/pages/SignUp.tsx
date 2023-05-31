@@ -112,12 +112,6 @@ export default function SignUp(): JSX.Element {
       <FormContainer>
         <Form onSubmit={handleSubmit}>
           <h3>회원가입</h3>
-          <div className="social">
-            {/*아이콘을 추가 예정*/}
-            <div>구글</div>
-            <div>카카오</div>
-          </div>
-          <p>이메일을 사용해 회원가입하기</p>
           <div className="control">
             <input
               placeholder="이메일"
