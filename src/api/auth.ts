@@ -20,14 +20,27 @@ export const sendCode = async (email: string) => {
   }
 };
 
-//위의 sendCode와 동일한 역할(서버에 문제가 있을 떄)
-// export const sendCode = async (email: string) => {
-//   if (true) {
-//     alert("이메일 인증코드를 보냈습니다.");
-//     return "CODE";
-//   }
-// };
-
 export const checkCode = (code: string, inputCode: string) => {
   return code === inputCode ? true : false;
+};
+
+//회원가입
+
+export const signup = async (userData: any) => {
+  try {
+    const res = await axios({
+      url: `${baseUrl}/member/join`,
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: userData,
+    });
+    if (res.status === 200) {
+      alert("회원가입 성공하셨습니다!");
+      window.location.replace("/signin");
+    }
+  } catch (error) {
+    alert("회원가입에 실패했습니다");
+  }
 };

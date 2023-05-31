@@ -74,28 +74,30 @@ export const signupForm: sign = {
     ...createFormFieldConfig("닉네임", "nickname", "text", ""),
     validationRules: nicknameRule(),
   },
-  role: {
-    ...createFormFieldConfig("역할", "role", "radio", "", [
-      { label: "학생", value: "student" },
-      { label: "선생님", value: "teacher" },
+  userClassification: {
+    ...createFormFieldConfig("역할", "userClassification", "radio", "", [
+      { label: "학생", value: "STUDENT" },
+      { label: "선생님", value: "TEACHER" },
     ]),
     validationRules: requiredRule("역할"),
   },
   gender: {
     ...createFormFieldConfig("성별", "gender", "radio", "", [
-      { label: "여성", value: "female" },
-      { label: "남성", value: "male" },
+      { label: "여성", value: "FEMALE" },
+      { label: "남성", value: "MALE" },
     ]),
     validationRules: requiredRule("성별"),
   },
-  level: {
-    ...createFormFieldConfig("레벨", "level", "radio", "", [
-      { label: "취준생", value: "seeker" },
-      { label: "주니어", value: "junior" },
-      { label: "미드", value: "mid" },
-      { label: "시니어", value: "senior" },
+  ageGroup: {
+    ...createFormFieldConfig("연령대", "ageGroup", "radio", "", [
+      { label: "10대", value: "TEENS" },
+      { label: "20대", value: "TWENTIES" },
+      { label: "30대", value: "THIRTIES" },
+      { label: "40대", value: "FORTIES" },
+      { label: "50대", value: "FIFTIES" },
+      { label: "60대", value: "SIXTIES" },
     ]),
-    validationRules: requiredRule("레벨"),
+    validationRules: requiredRule("연령대"),
   },
 };
 

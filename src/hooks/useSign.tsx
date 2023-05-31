@@ -62,7 +62,7 @@ function useSign(formObj: sign) {
     [form]
   );
 
-  return { renderFormInputs, isFormValid };
+  return { form, renderFormInputs, isFormValid };
 }
 
 export default useSign;
