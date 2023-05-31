@@ -10,8 +10,8 @@ import NotFound from "./pages/NotFound";
 import GlobalStyles from "./styles/GlobalStyles";
 import FindPage from "./pages/FindPage";
 import Write from "./pages/Write";
-import SignupForm from "./pages/SignupForm";
-import SigninForm from "./pages/SigninForm";
+import Signup from "./pages/Signup";
+import Signin from "./pages/Signin";
 
 function App() {
   const Layout = () => {
@@ -36,11 +36,11 @@ function App() {
         },
         {
           path: "/signup",
-          element: <SignupForm />,
+          element: <Signup />,
         },
         {
           path: "/signin",
-          element: <SigninForm />,
+          element: <Signin />,
         },
         {
           path: "/view/:me",

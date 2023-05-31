@@ -6,7 +6,7 @@ import {
   emailRule,
   pwdRule,
   nicknameRule,
-} from "./inputValidationRules";
+} from "./validationRules";
 
 function createFormFieldConfig(
   label: string,
