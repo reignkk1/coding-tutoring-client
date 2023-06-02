@@ -30,7 +30,7 @@ export default function Signup() {
           <h1>회원가입</h1>
           {renderFormInputs()}
           <button type="submit" disabled={!isFormValid()}>
-            Submit
+            회원가입
           </button>
         </Form>
         <p className="aboutSign">

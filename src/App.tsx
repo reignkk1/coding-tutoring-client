@@ -10,8 +10,9 @@ import NotFound from "./pages/NotFound";
 import GlobalStyles from "./styles/GlobalStyles";
 import FindPage from "./pages/FindPage";
 import Write from "./pages/Write";
-import Signup from "./pages/Signup";
-import Signin from "./pages/Signin";
+import Signin from "./pages/SignIn";
+import Signup from "./pages/SignUp";
+import FindPwd from "./pages/FindPwd";
 
 function App() {
   const Layout = () => {
@@ -41,6 +42,10 @@ function App() {
         {
           path: "/signin",
           element: <Signin />,
+        },
+        {
+          path: "/help/user",
+          element: <FindPwd />,
         },
         {
           path: "/view/:me",

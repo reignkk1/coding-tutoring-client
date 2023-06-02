@@ -111,3 +111,18 @@ export const signinForm: sign = {
     validationRules: pwdRule(),
   },
 };
+
+export const findPwdForm: sign = {
+  id: {
+    ...createFormFieldConfig("아이디", "id", "text", ""),
+    validationRules: userIdRule(),
+  },
+  email: {
+    ...createFormFieldConfig("이메일", "email", "email", ""),
+    validationRules: emailRule(),
+  },
+  password: {
+    ...createFormFieldConfig("새 비밀번호", "password", "password", ""),
+    validationRules: pwdRule(),
+  },
+};

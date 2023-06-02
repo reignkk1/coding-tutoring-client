@@ -25,7 +25,6 @@ export const checkCode = (code: string, inputCode: string) => {
 };
 
 //회원가입
-
 export const signup = async (userData: any) => {
   try {
     const res = await axios({
@@ -42,5 +41,28 @@ export const signup = async (userData: any) => {
     }
   } catch (error) {
     alert("회원가입에 실패했습니다");
+  }
+};
+
+//비밀 번호 찾기
+export const findPwd = async (userData: any) => {
+  const { id, password } = userData;
+
+  try {
+    const res = await axios({
+      url: `${baseUrl}/member/modify-password/${id}`,
+      data: { password: password },
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        // "Content-Type": "text/plain;charset-UTF-8",
+      },
+    });
+    if (res.status === 200) {
+      alert("비밀번호가 바뀌었습니다.");
+      window.location.replace("/signin");
+    }
+  } catch (error) {
+    alert("비밀번호 변경에 실패했습니다.");
   }
 };
