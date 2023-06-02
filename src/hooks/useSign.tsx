@@ -46,7 +46,7 @@ function useSign(formObj: sign) {
 
   const isFormValid = useCallback(
     //이메일 인증 성공시 유효하도록 수정필요함.
-    (authEmail?: boolean) => {
+    () => {
       let isValid = true;
       const arr = Object.values(form);
 
