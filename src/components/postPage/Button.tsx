@@ -11,8 +11,17 @@ const Btn = styled.button`
 interface IButton {
   children: React.ReactNode;
   onClick?(): void;
+  type?: "submit" | "reset" | "button";
 }
 
-export default function Button({ children, onClick }: IButton) {
-  return <Btn onClick={onClick}>{children}</Btn>;
+export default function Button({
+  children,
+  onClick,
+  type = "button",
+}: IButton) {
+  return (
+    <Btn type={type} onClick={onClick}>
+      {children}
+    </Btn>
+  );
 }

@@ -7,6 +7,7 @@ import { user } from "../UserData";
 import AddressSearch from "../components/write/AddressSearch";
 import Selector from "../components/write/Selector";
 import DesitredSubjectsList from "./../components/write/DesitredSubjectsList";
+import axios from "axios";
 
 const Container = styled.div`
   height: 200vh;
@@ -117,6 +118,25 @@ export default function Write() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("area", addressValue);
+    console.log("content", editorValue);
+    console.log("onOrOff", onOffValue);
+    console.log("subject", desiredSubjects);
+    console.log("title", titleValue);
+
+    axios
+      .post(
+        "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080/v1/teacherPost/post",
+        {
+          area: addressValue,
+          content: editorValue,
+          onOrOff: "online",
+          subject: desiredSubjects.join(","),
+          title: titleValue,
+        }
+      )
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -176,13 +196,14 @@ export default function Write() {
               placeholder="제목을 입력해주세요."
               onChange={(e) => setTitleValue(e.target.value)}
               value={titleValue}
+              maxLength={50}
             />
 
             <Label>{user.isStudent ? "학생 소개 *" : "선생님 소개 *"}</Label>
             <Editor editorValue={editorValue} setEditorValue={setEditorValue} />
 
             <ButtonBox>
-              <Button>작성하기</Button>
+              <Button type="submit">작성하기</Button>
             </ButtonBox>
           </form>
         </Container>
