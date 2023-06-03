@@ -10,8 +10,8 @@ import NotFound from "./pages/NotFound";
 import GlobalStyles from "./styles/GlobalStyles";
 import FindPage from "./pages/FindPage";
 import Write from "./pages/Write";
-import Signup from "./pages/Signup";
-import Signin from "./pages/Signin";
+import Signup from "./pages/SignUp";
+import Signin from "./pages/SignIn";
 
 function App() {
   const Layout = () => {

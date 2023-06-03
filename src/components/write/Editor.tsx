@@ -7,12 +7,21 @@ interface IEditor {
 }
 
 export default function Editor({ editorValue, setEditorValue }: IEditor) {
+  const handleChange = (value: string) => {
+    setEditorValue(value);
+  };
+
   return (
     <ReactQuill
       theme="snow"
       value={editorValue}
-      onChange={(prev) => setEditorValue(prev)}
-      style={{ height: "400px", marginTop: "10px", marginBottom: "80px" }}
+      onChange={handleChange}
+      style={{
+        height: "300px",
+        marginTop: "10px",
+        marginBottom: "80px",
+      }}
+      placeholder="자신을 소개해주세요."
     />
   );
 }
