@@ -61,6 +61,7 @@ function InputField({
             <span className="error">{errorMessage}</span>
           )}
           <button
+            type="button"
             disabled={!isValid}
             onClick={() => {
               sendCode(value).then((res) => setCode(res));
@@ -79,6 +80,7 @@ function InputField({
                 onChange={(e) => setInputCode(e.target.value)}
               />
               <button
+                type="button"
                 disabled={authEmail}
                 onClick={() => {
                   if (inputCode === code) {

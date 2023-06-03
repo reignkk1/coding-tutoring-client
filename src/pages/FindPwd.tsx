@@ -1,30 +1,28 @@
 import useSign from "../hooks/useSign";
-import { Link } from "react-router-dom";
-import { signinForm } from "../util/sign/formConfig";
+import { findPwdForm } from "../util/sign/formConfig";
+import { findPwd } from "../api/auth";
+
 import Wrapper from "../components/common/Wrapper";
 import { FormContainer, Form } from "../styles/Form";
 
-export default function Signin() {
-  const { renderFormInputs, isFormValid } = useSign(signinForm);
+export default function FindPwd() {
+  const { form, renderFormInputs, isFormValid } = useSign(findPwdForm);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //백엔드와 통신
+
+    findPwd({ id: form["id"].value, password: form["password"].value });
   };
 
   return (
     <Wrapper>
       <FormContainer>
         <Form onSubmit={handleSubmit}>
-          <h1>로그인</h1>
+          <h1>비밀번호 찾기</h1>
           {renderFormInputs()}
           <button type="submit" disabled={!isFormValid()}>
-            로그인
+            변경하기
           </button>
         </Form>
-        <div className="aboutSign">
-          <Link to="/help/user">비밀번호 찾기</Link>
-          <Link to="/signup">회원가입</Link>
-        </div>
       </FormContainer>
     </Wrapper>
   );
