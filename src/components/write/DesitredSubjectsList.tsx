@@ -39,7 +39,7 @@ export default function DesitredSubjectsList({
       <Subjects>
         {desiredSubjects.map((subject, index) => (
           <Subject key={index}>
-            {subject}
+            {subject.toLowerCase()}
             <Cancle onClick={() => handleCancleClick(subject)}>❌</Cancle>
           </Subject>
         ))}

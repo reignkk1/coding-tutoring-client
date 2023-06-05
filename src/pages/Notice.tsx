@@ -88,7 +88,7 @@ export default function Notice() {
         />
         <SearchBar placeholder="제목을 입력해주세요!" />
         <Button onClick={() => navigate("write")}>✏️ 작성하기</Button>
-        <PostBox posts={posts} />
+        <PostBox />
       </Container>
     </Wrapper>
   );
