@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useGetPosts } from "../../api/Post";
 
@@ -42,13 +43,21 @@ const InfoBox = styled.div`
   }
 `;
 
-export default function PostBox() {
+export default function PostBox({ category }: { category?: string }) {
+  const navigate = useNavigate();
   const posts = useGetPosts();
   return (
     <Container>
       <ul>
         {posts?.map((post) => (
-          <li key={post.id}>
+          <li
+            key={post.id}
+            onClick={() =>
+              navigate(`/${category}/post/${post.id}`, {
+                state: post,
+              })
+            }
+          >
             <ImgBox>
               <img
                 src={`https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80`}

@@ -9,11 +9,11 @@ import Footer from "./components/layout/Footer";
 import NotFound from "./pages/NotFound";
 import GlobalStyles from "./styles/GlobalStyles";
 import FindPage from "./pages/FindPage";
+import PostDetail from "./pages/PostDetail";
 import Write from "./pages/Write";
 import Signin from "./pages/SignIn";
 import Signup from "./pages/SignUp";
 import FindPwd from "./pages/FindPwd";
-
 
 function App() {
   const Layout = () => {
@@ -48,10 +48,7 @@ function App() {
           path: "/help/user",
           element: <FindPwd />,
         },
-        {
-          path: "/view/:me",
-          element: <MyPage />,
-        },
+
         {
           path: "/teachers",
           element: <FindPage category="teachers" />,
@@ -61,8 +58,20 @@ function App() {
           element: <FindPage category="students" />,
         },
         {
+          path: "/teachers/post/:postId",
+          element: <PostDetail category="teachers" />,
+        },
+        {
+          path: "/students/post/:postId",
+          element: <PostDetail category="students" />,
+        },
+        {
           path: "/notice",
           element: <Notice />,
+        },
+        {
+          path: "/view/:me",
+          element: <MyPage />,
         },
         {
           path: "/view/teachers/:id",

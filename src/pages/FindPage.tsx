@@ -59,7 +59,7 @@ export default function FindPage({ category }: { category: string }) {
           </Subject>
         </SearchBox>
         <Button onClick={() => navigate("write")}>✏️ 작성하기</Button>
-        <PostBox />
+        <PostBox category={category} />
       </Container>
     </Wrapper>
   );
