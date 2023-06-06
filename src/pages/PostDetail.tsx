@@ -1,10 +1,11 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 import { Container, ImgContainer } from "./MyPage";
 import Wrapper from "../components/common/Wrapper";
 
 export default function PostDetail({ category }: { category: string }) {
+  const navigate = useNavigate();
   const post = useLocation().state;
   const content = post.content;
 
@@ -12,14 +13,17 @@ export default function PostDetail({ category }: { category: string }) {
     <Wrapper>
       <Container>
         <Profile>
-          <div className="left">
-            <ImgContainer>
-              <img
-                src="https://i.pinimg.com/564x/92/32/a2/9232a2b8aba31dfe9a744fb232813f7f.jpg"
-                alt="profile-img"
-              />
-            </ImgContainer>
-          </div>
+          <ImgContainer
+            onClick={() => {
+              navigate(`/view/${post.userId}`);
+            }}
+          >
+            <img
+              src="https://i.pinimg.com/564x/92/32/a2/9232a2b8aba31dfe9a744fb232813f7f.jpg"
+              alt="profile-img"
+            />
+          </ImgContainer>
+
           <div className="right">
             <p className="nickname">
               김성연&nbsp;
