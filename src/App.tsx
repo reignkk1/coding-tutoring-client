@@ -2,18 +2,17 @@ import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
 import Home from "./pages/Home";
 import MyPage from "./pages/MyPage";
 import Notice from "./pages/Notice";
-import TeacherDetail from "./pages/TeacherDetail";
-import StudentDetail from "./pages/StudentDetail";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import NotFound from "./pages/NotFound";
-import GlobalStyles from "./styles/GlobalStyles";
 import FindPage from "./pages/FindPage";
 import PostDetail from "./pages/PostDetail";
 import Write from "./pages/Write";
 import Signin from "./pages/SignIn";
 import Signup from "./pages/SignUp";
 import FindPwd from "./pages/FindPwd";
+
+import GlobalStyles from "./styles/GlobalStyles";
 
 function App() {
   const Layout = () => {
@@ -74,12 +73,8 @@ function App() {
           element: <MyPage />,
         },
         {
-          path: "/view/teachers/:id",
-          element: <TeacherDetail />,
-        },
-        {
-          path: "/view/students/:id",
-          element: <StudentDetail />,
+          path: "/view/:userId",
+          element: <MyPage />,
         },
         {
           path: "/write",
