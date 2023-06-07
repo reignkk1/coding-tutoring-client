@@ -102,7 +102,7 @@ export default function Write() {
         <Container>
           <UserInfoBox>
             <UserInfo>
-              <img src={user.avartarImg} />
+              <img src={user.avartarImg} alt="avatar-img" />
               <div>
                 {user.name}
                 {user.isStudent ? " 학생" : " 선생님"}

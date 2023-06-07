@@ -43,3 +43,18 @@ export function useGetPosts() {
 
   return posts;
 }
+
+//유저 아이디로 post를 받아옴
+export const getPostsByUserId = async (userId: string) => {
+  try {
+    const res = await axios({
+      url: `/teacherPost/myPosts/${userId}`,
+      method: "get",
+    });
+    if (res.status === 200) {
+      return res.data.myPostList;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
