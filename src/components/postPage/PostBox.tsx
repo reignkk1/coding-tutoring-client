@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useGetPosts } from "../../api/Post";
+import { getPosts } from "../../api/Post";
+import { useEffect, useState } from "react";
 
 const Container = styled.section`
   width: 100%;
@@ -37,27 +38,36 @@ const InfoBox = styled.div`
   h2 {
     font-weight: bold;
     font-size: 24px;
+    cursor: pointer;
   }
   span {
     color: blue;
   }
 `;
 
+interface IGetPost {
+  id: number;
+  area: string;
+  content: string;
+  onOrOff: string;
+  subject: string;
+  title: string;
+}
+
 export default function PostBox({ category }: { category?: string }) {
   const navigate = useNavigate();
-  const posts = useGetPosts();
+
+  const [posts, setPosts] = useState<IGetPost[]>();
+
+  useEffect(() => {
+    getPosts(setPosts);
+  }, []);
+
   return (
     <Container>
       <ul>
         {posts?.map((post) => (
-          <li
-            key={post.id}
-            onClick={() =>
-              navigate(`/${category}/post/${post.id}`, {
-                state: post,
-              })
-            }
-          >
+          <li key={post.id}>
             <ImgBox>
               <img
                 src={`https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80`}
@@ -66,7 +76,16 @@ export default function PostBox({ category }: { category?: string }) {
               <span>{}</span>
             </ImgBox>
             <InfoBox>
-              <h2>{post.title}</h2>
+              <h2
+                onClick={() =>
+                  navigate(`/${category}/post/${post.id}`, {
+                    state: post,
+                  })
+                }
+              >
+                {post.title}
+              </h2>
+
               <span>{post.subject}</span>
               <p>{post.onOrOff}</p>
               <p>{post.area}</p>

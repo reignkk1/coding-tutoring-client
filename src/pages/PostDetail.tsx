@@ -1,8 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
-
 import styled from "styled-components";
 import { Container, ImgContainer } from "./MyPage";
 import Wrapper from "../components/common/Wrapper";
+import Button from "../components/postPage/Button";
+import axios from "axios";
 
 export default function PostDetail({ category }: { category: string }) {
   const navigate = useNavigate();
@@ -33,6 +34,17 @@ export default function PostDetail({ category }: { category: string }) {
             <button>쪽지 보내기</button>
           </div>
         </Profile>
+        <Buttons>
+          <Button
+            onClick={() =>
+              axios
+                .delete(`/v1/teacherPost/post/${post.id}`)
+                .then((response) => console.log(response))
+            }
+          >
+            삭제
+          </Button>
+        </Buttons>
 
         <Section id="intro">
           <p className="index">
@@ -143,4 +155,9 @@ const Section = styled.section`
       }
     }
   }
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;

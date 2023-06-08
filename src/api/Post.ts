@@ -1,6 +1,5 @@
 import axios from "axios";
 import { user } from "../UserData";
-import { useState } from "react";
 
 axios.defaults.baseURL =
   "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080";
@@ -13,8 +12,13 @@ interface ICreatePost {
   title: string;
 }
 
-interface IGetPost extends ICreatePost {
+interface IGetPost {
   id: number;
+  area: string;
+  content: string;
+  onOrOff: string;
+  subject: string;
+  title: string;
 }
 
 export function createPost(data: ICreatePost) {
@@ -29,9 +33,9 @@ export function createPost(data: ICreatePost) {
     .catch((error) => console.log(error));
 }
 
-export function useGetPosts() {
-  const [posts, setPosts] = useState<IGetPost[]>();
-
+export function getPosts(
+  setPosts: React.Dispatch<React.SetStateAction<IGetPost[] | undefined>>
+) {
   axios
     .get("/v1/teacherPost/posts")
     .then((response) => {
@@ -40,9 +44,13 @@ export function useGetPosts() {
       }
     })
     .catch((error) => console.log(error));
-
-  return posts;
 }
+
+// export function deletePost(postId) {
+//   axios
+//     .delete(`/v1/teacherPost/post/${postId}`)
+//     .then((response) => response.data);
+// }
 
 //유저 아이디로 post를 받아옴
 export const getPostsByUserId = async (userId: string) => {

@@ -68,7 +68,7 @@ const Required = styled.div`
 
 export default function Write() {
   const [onOffValue, setOnOffValue] = useState("ONLINE");
-  const [subjectValue, setSubjectValue] = useState("");
+  const [subjectValue, setSubjectValue] = useState("JAVASCRIPT");
   const [addressValue, setAddressValue] = useState("");
   const [editorValue, setEditorValue] = useState("");
   const [titleValue, setTitleValue] = useState("");
