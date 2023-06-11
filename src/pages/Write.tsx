@@ -70,8 +70,8 @@ export default function Write() {
   const [onOffValue, setOnOffValue] = useState("ONLINE");
   const [subjectValue, setSubjectValue] = useState("JAVASCRIPT");
   const [addressValue, setAddressValue] = useState("");
-  const [editorValue, setEditorValue] = useState("");
   const [titleValue, setTitleValue] = useState("");
+  const [editorValue, setEditorValue] = useState("");
 
   const [addressModal, setAddressModal] = useState(false);
   const [desiredSubjects, setDesiredSubjects] = useState<string[]>([]);
@@ -93,7 +93,8 @@ export default function Write() {
       subject: desiredSubjects.join(""),
       title: titleValue,
     };
-    createPost(data);
+
+    createPost(data, "students");
   };
 
   return (
@@ -149,7 +150,11 @@ export default function Write() {
             />
 
             <Label>{user.isStudent ? "학생 소개 *" : "선생님 소개 *"}</Label>
-            <Editor editorValue={editorValue} setEditorValue={setEditorValue} />
+            <Editor
+              placeholder="자신을 소개해주세요."
+              editorValue={editorValue}
+              setEditorValue={setEditorValue}
+            />
 
             <ButtonBox>
               <Button type="submit">작성하기</Button>

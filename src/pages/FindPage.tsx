@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
-import PostBox from "../components/postPage/PostBox";
 import SearchBar from "../components/postPage/SearchBar";
 import Button from "../components/postPage/Button";
 import TitleBox from "../components/postPage/TitleBox";
 import { useNavigate } from "react-router-dom";
 import { subjects } from "../components/write/SelectData";
+import PostList from "../components/postPage/PostList";
 
 const Container = styled.div`
   margin-top: 50px;
@@ -59,7 +59,7 @@ export default function FindPage({ category }: { category: string }) {
           </Subject>
         </SearchBox>
         <Button onClick={() => navigate("write")}>✏️ 작성하기</Button>
-        <PostBox category={category} />
+        <PostList category={category} />
       </Container>
     </Wrapper>
   );

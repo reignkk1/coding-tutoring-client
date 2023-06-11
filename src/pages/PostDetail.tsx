@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Container, ImgContainer } from "./MyPage";
 import Wrapper from "../components/common/Wrapper";
 import Button from "../components/postPage/Button";
-import axios from "axios";
+import { deletePost } from "../api/Post";
 
 export default function PostDetail({ category }: { category: string }) {
   const navigate = useNavigate();
@@ -35,15 +35,7 @@ export default function PostDetail({ category }: { category: string }) {
           </div>
         </Profile>
         <Buttons>
-          <Button
-            onClick={() =>
-              axios
-                .delete(`/v1/teacherPost/post/${post.id}`)
-                .then((response) => console.log(response))
-            }
-          >
-            삭제
-          </Button>
+          <Button onClick={() => deletePost(post.id, category)}>삭제</Button>
         </Buttons>
 
         <Section id="intro">
