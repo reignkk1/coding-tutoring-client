@@ -13,6 +13,8 @@ import Signup from "./pages/SignUp";
 import FindPwd from "./pages/FindPwd";
 
 import GlobalStyles from "./styles/GlobalStyles";
+import NoticeWrite from "./pages/NoticeWrite";
+import NoticeDetail from "./pages/NoticeDetail";
 
 function App() {
   const Layout = () => {
@@ -65,6 +67,10 @@ function App() {
           element: <PostDetail category="students" />,
         },
         {
+          path: "/notice/post/:postId",
+          element: <NoticeDetail />,
+        },
+        {
           path: "/notice",
           element: <Notice />,
         },
@@ -82,7 +88,7 @@ function App() {
         },
         {
           path: "/notice/write",
-          element: <Write />,
+          element: <NoticeWrite />,
         },
       ],
     },
