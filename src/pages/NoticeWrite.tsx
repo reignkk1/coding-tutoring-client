@@ -48,6 +48,7 @@ export default function NoticeWrite() {
       content: editorValue,
     };
     createPost(data, "notice");
+    window.location.assign("/notice");
   };
   return (
     <Wrapper>

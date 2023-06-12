@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
+
 import Home from "./pages/Home";
 import MyPage from "./pages/MyPage";
 import Notice from "./pages/Notice";
@@ -15,6 +16,7 @@ import FindPwd from "./pages/FindPwd";
 import GlobalStyles from "./styles/GlobalStyles";
 import NoticeWrite from "./pages/NoticeWrite";
 import NoticeDetail from "./pages/NoticeDetail";
+import ScrollToTop from "./util/ScrollToTop";
 
 import { tokenLoader } from "./util/sign/auth";
 import { action as logoutAction } from "./pages/Logout";
@@ -35,7 +37,8 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout />,
+      element: [<Layout />, <ScrollToTop />],
+
       errorElement: <NotFound />,
       id: "root",
       loader: tokenLoader,

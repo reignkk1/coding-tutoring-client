@@ -5,9 +5,19 @@ import Wrapper from "../components/common/Wrapper";
 import Button from "../components/postPage/Button";
 import { deletePost } from "../api/Post";
 
+interface IPost {
+  id: string;
+  title: string;
+  content: string;
+  onOrOff: string;
+  area: string;
+  userId: string;
+  subject: string;
+}
+
 export default function PostDetail({ category }: { category: string }) {
   const navigate = useNavigate();
-  const post = useLocation().state;
+  const post: IPost = useLocation().state;
   const content = post.content;
 
   return (

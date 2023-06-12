@@ -5,7 +5,7 @@ import Button from "../components/postPage/Button";
 import TitleBox from "../components/postPage/TitleBox";
 import { useNavigate } from "react-router-dom";
 import { subjects } from "../components/write/SelectData";
-import PostList from "../components/postPage/PostList";
+import FindPostList from "../components/postPage/FindPostList";
 
 const Container = styled.div`
   margin-top: 50px;
@@ -58,8 +58,8 @@ export default function FindPage({ category }: { category: string }) {
             ))}
           </Subject>
         </SearchBox>
-        <Button onClick={() => navigate("write")}>✏️ 작성하기</Button>
-        <PostList category={category} />
+        <Button onClick={() => navigate("/write")}>✏️ 작성하기</Button>
+        <FindPostList category={category} />
       </Container>
     </Wrapper>
   );

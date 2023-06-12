@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
-import PostBox from "../components/postPage/PostList";
 import SearchBar from "../components/postPage/SearchBar";
 import TitleBox from "../components/postPage/TitleBox";
 import Button from "../components/postPage/Button";
 import { useNavigate } from "react-router-dom";
-import PostList from "../components/postPage/PostList";
+import NoticePostList from "../components/postPage/NoticePostList";
 
 const Container = styled.div`
   margin-top: 50px;
@@ -27,7 +26,7 @@ export default function Notice() {
         />
         <SearchBar placeholder="제목을 입력해주세요!" />
         <Button onClick={() => navigate("write")}>✏️ 작성하기</Button>
-        <PostList category="notice" />
+        <NoticePostList />
       </Container>
     </Wrapper>
   );
