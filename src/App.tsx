@@ -16,6 +16,10 @@ import GlobalStyles from "./styles/GlobalStyles";
 import NoticeWrite from "./pages/NoticeWrite";
 import NoticeDetail from "./pages/NoticeDetail";
 
+import { tokenLoader } from "./util/sign/auth";
+import { action as logoutAction } from "./pages/Logout";
+import { checkAuthLoader } from "./util/sign/auth";
+
 function App() {
   const Layout = () => {
     return (
@@ -32,6 +36,8 @@ function App() {
       path: "/",
       element: <Layout />,
       errorElement: <NotFound />,
+      id: "root",
+      loader: tokenLoader,
       children: [
         {
           path: "/",
@@ -45,6 +51,7 @@ function App() {
           path: "/signin",
           element: <Signin />,
         },
+        { path: "/logout", action: logoutAction },
         {
           path: "/help/user",
           element: <FindPwd />,
@@ -77,6 +84,7 @@ function App() {
         {
           path: "/view/:me",
           element: <MyPage />,
+          loader: checkAuthLoader, //라우트 보호
         },
         {
           path: "/view/:userId",
@@ -85,6 +93,7 @@ function App() {
         {
           path: "/write",
           element: <Write />,
+          loader: checkAuthLoader,
         },
         {
           path: "/notice/write",

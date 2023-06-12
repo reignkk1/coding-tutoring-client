@@ -66,3 +66,33 @@ export const findPwd = async (userData: any) => {
     alert("비밀번호 변경에 실패했습니다.");
   }
 };
+
+//로그인
+export const signin = async (userData: any) => {
+  try {
+    const res = await axios({
+      url: `${baseUrl}/auth/sign-in`,
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: userData,
+    });
+    if (res.status === 200) {
+      const token = res.data.token;
+
+      localStorage.setItem("token", token);
+      const expiration = new Date();
+      expiration.setHours(expiration.getHours() + 0.5); //만료시간 30분
+      localStorage.setItem("expiration", expiration.toISOString());
+
+      // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+      alert("로그인 되셨습니다");
+      window.location.replace("/");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};

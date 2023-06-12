@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useRouteLoaderData } from "react-router-dom";
 import styled from "styled-components";
 import { user } from "./../../UserData";
 
@@ -45,13 +45,12 @@ const MenuItem = styled.li`
 `;
 
 export default function Header() {
+  const token = useRouteLoaderData("root");
   const menu = [
-    { item: "공지사항", to: "/notice" },
-    { item: "글 작성", to: user.isLogin ? "/write" : "/signin" },
     { item: "선생님 찾기", to: "/teachers" },
     { item: "학생 찾기", to: "/students" },
-    { item: "로그인", to: "/signin" },
-    { item: "회원가입", to: "/signup" },
+    { item: "공지사항", to: "/notice" },
+    { item: "글 작성", to: user.isLogin ? "/write" : "/signin" },
   ];
 
   return (
@@ -66,6 +65,25 @@ export default function Header() {
               <MenuItem>{list.item}</MenuItem>
             </Link>
           ))}
+          {!token ? (
+            <Link to="/signin">
+              <MenuItem>로그인</MenuItem>
+            </Link>
+          ) : (
+            <MenuItem
+              onClick={() => {
+                localStorage.removeItem("token");
+                localStorage.removeItem("expiration");
+                window.location.href = "/"; //redirect, navigate으로 하면 새로고침이 안됨
+              }}
+            >
+              로그아웃
+            </MenuItem>
+          )}
+
+          <Link to="/view/me">
+            <MenuItem>마이페이지 </MenuItem>
+          </Link>
         </Menu>
       </NavBar>
     </Container>

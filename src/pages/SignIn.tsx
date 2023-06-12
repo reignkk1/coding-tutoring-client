@@ -3,13 +3,23 @@ import { Link } from "react-router-dom";
 import { signinForm } from "../util/sign/formConfig";
 import Wrapper from "../components/common/Wrapper";
 import { FormContainer, Form } from "../styles/Form";
+import { signin } from "../api/auth";
 
 export default function Signin() {
-  const { renderFormInputs, isFormValid } = useSign(signinForm);
+  const { form, renderFormInputs, isFormValid } = useSign(signinForm);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //백엔드와 통신
+
+    signin({
+      id: form["id"].value,
+      password: form["password"].value,
+    });
   };
+
+  console.log({
+    id: form["id"].value,
+    password: form["password"].value,
+  });
 
   return (
     <Wrapper>
