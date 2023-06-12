@@ -90,14 +90,21 @@ export const signupForm: sign = {
   },
   ageGroup: {
     ...createFormFieldConfig("연령대", "ageGroup", "radio", "", [
-      { label: "10대", value: "TEENS" },
       { label: "20대", value: "TWENTIES" },
       { label: "30대", value: "THIRTIES" },
       { label: "40대", value: "FORTIES" },
       { label: "50대", value: "FIFTIES" },
-      { label: "60대", value: "SIXTIES" },
     ]),
     validationRules: requiredRule("연령대"),
+  },
+  career: {
+    ...createFormFieldConfig("경력", "career", "radio", "", [
+      { label: "1-3년", value: "FIRST_TO_THIRD_GRADE" },
+      { label: "3-5년", value: "THIRTHIRD_TO_FIFTH_GRADETIES" },
+      { label: "5-7년", value: "FIFTH_TO_SEVENTH_GRADE" },
+      { label: "7년 이상", value: "OVER_SEVENTH_GRADE" },
+    ]),
+    validationRules: requiredRule("경력"),
   },
 };
 

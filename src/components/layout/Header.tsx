@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useRouteLoaderData } from "react-router-dom";
 import styled from "styled-components";
 import { user } from "./../../UserData";
+import { singout } from "../../api/auth";
 
 const Container = styled.header`
   width: 100%;
@@ -29,9 +30,7 @@ const Menu = styled.ul`
   display: flex;
   align-items: center;
 
-  a {
-    margin-right: 30px;
-  }
+  margin-right: 30px;
 `;
 
 const MenuItem = styled.li`
@@ -39,19 +38,20 @@ const MenuItem = styled.li`
   font-weight: bold;
   cursor: pointer;
 
+  margin-right: 30px;
+
   &:hover {
     color: #00c000;
   }
 `;
 
 export default function Header() {
+  const token = useRouteLoaderData("root");
   const menu = [
-    { item: "공지사항", to: "/notice" },
-    { item: "글 작성", to: user.isLogin ? "/write" : "/signin" },
     { item: "선생님 찾기", to: "/teachers" },
     { item: "학생 찾기", to: "/students" },
-    { item: "로그인", to: "/signin" },
-    { item: "회원가입", to: "/signup" },
+    { item: "공지사항", to: "/notice" },
+    { item: "글 작성", to: user.isLogin ? "/write" : "/signin" },
   ];
 
   return (
@@ -66,6 +66,17 @@ export default function Header() {
               <MenuItem>{list.item}</MenuItem>
             </Link>
           ))}
+          {!token ? (
+            <Link to="/signin">
+              <MenuItem>로그인</MenuItem>
+            </Link>
+          ) : (
+            <MenuItem onClick={singout}>로그아웃</MenuItem>
+          )}
+
+          <Link to="/view/me">
+            <MenuItem>마이페이지 </MenuItem>
+          </Link>
         </Menu>
       </NavBar>
     </Container>
