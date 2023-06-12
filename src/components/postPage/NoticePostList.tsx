@@ -1,7 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useGetPosts } from "../../api/Post";
 
 const Container = styled.div`
+  width: 100%;
+  margin-top: 100px;
+  margin-bottom: 100px;
   div {
     display: flex;
     flex-direction: column;
@@ -39,25 +43,17 @@ const InfoBox = styled.div`
   }
 `;
 
-interface INoticePost {
-  id: number;
-  content: string;
-  title: string;
-}
-
-interface INoticePostList {
-  posts: INoticePost[] | undefined;
-}
-export default function NoticePostList({ posts }: INoticePostList) {
+export default function NoticePostList() {
   const navigate = useNavigate();
+  const posts = useGetPosts("notice");
   return (
     <Container>
       <ul>
-        {posts?.map((post, index) => (
-          <li key={index}>
+        {posts?.map((post) => (
+          <li key={post.id}>
             <ImgBox>
               <img
-                src={`https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80`}
+                src={`https://play-lh.googleusercontent.com/EmoxV_AVHYYitg8ELxYDRA47LC09BsDVqOpd2wrBPm4P4jB1rI6-muHJ_Ij9OM_RGw=w240-h480-rw`}
                 alt="프로필 사진"
               />
               <span>운영자</span>

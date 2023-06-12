@@ -1,5 +1,5 @@
 import axios from "axios";
-import { user } from "../UserData";
+import { useEffect, useState } from "react";
 
 axios.defaults.baseURL =
   "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080";
@@ -24,16 +24,19 @@ interface IGetPost {
 // 게시물 작성
 export function createPost(data: ICreatePost, category: string) {
   const categoryValue =
-    category === "teachers"
+    category === "TEACHER"
       ? "teacherPost"
-      : category === "students"
+      : category === "STUDENT"
       ? "studentPost"
       : "notice";
+
   axios
     .post(`/v1/${categoryValue}`, data)
     .then((response) => {
       if (response.status === 200) {
-        window.location.assign(user.isStudent ? "/students" : "/teachers");
+        window.location.assign(
+          category === "STUDENT" ? "/students" : "/teachers"
+        );
         return alert("작성완료");
       }
     })
@@ -41,24 +44,28 @@ export function createPost(data: ICreatePost, category: string) {
 }
 
 // 모든 게시물 불러오기
-export function getPosts(
-  setPosts: React.Dispatch<React.SetStateAction<IGetPost[] | undefined>>,
-  category?: string
-) {
+export function useGetPosts(category?: string) {
+  const [posts, setPosts] = useState<IGetPost[]>();
+
   const categoryValue =
     category === "teachers"
       ? "teacherPosts"
       : category === "students"
       ? "studentPosts"
       : "notices";
-  axios
-    .get(`/v1/${categoryValue}`)
-    .then((response) => {
-      if (response.status === 200) {
-        setPosts(response.data);
-      }
-    })
-    .catch((error) => console.log(error));
+
+  useEffect(() => {
+    axios
+      .get(`/v1/${categoryValue}`)
+      .then((response) => {
+        if (response.status === 200) {
+          setPosts(response.data);
+        }
+      })
+      .catch((error) => console.log(error));
+  }, [category]);
+
+  return posts;
 }
 
 // 게시물 삭제

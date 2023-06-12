@@ -58,7 +58,7 @@ export default function Header() {
     <Container>
       <NavBar>
         <Link to="/">
-          <Logo>과외바다</Logo>
+          <Logo>개발바다</Logo>
         </Link>
         <Menu>
           {menu.map((list) => (

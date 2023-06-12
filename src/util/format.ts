@@ -36,3 +36,12 @@ export const ageFormat = (age: string) => {
       return "50대";
   }
 };
+
+export const jobFormat = (userClassification: string) => {
+  switch (userClassification) {
+    case "STUDENT":
+      return " 학생";
+    case "TEACHER":
+      return " 선생님";
+  }
+};

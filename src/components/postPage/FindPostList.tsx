@@ -1,7 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useGetPosts } from "../../api/Post";
 
-const Container = styled.section`
+const Container = styled.div`
   width: 100%;
   margin-top: 100px;
   margin-bottom: 100px;
@@ -43,27 +44,15 @@ const InfoBox = styled.div`
   }
 `;
 
-interface IGetPost {
-  id: number;
-  area: string;
-  content: string;
-  onOrOff: string;
-  subject: string;
-  title: string;
-}
-
-interface IFindPostList {
-  posts: IGetPost[] | undefined;
-  category: string;
-}
-
-export default function FindPostList({ posts, category }: IFindPostList) {
+export default function FindPostList({ category }: { category: string }) {
   const navigate = useNavigate();
+
+  const posts = useGetPosts(category);
   return (
     <Container>
       <ul>
-        {posts?.map((post, index) => (
-          <li key={index}>
+        {posts?.map((post) => (
+          <li key={post.id}>
             <ImgBox>
               <img
                 src={`https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80`}

@@ -11,7 +11,7 @@ import { on_off, subjects } from "../components/write/SelectData";
 import { createPost } from "../api/Post";
 import { AuthContext } from "../context/AuthContext";
 
-import { genderFormat, ageFormat } from "../util/format";
+import { genderFormat, ageFormat, jobFormat } from "../util/format";
 
 const Container = styled.div`
   height: 200vh;
@@ -70,7 +70,10 @@ const Required = styled.div`
 `;
 
 export default function Write() {
-  const { user } = useContext(AuthContext);
+  const {
+    user,
+    user: { userClassification },
+  } = useContext(AuthContext);
 
   const [onOffValue, setOnOffValue] = useState("ONLINE");
   const [subjectValue, setSubjectValue] = useState("JAVASCRIPT");
@@ -99,7 +102,7 @@ export default function Write() {
       title: titleValue,
     };
 
-    createPost(data, "students");
+    createPost(data, userClassification);
   };
 
   return (
@@ -114,7 +117,7 @@ export default function Write() {
               />
               <div>
                 {user.nickname}
-                {user.userClassification === "STUDENT" ? " 학생" : " 선생님"}
+                {jobFormat(userClassification)}
               </div>
               <div>
                 {genderFormat(`${user.gender}`)} /&nbsp;
@@ -158,7 +161,7 @@ export default function Write() {
               maxLength={50}
             />
 
-            <Label>{user.isStudent ? "학생 소개 *" : "선생님 소개 *"}</Label>
+            <Label>{jobFormat(userClassification) + " 소개 *"}</Label>
             <Editor
               placeholder="자신을 소개해주세요."
               editorValue={editorValue}

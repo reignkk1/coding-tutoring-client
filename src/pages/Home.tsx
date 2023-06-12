@@ -84,7 +84,7 @@ export default function Home() {
         <BannerContainer>
           <BannerTitle>
             <h2>선생님과 학생을 가장 찾기 쉬운 방법!</h2>
-            <span>과외바다에서 함께 할 사람들을 찾으세요 🔍</span>
+            <span>개발바다에서 함께 할 사람들을 찾으세요 🔍</span>
           </BannerTitle>
           <BannerImg src="/banner.png" />
         </BannerContainer>
@@ -98,7 +98,7 @@ export default function Home() {
           <SecondBox>
             <Box>
               <div>중개 수수료 0%</div>
-              <span>과외바다는 연결 성사 수수료가 없어요</span>
+              <span>개발바다는 연결 성사 수수료가 없어요</span>
               <p>
                 선생님 및 학생 모두 연락 요청이나 유선 연락을 받은 경우 별다른
                 수수료가 발생하지 않아요. 선생님의 경우 큰 노력 없이도 리스트
