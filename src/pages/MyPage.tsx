@@ -1,20 +1,25 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
 import { Profile } from "./PostDetail";
 
+import { careerFormat, genderFormat } from "../util/format";
 import PostList from "../components/mypage/PostList";
-import { getPostsByUserId } from "../api/Post";
+import { AuthContext } from "../context/AuthContext";
 
 export default function MyPage(): JSX.Element {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    getPostsByUserId("tttt").then((res) => {
-      setPosts(res);
-    });
-  }, []);
+  const { user } = useContext(AuthContext);
+  const {
+    id,
+    nickname,
+    career,
+    userClassification,
+    email,
+    gender,
+    studentPostResponseDtos,
+    teacherPostResponseDtos,
+  } = user || {};
 
   return (
     <Wrapper>
@@ -28,13 +33,27 @@ export default function MyPage(): JSX.Element {
           </ImgContainer>
 
           <div className="right">
-            <p className="nickname">김성연&nbsp;선생님</p>
-            <p className="career">3년차&nbsp;풀스택 개발자</p>
+            <p className="nickname">
+              {nickname}&nbsp;
+              {userClassification === "STUDENT" ? "학생" : "선생님"}
+            </p>
+            <p className="career">
+              {careerFormat(`${career}`)} / {genderFormat(`${gender}`)}
+            </p>
             <button>쪽지 보내기</button>
           </div>
         </Profile>
 
-        <Posts>게시글 목록 영역(글이 없을때 보여줄게 필요함)</Posts>
+        <Posts>
+          {userClassification === "STUDENT" &&
+            studentPostResponseDtos.map((post: any) => (
+              <PostList post={post} />
+            ))}
+          {userClassification === "TEACHER" &&
+            teacherPostResponseDtos.map((post: any) => (
+              <PostList post={post} />
+            ))}
+        </Posts>
       </Container>
     </Wrapper>
   );

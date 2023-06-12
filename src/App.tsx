@@ -19,6 +19,7 @@ import NoticeDetail from "./pages/NoticeDetail";
 import { tokenLoader } from "./util/sign/auth";
 import { action as logoutAction } from "./pages/Logout";
 import { checkAuthLoader } from "./util/sign/auth";
+import { AuthContextProvider } from "./context/AuthContext";
 
 function App() {
   const Layout = () => {
@@ -104,10 +105,10 @@ function App() {
   ]);
 
   return (
-    <>
+    <AuthContextProvider>
       <GlobalStyles />
       <RouterProvider router={router} />
-    </>
+    </AuthContextProvider>
   );
 }
 

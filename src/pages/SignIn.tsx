@@ -16,11 +16,6 @@ export default function Signin() {
     });
   };
 
-  console.log({
-    id: form["id"].value,
-    password: form["password"].value,
-  });
-
   return (
     <Wrapper>
       <FormContainer>

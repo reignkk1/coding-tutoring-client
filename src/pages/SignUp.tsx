@@ -15,6 +15,7 @@ export default function Signup() {
 
     signup({
       ageGroup: form["ageGroup"].value,
+      career: form["career"].value,
       email: form["email"].value,
       gender: form["gender"].value,
       id: form["id"].value,

@@ -78,12 +78,13 @@ export const signin = async (userData: any) => {
       },
       data: userData,
     });
+    console.log(res);
     if (res.status === 200) {
       const token = res.data.token;
 
       localStorage.setItem("token", token);
-      const expiration = new Date();
-      expiration.setHours(expiration.getHours() + 0.5); //만료시간 30분
+      let expiration = new Date();
+      expiration.setHours(expiration.getHours() + 1); //만료시간 30분
       localStorage.setItem("expiration", expiration.toISOString());
 
       // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
@@ -91,6 +92,36 @@ export const signin = async (userData: any) => {
 
       alert("로그인 되셨습니다");
       window.location.replace("/");
+    }
+  } catch (error: any) {
+    alert(error.response.data.msg);
+  }
+};
+
+//로그아웃
+export const singout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("expiration");
+  window.location.href = "/"; //redirect, navigate으로 하면 새로고침이 안됨
+};
+
+//내 정보 가져오기
+export const getMyData = async (
+  token: string
+  // setUser: React.Dispatch<React.SetStateAction<any | undefined>>
+) => {
+  try {
+    const res = await axios({
+      url: `${baseUrl}/member/info`,
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (res.status === 200) {
+      const user = await res.data;
+      return user;
     }
   } catch (error) {
     console.log(error);

@@ -1,6 +1,7 @@
 import { Link, useRouteLoaderData } from "react-router-dom";
 import styled from "styled-components";
 import { user } from "./../../UserData";
+import { singout } from "../../api/auth";
 
 const Container = styled.header`
   width: 100%;
@@ -29,15 +30,15 @@ const Menu = styled.ul`
   display: flex;
   align-items: center;
 
-  a {
-    margin-right: 30px;
-  }
+  margin-right: 30px;
 `;
 
 const MenuItem = styled.li`
   color: black;
   font-weight: bold;
   cursor: pointer;
+
+  margin-right: 30px;
 
   &:hover {
     color: #00c000;
@@ -70,15 +71,7 @@ export default function Header() {
               <MenuItem>로그인</MenuItem>
             </Link>
           ) : (
-            <MenuItem
-              onClick={() => {
-                localStorage.removeItem("token");
-                localStorage.removeItem("expiration");
-                window.location.href = "/"; //redirect, navigate으로 하면 새로고침이 안됨
-              }}
-            >
-              로그아웃
-            </MenuItem>
+            <MenuItem onClick={singout}>로그아웃</MenuItem>
           )}
 
           <Link to="/view/me">

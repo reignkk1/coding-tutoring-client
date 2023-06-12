@@ -4,44 +4,24 @@ import { useNavigate } from "react-router-dom";
 interface PostListProps {
   post: {
     id: number;
-    category: string;
+    title: string;
+    content: any;
     subject: string;
-    intro: string;
-    education?: string;
-    sex?: string;
-    age?: string;
-    grade?: string;
-    relation?: string;
-    address?: string;
+    area: string;
+    onOrOff: string;
   };
 }
 
 export default function PostList({ post }: PostListProps) {
-  const {
-    id,
-    category,
-    subject,
-    intro,
-    education,
-    sex,
-    age,
-    grade,
-    relation,
-    address,
-  } = post;
+  const { id, title, subject, area, onOrOff } = post;
   const navigate = useNavigate();
 
   return (
-    <PostListContainer onClick={() => navigate(`/view/${category}/${id}`)}>
-      <p className="subject">{subject}</p>
-      <p className="intro">{intro}</p>
-      {category === "teachers" && <p>{education}</p>}
-      {category === "students" && (
-        <p>
-          {sex}/{age}/{grade}/{relation}
-        </p>
-      )}
-      <p>{address}</p>
+    <PostListContainer>
+      <p>{title}</p>
+      <p>{subject}</p>
+      <p>{area}</p>
+      <p>{onOrOff}</p>
     </PostListContainer>
   );
 }
