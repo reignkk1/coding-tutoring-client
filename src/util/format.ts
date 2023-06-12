@@ -23,3 +23,16 @@ export const genderFormat = (gender: string) => {
       return "남";
   }
 };
+
+export const ageFormat = (age: string) => {
+  switch (age) {
+    case "TWENTIES":
+      return "20대";
+    case "THIRTIES":
+      return "30대";
+    case "FORTIES":
+      return "40대";
+    case "FIFTIES":
+      return "50대";
+  }
+};

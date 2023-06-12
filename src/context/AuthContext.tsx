@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import { getAuthToken } from "../util/sign/auth";
 import { getMyData } from "../api/auth";
 
@@ -34,6 +34,6 @@ export function AuthContextProvider({
   );
 }
 
-export function useAuthContext() {
-  useContext(AuthContext);
-}
+// export function useAuthContext() {
+//   useContext(AuthContext);
+// }

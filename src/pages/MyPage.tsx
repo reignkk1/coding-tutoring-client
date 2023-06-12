@@ -20,6 +20,7 @@ export default function MyPage(): JSX.Element {
     studentPostResponseDtos,
     teacherPostResponseDtos,
   } = user || {};
+  console.log(user);
 
   return (
     <Wrapper>

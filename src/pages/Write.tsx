@@ -2,13 +2,16 @@ import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
 import Editor from "../components/write/Editor";
 import Button from "../components/postPage/Button";
-import { useState } from "react";
-import { user } from "../UserData";
+import { useState, useContext } from "react";
+
 import AddressSearch from "../components/write/AddressSearch";
 import Selector from "../components/write/Selector";
 import DesitredSubjectsList from "./../components/write/DesitredSubjectsList";
 import { on_off, subjects } from "../components/write/SelectData";
 import { createPost } from "../api/Post";
+import { AuthContext } from "../context/AuthContext";
+
+import { genderFormat, ageFormat } from "../util/format";
 
 const Container = styled.div`
   height: 200vh;
@@ -67,6 +70,8 @@ const Required = styled.div`
 `;
 
 export default function Write() {
+  const { user } = useContext(AuthContext);
+
   const [onOffValue, setOnOffValue] = useState("ONLINE");
   const [subjectValue, setSubjectValue] = useState("JAVASCRIPT");
   const [addressValue, setAddressValue] = useState("");
@@ -103,13 +108,17 @@ export default function Write() {
         <Container>
           <UserInfoBox>
             <UserInfo>
-              <img src={user.avartarImg} alt="avatar-img" />
+              <img
+                src="https://i.pinimg.com/564x/92/32/a2/9232a2b8aba31dfe9a744fb232813f7f.jpg"
+                alt="avatar-img"
+              />
               <div>
-                {user.name}
-                {user.isStudent ? " 학생" : " 선생님"}
+                {user.nickname}
+                {user.userClassification === "STUDENT" ? " 학생" : " 선생님"}
               </div>
               <div>
-                ({user.gender} / {user.age})
+                {genderFormat(`${user.gender}`)} /&nbsp;
+                {ageFormat(`${user.ageGroup}`)}
               </div>
             </UserInfo>
           </UserInfoBox>
