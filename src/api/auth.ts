@@ -1,4 +1,16 @@
 import axios from "axios";
+import { useState, useEffect } from "react";
+
+interface IGetUser {
+  id: string;
+  nickname: string;
+  career: string;
+  userClassification: string;
+  email: string;
+  gender: string;
+  studentPostResponseDtos: any;
+  teacherPostResponseDtos: any;
+}
 
 const baseUrl =
   "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080";
@@ -127,3 +139,41 @@ export const getMyData = async (
     console.log(error);
   }
 };
+
+//userId로 정보 가져오기
+//export const getUserDataById = async (userId: string) => {
+//  try {
+//    const res = await axios({
+//      url: `${baseUrl}/member/info/${userId}`,
+//      method: "get",
+//      headers: {
+//        "Content-Type": "application/json",
+//      },
+//    });
+//
+//    if (res.status === 200) {
+//      const user = await res.data;
+//      return user;
+//    }
+//  } catch (error) {
+//    console.log(error);
+//  }
+//};
+
+// 유저 아이디로 정보 불러오기
+export function useGetUserDataById(userId?: string) {
+  const [user, setUser] = useState<IGetUser>();
+
+  useEffect(() => {
+    axios
+      .get(`${baseUrl}/member/info/${userId}`)
+      .then((res) => {
+        if (res.status === 200) {
+          setUser(res.data);
+        }
+      })
+      .catch((error) => console.log(error));
+  }, [userId]);
+
+  return user;
+}
