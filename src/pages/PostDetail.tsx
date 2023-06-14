@@ -26,7 +26,8 @@ export default function PostDetail({ category }: { category: string }) {
         <Profile>
           <ImgContainer
             onClick={() => {
-              navigate(`/view/${post.userId}`);
+              navigate(`/view/hhhh`);
+              // navigate(`/view/${post.userId}`);
             }}
           >
             <img

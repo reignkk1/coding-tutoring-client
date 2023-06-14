@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
 
 import Home from "./pages/Home";
 import MyPage from "./pages/MyPage";
+import UserPage from "./pages/UserPage";
 import Notice from "./pages/Notice";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
@@ -86,13 +87,13 @@ function App() {
           element: <Notice />,
         },
         {
-          path: "/view/:me",
+          path: "/view/me",
           element: <MyPage />,
           loader: checkAuthLoader, //라우트 보호
         },
         {
           path: "/view/:userId",
-          element: <MyPage />,
+          element: <UserPage />,
         },
         {
           path: "/write",
