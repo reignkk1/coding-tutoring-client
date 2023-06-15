@@ -77,6 +77,9 @@ export default function Header() {
           ))}
         </Nav>
         <Sign>
+          <Link to="/view/me">
+            <NavItem>마이페이지 </NavItem>
+          </Link>
           {!token ? (
             <Link to="/signin">
               <NavItem>로그인</NavItem>
@@ -84,9 +87,6 @@ export default function Header() {
           ) : (
             <NavItem onClick={singout}>로그아웃</NavItem>
           )}
-          <Link to="/view/me">
-            <NavItem>마이페이지 </NavItem>
-          </Link>
         </Sign>
       </Container>
     </Head>
