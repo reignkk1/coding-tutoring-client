@@ -1,47 +1,56 @@
 import { Link, useRouteLoaderData } from "react-router-dom";
 import styled from "styled-components";
-import { user } from "./../../UserData";
 import { singout } from "../../api/auth";
 
-const Container = styled.header`
+const Head = styled.header`
   width: 100%;
   height: 65px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
   position: fixed;
-  background-color: white;
-  z-index: 98;
+
+  background-color: #0e1620;
+  border-bottom: 1px solid #4f504f;
+
+  z-index: 100;
 `;
 
-const NavBar = styled.nav`
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+
   display: flex;
   justify-content: space-between;
-  width: 1200px;
-  margin: 0 auto;
-  padding: 25px 0px;
+  align-items: center;
+
+  margin-inline: auto;
 `;
 
 const Logo = styled.h1`
-  font-weight: bold;
+  font-family: regular;
   font-size: 22px;
-  color: #00c000;
+  color: #c9fd35;
 `;
 
-const Menu = styled.ul`
+const Nav = styled.nav`
   display: flex;
   align-items: center;
-
-  margin-right: 30px;
+  gap: 1.5rem;
 `;
 
-const MenuItem = styled.li`
-  color: black;
-  font-weight: bold;
+const Sign = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+`;
+
+const NavItem = styled.li`
+  font-family: light;
+  color: #ffffff;
+
   cursor: pointer;
-
-  margin-right: 30px;
-
   &:hover {
-    color: #00c000;
+    color: #c9fd35;
   }
 `;
 
@@ -50,35 +59,36 @@ export default function Header() {
   const menu = [
     { item: "선생님 찾기", to: "/teachers" },
     { item: "학생 찾기", to: "/students" },
+    { item: "글 작성", to: token ? "/write" : "/signin" },
     { item: "공지사항", to: "/notice" },
-    { item: "글 작성", to: user.isLogin ? "/write" : "/signin" },
   ];
 
   return (
-    <Container>
-      <NavBar>
-        <Link to="/">
-          <Logo>개발바다</Logo>
-        </Link>
-        <Menu>
+    <Head>
+      <Container>
+        <Nav>
+          <Link to="/">
+            <Logo>개발바다</Logo>
+          </Link>
           {menu.map((list) => (
             <Link key={list.item} to={list.to}>
-              <MenuItem>{list.item}</MenuItem>
+              <NavItem>{list.item}</NavItem>
             </Link>
           ))}
+        </Nav>
+        <Sign>
           {!token ? (
             <Link to="/signin">
-              <MenuItem>로그인</MenuItem>
+              <NavItem>로그인</NavItem>
             </Link>
           ) : (
-            <MenuItem onClick={singout}>로그아웃</MenuItem>
+            <NavItem onClick={singout}>로그아웃</NavItem>
           )}
-
           <Link to="/view/me">
-            <MenuItem>마이페이지 </MenuItem>
+            <NavItem>마이페이지 </NavItem>
           </Link>
-        </Menu>
-      </NavBar>
-    </Container>
+        </Sign>
+      </Container>
+    </Head>
   );
 }

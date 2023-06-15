@@ -53,14 +53,15 @@ ${reset}
     font-style: normal;
 }
 
-
-
 body{
     font-family: light;
     background-color: #0e1620;
     color: #ffffff;
 }
 
+ul, li{
+    list-style:none;
+}
 
 a {
     text-decoration:none;
