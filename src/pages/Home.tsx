@@ -34,7 +34,7 @@ const BannerTitle = styled.div`
 
 const Intro = styled.section`
   text-align: center;
-  margin-top: 6rem;
+  margin-block: 6rem;
 `;
 
 const FirstBox = styled.div`
@@ -66,16 +66,16 @@ const Box = styled.div`
 
   overflow: hidden;
   clip-path: polygon(
-    32px 0,
+    22px 0,
     100% 0,
-    100% calc(100% - 32px),
-    calc(100% - 32px) 100%,
+    100% calc(100% - 22px),
+    calc(100% - 22px) 100%,
     0 100%,
-    0 32px
+    0 22px
   );
 
   div {
-    font-family: regular;
+    font-family: medium;
     font-size: 1.5rem;
     color: #c9fd35;
     margin-bottom: 2rem;
