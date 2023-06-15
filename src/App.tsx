@@ -23,6 +23,8 @@ import { tokenLoader } from "./util/sign/auth";
 import { action as logoutAction } from "./pages/Logout";
 import { checkAuthLoader } from "./util/sign/auth";
 import { AuthContextProvider } from "./context/AuthContext";
+import NoticeEdit from "./pages/NoticeEdit";
+import FindPageEdit from "./pages/FindPageEdit";
 
 function App() {
   const Layout = () => {
@@ -75,12 +77,24 @@ function App() {
           element: <PostDetail category="teachers" />,
         },
         {
+          path: "/teachers/post/:postId/edit",
+          element: <FindPageEdit category="teachers" />,
+        },
+        {
           path: "/students/post/:postId",
           element: <PostDetail category="students" />,
         },
         {
+          path: "/students/post/:postId/edit",
+          element: <FindPageEdit category="students" />,
+        },
+        {
           path: "/notice/post/:postId",
           element: <NoticeDetail />,
+        },
+        {
+          path: "/notice/post/:postId/edit",
+          element: <NoticeEdit />,
         },
         {
           path: "/notice",
