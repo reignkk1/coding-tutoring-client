@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Wrapper from "../components/common/Wrapper";
 import styled from "styled-components";
 import Button from "../components/postPage/Button";
@@ -18,7 +18,11 @@ const Content = styled.div`
 
   line-height: 1.8;
 `;
-const ButtonContainer = styled.div``;
+const ButtonContainer = styled.div`
+  button {
+    margin-right: 10px;
+  }
+`;
 
 interface INoticePost {
   id: string;
@@ -27,6 +31,7 @@ interface INoticePost {
 }
 
 export default function NoticeDetail() {
+  const navigate = useNavigate();
   const post: INoticePost = useLocation().state;
 
   const handleDelete = () => {
@@ -37,6 +42,7 @@ export default function NoticeDetail() {
     return;
   };
 
+  const handleModify = () => navigate("edit", { state: post });
   return (
     <Wrapper>
       <Container>
@@ -44,6 +50,7 @@ export default function NoticeDetail() {
         <Content>{Parser(post.content)}</Content>
         <ButtonContainer>
           <Button onClick={handleDelete}>삭제</Button>
+          <Button onClick={handleModify}>수정</Button>
         </ButtonContainer>
       </Container>
     </Wrapper>

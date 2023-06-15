@@ -20,6 +20,14 @@ export default function PostDetail({ category }: { category: string }) {
   const post: IPost = useLocation().state;
   const content = post.content;
 
+  const handleDelete = () => {
+    if (window.confirm("정말로 삭제하겠습니까?")) {
+      deletePost(post.id, category);
+    }
+  };
+
+  const handleModify = () => navigate("edit", { state: post });
+
   return (
     <Wrapper>
       <Container>
@@ -45,7 +53,8 @@ export default function PostDetail({ category }: { category: string }) {
           </div>
         </Profile>
         <Buttons>
-          <Button onClick={() => deletePost(post.id, category)}>삭제</Button>
+          <Button onClick={handleDelete}>삭제</Button>
+          <Button onClick={handleModify}>수정</Button>
         </Buttons>
 
         <Section id="intro">
@@ -162,4 +171,7 @@ const Section = styled.section`
 const Buttons = styled.div`
   display: flex;
   justify-content: flex-end;
+  button {
+    margin-right: 10px;
+  }
 `;

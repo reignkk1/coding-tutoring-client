@@ -4,25 +4,17 @@ import { useEffect, useState } from "react";
 axios.defaults.baseURL =
   "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080";
 
-interface ICreatePost {
+interface IPost {
+  id?: number;
   area?: string;
-  content?: string;
+  content: string;
   onOrOff?: string;
   subject?: string;
   title: string;
 }
 
-interface IGetPost {
-  id: number;
-  area: string;
-  content: string;
-  onOrOff: string;
-  subject: string;
-  title: string;
-}
-
 // 게시물 작성
-export function createPost(data: ICreatePost, category: string) {
+export function createPost(data: IPost, category: string) {
   const categoryValue =
     category === "TEACHER"
       ? "teacherPost"
@@ -45,7 +37,7 @@ export function createPost(data: ICreatePost, category: string) {
 
 // 모든 게시물 불러오기
 export function useGetPosts(category?: string) {
-  const [posts, setPosts] = useState<IGetPost[]>();
+  const [posts, setPosts] = useState<IPost[]>();
 
   const categoryValue =
     category === "teachers"
@@ -78,7 +70,31 @@ export function deletePost(postId: string, category: string) {
       : "notice";
   axios
     .delete(`/v1/${categoryValue}/${postId}`)
-    .then((response) => response.data)
+    .then((response) => {
+      if (response.status === 200) {
+        window.location.replace(`/${category}`);
+      }
+    })
+    .catch((error) => console.log(error));
+}
+
+// 게시물 수정
+export function modifyPost(data: IPost, category: string) {
+  const categoryValue =
+    category === "teachers"
+      ? "teacherPost"
+      : category === "students"
+      ? "studentPost"
+      : "notice";
+
+  axios
+    .put(`/v1/${categoryValue}/${data.id}`, data)
+    .then((response) => {
+      if (response.status === 200) {
+        alert("수정완료");
+        return window.location.replace(`/${category}`);
+      }
+    })
     .catch((error) => console.log(error));
 }
 

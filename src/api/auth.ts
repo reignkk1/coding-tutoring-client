@@ -121,6 +121,7 @@ export const getMyData = async (
     });
     if (res.status === 200) {
       const user = await res.data;
+      console.log(user);
       return user;
     }
   } catch (error) {
