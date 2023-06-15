@@ -68,6 +68,7 @@ a {
 }
 
 button{
+    font-family: medium;
     background-color: inherit;
     padding: 0;
     border: none;
