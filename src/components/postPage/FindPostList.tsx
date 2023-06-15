@@ -48,6 +48,7 @@ export default function FindPostList({ category }: { category: string }) {
   const navigate = useNavigate();
 
   const posts = useGetPosts(category);
+
   return (
     <Container>
       <ul>
