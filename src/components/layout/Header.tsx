@@ -2,6 +2,8 @@ import { Link, useRouteLoaderData } from "react-router-dom";
 import styled from "styled-components";
 import { singout } from "../../api/auth";
 
+import { TbMessageCircle } from "react-icons/tb";
+
 const Head = styled.header`
   width: 100%;
   height: 65px;
@@ -52,6 +54,12 @@ const NavItem = styled.li`
   &:hover {
     color: #c9fd35;
   }
+
+  .icon {
+    font-size: 1.4rem;
+    font-family: regular;
+    color: #ffffff;
+  }
 `;
 
 export default function Header() {
@@ -59,7 +67,7 @@ export default function Header() {
   const menu = [
     { item: "선생님 찾기", to: "/teachers" },
     { item: "학생 찾기", to: "/students" },
-    { item: "글 작성", to: token ? "/write" : "/signin" },
+    { item: "글 작성", to: "/write" },
     { item: "공지사항", to: "/notice" },
   ];
 
@@ -77,6 +85,11 @@ export default function Header() {
           ))}
         </Nav>
         <Sign>
+          <Link to="/notes">
+            <NavItem>
+              <TbMessageCircle className="icon" />
+            </NavItem>
+          </Link>
           <Link to="/view/me">
             <NavItem>마이페이지 </NavItem>
           </Link>

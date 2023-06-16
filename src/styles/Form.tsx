@@ -5,11 +5,12 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #697a79;
+  color: #ffffff;
 
   h1 {
-    font-size: 2rem;
-    font-weight: 600;
+    font-family: regular;
+    font-size: 1.5rem;
+    color: #c9fd35;
   }
 
   span {
@@ -20,7 +21,7 @@ export const Form = styled.form`
     display: none;
     width: 250px;
     margin-top: 0.5rem;
-    color: #b40e0e;
+    color: #ffffff;
     font-size: 0.8rem;
     line-height: 1.2rem;
 
@@ -37,11 +38,17 @@ export const Form = styled.form`
 
     input {
       width: 250px;
-      background-color: #f0f4f3;
-      border: none;
       padding: 0.8rem 1rem;
-      font: inherit;
+      border: none;
       border-radius: 0.5rem;
+
+      background-color: #ffffff;
+      font-family: regular;
+      font-size: 1rem;
+
+      &::placeholder {
+        font-family: regular;
+      }
 
       &.emailCode {
         display: none;
@@ -53,18 +60,13 @@ export const Form = styled.form`
 
       &:focus {
         outline: none;
-        border: 1px solid #697a79;
-      }
-
-      &.invalid {
-        border: 1px solid #b40e0e;
       }
     }
 
     .error {
       width: 250px;
       margin-top: 0.5rem;
-      color: #b40e0e;
+      color: #ffffff;
       font-size: 0.8rem;
       line-height: 1.2rem;
 
@@ -75,71 +77,72 @@ export const Form = styled.form`
   }
 
   button {
-    margin-top: 1rem;
-    background-color: green;
-    color: #fff;
     width: 250px;
-    padding: 1rem 1.5rem;
+    margin-top: 1rem;
+    padding-block: 0.8rem;
     border-radius: 0.5rem;
-    cursor: pointer;
 
-    &:hover,
-    :active {
-      background-color: #005b00;
+    background-color: #c9fd35;
+    color: #0e1620;
+
+    font-size: 1rem;
+
+    &:active {
+      background-color: #c9fd35;
+      color: #0e1620;
     }
 
     &:disabled,
     :disabled:hover,
     :disabled:active {
-      background-color: #ccc;
-      color: #fff;
-      border-color: #ccc;
+      background-color: #86ab20;
       cursor: not-allowed;
     }
   }
 `;
 
+export const Container = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-block: 10rem;
+  min-height: calc(100vh - 200px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const FormContainer = styled.div`
   max-width: 400px;
-  margin-inline: auto;
   height: 100%;
+  margin-inline: auto;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 100px 0px;
+  gap: 1.5rem;
 
   .aboutSign {
     display: flex;
     gap: 0.5rem;
-    color: #697a79;
-    margin-top: 1.5rem;
-    font-size: 0.8rem;
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    color: #c9fd35;
   }
 `;
 
 export const RadioContainer = styled.fieldset`
   width: 250px;
+  margin-top: 2rem;
 
   legend {
-    font-size: 1.2rem;
-    font-weight: 700;
-    padding-top: 1.5rem;
+    font-family: regular;
   }
 
   .radioControl {
     display: flex;
     align-items: center;
-    padding-top: 1.5rem;
-
-    input {
-      margin-right: 1rem;
-    }
+    gap: 1rem;
+    margin-top: 1rem;
   }
 `;
 

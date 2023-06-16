@@ -11,13 +11,13 @@ interface INote {
   title: string;
 }
 
-// 받은 메세지 불러오기
-export function useGetReceivedNotes(token?: string) {
+// 메세지 불러오기
+export function useGetNotes(token: string, category: string) {
   const [notes, setNotes] = useState<INote[]>();
 
   useEffect(() => {
     axios({
-      url: `${baseUrl}/v1/messages/received`,
+      url: `${baseUrl}/v1/messages/${category}`,
       method: "get",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -29,30 +29,7 @@ export function useGetReceivedNotes(token?: string) {
         }
       })
       .catch((error) => console.log(error));
-  }, [token]);
-
-  return notes;
-}
-
-// 보낸 메세지 불러오기
-export function useGetSentNotes(token?: string) {
-  const [notes, setNotes] = useState<INote[]>();
-
-  useEffect(() => {
-    axios({
-      url: `${baseUrl}/v1/messages/sent`,
-      method: "get",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          setNotes(res.data);
-        }
-      })
-      .catch((error) => console.log(error));
-  }, [token]);
+  }, [token, category]);
 
   return notes;
 }

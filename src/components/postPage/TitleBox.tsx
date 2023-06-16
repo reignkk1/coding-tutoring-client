@@ -1,13 +1,11 @@
 import styled from "styled-components";
 
 const Container = styled.div`
+  line-height: 1.7;
+
   h2 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  div {
-    margin-bottom: 5px;
+    font-family: regular;
+    font-size: 1.5rem;
   }
 `;
 

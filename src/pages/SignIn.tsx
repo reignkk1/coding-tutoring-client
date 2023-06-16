@@ -1,8 +1,7 @@
 import useSign from "../hooks/useSign";
 import { Link } from "react-router-dom";
 import { signinForm } from "../util/sign/formConfig";
-import Wrapper from "../components/common/Wrapper";
-import { FormContainer, Form } from "../styles/Form";
+import { Container, FormContainer, Form } from "../styles/Form";
 import { signin } from "../api/auth";
 
 export default function Signin() {
@@ -17,7 +16,7 @@ export default function Signin() {
   };
 
   return (
-    <Wrapper>
+    <Container>
       <FormContainer>
         <Form onSubmit={handleSubmit}>
           <h1>로그인</h1>
@@ -31,6 +30,6 @@ export default function Signin() {
           <Link to="/signup">회원가입</Link>
         </div>
       </FormContainer>
-    </Wrapper>
+    </Container>
   );
 }

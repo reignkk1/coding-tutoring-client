@@ -20,6 +20,18 @@ ${reset}
 
 * {
     box-sizing:border-box;
+
+    &::-webkit-scrollbar {
+     width: 0.5rem;
+    }
+    &::-webkit-scrollbar-thumb {
+     background-color: #c9fd35;
+     border-radius: 0.5rem;
+    }
+    &::-webkit-scrollbar-track {
+     background-color: #4f504f;
+     border-radius: 0.5rem;
+    }
 }
 
 @font-face {
@@ -57,6 +69,7 @@ body{
     font-family: light;
     background-color: #0e1620;
     color: #ffffff;
+
 }
 
 ul, li{
@@ -64,6 +77,7 @@ ul, li{
 }
 
 a {
+    color: inherit;
     text-decoration:none;
 }
 

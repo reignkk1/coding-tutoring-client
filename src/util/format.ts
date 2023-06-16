@@ -45,3 +45,18 @@ export const jobFormat = (userClassification: string) => {
       return " 선생님";
   }
 };
+
+export const howFormat = (how: string) => {
+  switch (how) {
+    case "ONLINE":
+      return " 온라인";
+    case "OFFLINE":
+      return " 오프라인";
+  }
+};
+
+export const firstToUpper = (str: string) => {
+  if (!str) return str;
+
+  return str[0] + str.slice(1).toLowerCase();
+};

@@ -38,8 +38,18 @@ export default function PostDetail({ category }: { category: string }) {
               // navigate(`/view/${post.userId}`);
             }}
           >
+            {/* <img
+              src={`${
+                gender === "MALE"
+                  ? "https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg"
+                  : "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg"
+              }`}
+              alt="profile-img"
+            /> */}
             <img
-              src="https://i.pinimg.com/564x/92/32/a2/9232a2b8aba31dfe9a744fb232813f7f.jpg"
+              src={
+                "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg"
+              }
               alt="profile-img"
             />
           </ImgContainer>
@@ -124,11 +134,10 @@ export const Profile = styled.div`
     }
 
     button {
-      width: 8rem;
-      padding-block: 0.5rem;
+      padding: 0.5rem 0.8rem;
 
       background-color: #c9fd35;
-      border-radius: 0.5rem;
+      border-radius: 5px;
 
       font-size: 1rem;
       font-family: regular;
