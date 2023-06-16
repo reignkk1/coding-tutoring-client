@@ -64,6 +64,7 @@ ul, li{
 }
 
 a {
+    color: inherit;
     text-decoration:none;
 }
 

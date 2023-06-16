@@ -5,7 +5,7 @@ import { signupForm } from "../util/sign/formConfig";
 import { signup } from "../api/auth";
 
 import Wrapper from "../components/common/Wrapper";
-import { FormContainer, Form } from "../styles/Form";
+import { FormContainer, Form, Container } from "../styles/Form";
 
 export default function Signup() {
   const { form, renderFormInputs, isFormValid } = useSign(signupForm);
@@ -25,7 +25,7 @@ export default function Signup() {
     });
   };
   return (
-    <Wrapper>
+    <Container>
       <FormContainer>
         <Form onSubmit={handleSubmit}>
           <h1>회원가입</h1>
@@ -38,6 +38,6 @@ export default function Signup() {
           계정이 있으신가요? <Link to="/signin">로그인</Link>
         </p>
       </FormContainer>
-    </Wrapper>
+    </Container>
   );
 }
