@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 const Btn = styled.button`
-  background-color: #f3f4f6;
+  height: 35px;
   padding: 6px 12px;
   border-radius: 5px;
-  font-weight: bold;
-  height: 35px;
+
+  background-color: #c9fd35;
+
+  &:hover {
+    background-color: #b2e22d;
+  }
 `;
 
 interface IButton {

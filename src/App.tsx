@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound";
 import FindPage from "./pages/FindPage";
 import PostDetail from "./pages/PostDetail";
 import Write from "./pages/Write";
+import Notes from "./pages/Notes";
 import Signin from "./pages/SignIn";
 import Signup from "./pages/SignUp";
 import FindPwd from "./pages/FindPwd";
@@ -117,6 +118,11 @@ function App() {
         {
           path: "/notice/write",
           element: <NoticeWrite />,
+        },
+        {
+          path: "/notes",
+          element: <Notes />,
+          loader: checkAuthLoader, //라우트 보호
         },
       ],
     },

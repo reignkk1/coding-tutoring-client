@@ -127,12 +127,12 @@ export const Profile = styled.div`
       width: 8rem;
       padding-block: 0.5rem;
 
-      background-color: green;
+      background-color: #c9fd35;
       border-radius: 0.5rem;
 
       font-size: 1rem;
-      font-weight: 600;
-      color: white;
+      font-family: regular;
+      color: #0e1620;
 
       transition: all 0.1s ease-in-out;
     }

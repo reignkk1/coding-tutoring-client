@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Button from "./Button";
 
+import { GoSearch } from "react-icons/go";
+
 const Form = styled.form`
   margin-left: 10px;
 `;
@@ -21,7 +23,10 @@ export default function SearchBar({ placeholder }: ISearchBar) {
   return (
     <Form>
       <Input placeholder={placeholder} />
-      <Button>🔎 검색</Button>
+      <Button>
+        <GoSearch />
+        검색
+      </Button>
     </Form>
   );
 }

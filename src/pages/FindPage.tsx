@@ -21,13 +21,20 @@ const Search = styled.div`
   align-items: center;
 `;
 const Subject = styled.div`
+  width: 600px;
+
   display: flex;
   flex-wrap: wrap;
-  width: 600px;
 
   button {
     margin-right: 15px;
     margin-bottom: 15px;
+
+    background-color: #c9fd35;
+
+    &:hover {
+      background-color: #b2e22d;
+    }
   }
 `;
 
@@ -44,9 +51,9 @@ export default function FindPage({ category }: { category: string }) {
         />
         <SearchBox>
           <Search>
-            <Button>과목</Button>
+            <Button>카테고리</Button>
             <SearchBar
-              placeholder={`어느 ${
+              placeholder={`어느 분야의 ${
                 category === "teachers" ? "선생님" : "학생"
               }을 찾으시나요?`}
             />
