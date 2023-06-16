@@ -34,7 +34,7 @@ const Subject = styled.div`
     background-color: #c9fd35;
 
     &:hover {
-      background-color: #b2e22d;
+      background-color: #93ba27;
     }
   }
 `;
@@ -68,6 +68,7 @@ export default function FindPage({ category }: { category: string }) {
             ))}
           </Subject>
         </Top>
+
         <Button onClick={() => navigate("/write")}>✏️ 작성하기</Button>
         <FindPostList category={category} />
       </Container>
