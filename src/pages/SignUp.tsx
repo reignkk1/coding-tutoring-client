@@ -4,7 +4,6 @@ import useSign from "../hooks/useSign";
 import { signupForm } from "../util/sign/formConfig";
 import { signup } from "../api/auth";
 
-import Wrapper from "../components/common/Wrapper";
 import { FormContainer, Form, Container } from "../styles/Form";
 
 export default function Signup() {

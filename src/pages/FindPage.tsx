@@ -53,6 +53,7 @@ export default function FindPage({ category }: { category: string }) {
               secondExplain="연락 요청은 5건, 직접 연락은 3건까지 매월 이용할 수 있어요"
             />
             <SearchBox>
+              {/* <button>카테고리</button> */}
               <SearchBar
                 placeholder={`어느 분야의 ${
                   category === "teachers" ? "선생님" : "학생"
