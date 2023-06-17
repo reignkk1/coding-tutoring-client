@@ -52,6 +52,7 @@ export const signup = async (userData: any) => {
       window.location.replace("/signin");
     }
   } catch (error) {
+    console.log(error);
     alert("회원가입에 실패했습니다");
   }
 };

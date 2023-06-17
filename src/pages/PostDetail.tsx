@@ -4,6 +4,9 @@ import { Container, ImgContainer } from "./MyPage";
 import Wrapper from "../components/common/Wrapper";
 import Button from "../components/postPage/Button";
 import { deletePost } from "../api/Post";
+import { useState } from "react";
+import Modal from "../components/common/Modal";
+import MessageSendBox from "./../components/detail/MessageSendBox";
 
 interface IPost {
   id: string;
@@ -11,11 +14,13 @@ interface IPost {
   content: string;
   onOrOff: string;
   area: string;
-  userId: string;
+  member: { nickname: string; id: string };
   subject: string;
 }
 
 export default function PostDetail({ category }: { category: string }) {
+  const [modal, setModal] = useState(false);
+
   const navigate = useNavigate();
   const post: IPost = useLocation().state;
   const content = post.content;
@@ -60,7 +65,10 @@ export default function PostDetail({ category }: { category: string }) {
               {category === "teachers" ? "선생님" : "학생"}
             </p>
             <p className="career">3년차&nbsp;풀스택 개발자</p>
-            <button>쪽지 보내기</button>
+            <button onClick={() => setModal(true)}>쪽지 보내기</button>
+            <Modal modal={modal} setModal={setModal}>
+              <MessageSendBox post={post} setModal={setModal} />
+            </Modal>
           </div>
         </Profile>
         <Buttons>

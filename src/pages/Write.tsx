@@ -12,6 +12,7 @@ import { createPost } from "../api/Post";
 import { AuthContext } from "../context/AuthContext";
 
 import { genderFormat, ageFormat, jobFormat } from "../util/format";
+import Modal from "../components/common/Modal";
 
 const Container = styled.div`
   height: 200vh;
@@ -106,12 +107,11 @@ export default function Write() {
   };
 
   return (
-    <>
-      <Wrapper>
-        <Container>
-          <UserInfoBox>
-            <UserInfo>
-              {/* <img
+    <Wrapper>
+      <Container>
+        <UserInfoBox>
+          <UserInfo>
+            {/* <img
               src={`${
                 gender === "MALE"
                   ? "https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg"
@@ -119,71 +119,72 @@ export default function Write() {
               }`}
               alt="profile-img"
             /> */}
-              <img
-                src={
-                  "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg"
-                }
-                alt="profile-img"
-              />
-              <div>
-                {user.nickname}
-                {jobFormat(userClassification)}
-              </div>
-              <div>
-                {genderFormat(`${user.gender}`)} /&nbsp;
-                {ageFormat(`${user.ageGroup}`)}
-              </div>
-            </UserInfo>
-          </UserInfoBox>
-          <Required>필수 *</Required>
-          <form onSubmit={handleSubmit}>
-            <Label>사는 곳 *</Label>
-            <TitleInput
-              name="address"
-              style={{ width: "300px" }}
-              defaultValue={addressValue}
-              readOnly
+            <img
+              src={
+                "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg"
+              }
+              alt="profile-img"
             />
-            <Button onClick={() => setAddressModal(true)}>검색</Button>
+            <div>
+              {user.nickname}
+              {jobFormat(userClassification)}
+            </div>
+            <div>
+              {genderFormat(`${user.gender}`)} /&nbsp;
+              {ageFormat(`${user.ageGroup}`)}
+            </div>
+          </UserInfo>
+        </UserInfoBox>
+
+        <Required>필수 *</Required>
+        <form onSubmit={handleSubmit}>
+          <Label>사는 곳 *</Label>
+          <TitleInput
+            name="address"
+            style={{ width: "300px" }}
+            defaultValue={addressValue}
+            readOnly
+          />
+          <Button onClick={() => setAddressModal(true)}>검색</Button>
+          <Modal modal={addressModal} setModal={setAddressModal}>
             <AddressSearch
-              modal={addressModal}
-              modalhandle={setAddressModal}
               setAddressValue={setAddressValue}
+              setModal={setAddressModal}
             />
+          </Modal>
 
-            <Label>희망 과목 *</Label>
-            <Selector setValue={setSubjectValue} data={subjects} />
-            <Button onClick={handleClick}>추가</Button>
-            <DesitredSubjectsList
-              desiredSubjects={desiredSubjects}
-              setDesiredSubjects={setDesiredSubjects}
-            />
+          <Label>희망 과목 *</Label>
+          <Selector setValue={setSubjectValue} data={subjects} />
+          <Button onClick={handleClick}>추가</Button>
+          <DesitredSubjectsList
+            desiredSubjects={desiredSubjects}
+            setDesiredSubjects={setDesiredSubjects}
+          />
 
-            <Label>온/오프라인 여부 *</Label>
-            <Selector setValue={setOnOffValue} data={on_off} />
+          <Label>온/오프라인 여부 *</Label>
+          <Selector setValue={setOnOffValue} data={on_off} />
 
-            <Label htmlFor="title">제목 *</Label>
-            <TitleInput
-              id="title"
-              placeholder="제목을 입력해주세요."
-              onChange={(e) => setTitleValue(e.target.value)}
-              value={titleValue}
-              maxLength={50}
-            />
+          <Label htmlFor="title">제목 *</Label>
+          <TitleInput
+            id="title"
+            placeholder="제목을 입력해주세요."
+            onChange={(e) => setTitleValue(e.target.value)}
+            value={titleValue}
+            maxLength={50}
+          />
 
-            <Label>{jobFormat(userClassification) + " 소개 *"}</Label>
-            <Editor
-              placeholder="자신을 소개해주세요."
-              editorValue={editorValue}
-              setEditorValue={setEditorValue}
-            />
+          <Label>{jobFormat(userClassification) + " 소개 *"}</Label>
+          <Editor
+            placeholder="자신을 소개해주세요."
+            editorValue={editorValue}
+            setEditorValue={setEditorValue}
+          />
 
-            <ButtonBox>
-              <Button type="submit">작성하기</Button>
-            </ButtonBox>
-          </form>
-        </Container>
-      </Wrapper>
-    </>
+          <ButtonBox>
+            <Button type="submit">작성하기</Button>
+          </ButtonBox>
+        </form>
+      </Container>
+    </Wrapper>
   );
 }

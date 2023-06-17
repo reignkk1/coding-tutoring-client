@@ -62,7 +62,6 @@ export default function NoticeEdit() {
 
   return (
     <Wrapper>
-      {" "}
       <Container>
         <form onSubmit={handleSubmit}>
           <Label htmlFor="title">제목</Label>
