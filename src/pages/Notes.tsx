@@ -4,12 +4,12 @@ import { useRouteLoaderData, useNavigate } from "react-router-dom";
 import { useGetNotes } from "../api/note";
 import Wrapper from "../components/common/Wrapper";
 import Category from "../components/notes/Category";
-import Modal from "../components/common/Modal";
+// import Modal from "../components/common/Modal";
 export default function Notes() {
   const token = useRouteLoaderData("root");
   const [selected, setSelected] = useState("received");
   const navigate = useNavigate();
-  const [modal, setModal] = useState(false);
+  // const [modal, setModal] = useState(false);
   const changeSelected = (category: string) => {
     setSelected(category);
   };
@@ -26,14 +26,18 @@ export default function Notes() {
             <li>
               <span
                 onClick={() => {
-                  navigate(`/view/${note.senderId}`);
+                  if (selected === "sent") {
+                    navigate(`/view/${note.receiverId}`);
+                  } else {
+                    navigate(`/view/${note.senderId}`);
+                  }
                 }}
               >{`${
                 selected === "sent"
                   ? "to. " + note.receiverNickname
                   : "from. " + note.senderNickname
               }`}</span>
-              <button onClick={() => setModal(true)}>삭제</button>
+              <button>삭제</button>
               <p>{note.title}</p>
               <p>{note.content}</p>
             </li>

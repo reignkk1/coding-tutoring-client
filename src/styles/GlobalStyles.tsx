@@ -9,6 +9,7 @@ ${reset}
 // 여기에 스타일을 지정하시면 전역으로 적용 됩니다.
 
 .ql-editor{
+    background-color: #ffffff;
     font-size:18px;
     
 }
@@ -17,15 +18,22 @@ ${reset}
      
  }
 
+ .quill{
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    font-family:regular;
+    color: #0e1620;
+ }
+
 
 * {
     box-sizing:border-box;
-
     &::-webkit-scrollbar {
      width: 0.5rem;
     }
     &::-webkit-scrollbar-thumb {
-     background-color: #c9fd35;
+     background-color: #7d7d7d;
      border-radius: 0.5rem;
     }
     &::-webkit-scrollbar-track {
@@ -82,12 +90,32 @@ a {
 }
 
 button{
-    font-family: medium;
+    font-family: regular;
     background-color: inherit;
     padding: 0;
     border: none;
     outline: none;
     cursor: pointer;
+}
+
+input{
+    font-family: regular;
+    font-size: 0.9rem;
+    border: none;
+    outline: none;
+
+    line-height: 1.3;
+
+    &::placeholder {
+    font-family: regular;
+    font-size: 0.9rem;
+  }
+}
+
+select{
+    font-family: regular;
+    font-size: 0.9rem;
+  
 }
 `;
 

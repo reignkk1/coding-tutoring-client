@@ -27,11 +27,11 @@ const Container = styled.div`
 const TitleInput = styled.input`
   width: 100%;
   padding: 8px 10px;
-  font-size: 16px;
+
   border: 1px solid rgba(0, 0, 0, 0.4);
-  outline: none;
   border-radius: 5px;
   margin-bottom: 20px;
+
   &:focus {
     border-color: black;
   }
@@ -40,7 +40,7 @@ const TitleInput = styled.input`
 const Label = styled.label`
   display: block;
   margin-bottom: 10px;
-  font-weight: bold;
+  font-family: medium;
 `;
 
 const ButtonBox = styled.div`
