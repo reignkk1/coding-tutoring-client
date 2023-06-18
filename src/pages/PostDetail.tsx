@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Container, ImgContainer } from "./MyPage";
@@ -8,6 +9,7 @@ import { useState } from "react";
 import Modal from "../components/common/Modal";
 import MessageSendBox from "./../components/detail/MessageSendBox";
 import { ageFormat, careerFormat, genderFormat } from "../util/format";
+import { AuthContext } from "../context/AuthContext";
 
 interface IPost {
   id: string;
@@ -27,6 +29,7 @@ interface IPost {
 }
 
 export default function PostDetail({ category }: { category: string }) {
+  const { user } = useContext(AuthContext);
   const [modal, setModal] = useState(false);
 
   const navigate = useNavigate();
@@ -66,16 +69,20 @@ export default function PostDetail({ category }: { category: string }) {
               {category === "teachers" ? "선생님" : "학생"}
             </p>
             <p className="career">{careerFormat(`${member.career}`)}</p>
-            <button onClick={() => setModal(true)}>쪽지 보내기</button>
+            {user.id !== member.id && (
+              <button onClick={() => setModal(true)}>쪽지 보내기</button>
+            )}
             <Modal modal={modal} setModal={setModal}>
               <MessageSendBox post={post} setModal={setModal} />
             </Modal>
           </div>
         </Profile>
-        <Buttons>
-          <Button onClick={handleDelete}>삭제</Button>
-          <Button onClick={handleModify}>수정</Button>
-        </Buttons>
+        {user.id === member.id && (
+          <Buttons>
+            <Button onClick={handleDelete}>삭제</Button>
+            <Button onClick={handleModify}>수정</Button>
+          </Buttons>
+        )}
 
         <Section id="intro">
           <p className="index">
@@ -113,7 +120,7 @@ export default function PostDetail({ category }: { category: string }) {
           <div className="detail">
             <span>성별/연령대</span>
             <span>
-              {genderFormat(`${member.gender}`)} /
+              {genderFormat(`${member.gender}`)} /&nbsp;
               {ageFormat(`${member.ageGroup}`)}
             </span>
           </div>

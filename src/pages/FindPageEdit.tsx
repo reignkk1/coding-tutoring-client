@@ -81,8 +81,7 @@ interface IFindPageEdit {
 
 export default function FindPageEdit({ category }: { category: string }) {
   const {
-    user,
-    user: { userClassification },
+    user: { nickname, img, ageGroup, gender, userClassification },
   } = useContext(AuthContext);
 
   const post: IFindPageEdit = useLocation().state;
@@ -124,17 +123,14 @@ export default function FindPageEdit({ category }: { category: string }) {
       <Container>
         <UserInfoBox>
           <UserInfo>
-            <img
-              src="https://i.pinimg.com/564x/92/32/a2/9232a2b8aba31dfe9a744fb232813f7f.jpg"
-              alt="avatar-img"
-            />
+            <img src={img} alt="avatar-img" />
             <div>
-              {user.nickname}
+              {nickname}
               {jobFormat(userClassification)}
             </div>
             <div>
-              {genderFormat(`${user.gender}`)} /&nbsp;
-              {ageFormat(`${user.ageGroup}`)}
+              {genderFormat(`${gender}`)} /&nbsp;
+              {ageFormat(`${ageGroup}`)}
             </div>
           </UserInfo>
         </UserInfoBox>

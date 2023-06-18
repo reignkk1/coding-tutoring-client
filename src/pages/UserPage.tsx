@@ -39,8 +39,7 @@ export default function UserPage(): JSX.Element {
             {userClassification === "STUDENT" ? "학생" : "선생님"}
           </p>
           <p className="career">
-            {careerFormat(`${career}`)}
-            {genderFormat(`${gender}`)}
+            {careerFormat(`${career}`)} / {genderFormat(`${gender}`)}
           </p>
           <button>쪽지 보내기</button>
         </div>
