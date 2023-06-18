@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 interface IGetUser {
   id: string;
+  img: string;
   nickname: string;
   career: string;
   userClassification: string;

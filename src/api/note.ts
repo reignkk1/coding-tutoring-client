@@ -5,13 +5,6 @@ const baseUrl =
   "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080";
 
 interface INote {
-  content: string;
-  receiverName: string;
-  setderName: string;
-  title: string;
-}
-
-interface INotePost {
   title: string;
   content: string;
   receiverId: string;
@@ -24,7 +17,7 @@ interface INotePost {
 
 export function sendNotePost(
   token: string | null,
-  data: INotePost,
+  data: INote,
   setModal: React.Dispatch<React.SetStateAction<boolean>>
 ) {
   axios({
@@ -56,7 +49,7 @@ export function useGetNotes(token: string, category: string) {
       url: `${baseUrl}/v1/messages/${category}`,
       method: "get",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `${token}`,
       },
     })
       .then((res) => {

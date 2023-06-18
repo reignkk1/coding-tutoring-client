@@ -14,6 +14,7 @@ export default function UserPage(): JSX.Element {
   const user = useGetUserDataById(userId);
 
   const {
+    img,
     nickname,
     gender,
     career,
@@ -23,64 +24,49 @@ export default function UserPage(): JSX.Element {
   } = user || {};
 
   const havePosts =
-    studentPostResponseDtos?.length * teacherPostResponseDtos?.length !== 0;
+    studentPostResponseDtos?.length + teacherPostResponseDtos?.length !== 0;
 
   return (
     <Wrapper>
-      <Container>
-        <Profile>
-          <ImgContainer>
-            <img
-              src={`${
-                gender === "MALE"
-                  ? "https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg"
-                  : "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg"
-              }`}
-              alt="profile-img"
-            />
-          </ImgContainer>
+      <Profile>
+        <ImgContainer>
+          <img src={img} alt="profile-img" />
+        </ImgContainer>
 
-          <div className="right">
-            <p className="nickname">
-              {nickname}&nbsp;
-              {userClassification === "STUDENT" ? "학생" : "선생님"}
-            </p>
-            <p className="career">
-              {careerFormat(`${career}`)}
-              {genderFormat(`${gender}`)}
-            </p>
-            <button>쪽지 보내기</button>
-          </div>
-        </Profile>
+        <div className="right">
+          <p className="nickname">
+            {nickname}&nbsp;
+            {userClassification === "STUDENT" ? "학생" : "선생님"}
+          </p>
+          <p className="career">
+            {careerFormat(`${career}`)}
+            {genderFormat(`${gender}`)}
+          </p>
+          <button>쪽지 보내기</button>
+        </div>
+      </Profile>
+      <PostContainer>
         {!havePosts && (
           <Img src={require("../assets/noImg.png")} alt="no-img" />
         )}
         {havePosts && userClassification === "STUDENT" && (
           <Posts>
             {studentPostResponseDtos.map((post: any) => (
-              <PostList post={post} />
+              <PostList post={post} category="students" />
             ))}
           </Posts>
         )}
         {havePosts && userClassification === "TEACHER" && (
           <Posts>
             {teacherPostResponseDtos.map((post: any) => (
-              <PostList post={post} />
+              <PostList post={post} category="teachers" />
             ))}
           </Posts>
         )}
-      </Container>
+      </PostContainer>
     </Wrapper>
   );
 }
-
-export const Container = styled.div`
-  width: 70%;
-  margin-inline: auto;
-  padding-block: 4rem;
-  display: flex;
-  flex-direction: column;
-`;
 
 export const ImgContainer = styled.div`
   width: 8rem;
@@ -101,9 +87,51 @@ const Posts = styled.ul`
   gap: 1rem;
 
   margin-top: 4rem;
-  background-color: yellow;
 `;
 
 const Img = styled.img`
   opacity: 0.5;
+`;
+
+const PostContainer = styled.div`
+  width: 70%;
+  margin-inline: auto;
+  margin-block: 6rem;
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+  img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+  li {
+    margin-bottom: 2.5rem;
+    padding: 1rem 1.5rem;
+
+    overflow: hidden;
+    clip-path: polygon(
+      0 0,
+      calc(100% - 16px) 0,
+      100% 16px,
+      100% 100%,
+      100% 100%,
+      0 100%,
+      0 100%,
+      0 0
+    );
+    background-color: #c9fd35;
+
+    display: flex;
+    align-items: center;
+
+    color: #0e1620;
+
+    transition: all 0.1s ease-out;
+
+    &:hover {
+      transform: translateY(-0.5rem);
+    }
+  }
 `;

@@ -72,8 +72,7 @@ const Required = styled.div`
 
 export default function Write() {
   const {
-    user,
-    user: { userClassification },
+    user: { nickname, ageGroup, gender, img, userClassification },
   } = useContext(AuthContext);
 
   const [onOffValue, setOnOffValue] = useState("ONLINE");
@@ -111,27 +110,14 @@ export default function Write() {
       <Container>
         <UserInfoBox>
           <UserInfo>
-            {/* <img
-              src={`${
-                gender === "MALE"
-                  ? "https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg"
-                  : "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg"
-              }`}
-              alt="profile-img"
-            /> */}
-            <img
-              src={
-                "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg"
-              }
-              alt="profile-img"
-            />
+            <img src={img} alt="profile-img" />
             <div>
-              {user.nickname}
+              {nickname}
               {jobFormat(userClassification)}
             </div>
             <div>
-              {genderFormat(`${user.gender}`)} /&nbsp;
-              {ageFormat(`${user.ageGroup}`)}
+              {genderFormat(`${gender}`)} /&nbsp;
+              {ageFormat(`${ageGroup}`)}
             </div>
           </UserInfo>
         </UserInfoBox>

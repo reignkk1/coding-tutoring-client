@@ -37,18 +37,17 @@ export default function MyPage(): JSX.Element {
             <p className="career">
               {careerFormat(`${career}`)} / {genderFormat(`${gender}`)}
             </p>
-            <button>쪽지 보내기</button>
           </div>
         </Profile>
 
         <Posts>
           {userClassification === "STUDENT" &&
             studentPostResponseDtos.map((post: any) => (
-              <PostList post={post} />
+              <PostList post={post} category="student" />
             ))}
           {userClassification === "TEACHER" &&
             teacherPostResponseDtos.map((post: any) => (
-              <PostList post={post} />
+              <PostList post={post} category="teacher" />
             ))}
         </Posts>
       </Container>
