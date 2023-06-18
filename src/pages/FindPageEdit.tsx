@@ -13,6 +13,7 @@ import { on_off, subjects } from "../components/write/SelectData";
 import { useLocation } from "react-router-dom";
 import { modifyPost } from "../api/Post";
 import Category from "./../components/mypage/Category";
+import Modal from "../components/common/Modal";
 
 const Container = styled.div`
   height: 200vh;
@@ -148,11 +149,12 @@ export default function FindPageEdit({ category }: { category: string }) {
             readOnly
           />
           <Button onClick={() => setAddressModal(true)}>검색</Button>
-          <AddressSearch
-            modal={addressModal}
-            modalhandle={setAddressModal}
-            setAddressValue={setAddressValue}
-          />
+          <Modal modal={addressModal} setModal={setAddressModal}>
+            <AddressSearch
+              setAddressValue={setAddressValue}
+              setModal={setAddressModal}
+            />
+          </Modal>
 
           <Label>희망 과목 *</Label>
           <Selector setValue={setSubjectValue} data={subjects} />

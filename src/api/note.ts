@@ -11,6 +11,42 @@ interface INote {
   title: string;
 }
 
+interface INotePost {
+  title: string;
+  content: string;
+  receiverId: string;
+  receiverNickname: string;
+  senderId: string;
+  senderNickname: string;
+}
+
+// 메세지 보내기
+
+export function sendNotePost(
+  token: string | null,
+  data: INotePost,
+  setModal: React.Dispatch<React.SetStateAction<boolean>>
+) {
+  axios({
+    url: `${baseUrl}/v1/message`,
+    method: "post",
+    headers: {
+      Authorization: `${token}`,
+    },
+    data,
+  })
+    .then((res) => {
+      if (res.status === 200) {
+        setModal(false);
+        alert("보내기 완료!");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      alert("보내기 실패!");
+    });
+}
+
 // 메세지 불러오기
 export function useGetNotes(token: string, category: string) {
   const [notes, setNotes] = useState<INote[]>();

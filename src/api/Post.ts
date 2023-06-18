@@ -1,8 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+const token = localStorage.getItem("token");
+
 axios.defaults.baseURL =
   "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080";
+
+axios.defaults.headers.common["Authorization"] = `${token}`;
 
 interface IPost {
   id?: number;
