@@ -12,7 +12,6 @@ import DesitredSubjectsList from "../components/write/DesitredSubjectsList";
 import { on_off, subjects } from "../components/write/SelectData";
 import { useLocation } from "react-router-dom";
 import { modifyPost } from "../api/Post";
-import Category from "./../components/mypage/Category";
 import Modal from "../components/common/Modal";
 
 const Container = styled.div`

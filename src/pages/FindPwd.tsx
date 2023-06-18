@@ -2,8 +2,7 @@ import useSign from "../hooks/useSign";
 import { findPwdForm } from "../util/sign/formConfig";
 import { findPwd } from "../api/auth";
 
-import Wrapper from "../components/common/Wrapper";
-import { FormContainer, Form } from "../styles/Form";
+import { FormContainer, Form, Container } from "../styles/Form";
 
 export default function FindPwd() {
   const { form, renderFormInputs, isFormValid } = useSign(findPwdForm);
@@ -14,7 +13,7 @@ export default function FindPwd() {
   };
 
   return (
-    <Wrapper>
+    <Container>
       <FormContainer>
         <Form onSubmit={handleSubmit}>
           <h1>비밀번호 찾기</h1>
@@ -24,6 +23,6 @@ export default function FindPwd() {
           </button>
         </Form>
       </FormContainer>
-    </Wrapper>
+    </Container>
   );
 }

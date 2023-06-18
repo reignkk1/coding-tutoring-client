@@ -7,15 +7,23 @@ import { deletePost } from "../api/Post";
 import { useState } from "react";
 import Modal from "../components/common/Modal";
 import MessageSendBox from "./../components/detail/MessageSendBox";
+import { ageFormat, careerFormat, genderFormat } from "../util/format";
 
 interface IPost {
   id: string;
   title: string;
+  subject: string;
   content: string;
   onOrOff: string;
   area: string;
-  member: { nickname: string; id: string };
-  subject: string;
+  member: {
+    id: string;
+    nickname: string;
+    gender: string;
+    ageGroup: string;
+    userClassification: string;
+    career: string;
+  };
 }
 
 export default function PostDetail({ category }: { category: string }) {
@@ -23,7 +31,7 @@ export default function PostDetail({ category }: { category: string }) {
 
   const navigate = useNavigate();
   const post: IPost = useLocation().state;
-  const content = post.content;
+  const { title, content, subject, onOrOff, area, member } = post;
 
   const handleDelete = () => {
     if (window.confirm("정말로 삭제하겠습니까?")) {
@@ -39,32 +47,25 @@ export default function PostDetail({ category }: { category: string }) {
         <Profile>
           <ImgContainer
             onClick={() => {
-              navigate(`/view/hhhh`);
-              // navigate(`/view/${post.userId}`);
+              navigate(`/view/${member.id}`);
             }}
           >
-            {/* <img
+            <img
               src={`${
-                gender === "MALE"
+                post.member.gender === "MALE"
                   ? "https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg"
                   : "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg"
               }`}
-              alt="profile-img"
-            /> */}
-            <img
-              src={
-                "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg"
-              }
               alt="profile-img"
             />
           </ImgContainer>
 
           <div className="right">
             <p className="nickname">
-              김성연&nbsp;
+              {member.nickname}&nbsp;
               {category === "teachers" ? "선생님" : "학생"}
             </p>
-            <p className="career">3년차&nbsp;풀스택 개발자</p>
+            <p className="career">{careerFormat(`${member.career}`)}</p>
             <button onClick={() => setModal(true)}>쪽지 보내기</button>
             <Modal modal={modal} setModal={setModal}>
               <MessageSendBox post={post} setModal={setModal} />
@@ -81,7 +82,7 @@ export default function PostDetail({ category }: { category: string }) {
             {category === "teachers" ? "교습 소개" : "교습 요청"}
           </p>
           <div className="detail">
-            <h3>{post.title}</h3>
+            <h3>{title}</h3>
             <div
               className="description"
               dangerouslySetInnerHTML={{ __html: content }}
@@ -94,11 +95,11 @@ export default function PostDetail({ category }: { category: string }) {
           </p>
           <div className="detail">
             <span>교습과목</span>
-            <span>{post.subject.toLowerCase()}</span>
+            <span>{subject.toLowerCase()}</span>
           </div>
           <div className="detail">
             <span>교습수단</span>
-            <span>{post.onOrOff.toLowerCase()}</span>
+            <span>{onOrOff.toLowerCase()}</span>
           </div>
         </Section>
         <Section id="user-nfo">
@@ -107,15 +108,18 @@ export default function PostDetail({ category }: { category: string }) {
           </p>
           <div className="detail">
             <span>경력</span>
-            <span>3년차</span>
+            <span>{careerFormat(`${member.career}`)}</span>
           </div>
           <div className="detail">
             <span>성별/연령대</span>
-            <span>남/20대</span>
+            <span>
+              {genderFormat(`${member.gender}`)} /
+              {ageFormat(`${member.ageGroup}`)}
+            </span>
           </div>
           <div className="detail">
             <span>거주지</span>
-            <span>{post.area}</span>
+            <span>{area}</span>
           </div>
         </Section>
       </Container>

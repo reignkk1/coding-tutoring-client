@@ -10,11 +10,19 @@ axios.defaults.headers.common["Authorization"] = `${token}`;
 
 interface IPost {
   id?: number;
-  area?: string;
-  content: string;
-  onOrOff?: string;
   subject?: string;
   title: string;
+  content: string;
+  area?: string;
+  onOrOff?: string;
+  member?: {
+    id: number;
+    nickname: string;
+    gender: string;
+    ageGroup: string;
+    userClassification: string;
+    career: string;
+  };
 }
 
 // 게시물 작성

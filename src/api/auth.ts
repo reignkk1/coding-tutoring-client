@@ -119,10 +119,7 @@ export const singout = () => {
 };
 
 //내 정보 가져오기
-export const getMyData = async (
-  token: string
-  // setUser: React.Dispatch<React.SetStateAction<any | undefined>>
-) => {
+export const getMyData = async (token: string) => {
   try {
     const res = await axios({
       url: `${baseUrl}/member/info`,
@@ -133,8 +130,14 @@ export const getMyData = async (
       },
     });
     if (res.status === 200) {
-      const user = await res.data;
-      console.log(user);
+      let user = await res.data;
+      user = {
+        ...user,
+        img:
+          user.gender === "MALE"
+            ? "https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg"
+            : "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg",
+      };
       return user;
     }
   } catch (error) {
@@ -171,7 +174,15 @@ export function useGetUserDataById(userId?: string) {
       .get(`${baseUrl}/member/info/${userId}`)
       .then((res) => {
         if (res.status === 200) {
-          setUser(res.data);
+          let user = res.data;
+          user = {
+            ...user,
+            img:
+              user.gender === "MALE"
+                ? "https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg"
+                : "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg",
+          };
+          setUser(user);
         }
       })
       .catch((error) => console.log(error));
