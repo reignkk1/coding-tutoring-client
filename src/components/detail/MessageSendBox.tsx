@@ -6,37 +6,63 @@ import { sendNotePost } from "../../api/note";
 const Container = styled.div`
   width: 300px;
   height: 500px;
-  background-color: white;
-  color: black;
+
+  color: #ffffff;
   background-color: #1760fa;
-  border-radius: 10px;
+
+  overflow: hidden;
+  clip-path: polygon(
+    23px 0,
+    calc(100% - 23px) 0,
+    100% 0,
+    100% calc(100% - 23px),
+    calc(100% - 23px) 100%,
+    23px 100%,
+    0 100%,
+    0 23px
+  );
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
+
   height: 100%;
-  padding: 0px 15px;
+  padding: 2rem 1.5rem;
+
+  font-family: light;
 
   input {
-    margin-bottom: 50px;
-    padding: 5px 10px;
-    border: 1px solid rgba(0, 0, 0, 0.4);
+    background-color: transparent;
+    padding: 0.5rem 0.8rem;
+    border: 1px solid #c9fd35;
     outline: none;
-    &:focus {
-      border-color: black;
+    font-family: light;
+    line-height: 1.7;
+    color: #ffffff;
+
+    &::placeholder {
+      font-family: light;
+      color: #ffffff;
     }
+
     border-radius: 5px;
   }
   textarea {
     height: 200px;
-    resize: none;
-    outline: none;
-    border-radius: 10px;
     padding: 10px;
+    border: 1px solid #c9fd35;
+    background-color: transparent;
+    outline: none;
+    resize: none;
+
+    border-radius: 5px;
+    font-family: light;
     line-height: 1.5;
+    color: #ffffff;
   }
+
   div {
     display: flex;
     flex-direction: column;

@@ -162,6 +162,9 @@ export const Profile = styled.div`
       font-family: regular;
       color: #0e1620;
 
+      &:hover {
+        background-color: #93ba27;
+      }
       transition: all 0.1s ease-in-out;
     }
   }
