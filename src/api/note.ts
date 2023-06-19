@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 const baseUrl =
   "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080";
 
-interface INote {
+export interface INote {
   title: string;
   content: string;
   messageId?: string;

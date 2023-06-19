@@ -9,21 +9,17 @@ import Note from "../components/notes/Note";
 export default function Notes() {
   const token = useRouteLoaderData("root");
   const [selected, setSelected] = useState("received");
-
   const [modal, setModal] = useState(false);
   const changeSelected = (category: string) => {
     setSelected(category);
   };
-  const handleDelete = (note: any) => {
+  const handleDelete = (noteId: string) => {
     if (window.confirm("정말로 삭제하겠습니까?")) {
-      deleteNote(token as string, note.messageId!, selected);
+      deleteNote(token as string, noteId, selected);
     }
   };
-
   const notes = useGetNotes(token as string, selected);
-
-  console.log(notes);
-
+  console.log(token);
   return (
     <Wrapper>
       <Container>

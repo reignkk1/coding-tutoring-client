@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Modal from "../common/Modal";
 import MessageSendBox from "./MessageSendBox";
+import { INote } from "../../api/note";
 
 export default function Note({
   note,
@@ -8,9 +9,15 @@ export default function Note({
   handleDelete,
   modal,
   setModal,
-}: any) {
+}: {
+  note: INote;
+  selected: string;
+  handleDelete: any;
+  modal: boolean;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const navigate = useNavigate();
-  console.log(note);
+
   return (
     <li key={note.messageId}>
       <span
@@ -29,7 +36,7 @@ export default function Note({
       {selected === "received" && (
         <button onClick={() => setModal(true)}>답장</button>
       )}
-      <button onClick={() => handleDelete(note)}>삭제</button>
+      <button onClick={() => handleDelete(note.messageId)}>삭제</button>
 
       <p>{note.title}</p>
       <p>{note.content}</p>

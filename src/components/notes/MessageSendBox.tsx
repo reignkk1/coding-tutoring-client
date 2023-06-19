@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { sendNotePost } from "../../api/note";
+import { INote, sendNotePost } from "../../api/note";
 
 const Container = styled.div`
   width: 300px;
@@ -83,7 +83,7 @@ export default function MessageSendBox({
   note,
   setModal,
 }: {
-  note: any;
+  note: INote;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const {
