@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useRouteLoaderData, useNavigate } from "react-router-dom";
-import { useGetNotes } from "../api/note";
+import { deleteNote, useGetNotes } from "../api/note";
 import Wrapper from "../components/common/Wrapper";
 import Category from "../components/notes/Category";
 // import Modal from "../components/common/Modal";
@@ -15,6 +15,7 @@ export default function Notes() {
   };
 
   const notes = useGetNotes(token as string, selected);
+
   console.log(notes);
 
   return (
@@ -23,7 +24,7 @@ export default function Notes() {
         <Category selected={selected} changeSelected={changeSelected} />
         <MsgBox className={`${selected === "sent" && "sent"}`}>
           {notes?.map((note) => (
-            <li>
+            <li key={note.messageId}>
               <span
                 onClick={() => {
                   if (selected === "sent") {
@@ -37,7 +38,15 @@ export default function Notes() {
                   ? "to. " + note.receiverNickname
                   : "from. " + note.senderNickname
               }`}</span>
-              <button>삭제</button>
+              <button
+                onClick={() => {
+                  if (window.confirm("정말로 삭제하겠습니까?")) {
+                    deleteNote(token as string, note.messageId!, selected);
+                  }
+                }}
+              >
+                삭제
+              </button>
               <p>{note.title}</p>
               <p>{note.content}</p>
             </li>

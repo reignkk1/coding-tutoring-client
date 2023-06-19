@@ -7,6 +7,7 @@ const baseUrl =
 interface INote {
   title: string;
   content: string;
+  messageId?: string;
   receiverId: string;
   receiverNickname: string;
   senderId: string;
@@ -61,4 +62,16 @@ export function useGetNotes(token: string, category: string) {
   }, [token, category]);
 
   return notes;
+}
+
+//메세지 삭제
+export function deleteNote(token: string, noteId: string, category: string) {
+  axios
+    .delete(`${baseUrl}/v1/message/${category}/${noteId}`)
+    .then((response) => {
+      if (response.status === 200) {
+        window.location.replace("/notes");
+      }
+    })
+    .catch((error) => console.log(error));
 }
