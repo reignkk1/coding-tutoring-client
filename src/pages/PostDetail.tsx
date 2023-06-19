@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Container, ImgContainer } from "./MyPage";
+import { ImgContainer } from "./MyPage";
 import Wrapper from "../components/common/Wrapper";
 import Button from "../components/postPage/Button";
 import { deletePost } from "../api/Post";
@@ -168,6 +168,14 @@ export const Profile = styled.div`
       transition: all 0.1s ease-in-out;
     }
   }
+`;
+
+export const Container = styled.div`
+  width: 70%;
+  margin-inline: auto;
+  padding-block: 4rem;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Section = styled.section`
