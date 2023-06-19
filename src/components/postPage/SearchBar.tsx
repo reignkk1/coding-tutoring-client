@@ -1,5 +1,10 @@
 import styled from "styled-components";
 import Button from "./Button";
+import { IPost, searchTitle } from "../../api/Post";
+import { useState } from "react";
+import { Dispatch } from "redux";
+import { useDispatch } from "react-redux";
+import { IPostAction } from "../../reducers/post";
 
 const Form = styled.form`
   display: flex;
@@ -28,14 +33,28 @@ const Input = styled.input`
 
 interface ISearchBar {
   placeholder: string;
+
+  category: string;
 }
 
-export default function SearchBar({ placeholder }: ISearchBar) {
+export default function SearchBar({ placeholder, category }: ISearchBar) {
+  const dispatch = useDispatch<Dispatch<IPostAction>>();
+  const [value, setValue] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    searchTitle(value, dispatch, category);
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Button>카테고리</Button>
-      <Input placeholder={placeholder} />
-      <Button>검색</Button>
+      <Input
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <Button type="submit">검색</Button>
     </Form>
   );
 }

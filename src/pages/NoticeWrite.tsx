@@ -56,7 +56,7 @@ export default function NoticeWrite() {
         <form onSubmit={handleSubmit}>
           <Label htmlFor="title">제목</Label>
           <Title id="title" value={title} onChange={handleChange} />
-          <Editor editorValue={editorValue} setEditorValue={setEditorValue} />
+          <Editor editorValue={editorValue} setEditorText={setEditorValue} />
           <ButtonContainer>
             <Button type="submit">작성하기</Button>
           </ButtonContainer>

@@ -1,14 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Dispatch } from "redux";
+import { IPostAction } from "../reducers/post";
 
 const token = localStorage.getItem("token");
 
 axios.defaults.baseURL =
   "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080";
 
-axios.defaults.headers.common["Authorization"] = `${token}`;
+axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-interface IPost {
+export interface IPost {
   id?: number;
   subject?: string;
   title: string;
@@ -48,17 +50,16 @@ export function createPost(data: IPost, category: string) {
 }
 
 // 모든 게시물 불러오기
-export function useGetPosts(category?: string) {
-  const [posts, setPosts] = useState<IPost[]>();
-
-  const categoryValue =
-    category === "teachers"
-      ? "teacherPosts"
-      : category === "students"
-      ? "studentPosts"
-      : "notices";
+export function useGetPosts(category: string) {
+  const [posts, setPosts] = useState<IPost[]>([]);
 
   useEffect(() => {
+    const categoryValue =
+      category === "teachers"
+        ? "teacherPosts"
+        : category === "students"
+        ? "studentPosts"
+        : "notices";
     axios
       .get(`/v1/${categoryValue}`)
       .then((response) => {
@@ -69,7 +70,7 @@ export function useGetPosts(category?: string) {
       .catch((error) => console.log(error));
   }, [category]);
 
-  return posts;
+  return [posts, setPosts] as const;
 }
 
 // 게시물 삭제
@@ -107,5 +108,44 @@ export function modifyPost(data: IPost, category: string) {
         return window.location.replace(`/${category}`);
       }
     })
+    .catch((error) => console.log(error));
+}
+
+// 게시물 제목 검색
+export function searchTitle(
+  title: string,
+  dispatch: Dispatch<IPostAction>,
+  category: string
+) {
+  const categoryValue =
+    category === "teachers"
+      ? "teacherPosts"
+      : category === "students"
+      ? "studentPosts"
+      : "notices";
+
+  axios
+    .get(`v1/${categoryValue}?content=${title}&searchType=TITLE`)
+    .then((response) => dispatch({ type: "POST_UPDATE", data: response.data }))
+    .catch((error) => console.log(error));
+}
+
+// 희망언어 클릭시 검색
+
+export function searchSubject(
+  subject: string,
+  category: string,
+  dispatch: Dispatch<IPostAction>
+) {
+  const categoryValue =
+    category === "teachers"
+      ? "teacherPosts"
+      : category === "students"
+      ? "studentPosts"
+      : "notices";
+
+  axios
+    .get(`v1/${categoryValue}?content=${subject}&searchType=SUBJECT`)
+    .then((response) => dispatch({ type: "POST_UPDATE", data: response.data }))
     .catch((error) => console.log(error));
 }

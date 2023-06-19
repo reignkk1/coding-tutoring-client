@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Dispatch } from "redux";
+import { IModalAction } from "../reducers/modal";
 
 const baseUrl =
   "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080";
@@ -18,19 +20,19 @@ interface INote {
 export function sendNotePost(
   token: string | null,
   data: INote,
-  setModal: React.Dispatch<React.SetStateAction<boolean>>
+  dispatch: Dispatch<IModalAction>
 ) {
   axios({
     url: `${baseUrl}/v1/message`,
     method: "post",
     headers: {
-      Authorization: `${token}`,
+      Authorization: `Bearer ${token}`,
     },
     data,
   })
     .then((res) => {
       if (res.status === 200) {
-        setModal(false);
+        dispatch({ type: "MODAL_CLOSE" });
         alert("보내기 완료!");
       }
     })

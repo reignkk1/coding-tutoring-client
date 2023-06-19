@@ -1,12 +1,14 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useGetPosts } from "../../api/Post";
+import { IPost } from "../../api/Post";
 import {
   howFormat,
   firstToUpper,
   genderFormat,
   careerFormat,
 } from "../../util/format";
+import { useSelector } from "react-redux";
+import { ReducerState } from "../../reducers/rootReducer";
 
 const Container = styled.div`
   width: 70%;
@@ -94,10 +96,16 @@ const InfoBox = styled.div`
   }
 `;
 
-export default function FindPostList({ category }: { category: string }) {
+interface IFindPostList {
+  posts?: IPost[];
+
+  category: string;
+}
+
+export default function FindPostList({ category }: IFindPostList) {
   const navigate = useNavigate();
 
-  const posts = useGetPosts(category);
+  const posts = useSelector((state: ReducerState) => state.post);
 
   return (
     <Container>
