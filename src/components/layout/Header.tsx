@@ -76,7 +76,7 @@ export default function Header() {
       <Container>
         <Nav>
           <Link to="/">
-            <Logo>개발바다</Logo>
+            <Logo>코딩바다</Logo>
           </Link>
           {menu.map((list) => (
             <Link key={list.item} to={list.to}>

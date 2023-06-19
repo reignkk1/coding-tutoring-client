@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useGetPosts } from "../../api/Post";
-import { howFormat, firstToUpper } from "../../util/format";
-import { MdLocationOn } from "react-icons/md";
+import {
+  howFormat,
+  firstToUpper,
+  genderFormat,
+  careerFormat,
+} from "../../util/format";
 
 const Container = styled.div`
   width: 70%;
@@ -94,7 +98,7 @@ export default function FindPostList({ category }: { category: string }) {
   const navigate = useNavigate();
 
   const posts = useGetPosts(category);
-  console.log(posts);
+
   return (
     <Container>
       <ul>
@@ -102,12 +106,14 @@ export default function FindPostList({ category }: { category: string }) {
           <li key={post.id}>
             <ImgBox>
               <img
-                src={`https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg`}
-                //  src={`https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg`}
+                src={`${
+                  post.member!.gender === "MALE"
+                    ? "https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg"
+                    : "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg"
+                }`}
                 alt="프로필 사진"
               />
-              <span>닉네임</span>
-              <span>남 / 7년차</span>
+              <span>{post.member!.nickname}</span>
             </ImgBox>
             <InfoBox>
               <h2
@@ -122,11 +128,11 @@ export default function FindPostList({ category }: { category: string }) {
 
               <span>{firstToUpper(`${post.subject}`)}</span>
               <p>{howFormat(`${post.onOrOff}`)}</p>
-              <p className="area">
-                <MdLocationOn className="icon" />
-                &nbsp;
-                {post.area}
+              <p>
+                {genderFormat(`${post.member!.gender}`)} /&nbsp;
+                {careerFormat(`${post.member!.career}`)}
               </p>
+              <p className="area">{post.area} 거주</p>
             </InfoBox>
           </li>
         ))}

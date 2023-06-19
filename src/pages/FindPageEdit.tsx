@@ -12,7 +12,6 @@ import DesitredSubjectsList from "../components/write/DesitredSubjectsList";
 import { on_off, subjects } from "../components/write/SelectData";
 import { useLocation } from "react-router-dom";
 import { modifyPost } from "../api/Post";
-import Category from "./../components/mypage/Category";
 import Modal from "../components/common/Modal";
 
 const Container = styled.div`
@@ -28,11 +27,11 @@ const Container = styled.div`
 const TitleInput = styled.input`
   width: 100%;
   padding: 8px 10px;
-  font-size: 16px;
+
   border: 1px solid rgba(0, 0, 0, 0.4);
-  outline: none;
   border-radius: 5px;
   margin-bottom: 20px;
+
   &:focus {
     border-color: black;
   }
@@ -41,7 +40,7 @@ const TitleInput = styled.input`
 const Label = styled.label`
   display: block;
   margin-bottom: 10px;
-  font-weight: bold;
+  font-family: medium;
 `;
 
 const ButtonBox = styled.div`
@@ -82,8 +81,7 @@ interface IFindPageEdit {
 
 export default function FindPageEdit({ category }: { category: string }) {
   const {
-    user,
-    user: { userClassification },
+    user: { nickname, img, ageGroup, gender, userClassification },
   } = useContext(AuthContext);
 
   const post: IFindPageEdit = useLocation().state;
@@ -125,17 +123,14 @@ export default function FindPageEdit({ category }: { category: string }) {
       <Container>
         <UserInfoBox>
           <UserInfo>
-            <img
-              src="https://i.pinimg.com/564x/92/32/a2/9232a2b8aba31dfe9a744fb232813f7f.jpg"
-              alt="avatar-img"
-            />
+            <img src={img} alt="avatar-img" />
             <div>
-              {user.nickname}
+              {nickname}
               {jobFormat(userClassification)}
             </div>
             <div>
-              {genderFormat(`${user.gender}`)} /&nbsp;
-              {ageFormat(`${user.ageGroup}`)}
+              {genderFormat(`${gender}`)} /&nbsp;
+              {ageFormat(`${ageGroup}`)}
             </div>
           </UserInfo>
         </UserInfoBox>

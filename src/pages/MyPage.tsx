@@ -11,7 +11,7 @@ import { AuthContext } from "../context/AuthContext";
 export default function MyPage(): JSX.Element {
   const { user } = useContext(AuthContext);
   const {
-    id,
+    img,
     nickname,
     career,
     userClassification,
@@ -26,14 +26,7 @@ export default function MyPage(): JSX.Element {
       <Container>
         <Profile>
           <ImgContainer>
-            <img
-              src={`${
-                gender === "MALE"
-                  ? "https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg"
-                  : "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg"
-              }`}
-              alt="profile-img"
-            />
+            <img src={img} alt="profile-img" />
           </ImgContainer>
 
           <div className="right">
@@ -44,18 +37,17 @@ export default function MyPage(): JSX.Element {
             <p className="career">
               {careerFormat(`${career}`)} / {genderFormat(`${gender}`)}
             </p>
-            <button>쪽지 보내기</button>
           </div>
         </Profile>
 
         <Posts>
           {userClassification === "STUDENT" &&
             studentPostResponseDtos.map((post: any) => (
-              <PostList post={post} />
+              <PostList post={post} category="student" />
             ))}
           {userClassification === "TEACHER" &&
             teacherPostResponseDtos.map((post: any) => (
-              <PostList post={post} />
+              <PostList post={post} category="teacher" />
             ))}
         </Posts>
       </Container>

@@ -4,6 +4,7 @@ const Select = styled.select`
   padding: 8px;
   outline: none;
   margin-bottom: 20px;
+  border-radius: 5px;
 `;
 
 class SeletItem {

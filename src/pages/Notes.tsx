@@ -1,20 +1,21 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { useRouteLoaderData } from "react-router-dom";
+import { useRouteLoaderData, useNavigate } from "react-router-dom";
 import { useGetNotes } from "../api/note";
 import Wrapper from "../components/common/Wrapper";
 import Category from "../components/notes/Category";
-
+// import Modal from "../components/common/Modal";
 export default function Notes() {
   const token = useRouteLoaderData("root");
   const [selected, setSelected] = useState("received");
+  const navigate = useNavigate();
+  // const [modal, setModal] = useState(false);
   const changeSelected = (category: string) => {
     setSelected(category);
   };
 
-  // const notes = useGetNotes(token as string, selected);
-  // console.log(notes);
-  const notes = [1, 2, 3, 4, 5];
+  const notes = useGetNotes(token as string, selected);
+  console.log(notes);
 
   return (
     <Wrapper>
@@ -23,12 +24,22 @@ export default function Notes() {
         <MsgBox className={`${selected === "sent" && "sent"}`}>
           {notes?.map((note) => (
             <li>
-              <span>닉네임</span>
-              <button>답장</button>
-              <p>
-                자바스크립트 수강생 모집 보고 연락드려요. 혹시 연락처 알려주실
-                수 있나요?
-              </p>
+              <span
+                onClick={() => {
+                  if (selected === "sent") {
+                    navigate(`/view/${note.receiverId}`);
+                  } else {
+                    navigate(`/view/${note.senderId}`);
+                  }
+                }}
+              >{`${
+                selected === "sent"
+                  ? "to. " + note.receiverNickname
+                  : "from. " + note.senderNickname
+              }`}</span>
+              <button>삭제</button>
+              <p>{note.title}</p>
+              <p>{note.content}</p>
             </li>
           ))}
         </MsgBox>
@@ -69,6 +80,20 @@ const MsgBox = styled.ul`
     line-height: 1.7;
     padding: 1rem;
     border-bottom: 1px solid #1760fa;
+
+    span {
+      width: fit-content;
+      border-radius: 5px;
+      padding: 0.3rem 0.5rem;
+      background-color: #0e1620;
+      margin-bottom: 1rem;
+
+      font-family: light;
+      font-size: 14px;
+      color: #c9fd35;
+
+      cursor: pointer;
+    }
 
     button {
       width: fit-content;
