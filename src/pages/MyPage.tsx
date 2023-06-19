@@ -19,7 +19,6 @@ export default function MyPage(): JSX.Element {
     studentPostResponseDtos,
     teacherPostResponseDtos,
   } = user || {};
-  console.log(user);
 
   const havePosts =
     studentPostResponseDtos?.length + teacherPostResponseDtos?.length !== 0;

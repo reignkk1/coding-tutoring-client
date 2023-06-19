@@ -3,12 +3,13 @@ import { useState, useEffect } from "react";
 
 interface IGetUser {
   id: string;
-  img: string;
+  img?: string;
   nickname: string;
   career: string;
   userClassification: string;
   email: string;
   gender: string;
+  role?: string;
   studentPostResponseDtos: any;
   teacherPostResponseDtos: any;
 }

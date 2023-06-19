@@ -19,7 +19,7 @@ export default function Notes() {
     }
   };
   const notes = useGetNotes(token as string, selected);
-  console.log(token);
+
   return (
     <Wrapper>
       <Container>

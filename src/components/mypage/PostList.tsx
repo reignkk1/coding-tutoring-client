@@ -23,7 +23,6 @@ interface PostListProps {
 export default function PostList({ post, category }: PostListProps) {
   const { id, title, subject, area, onOrOff, member } = post;
   const navigate = useNavigate();
-  console.log(post);
 
   return (
     <li key={id}>

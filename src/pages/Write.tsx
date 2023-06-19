@@ -13,6 +13,7 @@ import { AuthContext } from "../context/AuthContext";
 
 import { genderFormat, ageFormat, jobFormat } from "../util/format";
 import Modal from "../components/common/Modal";
+import { useRouteLoaderData } from "react-router-dom";
 
 const Container = styled.div`
   height: 200vh;
@@ -71,6 +72,7 @@ const Required = styled.div`
 `;
 
 export default function Write() {
+  const token = useRouteLoaderData("root");
   const {
     user: { nickname, ageGroup, gender, img, userClassification },
   } = useContext(AuthContext);
@@ -101,8 +103,9 @@ export default function Write() {
       subject: desiredSubjects.join(""),
       title: titleValue,
     };
+    console.log(data);
 
-    createPost(data, userClassification);
+    createPost(data, userClassification, token as string);
   };
 
   return (

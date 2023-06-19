@@ -6,7 +6,7 @@ const token = localStorage.getItem("token");
 axios.defaults.baseURL =
   "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080";
 
-axios.defaults.headers.common["Authorization"] = `${token}`;
+axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 interface IPost {
   id?: number;
@@ -20,13 +20,15 @@ interface IPost {
     nickname: string;
     gender: string;
     ageGroup: string;
+    role?: string;
     userClassification: string;
     career: string;
   };
 }
 
 // 게시물 작성
-export function createPost(data: IPost, category: string) {
+
+export function createPost(data: IPost, category: string, token?: string) {
   const categoryValue =
     category === "TEACHER"
       ? "teacherPost"

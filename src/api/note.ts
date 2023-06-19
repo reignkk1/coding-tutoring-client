@@ -1,8 +1,12 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const baseUrl =
+const token = localStorage.getItem("token");
+
+const baseURL =
   "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080";
+
+axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 export interface INote {
   title: string;
@@ -22,11 +26,8 @@ export function sendNotePost(
   setModal: React.Dispatch<React.SetStateAction<boolean>>
 ) {
   axios({
-    url: `${baseUrl}/v1/message`,
+    url: `${baseURL}/v1/message`,
     method: "post",
-    headers: {
-      Authorization: `${token}`,
-    },
     data,
   })
     .then((res) => {
@@ -47,11 +48,8 @@ export function useGetNotes(token: string, category: string) {
 
   useEffect(() => {
     axios({
-      url: `${baseUrl}/v1/messages/${category}`,
+      url: `${baseURL}/v1/messages/${category}`,
       method: "get",
-      headers: {
-        Authorization: `${token}`,
-      },
     })
       .then((res) => {
         if (res.status === 200) {
@@ -67,7 +65,7 @@ export function useGetNotes(token: string, category: string) {
 //메세지 삭제
 export function deleteNote(token: string, noteId: string, category: string) {
   axios
-    .delete(`${baseUrl}/v1/message/${category}/${noteId}`)
+    .delete(`${baseURL}/v1/message/${category}/${noteId}`)
     .then((response) => {
       if (response.status === 200) {
         window.location.replace("/notes");
