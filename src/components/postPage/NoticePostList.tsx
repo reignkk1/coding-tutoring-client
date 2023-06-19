@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { useGetPosts } from "../../api/Post";
 
 const Container = styled.div`
-  width: 100%;
-  margin-top: 100px;
-  margin-bottom: 100px;
+  width: 70%;
+  margin-inline: auto;
+  margin-block: 6rem;
   div {
     display: flex;
     flex-direction: column;
@@ -16,30 +16,75 @@ const Container = styled.div`
     border-radius: 50%;
   }
   li {
+    margin-bottom: 2.5rem;
+    padding: 1rem 1.5rem;
+
+    overflow: hidden;
+    clip-path: polygon(
+      0 0,
+      calc(100% - 16px) 0,
+      100% 16px,
+      100% 100%,
+      100% 100%,
+      0 100%,
+      0 100%,
+      0 0
+    );
+    background-color: #c9fd35;
+
     display: flex;
-    margin-bottom: 45px;
+    align-items: center;
+
+    color: #0e1620;
+
+    transition: all 0.1s ease-out;
+
+    &:hover {
+      transform: translateY(-0.5rem);
+    }
   }
 `;
+
 const ImgBox = styled.div`
+  margin-right: 3rem;
   text-align: center;
-  margin-right: 50px;
   img {
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
   }
   span {
+    font-family: regular;
     font-size: 14px;
   }
 `;
 const InfoBox = styled.div`
-  font-size: 18px;
   line-height: 1.7;
   h2 {
     font-weight: bold;
-    font-size: 24px;
+    font-size: 18px;
     cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
   span {
-    color: blue;
+    width: fit-content;
+    border-radius: 5px;
+    padding: 0.1rem 0.5rem;
+    background-color: #0e1620;
+
+    font-family: regular;
+    line-height: 1.5;
+    color: #c9fd35;
+  }
+
+  .area {
+    display: flex;
+    align-items: center;
+
+    .icon {
+      font-size: 1.2rem;
+    }
   }
 `;
 
@@ -52,10 +97,7 @@ export default function NoticePostList() {
         {posts?.map((post) => (
           <li key={post.id}>
             <ImgBox>
-              <img
-                src={`https://play-lh.googleusercontent.com/EmoxV_AVHYYitg8ELxYDRA47LC09BsDVqOpd2wrBPm4P4jB1rI6-muHJ_Ij9OM_RGw=w240-h480-rw`}
-                alt="프로필 사진"
-              />
+              <img src="/admin-img.png" alt="프로필 사진" />
               <span>운영자</span>
             </ImgBox>
             <InfoBox>

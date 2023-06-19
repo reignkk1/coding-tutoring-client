@@ -7,7 +7,9 @@ import { useNavigate } from "react-router-dom";
 import NoticePostList from "../components/postPage/NoticePostList";
 
 const Container = styled.div`
-  margin-top: 50px;
+  margin-top: 4rem;
+  padding-inline: 4rem;
+
   form {
     margin-top: 30px;
     margin-bottom: 50px;
@@ -25,7 +27,7 @@ export default function Notice() {
           firstExplain="과외바다의 새소식, 이벤트, 행사 정보를 공유하는 공간입니다."
         />
         <SearchBar placeholder="제목을 입력해주세요!" />
-        <Button onClick={() => navigate("write")}>✏️ 작성하기</Button>
+        <Button onClick={() => navigate("write")}>작성하기</Button>
         <NoticePostList />
       </Container>
     </Wrapper>
