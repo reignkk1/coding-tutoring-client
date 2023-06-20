@@ -9,15 +9,13 @@ ${reset}
 // 여기에 스타일을 지정하시면 전역으로 적용 됩니다.
 
 .ql-editor{
+    font-family: regular;
     background-color: #ffffff;
-    font-size:18px;
-    
+    font-size:1rem;
 }
 .ql-editor strong{
      font-weight:bold;
-     
  }
-
  .quill{
     background-color: #ffffff;
     border-radius: 0.5rem;

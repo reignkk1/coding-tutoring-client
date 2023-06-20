@@ -7,7 +7,9 @@ import NoticePostList from "../components/postPage/NoticePostList";
 import SearchBar from "./../components/postPage/SearchBar";
 
 const Container = styled.div`
-  margin-top: 50px;
+  margin-top: 4rem;
+  padding-inline: 4rem;
+
   form {
     margin-top: 30px;
     margin-bottom: 50px;

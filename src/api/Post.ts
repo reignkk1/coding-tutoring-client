@@ -22,13 +22,15 @@ export interface IPost {
     nickname: string;
     gender: string;
     ageGroup: string;
+    role?: string;
     userClassification: string;
     career: string;
   };
 }
 
 // 게시물 작성
-export function createPost(data: IPost, category: string) {
+
+export function createPost(data: IPost, category: string, token?: string) {
   const categoryValue =
     category === "TEACHER"
       ? "teacherPost"

@@ -101,7 +101,7 @@ export const signupForm: sign = {
     ...createFormFieldConfig("경력", "career", "radio", "", [
       { label: "취준생", value: "NO_EXPERIENCE" },
       { label: "1-3년", value: "FIRST_TO_THIRD_GRADE" },
-      { label: "3-5년", value: "THIRTHIRD_TO_FIFTH_GRADETIES" },
+      { label: "3-5년", value: "THIRD_TO_FIFTH_GRADE" },
       { label: "5-7년", value: "FIFTH_TO_SEVENTH_GRADE" },
       { label: "7년 이상", value: "OVER_SEVENTH_GRADE" },
     ]),

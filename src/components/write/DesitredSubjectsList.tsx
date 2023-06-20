@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { GrFormClose } from "react-icons/gr";
 import { useDispatch } from "react-redux";
 
 const Container = styled.div`
@@ -10,16 +11,25 @@ const Subjects = styled.ul`
 `;
 
 const Subject = styled.li`
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 6px 10px;
-  border-radius: 10px;
+  background-color: #1760fa;
+  padding: 0.5rem 0.7rem;
+  border-radius: 5px;
   margin-right: 30px;
   position: relative;
+  color: #ffffff;
+  font-family: regular;
+  font-size: 0.9rem;
 `;
 
 const Cancle = styled.button`
   position: absolute;
   top: -5px;
+
+  .icon {
+    background-color: #ffffff;
+    font-size: 1rem;
+    font-family: regular;
+  }
 `;
 
 interface IdesiredSubjects {
@@ -48,7 +58,9 @@ export default function DesitredSubjectsList({
         {desiredSubjects.map((subject, index) => (
           <Subject key={index}>
             {subject.toLowerCase()}
-            <Cancle onClick={() => handleCancleClick(subject)}>❌</Cancle>
+            <Cancle onClick={() => handleCancleClick(subject)}>
+              <GrFormClose className="icon" />
+            </Cancle>
           </Subject>
         ))}
       </Subjects>

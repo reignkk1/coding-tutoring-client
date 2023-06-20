@@ -1,21 +1,24 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { useRouteLoaderData, useNavigate } from "react-router-dom";
-import { useGetNotes } from "../api/note";
+import { useRouteLoaderData } from "react-router-dom";
+import { deleteNote, useGetNotes } from "../api/note";
 import Wrapper from "../components/common/Wrapper";
 import Category from "../components/notes/Category";
-// import Modal from "../components/common/Modal";
+import Note from "../components/notes/Note";
+
 export default function Notes() {
   const token = useRouteLoaderData("root");
   const [selected, setSelected] = useState("received");
-  const navigate = useNavigate();
-  // const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(false);
   const changeSelected = (category: string) => {
     setSelected(category);
   };
-
+  const handleDelete = (noteId: string) => {
+    if (window.confirm("정말로 삭제하겠습니까?")) {
+      deleteNote(token as string, noteId, selected);
+    }
+  };
   const notes = useGetNotes(token as string, selected);
-  console.log(notes);
 
   return (
     <Wrapper>
@@ -23,24 +26,13 @@ export default function Notes() {
         <Category selected={selected} changeSelected={changeSelected} />
         <MsgBox className={`${selected === "sent" && "sent"}`}>
           {notes?.map((note) => (
-            <li>
-              <span
-                onClick={() => {
-                  if (selected === "sent") {
-                    navigate(`/view/${note.receiverId}`);
-                  } else {
-                    navigate(`/view/${note.senderId}`);
-                  }
-                }}
-              >{`${
-                selected === "sent"
-                  ? "to. " + note.receiverNickname
-                  : "from. " + note.senderNickname
-              }`}</span>
-              <button>삭제</button>
-              <p>{note.title}</p>
-              <p>{note.content}</p>
-            </li>
+            <Note
+              note={note}
+              selected={selected}
+              handleDelete={handleDelete}
+              modal={modal}
+              setModal={setModal}
+            />
           ))}
         </MsgBox>
       </Container>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { AuthContext } from "./../../context/AuthContext";
-import { useContext, useState } from "react";
-import { sendNotePost } from "../../api/note";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { INote, sendNotePost } from "../../api/note";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
 import { IModalAction } from "../../reducers/modal";
@@ -82,39 +82,33 @@ const Sender = styled.div`
   }
 `;
 
-interface IPost {
-  id: string;
-  title: string;
-  content: string;
-  onOrOff: string;
-  area: string;
-  member: { nickname: string; id: string };
-  subject: string;
-}
-
-export default function MessageSendBox({ post }: { post: IPost }) {
+export default function MessageSendBox({
+  note,
+  setModal,
+}: {
+  note: INote;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const {
-    user: { nickname: sender, id: senderId },
+    user: { nickname, id },
   } = useContext(AuthContext);
-
-  const dispatch = useDispatch<Dispatch<IModalAction>>();
-
   const token = localStorage.getItem("token");
+  const dispatch = useDispatch<Dispatch<IModalAction>>();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const { nickname: recipient, id: recipientId } = post!.member;
+  const { senderId, senderNickname } = note;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = {
       title,
       content: content.replaceAll("\n", "<br/>"),
-      receiverId: recipientId,
-      receiverNickname: recipient,
-      senderId: senderId,
-      senderNickname: sender,
+      receiverId: senderId,
+      receiverNickname: senderNickname,
+      senderId: id,
+      senderNickname: nickname,
     };
 
     sendNotePost(token, data, dispatch);
@@ -124,8 +118,8 @@ export default function MessageSendBox({ post }: { post: IPost }) {
     <Container>
       <Form onSubmit={handleSubmit}>
         <Sender>
-          <div>보내는 사람 : {sender}</div>
-          <div>받는 사람 : {recipient}</div>
+          <div>보내는 사람 : {nickname}</div>
+          <div>받는 사람 : {senderNickname}</div>
         </Sender>
         <div>
           <label htmlFor="title">제목</label>

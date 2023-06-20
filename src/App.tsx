@@ -116,7 +116,7 @@ function App() {
         {
           path: "/write",
           element: <Write />,
-          // loader: checkAuthLoader,
+          loader: checkAuthLoader,
         },
         {
           path: "/notice/write",

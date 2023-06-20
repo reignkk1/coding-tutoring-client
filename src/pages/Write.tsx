@@ -16,6 +16,7 @@ import { ReducerState } from "../reducers/rootReducer";
 import { Dispatch } from "redux";
 import { IModalAction } from "../reducers/modal";
 import { IWriteAction } from "../reducers/write";
+import { useRouteLoaderData } from "react-router-dom";
 
 const Container = styled.div`
   height: 200vh;
@@ -74,6 +75,7 @@ const Required = styled.div`
 `;
 
 export default function Write() {
+  const token = useRouteLoaderData("root");
   const {
     user: { nickname, ageGroup, gender, img, userClassification },
   } = useContext(AuthContext);
@@ -103,8 +105,9 @@ export default function Write() {
       subject: desiredSubjects.join(""),
       title,
     };
+    console.log(data);
 
-    createPost(data, userClassification);
+    createPost(data, userClassification, token as string);
   };
 
   return (
