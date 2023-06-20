@@ -2,6 +2,9 @@ import styled from "styled-components";
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { INote, sendNotePost } from "../../api/note";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
+import { IModalAction } from "../../reducers/modal";
 
 const Container = styled.div`
   width: 300px;
@@ -90,6 +93,7 @@ export default function MessageSendBox({
     user: { nickname, id },
   } = useContext(AuthContext);
   const token = localStorage.getItem("token");
+  const dispatch = useDispatch<Dispatch<IModalAction>>();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -107,7 +111,7 @@ export default function MessageSendBox({
       senderNickname: nickname,
     };
 
-    sendNotePost(token, data, setModal);
+    sendNotePost(token, data, dispatch);
   };
 
   return (

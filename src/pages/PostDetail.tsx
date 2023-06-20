@@ -5,7 +5,6 @@ import { ImgContainer } from "./MyPage";
 import Wrapper from "../components/common/Wrapper";
 import Button from "../components/postPage/Button";
 import { deletePost } from "../api/Post";
-import { useState } from "react";
 import Modal from "../components/common/Modal";
 import MessageSendBox from "./../components/detail/MessageSendBox";
 import { ageFormat, careerFormat, genderFormat } from "../util/format";

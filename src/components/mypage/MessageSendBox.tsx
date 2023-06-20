@@ -85,11 +85,9 @@ const Sender = styled.div`
 export default function MessageSendBox({
   receiverId,
   receiverNickname,
-  setModal,
 }: {
   receiverId: any;
   receiverNickname: any;
-  setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const {
     user: { nickname, id },

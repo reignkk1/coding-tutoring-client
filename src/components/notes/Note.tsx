@@ -3,6 +3,10 @@ import Modal from "../common/Modal";
 import MessageSendBox from "./MessageSendBox";
 import { INote } from "../../api/note";
 
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
+import { IModalAction } from "../../reducers/modal";
+
 export default function Note({
   note,
   selected,
@@ -16,6 +20,8 @@ export default function Note({
   modal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const dispatch = useDispatch<Dispatch<IModalAction>>();
+
   const navigate = useNavigate();
 
   return (
@@ -34,13 +40,13 @@ export default function Note({
           : "from. " + note.senderNickname
       }`}</span>
       {selected === "received" && (
-        <button onClick={() => setModal(true)}>답장</button>
+        <button onClick={() => dispatch({ type: "MODAL_OPEN" })}>답장</button>
       )}
       <button onClick={() => handleDelete(note.messageId)}>삭제</button>
 
       <p>{note.title}</p>
       <p>{note.content}</p>
-      <Modal modal={modal} setModal={setModal}>
+      <Modal>
         <MessageSendBox note={note} setModal={setModal} />
       </Modal>
     </li>
