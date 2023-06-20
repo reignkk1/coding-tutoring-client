@@ -17,18 +17,14 @@ class SeletItem {
 }
 
 interface ISelector {
-  setValue: React.Dispatch<React.SetStateAction<string>>;
   data: SeletItem[];
   value?: string;
+  onChange(e: React.ChangeEvent<HTMLSelectElement>): void;
 }
 
-export default function Selector({ setValue, data }: ISelector) {
+export default function Selector({ data, onChange }: ISelector) {
   return (
-    <Select
-      onChange={(e) => {
-        setValue(e.target.value);
-      }}
-    >
+    <Select onChange={onChange} defaultValue={"OFFLINE"}>
       {data.map((item, index) => (
         <option key={index} value={item.value}>
           {item.name}

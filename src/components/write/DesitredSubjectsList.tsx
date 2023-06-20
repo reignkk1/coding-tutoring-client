@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { GrFormClose } from "react-icons/gr";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div`
   margin-bottom: 20px;
@@ -33,16 +34,23 @@ const Cancle = styled.button`
 
 interface IdesiredSubjects {
   desiredSubjects: string[];
-  setDesiredSubjects: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export default function DesitredSubjectsList({
   desiredSubjects,
-  setDesiredSubjects,
 }: IdesiredSubjects) {
+  const dispatch = useDispatch();
+
   const handleCancleClick = (subject: string) => {
-    setDesiredSubjects((prev) => prev.filter((cur) => cur !== subject));
+    dispatch({
+      type: "SET_Desitred_Subjects",
+      value: desiredSubjects.filter(
+        (desiredSubject) => desiredSubject !== subject
+      ),
+    });
   };
+
+  console.log(desiredSubjects);
 
   return (
     <Container>

@@ -2,6 +2,9 @@ import styled from "styled-components";
 import { AuthContext } from "./../../context/AuthContext";
 import { useContext, useState } from "react";
 import { sendNotePost } from "../../api/note";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
+import { IModalAction } from "../../reducers/modal";
 
 const Container = styled.div`
   width: 300px;
@@ -89,16 +92,12 @@ interface IPost {
   subject: string;
 }
 
-export default function MessageSendBox({
-  post,
-  setModal,
-}: {
-  post?: IPost;
-  setModal: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+export default function MessageSendBox({ post }: { post: IPost }) {
   const {
     user: { nickname: sender, id: senderId },
   } = useContext(AuthContext);
+
+  const dispatch = useDispatch<Dispatch<IModalAction>>();
 
   const token = localStorage.getItem("token");
 
@@ -118,7 +117,7 @@ export default function MessageSendBox({
       senderNickname: sender,
     };
 
-    sendNotePost(token, data, setModal);
+    sendNotePost(token, data, dispatch);
   };
 
   return (

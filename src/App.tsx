@@ -26,6 +26,9 @@ import { checkAuthLoader } from "./util/sign/auth";
 import { AuthContextProvider } from "./context/AuthContext";
 import NoticeEdit from "./pages/NoticeEdit";
 import FindPageEdit from "./pages/FindPageEdit";
+import { Provider } from "react-redux";
+import { legacy_createStore } from "redux";
+import rootReducer from "./reducers/rootReducer";
 
 function App() {
   const Layout = () => {
@@ -128,11 +131,15 @@ function App() {
     },
   ]);
 
+  const store = legacy_createStore(rootReducer);
+
   return (
-    <AuthContextProvider>
-      <GlobalStyles />
-      <RouterProvider router={router} />
-    </AuthContextProvider>
+    <Provider store={store}>
+      <AuthContextProvider>
+        <GlobalStyles />
+        <RouterProvider router={router} />
+      </AuthContextProvider>
+    </Provider>
   );
 }
 

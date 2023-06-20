@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useGetPosts } from "../../api/Post";
+import { useGetPosts } from "./../../api/Post";
 
 const Container = styled.div`
   width: 70%;
@@ -89,8 +89,9 @@ const InfoBox = styled.div`
 `;
 
 export default function NoticePostList() {
+  const [posts] = useGetPosts("notice");
   const navigate = useNavigate();
-  const posts = useGetPosts("notice");
+
   return (
     <Container>
       <ul>

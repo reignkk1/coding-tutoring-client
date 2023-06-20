@@ -3,16 +3,19 @@ import Wrapper from "../components/common/Wrapper";
 import Editor from "../components/write/Editor";
 import Button from "../components/postPage/Button";
 import { useState, useContext } from "react";
-
 import AddressSearch from "../components/write/AddressSearch";
 import Selector from "../components/write/Selector";
 import DesitredSubjectsList from "./../components/write/DesitredSubjectsList";
 import { on_off, subjects } from "../components/write/SelectData";
 import { createPost } from "../api/Post";
 import { AuthContext } from "../context/AuthContext";
-
 import { genderFormat, ageFormat, jobFormat } from "../util/format";
 import Modal from "../components/common/Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { ReducerState } from "../reducers/rootReducer";
+import { Dispatch } from "redux";
+import { IModalAction } from "../reducers/modal";
+import { IWriteAction } from "../reducers/write";
 import { useRouteLoaderData } from "react-router-dom";
 
 const Container = styled.div`
@@ -77,31 +80,30 @@ export default function Write() {
     user: { nickname, ageGroup, gender, img, userClassification },
   } = useContext(AuthContext);
 
-  const [onOffValue, setOnOffValue] = useState("ONLINE");
-  const [subjectValue, setSubjectValue] = useState("JAVASCRIPT");
-  const [addressValue, setAddressValue] = useState("");
-  const [titleValue, setTitleValue] = useState("");
-  const [editorValue, setEditorValue] = useState("");
+  const [editorText, setEditorText] = useState("");
 
-  const [addressModal, setAddressModal] = useState(false);
-  const [desiredSubjects, setDesiredSubjects] = useState<string[]>([]);
+  const dispatch = useDispatch();
+
+  const {
+    write: { onOrOff, subject, desiredSubjects, title, area },
+  } = useSelector((state: ReducerState) => state);
 
   const handleClick = () => {
-    if (desiredSubjects.includes(subjectValue))
+    if (desiredSubjects.includes(subject))
       return alert("이미 추가 되었습니다.");
     if (desiredSubjects.length >= 1)
       return alert("기술스택은 최대 1개까지 선택 가능합니다.");
-    setDesiredSubjects([...desiredSubjects, subjectValue]);
+    dispatch({ type: "SET_Desitred_Subjects", value: [subject] });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = {
-      area: addressValue,
-      content: editorValue,
-      onOrOff: onOffValue,
+      area,
+      content: editorText,
+      onOrOff,
       subject: desiredSubjects.join(""),
-      title: titleValue,
+      title,
     };
     console.log(data);
 
@@ -131,42 +133,48 @@ export default function Write() {
           <TitleInput
             name="address"
             style={{ width: "300px" }}
-            defaultValue={addressValue}
+            defaultValue={area}
             readOnly
           />
-          <Button onClick={() => setAddressModal(true)}>검색</Button>
-          <Modal modal={addressModal} setModal={setAddressModal}>
-            <AddressSearch
-              setAddressValue={setAddressValue}
-              setModal={setAddressModal}
-            />
+          <Button onClick={() => dispatch({ type: "MODAL_OPEN" })}>검색</Button>
+          <Modal>
+            <AddressSearch />
           </Modal>
 
           <Label>희망 과목 *</Label>
-          <Selector setValue={setSubjectValue} data={subjects} />
-          <Button onClick={handleClick}>추가</Button>
-          <DesitredSubjectsList
-            desiredSubjects={desiredSubjects}
-            setDesiredSubjects={setDesiredSubjects}
+          <Selector
+            onChange={(e) =>
+              dispatch({ type: "SET_SUBJECT", value: e.target.value })
+            }
+            data={subjects}
           />
+          <Button onClick={handleClick}>추가</Button>
+          <DesitredSubjectsList desiredSubjects={desiredSubjects} />
 
           <Label>온/오프라인 여부 *</Label>
-          <Selector setValue={setOnOffValue} data={on_off} />
+          <Selector
+            onChange={(e) =>
+              dispatch({ type: "SET_ONOFF", value: e.target.value })
+            }
+            data={on_off}
+          />
 
           <Label htmlFor="title">제목 *</Label>
           <TitleInput
             id="title"
             placeholder="제목을 입력해주세요."
-            onChange={(e) => setTitleValue(e.target.value)}
-            value={titleValue}
+            onChange={(e) =>
+              dispatch({ type: "SET_TITLE", value: e.target.value })
+            }
+            value={title}
             maxLength={50}
           />
 
           <Label>{jobFormat(userClassification) + " 소개 *"}</Label>
           <Editor
             placeholder="자신을 소개해주세요."
-            editorValue={editorValue}
-            setEditorValue={setEditorValue}
+            setEditorText={setEditorText}
+            editorValue={editorText}
           />
 
           <ButtonBox>

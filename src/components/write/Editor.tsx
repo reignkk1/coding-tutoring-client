@@ -3,17 +3,17 @@ import "react-quill/dist/quill.snow.css";
 
 interface IEditor {
   editorValue: string;
-  setEditorValue: React.Dispatch<React.SetStateAction<string>>;
+  setEditorText: React.Dispatch<React.SetStateAction<string>>;
   placeholder?: string;
 }
 
 export default function Editor({
   editorValue,
-  setEditorValue,
+  setEditorText,
   placeholder,
 }: IEditor) {
   const handleChange = (value: string) => {
-    setEditorValue(value);
+    setEditorText(value);
   };
 
   return (
