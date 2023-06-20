@@ -1,15 +1,12 @@
 import DaumPostCode, { Address } from "react-daum-postcode";
 
-interface IAddressSearch {
-  setAddressValue: React.Dispatch<React.SetStateAction<string>>;
-  setModal: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { useDispatch } from "react-redux";
 
-export default function AddressSearch({
-  setAddressValue,
-  setModal,
-}: IAddressSearch) {
-  const handleComplete = (data: Address) => setAddressValue(data.address);
+export default function AddressSearch() {
+  const dispatch = useDispatch();
+
+  const handleComplete = (data: Address) =>
+    dispatch({ type: "SET_AREA", value: data.address });
 
   return (
     <DaumPostCode
@@ -18,7 +15,7 @@ export default function AddressSearch({
         height: "500px",
       }}
       onComplete={handleComplete}
-      onClose={() => setModal(false)}
+      onClose={() => dispatch({ type: "MODAL_CLOSE" })}
     />
   );
 }

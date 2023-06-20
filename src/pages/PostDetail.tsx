@@ -10,6 +10,9 @@ import Modal from "../components/common/Modal";
 import MessageSendBox from "./../components/detail/MessageSendBox";
 import { ageFormat, careerFormat, genderFormat } from "../util/format";
 import { AuthContext } from "../context/AuthContext";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
+import { IModalAction } from "../reducers/modal";
 
 interface IPost {
   id: string;
@@ -30,10 +33,12 @@ interface IPost {
 
 export default function PostDetail({ category }: { category: string }) {
   const { user } = useContext(AuthContext);
-  const [modal, setModal] = useState(false);
+
+  const dispatch = useDispatch<Dispatch<IModalAction>>();
 
   const navigate = useNavigate();
   const post: IPost = useLocation().state;
+
   const { title, content, subject, onOrOff, area, member } = post;
 
   const handleDelete = () => {
@@ -70,10 +75,12 @@ export default function PostDetail({ category }: { category: string }) {
             </p>
             <p className="career">{careerFormat(`${member.career}`)}</p>
             {user.id !== member.id && (
-              <button onClick={() => setModal(true)}>쪽지 보내기</button>
+              <button onClick={() => dispatch({ type: "MODAL_OPEN" })}>
+                쪽지 보내기
+              </button>
             )}
-            <Modal modal={modal} setModal={setModal}>
-              <MessageSendBox post={post} setModal={setModal} />
+            <Modal>
+              <MessageSendBox post={post} />
             </Modal>
           </div>
         </Profile>

@@ -5,6 +5,11 @@ import Button from "../components/postPage/Button";
 import TitleBox from "../components/postPage/TitleBox";
 import { subjects } from "../components/write/SelectData";
 import FindPostList from "../components/postPage/FindPostList";
+import { searchSubject, useGetPosts } from "../api/Post";
+
+import { useDispatch } from "react-redux";
+import { IPostAction } from "../reducers/post";
+import { Dispatch } from "redux";
 
 const Container = styled.div`
   margin-top: 4rem;
@@ -36,8 +41,32 @@ const Subject = styled.div`
     }
   }
 `;
+export interface IPost {
+  id?: number;
+  subject?: string;
+  title: string;
+  content: string;
+  area?: string;
+  onOrOff?: string;
+  member?: {
+    id: number;
+    nickname: string;
+    gender: string;
+    ageGroup: string;
+    userClassification: string;
+    career: string;
+  };
+}
 
 export default function FindPage({ category }: { category: string }) {
+  const [posts] = useGetPosts(category);
+
+  const dispatch = useDispatch<Dispatch<IPostAction>>();
+  dispatch({ type: "POST_UPDATE", data: posts });
+
+  const handleSubjectClick = (subject: string) =>
+    searchSubject(subject, category, dispatch);
+
   return (
     <Wrapper>
       <Container>
@@ -50,19 +79,22 @@ export default function FindPage({ category }: { category: string }) {
             />
 
             <SearchBar
-              placeholder={`어느 분야의 ${
-                category === "teachers" ? "선생님" : "학생"
-              }을 찾으시나요?`}
+              category={category}
+              placeholder={"제목을 입력해주세요."}
             />
           </Left>
 
           <Subject>
             {subjects.map((subject, index) => (
-              <Button key={index}>{subject.name}</Button>
+              <Button
+                onClick={() => handleSubjectClick(subject.value)}
+                key={index}
+              >
+                {subject.name}
+              </Button>
             ))}
           </Subject>
         </Top>
-
         <FindPostList category={category} />
       </Container>
     </Wrapper>

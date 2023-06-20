@@ -3,8 +3,8 @@ import Wrapper from "../components/common/Wrapper";
 import { ageFormat, genderFormat, jobFormat } from "../util/format";
 import Button from "../components/postPage/Button";
 import Editor from "../components/write/Editor";
-import { useState } from "react";
-import { useContext } from "react";
+import { useState, useContext, useEffect } from "react";
+
 import { AuthContext } from "../context/AuthContext";
 import AddressSearch from "../components/write/AddressSearch";
 import Selector from "../components/write/Selector";
@@ -13,6 +13,10 @@ import { on_off, subjects } from "../components/write/SelectData";
 import { useLocation } from "react-router-dom";
 import { modifyPost } from "../api/Post";
 import Modal from "../components/common/Modal";
+
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { ReducerState } from "../reducers/rootReducer";
 
 const Container = styled.div`
   height: 200vh;
@@ -84,36 +88,48 @@ export default function FindPageEdit({ category }: { category: string }) {
     user: { nickname, img, ageGroup, gender, userClassification },
   } = useContext(AuthContext);
 
+  const dispatch = useDispatch();
+  const { onOrOff, subject, area, title, desiredSubjects } = useSelector(
+    (state: ReducerState) => state.edit
+  );
+
   const post: IFindPageEdit = useLocation().state;
 
-  const [onOffValue, setOnOffValue] = useState(post.onOrOff);
-  const [subjectValue, setSubjectValue] = useState(post.subject);
-  const [addressValue, setAddressValue] = useState(post.area);
-  const [titleValue, setTitleValue] = useState(post.title);
+  useEffect(() => {
+    dispatch({
+      type: "SET_STATE",
+      value: {
+        onOrOff: post.onOrOff,
+        subject: post.subject,
+        area: post.area,
+        title: post.title,
+        desiredSubjects: [post.subject],
+      },
+    });
+  }, [category]);
+
   const [editorValue, setEditorValue] = useState(post.content);
 
-  const [addressModal, setAddressModal] = useState(false);
-  const [desiredSubjects, setDesiredSubjects] = useState<string[]>([
-    post.subject,
-  ]);
-
   const handleClick = () => {
-    if (desiredSubjects.includes(subjectValue))
+    if (desiredSubjects.includes(subject))
       return alert("이미 추가 되었습니다.");
     if (desiredSubjects.length >= 1)
       return alert("기술스택은 최대 1개까지 선택 가능합니다.");
-    setDesiredSubjects([...desiredSubjects, subjectValue]);
+    dispatch({
+      type: "SET_Desitred_Subjects",
+      value: [...desiredSubjects, subject],
+    });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = {
       id: post.id,
-      area: addressValue,
+      area,
       content: editorValue,
-      onOrOff: onOffValue,
+      onOrOff,
       subject: desiredSubjects.join(""),
-      title: titleValue,
+      title,
     };
     modifyPost(data, category);
   };
@@ -140,34 +156,40 @@ export default function FindPageEdit({ category }: { category: string }) {
           <TitleInput
             name="address"
             style={{ width: "300px" }}
-            value={addressValue}
+            value={area}
             readOnly
           />
-          <Button onClick={() => setAddressModal(true)}>검색</Button>
-          <Modal modal={addressModal} setModal={setAddressModal}>
-            <AddressSearch
-              setAddressValue={setAddressValue}
-              setModal={setAddressModal}
-            />
+          <Button onClick={() => dispatch({ type: "MODAL_OPEN" })}>검색</Button>
+          <Modal>
+            <AddressSearch />
           </Modal>
 
           <Label>희망 과목 *</Label>
-          <Selector setValue={setSubjectValue} data={subjects} />
-          <Button onClick={handleClick}>추가</Button>
-          <DesitredSubjectsList
-            desiredSubjects={desiredSubjects}
-            setDesiredSubjects={setDesiredSubjects}
+          <Selector
+            onChange={(e) =>
+              dispatch({ type: "SET_SUBJECT", value: e.target.value })
+            }
+            data={subjects}
           />
+          <Button onClick={handleClick}>추가</Button>
+          <DesitredSubjectsList desiredSubjects={desiredSubjects} />
 
           <Label>온/오프라인 여부 *</Label>
-          <Selector setValue={setOnOffValue} data={on_off} />
+          <Selector
+            onChange={(e) =>
+              dispatch({ type: "SET_ONOFF", value: e.target.value })
+            }
+            data={on_off}
+          />
 
           <Label htmlFor="title">제목 *</Label>
           <TitleInput
             id="title"
             placeholder="제목을 입력해주세요."
-            onChange={(e) => setTitleValue(e.target.value)}
-            value={titleValue}
+            onChange={(e) =>
+              dispatch({ type: "SET_TITLE", value: e.target.value })
+            }
+            value={title}
             maxLength={50}
           />
 
@@ -175,7 +197,7 @@ export default function FindPageEdit({ category }: { category: string }) {
           <Editor
             placeholder="자신을 소개해주세요."
             editorValue={editorValue}
-            setEditorValue={setEditorValue}
+            setEditorText={setEditorValue}
           />
 
           <ButtonBox>
