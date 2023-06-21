@@ -9,7 +9,8 @@ import Note from "../components/notes/Note";
 export default function Notes() {
   const token = useRouteLoaderData("root");
   const [selected, setSelected] = useState("received");
-  const [modal, setModal] = useState(false);
+  //메세지를 보낼 사람을 정해줘야 모달창이 모두 뜨지 않음
+  const [sender, setSender] = useState("");
   const changeSelected = (category: string) => {
     setSelected(category);
   };
@@ -30,8 +31,8 @@ export default function Notes() {
               note={note}
               selected={selected}
               handleDelete={handleDelete}
-              modal={modal}
-              setModal={setModal}
+              sender={sender}
+              setSender={setSender}
             />
           ))}
         </MsgBox>

@@ -21,7 +21,6 @@ export interface INote {
 }
 
 // 메세지 보내기
-
 export function sendNotePost(
   token: string | null,
   data: INote,

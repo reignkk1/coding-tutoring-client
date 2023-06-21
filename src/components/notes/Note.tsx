@@ -11,17 +11,16 @@ export default function Note({
   note,
   selected,
   handleDelete,
-  modal,
-  setModal,
+  sender,
+  setSender,
 }: {
   note: INote;
   selected: string;
   handleDelete: any;
-  modal: boolean;
-  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  sender: string;
+  setSender: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const dispatch = useDispatch<Dispatch<IModalAction>>();
-
   const navigate = useNavigate();
 
   return (
@@ -40,15 +39,26 @@ export default function Note({
           : "from. " + note.senderNickname
       }`}</span>
       {selected === "received" && (
-        <button onClick={() => dispatch({ type: "MODAL_OPEN" })}>답장</button>
+        <button
+          onClick={() => {
+            dispatch({ type: "MODAL_OPEN" });
+            // 답장할 사람을 set함
+            setSender(note.senderId);
+          }}
+        >
+          답장
+        </button>
       )}
       <button onClick={() => handleDelete(note.messageId)}>삭제</button>
 
       <p>{note.title}</p>
       <p>{note.content}</p>
-      <Modal>
-        <MessageSendBox note={note} setModal={setModal} />
-      </Modal>
+      {/* 답장할 사람의 id랑 현재 쪽지의 보낸 사람이 같은 경우만 모달창을 띄움  */}
+      {sender === note.senderId && (
+        <Modal>
+          <MessageSendBox note={note} />
+        </Modal>
+      )}
     </li>
   );
 }

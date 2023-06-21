@@ -50,7 +50,7 @@ export default function DesitredSubjectsList({
     });
   };
 
-  console.log(desiredSubjects);
+  // console.log(desiredSubjects);
 
   return (
     <Container>

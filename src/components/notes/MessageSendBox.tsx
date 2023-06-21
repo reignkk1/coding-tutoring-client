@@ -82,13 +82,7 @@ const Sender = styled.div`
   }
 `;
 
-export default function MessageSendBox({
-  note,
-  setModal,
-}: {
-  note: INote;
-  setModal: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+export default function MessageSendBox({ note }: { note: INote }) {
   const {
     user: { nickname, id },
   } = useContext(AuthContext);
