@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Modal from "../common/Modal";
-import MessageSendBox from "./MessageSendBox";
+import MessageSendBox from "../mypage/MessageSendBox";
 import { INote } from "../../api/note";
 
 import { useDispatch } from "react-redux";
@@ -56,7 +56,10 @@ export default function Note({
       {/* 답장할 사람의 id랑 현재 쪽지의 보낸 사람이 같은 경우만 모달창을 띄움  */}
       {sender === note.senderId && (
         <Modal>
-          <MessageSendBox note={note} />
+          <MessageSendBox
+            receiverId={note.senderId}
+            receiverNickname={note.senderNickname}
+          />
         </Modal>
       )}
     </li>

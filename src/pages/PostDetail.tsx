@@ -6,7 +6,7 @@ import Wrapper from "../components/common/Wrapper";
 import Button from "../components/postPage/Button";
 import { deletePost } from "../api/Post";
 import Modal from "../components/common/Modal";
-import MessageSendBox from "./../components/detail/MessageSendBox";
+import MessageSendBox from "./../components/mypage/MessageSendBox";
 import { ageFormat, careerFormat, genderFormat } from "../util/format";
 import { AuthContext } from "../context/AuthContext";
 import { useDispatch } from "react-redux";
@@ -79,7 +79,10 @@ export default function PostDetail({ category }: { category: string }) {
               </button>
             )}
             <Modal>
-              <MessageSendBox post={post} />
+              <MessageSendBox
+                receiverId={member.id}
+                receiverNickname={member.nickname}
+              />
             </Modal>
           </div>
         </Profile>
