@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Wrapper from "../components/common/Wrapper";
 import styled from "styled-components";
-import Button from "../components/postPage/Button";
+import Button from "../components/common/Button";
 import { deletePost } from "../api/Post";
 import Parser from "html-react-parser";
 

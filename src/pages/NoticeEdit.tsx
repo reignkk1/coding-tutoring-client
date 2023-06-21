@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
-import { useState } from "react";
-import Button from "../components/postPage/Button";
+import { useEffect } from "react";
+import Button from "../components/common/Button";
 import Editor from "../components/write/Editor";
 import { useLocation } from "react-router-dom";
 import { modifyPost } from "../api/Post";
+import useWriteEditForm from "../hooks/useWriteEditForm";
 
 const Container = styled.div`
   height: 100vh;
@@ -44,18 +45,28 @@ interface INoticePost {
 export default function NoticeEdit() {
   const post: INoticePost = useLocation().state;
 
-  const [title, setTitle] = useState(post.title);
-  const [editorValue, setEditorValue] = useState(post.content);
+  const [state, dispatch] = useWriteEditForm();
+  const { content, title } = state;
+
+  useEffect(() => {
+    dispatch({
+      type: "SET_STATE",
+      value: {
+        title: post.title,
+        content: post.content,
+      },
+    });
+  }, [post, dispatch]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setTitle(e.target.value);
+    dispatch({ type: "SET_TITLE", value: e.target.value });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = {
       id: post.id,
-      title: title,
-      content: editorValue,
+      title,
+      content,
     };
     modifyPost(data, "notice");
   };
@@ -66,7 +77,7 @@ export default function NoticeEdit() {
         <form onSubmit={handleSubmit}>
           <Label htmlFor="title">제목</Label>
           <Title id="title" value={title} onChange={handleChange} />
-          <Editor editorValue={editorValue} setEditorText={setEditorValue} />
+          <Editor />
           <ButtonContainer>
             <Button type="submit">수정하기</Button>
           </ButtonContainer>

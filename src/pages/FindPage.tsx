@@ -1,15 +1,14 @@
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
 import SearchBar from "../components/postPage/SearchBar";
-import Button from "../components/postPage/Button";
+import Button from "../components/common/Button";
 import TitleBox from "../components/postPage/TitleBox";
 import { subjects } from "../components/write/SelectData";
 import FindPostList from "../components/postPage/FindPostList";
 import { searchSubject, useGetPosts } from "../api/Post";
-
-import { useDispatch } from "react-redux";
-import { IPostAction } from "../reducers/post";
-import { Dispatch } from "redux";
+import { ICategory } from "../types/category";
+import { usePost } from "../hooks/usePost";
+import { useEffect } from "react";
 
 const Container = styled.div`
   margin-top: 4rem;
@@ -41,28 +40,14 @@ const Subject = styled.div`
     }
   }
 `;
-export interface IPost {
-  id?: number;
-  subject?: string;
-  title: string;
-  content: string;
-  area?: string;
-  onOrOff?: string;
-  member?: {
-    id: number;
-    nickname: string;
-    gender: string;
-    ageGroup: string;
-    userClassification: string;
-    career: string;
-  };
-}
 
-export default function FindPage({ category }: { category: string }) {
+export default function FindPage({ category }: ICategory) {
   const [posts] = useGetPosts(category);
+  const [, dispatch] = usePost();
 
-  const dispatch = useDispatch<Dispatch<IPostAction>>();
-  dispatch({ type: "POST_UPDATE", data: posts });
+  useEffect(() => {
+    dispatch({ type: "POST_UPDATE", data: posts });
+  }, [dispatch, posts]);
 
   const handleSubjectClick = (subject: string) =>
     searchSubject(subject, category, dispatch);
