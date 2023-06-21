@@ -7,8 +7,7 @@ import {
   genderFormat,
   careerFormat,
 } from "../../util/format";
-import { useSelector } from "react-redux";
-import { ReducerState } from "../../reducers/rootReducer";
+import { usePost } from "../../hooks/usePost";
 
 const Container = styled.div`
   width: 70%;
@@ -98,14 +97,13 @@ const InfoBox = styled.div`
 
 interface IFindPostList {
   posts?: IPost[];
-
   category: string;
 }
 
 export default function FindPostList({ category }: IFindPostList) {
   const navigate = useNavigate();
 
-  const posts = useSelector((state: ReducerState) => state.post);
+  const [posts] = usePost();
 
   return (
     <Container>

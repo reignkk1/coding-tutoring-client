@@ -37,7 +37,7 @@ export const ageFormat = (age: string) => {
   }
 };
 
-export const jobFormat = (userClassification: string) => {
+export const jobFormat = (userClassification?: string) => {
   switch (userClassification) {
     case "STUDENT":
       return " 학생";

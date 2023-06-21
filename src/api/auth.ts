@@ -24,7 +24,7 @@ export const sendCode = async (email: string) => {
       url: `${baseUrl}/auth/mail?email=${email}`,
       method: "get",
     });
-    console.log(res);
+
     if (res.status === 200) {
       alert("이메일 인증코드를 보냈습니다.");
       return res.data.certificationCode;
@@ -93,7 +93,7 @@ export const signin = async (userData: any) => {
       },
       data: userData,
     });
-    console.log(res);
+
     if (res.status === 200) {
       const token = res.data.token;
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
 import TitleBox from "../components/postPage/TitleBox";
-import Button from "../components/postPage/Button";
+import Button from "../components/common/Button";
 import { useNavigate } from "react-router-dom";
 import NoticePostList from "../components/postPage/NoticePostList";
 import SearchBar from "./../components/postPage/SearchBar";

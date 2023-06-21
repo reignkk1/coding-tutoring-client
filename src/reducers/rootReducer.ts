@@ -1,11 +1,10 @@
 import { combineReducers } from "redux";
 
 import modal from "./modal";
-import write from "./write";
+import writeEdit from "./writeEdit";
 import post from "./post";
-import edit from "./edit";
 
-const rootReducer = combineReducers({ write, modal, post, edit });
+const rootReducer = combineReducers({ writeEdit, modal, post });
 
 export type ReducerState = ReturnType<typeof rootReducer>;
 
