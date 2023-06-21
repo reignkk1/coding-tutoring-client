@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Dispatch } from "redux";
 import { IModalAction } from "../reducers/modal";
+// import { closeModal } from "../store/modal";
 
 const token = localStorage.getItem("token");
 
@@ -25,6 +26,7 @@ export function sendNotePost(
   token: string | null,
   data: INote,
   dispatch: Dispatch<IModalAction>
+  // dispatch: Dispatch
 ) {
   axios({
     url: `${baseURL}/v1/message`,
@@ -33,6 +35,7 @@ export function sendNotePost(
   })
     .then((res) => {
       if (res.status === 200) {
+        // dispatch(closeModal);
         dispatch({ type: "MODAL_CLOSE" });
         alert("보내기 완료!");
       }

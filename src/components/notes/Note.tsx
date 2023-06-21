@@ -4,6 +4,7 @@ import MessageSendBox from "./MessageSendBox";
 import { INote } from "../../api/note";
 
 import useModal from "../../hooks/useModal";
+// import { openModal } from "../../store/modal";
 
 export default function Note({
   note,
@@ -39,6 +40,7 @@ export default function Note({
       {selected === "received" && (
         <button
           onClick={() => {
+            // dispatch(openModal);
             dispatch({ type: "MODAL_OPEN" });
             // 답장할 사람을 set함
             setSender(note.senderId);

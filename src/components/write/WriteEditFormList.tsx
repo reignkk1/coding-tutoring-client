@@ -8,6 +8,7 @@ import { on_off, subjects } from "./SelectData";
 import Editor from "./Editor";
 import useModal from "../../hooks/useModal";
 import useWriteEditForm from "../../hooks/useWriteEditForm";
+// import { openModal } from "../../store/modal";
 
 const TitleInput = styled.input`
   width: 100%;

@@ -11,6 +11,7 @@ import { AuthContext } from "../context/AuthContext";
 import Button from "../components/common/Button";
 import useModal from "../hooks/useModal";
 import { ICategory } from "../types/category";
+// import { openModal } from "../store/modal";
 
 interface IPost {
   id: string;
