@@ -5,7 +5,7 @@ import { ImgContainer } from "./MyPage";
 import Wrapper from "../components/common/Wrapper";
 import { deletePost } from "../api/Post";
 import Modal from "../components/common/Modal";
-import MessageSendBox from "./../components/mypage/MessageSendBox";
+import MessageSendBox from "../components/notes/MessageSendBox";
 import { ageFormat, careerFormat, genderFormat } from "../util/format";
 import { AuthContext } from "../context/AuthContext";
 import Button from "../components/common/Button";

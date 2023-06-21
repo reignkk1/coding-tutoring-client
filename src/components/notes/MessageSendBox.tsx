@@ -2,9 +2,8 @@ import styled from "styled-components";
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { sendNotePost } from "../../api/note";
-import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
-import { IModalAction } from "../../reducers/modal";
+
+import useModal from "../../hooks/useModal";
 
 const Container = styled.div`
   width: 300px;
@@ -93,7 +92,7 @@ export default function MessageSendBox({
     user: { nickname, id },
   } = useContext(AuthContext);
 
-  const dispatch = useDispatch<Dispatch<IModalAction>>();
+  const [, dispatch] = useModal();
   const token = localStorage.getItem("token");
 
   const [title, setTitle] = useState("");

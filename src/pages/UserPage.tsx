@@ -5,7 +5,7 @@ import { Profile } from "./PostDetail";
 import { careerFormat, genderFormat } from "../util/format";
 import PostList from "../components/mypage/PostList";
 import Modal from "../components/common/Modal";
-import MessageSendBox from "../components/mypage/MessageSendBox";
+import MessageSendBox from "../components/notes/MessageSendBox";
 
 import { useParams } from "react-router-dom";
 import { useGetUserDataById } from "../api/auth";

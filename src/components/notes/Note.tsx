@@ -1,11 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import Modal from "../common/Modal";
-import MessageSendBox from "../mypage/MessageSendBox";
+import MessageSendBox from "./MessageSendBox";
 import { INote } from "../../api/note";
 
-import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
-import { IModalAction } from "../../reducers/modal";
+import useModal from "../../hooks/useModal";
 
 export default function Note({
   note,
@@ -20,7 +18,7 @@ export default function Note({
   sender: string;
   setSender: React.Dispatch<React.SetStateAction<string>>;
 }) {
-  const dispatch = useDispatch<Dispatch<IModalAction>>();
+  const [, dispatch] = useModal();
   const navigate = useNavigate();
 
   return (
