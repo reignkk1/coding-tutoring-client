@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { ReducerState } from "../../reducers/rootReducer";
+import useModal from "../../hooks/useModal";
 
 const ModalConatiner = styled.div`
   display: flex;
@@ -21,14 +19,10 @@ interface IModal {
 }
 
 export default function Modal({ children }: IModal) {
-  const dispatch = useDispatch();
-
-  const { modal } = useSelector((state: ReducerState) => state);
+  const [modal, dispatch] = useModal();
 
   return modal ? (
-    <ModalConatiner
-      onMouseDown={() => dispatch({ type: "MODAL_CLOSE", value: false })}
-    >
+    <ModalConatiner onMouseDown={() => dispatch({ type: "MODAL_CLOSE" })}>
       <div onMouseDown={(e) => e.stopPropagation()}>{children}</div>
     </ModalConatiner>
   ) : null;

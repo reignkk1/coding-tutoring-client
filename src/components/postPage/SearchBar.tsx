@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import Button from "./Button";
-import { IPost, searchTitle } from "../../api/Post";
-import { useState } from "react";
+import Button from "../common/Button";
+import { searchTitle } from "../../api/Post";
 import { Dispatch } from "redux";
 import { useDispatch } from "react-redux";
 import { IPostAction } from "../../reducers/post";
+import { useState } from "react";
 
 const Form = styled.form`
   display: flex;
@@ -33,8 +33,7 @@ const Input = styled.input`
 
 interface ISearchBar {
   placeholder: string;
-
-  category: string;
+  category: "teachers" | "students" | "notice";
 }
 
 export default function SearchBar({ placeholder, category }: ISearchBar) {
@@ -44,6 +43,7 @@ export default function SearchBar({ placeholder, category }: ISearchBar) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     searchTitle(value, dispatch, category);
+    setValue("");
   };
 
   return (

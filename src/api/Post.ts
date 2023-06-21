@@ -30,7 +30,11 @@ export interface IPost {
 
 // 게시물 작성
 
-export function createPost(data: IPost, category: string, token?: string) {
+export function createPost(
+  data: IPost,
+  category: "TEACHER" | "STUDENT" | "notice",
+  token?: string
+) {
   const categoryValue =
     category === "TEACHER"
       ? "teacherPost"
@@ -52,7 +56,7 @@ export function createPost(data: IPost, category: string, token?: string) {
 }
 
 // 모든 게시물 불러오기
-export function useGetPosts(category: string) {
+export function useGetPosts(category: "teachers" | "students" | "notice") {
   const [posts, setPosts] = useState<IPost[]>([]);
 
   useEffect(() => {
@@ -76,7 +80,10 @@ export function useGetPosts(category: string) {
 }
 
 // 게시물 삭제
-export function deletePost(postId: string, category: string) {
+export function deletePost(
+  postId: string,
+  category: "teachers" | "students" | "notice"
+) {
   const categoryValue =
     category === "teachers"
       ? "teacherPost"
@@ -94,7 +101,10 @@ export function deletePost(postId: string, category: string) {
 }
 
 // 게시물 수정
-export function modifyPost(data: IPost, category: string) {
+export function modifyPost(
+  data: IPost,
+  category: "teachers" | "students" | "notice"
+) {
   const categoryValue =
     category === "teachers"
       ? "teacherPost"
@@ -117,7 +127,7 @@ export function modifyPost(data: IPost, category: string) {
 export function searchTitle(
   title: string,
   dispatch: Dispatch<IPostAction>,
-  category: string
+  category: "teachers" | "students" | "notice"
 ) {
   const categoryValue =
     category === "teachers"
@@ -128,7 +138,10 @@ export function searchTitle(
 
   axios
     .get(`v1/${categoryValue}?content=${title}&searchType=TITLE`)
-    .then((response) => dispatch({ type: "POST_UPDATE", data: response.data }))
+    .then((response) => {
+      console.log(response.data);
+      dispatch({ type: "POST_UPDATE", data: response.data });
+    })
     .catch((error) => console.log(error));
 }
 
@@ -136,7 +149,7 @@ export function searchTitle(
 
 export function searchSubject(
   subject: string,
-  category: string,
+  category: "teachers" | "students" | "notice",
   dispatch: Dispatch<IPostAction>
 ) {
   const categoryValue =

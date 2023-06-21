@@ -3,15 +3,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ImgContainer } from "./MyPage";
 import Wrapper from "../components/common/Wrapper";
-import Button from "../components/postPage/Button";
 import { deletePost } from "../api/Post";
 import Modal from "../components/common/Modal";
 import MessageSendBox from "./../components/mypage/MessageSendBox";
 import { ageFormat, careerFormat, genderFormat } from "../util/format";
 import { AuthContext } from "../context/AuthContext";
-import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
-import { IModalAction } from "../reducers/modal";
+import Button from "../components/common/Button";
+import useModal from "../hooks/useModal";
+import { ICategory } from "../types/category";
 
 interface IPost {
   id: string;
@@ -30,10 +29,10 @@ interface IPost {
   };
 }
 
-export default function PostDetail({ category }: { category: string }) {
+export default function PostDetail({ category }: ICategory) {
   const { user } = useContext(AuthContext);
 
-  const dispatch = useDispatch<Dispatch<IModalAction>>();
+  const [, dispatch] = useModal();
 
   const navigate = useNavigate();
   const post: IPost = useLocation().state;

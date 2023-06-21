@@ -1,13 +1,18 @@
 export interface IState {
-  onOrOff: string;
-  subject: string;
-  area: string;
+  onOrOff?: string;
+  subject?: string;
+  area?: string;
   title: string;
-  desiredSubjects: string[];
+  desiredSubjects?: string[];
+  content: string;
 }
 
-type IactionType =
+export type IWriteEditAction =
   | { type: "SET_STATE"; value: IState }
+  | {
+      type: "SET_TEXT";
+      value: string;
+    }
   | {
       type: "SET_ONOFF";
       value: string;
@@ -18,20 +23,24 @@ type IactionType =
   | { type: "SET_Desitred_Subjects"; value: string[] };
 
 const writeState: IState = {
-  onOrOff: "",
-  subject: "",
+  onOrOff: "ONLINE",
+  subject: "JAVASCRIPT",
   area: "",
   title: "",
   desiredSubjects: [],
+  content: "",
 };
 
-const edit = (state = writeState, action: IactionType): IState => {
+const write = (state = writeState, action: IWriteEditAction): IState => {
   switch (action.type) {
     case "SET_STATE":
       return { ...state, ...action.value };
 
     case "SET_ONOFF":
-      return { ...state, onOrOff: action.value };
+      return {
+        ...state,
+        onOrOff: action.value,
+      };
 
     case "SET_SUBJECT":
       return {
@@ -55,10 +64,15 @@ const edit = (state = writeState, action: IactionType): IState => {
         ...state,
         desiredSubjects: action.value,
       };
+    case "SET_TEXT":
+      return {
+        ...state,
+        content: action.value,
+      };
 
     default:
       return state;
   }
 };
 
-export default edit;
+export default write;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { GrFormClose } from "react-icons/gr";
-import { useDispatch } from "react-redux";
+import useWriteEditForm from "../../hooks/useWriteEditForm";
 
 const Container = styled.div`
   margin-bottom: 20px;
@@ -24,7 +24,6 @@ const Subject = styled.li`
 const Cancle = styled.button`
   position: absolute;
   top: -5px;
-
   .icon {
     background-color: #ffffff;
     font-size: 1rem;
@@ -39,7 +38,7 @@ interface IdesiredSubjects {
 export default function DesitredSubjectsList({
   desiredSubjects,
 }: IdesiredSubjects) {
-  const dispatch = useDispatch();
+  const [, dispatch] = useWriteEditForm();
 
   const handleCancleClick = (subject: string) => {
     dispatch({
@@ -49,8 +48,6 @@ export default function DesitredSubjectsList({
       ),
     });
   };
-
-  // console.log(desiredSubjects);
 
   return (
     <Container>

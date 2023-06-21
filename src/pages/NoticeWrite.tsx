@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
-import { useState } from "react";
 import Editor from "./../components/write/Editor";
-import Button from "../components/postPage/Button";
+import Button from "../components/common/Button";
 import { createPost } from "../api/Post";
+import useWriteEditForm from "../hooks/useWriteEditForm";
 
 const Container = styled.div`
   height: 100vh;
@@ -35,17 +35,17 @@ const ButtonContainer = styled.div`
 `;
 
 export default function NoticeWrite() {
-  const [title, setTitle] = useState("");
-  const [editorValue, setEditorValue] = useState("");
+  const [state, dispatch] = useWriteEditForm();
+  const { title, content } = state;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setTitle(e.target.value);
+    dispatch({ type: "SET_TITLE", value: e.target.value });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = {
-      title: title,
-      content: editorValue,
+      title,
+      content,
     };
     createPost(data, "notice");
     window.location.assign("/notice");
@@ -56,7 +56,7 @@ export default function NoticeWrite() {
         <form onSubmit={handleSubmit}>
           <Label htmlFor="title">제목</Label>
           <Title id="title" value={title} onChange={handleChange} />
-          <Editor editorValue={editorValue} setEditorText={setEditorValue} />
+          <Editor />
           <ButtonContainer>
             <Button type="submit">작성하기</Button>
           </ButtonContainer>

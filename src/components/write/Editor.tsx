@@ -1,25 +1,16 @@
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import useWriteEditForm from "../../hooks/useWriteEditForm";
 
-interface IEditor {
-  editorValue: string;
-  setEditorText: React.Dispatch<React.SetStateAction<string>>;
-  placeholder?: string;
-}
+export default function Editor({ placeholder }: { placeholder?: string }) {
+  const [state, dispatch] = useWriteEditForm();
 
-export default function Editor({
-  editorValue,
-  setEditorText,
-  placeholder,
-}: IEditor) {
-  const handleChange = (value: string) => {
-    setEditorText(value);
-  };
+  const handleChange = (value: string) => dispatch({ type: "SET_TEXT", value });
 
   return (
     <ReactQuill
       theme="snow"
-      value={editorValue}
+      value={state.content}
       onChange={handleChange}
       style={{
         height: "300px",

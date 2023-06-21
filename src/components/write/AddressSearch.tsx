@@ -1,9 +1,10 @@
 import DaumPostCode, { Address } from "react-daum-postcode";
-
-import { useDispatch } from "react-redux";
+import useWriteEditForm from "../../hooks/useWriteEditForm";
+import useModal from "../../hooks/useModal";
 
 export default function AddressSearch() {
-  const dispatch = useDispatch();
+  const [, dispatch] = useWriteEditForm();
+  const [, modalDispatch] = useModal();
 
   const handleComplete = (data: Address) =>
     dispatch({ type: "SET_AREA", value: data.address });
@@ -15,7 +16,7 @@ export default function AddressSearch() {
         height: "500px",
       }}
       onComplete={handleComplete}
-      onClose={() => dispatch({ type: "MODAL_CLOSE" })}
+      onClose={() => modalDispatch({ type: "MODAL_CLOSE" })}
     />
   );
 }
