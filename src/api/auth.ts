@@ -26,6 +26,7 @@ export const sendCode = async (email: string) => {
     });
 
     if (res.status === 200) {
+      console.log(res.data);
       alert("이메일 인증코드를 보냈습니다.");
       return res.data.certificationCode;
     }
