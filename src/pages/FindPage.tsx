@@ -9,6 +9,7 @@ import { searchSubject, useGetPosts } from "../api/Post";
 import { ICategory } from "../types/category";
 import { usePost } from "../hooks/usePost";
 import { useEffect } from "react";
+// import { updatePost } from "../store/post";
 
 const Container = styled.div`
   margin-top: 4rem;
@@ -47,6 +48,7 @@ export default function FindPage({ category }: ICategory) {
 
   useEffect(() => {
     dispatch({ type: "POST_UPDATE", data: posts });
+    // dispatch(updatePost({ payload: posts }));
   }, [dispatch, posts]);
 
   const handleSubjectClick = (subject: string) =>

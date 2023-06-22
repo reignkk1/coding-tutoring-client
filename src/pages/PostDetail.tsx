@@ -5,12 +5,13 @@ import { ImgContainer } from "./MyPage";
 import Wrapper from "../components/common/Wrapper";
 import { deletePost } from "../api/Post";
 import Modal from "../components/common/Modal";
-import MessageSendBox from "./../components/detail/MessageSendBox";
+import MessageSendBox from "../components/notes/MessageSendBox";
 import { ageFormat, careerFormat, genderFormat } from "../util/format";
 import { AuthContext } from "../context/AuthContext";
 import Button from "../components/common/Button";
 import useModal from "../hooks/useModal";
 import { ICategory } from "../types/category";
+// import { openModal } from "../store/modal";
 
 interface IPost {
   id: string;
@@ -78,7 +79,10 @@ export default function PostDetail({ category }: ICategory) {
               </button>
             )}
             <Modal>
-              <MessageSendBox post={post} />
+              <MessageSendBox
+                receiverId={member.id}
+                receiverNickname={member.nickname}
+              />
             </Modal>
           </div>
         </Profile>

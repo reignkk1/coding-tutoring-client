@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import useModal from "../../hooks/useModal";
+// import { closeModal } from "../../store/modal";
 
 const ModalConatiner = styled.div`
   display: flex;
@@ -22,6 +23,7 @@ export default function Modal({ children }: IModal) {
   const [modal, dispatch] = useModal();
 
   return modal ? (
+    // <ModalConatiner onMouseDown={() => dispatch(closeModal)}>
     <ModalConatiner onMouseDown={() => dispatch({ type: "MODAL_CLOSE" })}>
       <div onMouseDown={(e) => e.stopPropagation()}>{children}</div>
     </ModalConatiner>

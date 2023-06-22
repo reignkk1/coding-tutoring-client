@@ -9,6 +9,7 @@ import UserInfo from "./../components/write/UserInfo";
 import EditFormList from "../components/write/WriteEditFormList";
 import Button from "../components/common/Button";
 import { ICategory } from "../types/category";
+// import { setEdit } from "../store/editPost";
 
 const Container = styled.div`
   height: 200vh;
@@ -57,6 +58,18 @@ export default function FindPageEdit({ category }: ICategory) {
         content: post.content,
       },
     });
+    // dispatch(
+    //   setEdit({
+    //     payload: {
+    //       onOrOff: post.onOrOff,
+    //       subject: post.subject,
+    //       area: post.area,
+    //       title: post.title,
+    //       desiredSubjects: [post.subject],
+    //       content: post.content,
+    //     },
+    //   })
+    // );
   }, [dispatch, post]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

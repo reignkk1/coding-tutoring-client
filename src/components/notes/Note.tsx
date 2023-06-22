@@ -3,25 +3,23 @@ import Modal from "../common/Modal";
 import MessageSendBox from "./MessageSendBox";
 import { INote } from "../../api/note";
 
-import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
-import { IModalAction } from "../../reducers/modal";
+import useModal from "../../hooks/useModal";
+// import { openModal } from "../../store/modal";
 
 export default function Note({
   note,
   selected,
   handleDelete,
-  modal,
-  setModal,
+  sender,
+  setSender,
 }: {
   note: INote;
   selected: string;
   handleDelete: any;
-  modal: boolean;
-  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  sender: string;
+  setSender: React.Dispatch<React.SetStateAction<string>>;
 }) {
-  const dispatch = useDispatch<Dispatch<IModalAction>>();
-
+  const [, dispatch] = useModal();
   const navigate = useNavigate();
 
   return (
@@ -40,15 +38,30 @@ export default function Note({
           : "from. " + note.senderNickname
       }`}</span>
       {selected === "received" && (
-        <button onClick={() => dispatch({ type: "MODAL_OPEN" })}>답장</button>
+        <button
+          onClick={() => {
+            // dispatch(openModal);
+            dispatch({ type: "MODAL_OPEN" });
+            // 답장할 사람을 set함
+            setSender(note.senderId);
+          }}
+        >
+          답장
+        </button>
       )}
       <button onClick={() => handleDelete(note.messageId)}>삭제</button>
 
       <p>{note.title}</p>
       <p>{note.content}</p>
-      <Modal>
-        <MessageSendBox note={note} setModal={setModal} />
-      </Modal>
+      {/* 답장할 사람의 id랑 현재 쪽지의 보낸 사람이 같은 경우만 모달창을 띄움  */}
+      {sender === note.senderId && (
+        <Modal>
+          <MessageSendBox
+            receiverId={note.senderId}
+            receiverNickname={note.senderNickname}
+          />
+        </Modal>
+      )}
     </li>
   );
 }

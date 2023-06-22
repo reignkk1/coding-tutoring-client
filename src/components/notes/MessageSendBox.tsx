@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { INote, sendNotePost } from "../../api/note";
-import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
-import { IModalAction } from "../../reducers/modal";
+import { sendNotePost } from "../../api/note";
+
+import useModal from "../../hooks/useModal";
 
 const Container = styled.div`
   width: 300px;
@@ -83,30 +82,29 @@ const Sender = styled.div`
 `;
 
 export default function MessageSendBox({
-  note,
-  setModal,
+  receiverId,
+  receiverNickname,
 }: {
-  note: INote;
-  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  receiverId: any;
+  receiverNickname: any;
 }) {
   const {
     user: { nickname, id },
   } = useContext(AuthContext);
+
+  const [, dispatch] = useModal();
   const token = localStorage.getItem("token");
-  const dispatch = useDispatch<Dispatch<IModalAction>>();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-
-  const { senderId, senderNickname } = note;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = {
       title,
       content: content.replaceAll("\n", "<br/>"),
-      receiverId: senderId,
-      receiverNickname: senderNickname,
+      receiverId: receiverId,
+      receiverNickname: receiverNickname,
       senderId: id,
       senderNickname: nickname,
     };
@@ -119,7 +117,7 @@ export default function MessageSendBox({
       <Form onSubmit={handleSubmit}>
         <Sender>
           <div>보내는 사람 : {nickname}</div>
-          <div>받는 사람 : {senderNickname}</div>
+          <div>받는 사람 : {receiverNickname}</div>
         </Sender>
         <div>
           <label htmlFor="title">제목</label>

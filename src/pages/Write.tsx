@@ -34,6 +34,7 @@ export default function Write() {
   const { user } = useContext(AuthContext);
 
   const [state] = useWriteEditForm();
+
   const { area, content, onOrOff, desiredSubjects, title } = state;
 
   const checkEmpty = () => {
