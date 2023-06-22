@@ -4,6 +4,7 @@ import Editor from "./../components/write/Editor";
 import Button from "../components/common/Button";
 import { createPost } from "../api/Post";
 import useWriteEditForm from "../hooks/useWriteEditForm";
+import { editTitle } from "../store/editPost";
 
 const Container = styled.div`
   height: 100vh;
@@ -39,7 +40,7 @@ export default function NoticeWrite() {
   const { title, content } = state;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    dispatch({ type: "SET_TITLE", value: e.target.value });
+    dispatch(editTitle(e.target.value));
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

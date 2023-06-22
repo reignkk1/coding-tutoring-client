@@ -28,5 +28,3 @@ const post = (state = [] as IPost[], action: IPostAction): IPost[] => {
       return state;
   }
 };
-
-export default post;

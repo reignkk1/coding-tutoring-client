@@ -56,4 +56,4 @@ export const {
   editSubject,
   editTitle,
 } = editPostSlice.actions;
-export default editPostSlice;
+export default editPostSlice.reducer;

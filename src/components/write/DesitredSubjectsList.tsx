@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { GrFormClose } from "react-icons/gr";
 import useWriteEditForm from "../../hooks/useWriteEditForm";
-// import { editDesiredSubjects } from "../../store/editPost";
+import { editDesiredSubjects } from "../../store/editPost";
 
 const Container = styled.div`
   margin-bottom: 20px;
@@ -41,22 +41,12 @@ export default function DesitredSubjectsList({
 }: IdesiredSubjects) {
   const [, dispatch] = useWriteEditForm();
 
-  const handleCancleClick = (subject: string) => {
-    dispatch({
-      type: "SET_Desitred_Subjects",
-      value: desiredSubjects.filter(
-        (desiredSubject) => desiredSubject !== subject
-      ),
-    });
-    // dispatch(
-    //   editDesiredSubjects({
-    //     payload: desiredSubjects.filter(
-    //       (desiredSubject) => desiredSubject !== subject
-    //     )
-    //   })
-    // );
-  };
-
+  const handleCancleClick = (subject: string) =>
+    dispatch(
+      editDesiredSubjects(
+        desiredSubjects.filter((desiredSubject) => desiredSubject !== subject)
+      )
+    );
   return (
     <Container>
       <Subjects>

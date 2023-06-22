@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Dispatch } from "redux";
-import { IPostAction } from "../reducers/post";
+import { AnyAction, Dispatch } from "redux";
+import { updatePost } from "../store/post";
 
 const token = localStorage.getItem("token");
 
@@ -126,7 +126,7 @@ export function modifyPost(
 // 게시물 제목 검색
 export function searchTitle(
   title: string,
-  dispatch: Dispatch<IPostAction>,
+  dispatch: Dispatch<AnyAction>,
   category: "teachers" | "students" | "notice"
 ) {
   const categoryValue =
@@ -140,7 +140,7 @@ export function searchTitle(
     .get(`v1/${categoryValue}?content=${title}&searchType=TITLE`)
     .then((response) => {
       console.log(response.data);
-      dispatch({ type: "POST_UPDATE", data: response.data });
+      dispatch(updatePost(response.data));
     })
     .catch((error) => console.log(error));
 }
@@ -150,7 +150,7 @@ export function searchTitle(
 export function searchSubject(
   subject: string,
   category: "teachers" | "students" | "notice",
-  dispatch: Dispatch<IPostAction>
+  dispatch: Dispatch<AnyAction>
 ) {
   const categoryValue =
     category === "teachers"
@@ -161,6 +161,6 @@ export function searchSubject(
 
   axios
     .get(`v1/${categoryValue}?content=${subject}&searchType=SUBJECT`)
-    .then((response) => dispatch({ type: "POST_UPDATE", data: response.data }))
+    .then((response) => dispatch(updatePost(response.data)))
     .catch((error) => console.log(error));
 }
