@@ -193,3 +193,28 @@ export function useGetUserDataById(userId?: string) {
 
   return user;
 }
+
+//카카오 로그인
+export const kakaoSignin = async (access_token: string) => {
+  try {
+    const res = await axios({
+      url: `${baseUrl}/oauth/kakao/${access_token}`,
+      method: "get",
+    });
+    console.log(res);
+
+    if (res.status === 200) {
+      const token = res.data.token;
+
+      localStorage.setItem("token", token);
+      let expiration = new Date();
+      expiration.setHours(expiration.getHours() + 1); //만료시간 30분
+      localStorage.setItem("expiration", expiration.toISOString());
+
+      alert("로그인 되셨습니다");
+      window.location.replace("/");
+    }
+  } catch (error: any) {
+    alert(error.response.data.msg);
+  }
+};

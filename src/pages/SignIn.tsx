@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { signinForm } from "../util/sign/formConfig";
 import { Container, FormContainer, Form } from "../styles/Form";
 import { signin } from "../api/auth";
+import SocialKakao from "../components/sign/SocialKakao";
 
 export default function Signin() {
   const { form, renderFormInputs, isFormValid } = useSign(signinForm);
@@ -25,6 +26,7 @@ export default function Signin() {
             로그인
           </button>
         </Form>
+        <SocialKakao />
         <div className="aboutSign">
           <Link to="/help/user">비밀번호 찾기</Link>
           <Link to="/signup">회원가입</Link>
