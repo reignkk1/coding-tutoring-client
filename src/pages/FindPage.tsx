@@ -10,7 +10,6 @@ import { ICategory } from "../types/category";
 import { usePost } from "../hooks/usePost";
 import { useEffect } from "react";
 import { updatePost } from "../store/post";
-// import { updatePost } from "../store/post";
 
 const Container = styled.div`
   margin-top: 4rem;
@@ -54,8 +53,6 @@ export default function FindPage({ category }: ICategory) {
   const handleSubjectClick = (subject: string) =>
     searchSubject(subject, category, dispatch);
 
- 
-
   return (
     <Wrapper>
       <Container>
@@ -71,7 +68,6 @@ export default function FindPage({ category }: ICategory) {
               category={category}
               placeholder={"제목을 입력해주세요."}
             />
-            
           </Left>
           <Subject>
             {subjects.map((subject, index) => (
