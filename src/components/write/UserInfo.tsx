@@ -27,7 +27,8 @@ interface IUserData {
 }
 
 export default function UserInfo({ userData }: { userData: IUserData }) {
-  const { img, nickname, userClassification, gender, ageGroup } = userData;
+  const { img, nickname, userClassification, gender, ageGroup } =
+    userData || {};
 
   return (
     <Container>
