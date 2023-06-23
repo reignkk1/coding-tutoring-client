@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import Button from "../common/Button";
 import { searchTitle } from "../../api/Post";
-import { Dispatch } from "redux";
 import { useDispatch } from "react-redux";
-import { IPostAction } from "../../reducers/post";
 import { useState } from "react";
 
 const Form = styled.form`
@@ -37,7 +35,7 @@ interface ISearchBar {
 }
 
 export default function SearchBar({ placeholder, category }: ISearchBar) {
-  const dispatch = useDispatch<Dispatch<IPostAction>>();
+  const dispatch = useDispatch();
   const [value, setValue] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {

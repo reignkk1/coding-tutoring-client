@@ -42,7 +42,7 @@ export function createPost(
       ? "studentPost"
       : "notice";
 
-  axios
+  return axios
     .post(`/v1/${categoryValue}`, data)
     .then((response) => {
       if (response.status === 200) {
