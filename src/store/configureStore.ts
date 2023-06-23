@@ -5,9 +5,9 @@ import modalSlice from "./modal";
 
 export const store = configureStore({
   reducer: {
-    post: postSlice.reducer,
-    editPost: editPostSlice.reducer,
-    modal: modalSlice.reducer,
+    post: postSlice,
+    editPost: editPostSlice,
+    modal: modalSlice,
   },
 });
 

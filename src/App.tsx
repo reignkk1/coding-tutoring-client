@@ -27,8 +27,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import NoticeEdit from "./pages/NoticeEdit";
 import FindPageEdit from "./pages/FindPageEdit";
 import { Provider } from "react-redux";
-import { legacy_createStore } from "redux";
-import rootReducer from "./reducers/rootReducer";
+import { store } from "./store/configureStore";
 
 function App() {
   const Layout = () => {
@@ -130,8 +129,6 @@ function App() {
       ],
     },
   ]);
-
-  const store = legacy_createStore(rootReducer);
 
   return (
     <Provider store={store}>

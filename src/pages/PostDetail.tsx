@@ -11,7 +11,7 @@ import { AuthContext } from "../context/AuthContext";
 import Button from "../components/common/Button";
 import useModal from "../hooks/useModal";
 import { ICategory } from "../types/category";
-// import { openModal } from "../store/modal";
+import { openModal } from "../store/modal";
 
 interface IPost {
   id: string;
@@ -74,9 +74,7 @@ export default function PostDetail({ category }: ICategory) {
             </p>
             <p className="career">{careerFormat(`${member.career}`)}</p>
             {user.id !== member.id && (
-              <button onClick={() => dispatch({ type: "MODAL_OPEN" })}>
-                쪽지 보내기
-              </button>
+              <button onClick={() => dispatch(openModal())}>쪽지 보내기</button>
             )}
             <Modal>
               <MessageSendBox

@@ -1,15 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
-import { IModalAction } from "../reducers/modal";
-import { ReducerState } from "../reducers/rootReducer";
-
-// import { useAppSelector, useAppDispatch } from "../reduxHooks";
+import { useAppSelector, useAppDispatch } from "../reduxHooks";
+import { RootState } from "../store/configureStore";
 
 export default function useModal() {
-  const dispatch = useDispatch<Dispatch<IModalAction>>();
-  const state = useSelector((state: ReducerState) => state.modal);
-  // const modal = useAppSelector((state: RootState) => state.modal.value);
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
+  const { value } = useAppSelector((state: RootState) => state.modal);
 
-  return [state, dispatch] as const;
+  return [value, dispatch] as const;
 }
