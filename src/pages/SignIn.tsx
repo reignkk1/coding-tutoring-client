@@ -25,12 +25,13 @@ export default function Signin() {
           <button type="submit" disabled={!isFormValid()}>
             로그인
           </button>
+          <div className="aboutSign">
+            <Link to="/help/user">비밀번호 찾기</Link>
+            <Link to="/signup">회원가입</Link>
+          </div>
         </Form>
+
         <SocialKakao />
-        <div className="aboutSign">
-          <Link to="/help/user">비밀번호 찾기</Link>
-          <Link to="/signup">회원가입</Link>
-        </div>
       </FormContainer>
     </Container>
   );

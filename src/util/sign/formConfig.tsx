@@ -134,3 +134,43 @@ export const findPwdForm: sign = {
     validationRules: pwdRule(),
   },
 };
+
+export const updateProfileForm: sign = {
+  nickname: {
+    ...createFormFieldConfig("닉네임", "nickname", "text", ""),
+    validationRules: nicknameRule(),
+  },
+  userClassification: {
+    ...createFormFieldConfig("역할", "userClassification", "radio", "", [
+      { label: "학생", value: "STUDENT" },
+      { label: "선생님", value: "TEACHER" },
+    ]),
+    validationRules: requiredRule("역할"),
+  },
+  gender: {
+    ...createFormFieldConfig("성별", "gender", "radio", "", [
+      { label: "여성", value: "FEMALE" },
+      { label: "남성", value: "MALE" },
+    ]),
+    validationRules: requiredRule("성별"),
+  },
+  ageGroup: {
+    ...createFormFieldConfig("연령대", "ageGroup", "radio", "", [
+      { label: "20대", value: "TWENTIES" },
+      { label: "30대", value: "THIRTIES" },
+      { label: "40대", value: "FORTIES" },
+      { label: "50대", value: "FIFTIES" },
+    ]),
+    validationRules: requiredRule("연령대"),
+  },
+  career: {
+    ...createFormFieldConfig("경력", "career", "radio", "", [
+      { label: "취준생", value: "NO_EXPERIENCE" },
+      { label: "1-3년", value: "FIRST_TO_THIRD_GRADE" },
+      { label: "3-5년", value: "THIRD_TO_FIFTH_GRADE" },
+      { label: "5-7년", value: "FIFTH_TO_SEVENTH_GRADE" },
+      { label: "7년 이상", value: "OVER_SEVENTH_GRADE" },
+    ]),
+    validationRules: requiredRule("경력"),
+  },
+};

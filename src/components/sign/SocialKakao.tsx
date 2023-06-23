@@ -15,6 +15,7 @@ const SocialKakao = () => {
   return (
     <>
       <KakaoLogin
+        className="kakao"
         token={kakaoClientId}
         onSuccess={kakaoOnSuccess}
         onFail={kakaoOnFailure}

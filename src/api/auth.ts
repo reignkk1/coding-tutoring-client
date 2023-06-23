@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-interface IGetUser {
+export interface IGetUser {
   id: string;
   img?: string;
   nickname: string;
@@ -216,5 +216,27 @@ export const kakaoSignin = async (access_token: string) => {
     }
   } catch (error: any) {
     alert(error.response.data.msg);
+  }
+};
+
+//프로필 업데이트
+export const updateProfile = async (userData: any, token: string) => {
+  try {
+    const res = await axios({
+      url: `${baseUrl}/oauth/member/modify-member-info`,
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      data: userData,
+    });
+    if (res.status === 200) {
+      alert("수정 완료되었습니다.");
+      window.location.replace("/view/me");
+    }
+  } catch (error) {
+    console.log(error);
+    alert("수정 실패했습니다.");
   }
 };

@@ -28,6 +28,7 @@ import NoticeEdit from "./pages/NoticeEdit";
 import FindPageEdit from "./pages/FindPageEdit";
 import { Provider } from "react-redux";
 import { store } from "./store/configureStore";
+import ProfileUpdate from "./pages/ProfileUpdate";
 
 function App() {
   const Layout = () => {
@@ -106,6 +107,11 @@ function App() {
         {
           path: "/view/me",
           element: <MyPage />,
+          loader: checkAuthLoader, //라우트 보호
+        },
+        {
+          path: "/profile/update",
+          element: <ProfileUpdate />,
           loader: checkAuthLoader, //라우트 보호
         },
         {

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Form = styled.form`
   width: 100%;
+  padding-block: 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -121,11 +122,11 @@ export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
 
   .aboutSign {
     display: flex;
     gap: 0.5rem;
+    margin-top: 1rem;
     color: #c9fd35;
   }
 `;
