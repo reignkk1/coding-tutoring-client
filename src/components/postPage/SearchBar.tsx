@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Button from "../common/Button";
-import { searchTitle } from "../../api/Post";
+import { searchSubject, searchTitle } from "../../api/Post";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
@@ -44,15 +44,17 @@ export default function SearchBar({ placeholder, category }: ISearchBar) {
     setValue("");
   };
 
+  const handleAllSubject = () => searchSubject("", category, dispatch);
+
   return (
     <Form onSubmit={handleSubmit}>
-      <Button>카테고리</Button>
       <Input
         placeholder={placeholder}
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
       <Button type="submit">검색</Button>
+      <Button onClick={handleAllSubject}>모두보기</Button>
     </Form>
   );
 }

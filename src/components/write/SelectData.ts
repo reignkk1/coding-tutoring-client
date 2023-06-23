@@ -13,7 +13,6 @@ export const on_off = [
 ];
 
 export const subjects = [
-  new SeletItem("All", ""),
   new SeletItem("JavaScript", "JAVASCRIPT"),
   new SeletItem("TypeScript", "TYPESCRIPT"),
   new SeletItem("React", "REACT"),
