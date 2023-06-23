@@ -8,7 +8,13 @@ import { on_off, subjects } from "./SelectData";
 import Editor from "./Editor";
 import useModal from "../../hooks/useModal";
 import useWriteEditForm from "../../hooks/useWriteEditForm";
-// import { openModal } from "../../store/modal";
+import { openModal } from "../../store/modal";
+import {
+  editDesiredSubjects,
+  editOnOff,
+  editSubject,
+  editTitle,
+} from "../../store/editPost";
 
 const TitleInput = styled.input`
   width: 100%;
@@ -37,7 +43,7 @@ export default function WriteEditFormList() {
       return alert("이미 추가 되었습니다.");
     if (desiredSubjects?.length || 0 >= 1)
       return alert("기술스택은 최대 1개까지 선택 가능합니다.");
-    dispatch({ type: "SET_Desitred_Subjects", value: [subject || ""] });
+    dispatch(editDesiredSubjects([subject || ""]));
   };
 
   return (
@@ -49,9 +55,7 @@ export default function WriteEditFormList() {
         defaultValue={area}
         readOnly
       />
-      <Button onClick={() => modalDispatch({ type: "MODAL_OPEN" })}>
-        검색
-      </Button>
+      <Button onClick={() => modalDispatch(openModal())}>검색</Button>
 
       <Modal>
         <AddressSearch />
@@ -59,9 +63,7 @@ export default function WriteEditFormList() {
 
       <Label>희망 과목 *</Label>
       <Selector
-        onChange={(e) =>
-          dispatch({ type: "SET_SUBJECT", value: e.target.value })
-        }
+        onChange={(e) => dispatch(editSubject(e.target.value))}
         data={subjects}
       />
       <Button onClick={handleClick}>추가</Button>
@@ -69,7 +71,7 @@ export default function WriteEditFormList() {
 
       <Label>온/오프라인 여부 *</Label>
       <Selector
-        onChange={(e) => dispatch({ type: "SET_ONOFF", value: e.target.value })}
+        onChange={(e) => dispatch(editOnOff(e.target.value))}
         data={on_off}
       />
 
@@ -77,7 +79,7 @@ export default function WriteEditFormList() {
       <TitleInput
         id="title"
         placeholder="제목을 입력해주세요."
-        onChange={(e) => dispatch({ type: "SET_TITLE", value: e.target.value })}
+        onChange={(e) => dispatch(editTitle(e.target.value))}
         value={title}
         maxLength={50}
       />

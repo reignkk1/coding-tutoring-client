@@ -100,6 +100,8 @@ export default function MessageSendBox({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (title === "" || content === "") return alert("모두 입력해주세요.");
+
     const data = {
       title,
       content: content.replaceAll("\n", "<br/>"),

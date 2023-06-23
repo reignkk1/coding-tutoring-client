@@ -1,23 +1,19 @@
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
 import { Profile } from "./PostDetail";
-
 import { careerFormat, genderFormat } from "../util/format";
 import PostList from "../components/mypage/PostList";
 import Modal from "../components/common/Modal";
 import MessageSendBox from "../components/notes/MessageSendBox";
-
 import { useParams } from "react-router-dom";
 import { useGetUserDataById } from "../api/auth";
-
 import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
-import { IModalAction } from "../reducers/modal";
+import { openModal } from "../store/modal";
 
 export default function UserPage(): JSX.Element {
   const { userId } = useParams();
 
-  const dispatch = useDispatch<Dispatch<IModalAction>>();
+  const dispatch = useDispatch();
 
   const user = useGetUserDataById(userId);
 
@@ -50,9 +46,7 @@ export default function UserPage(): JSX.Element {
           <p className="career">
             {careerFormat(`${career}`)} / {genderFormat(`${gender}`)}
           </p>
-          <button onClick={() => dispatch({ type: "MODAL_OPEN" })}>
-            쪽지 보내기
-          </button>
+          <button onClick={() => dispatch(openModal())}>쪽지 보내기</button>
           <Modal>
             <MessageSendBox receiverId={id} receiverNickname={nickname} />
           </Modal>
