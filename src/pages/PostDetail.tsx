@@ -73,18 +73,31 @@ export default function PostDetail({ category }: ICategory) {
               {category === "teachers" ? "선생님" : "학생"}
             </p>
             <p className="career">{careerFormat(`${member.career}`)}</p>
-            {user.id !== member.id && (
-              <button onClick={() => dispatch(openModal())}>쪽지 보내기</button>
+
+            {!(user && user.id === member.id) && (
+              <button
+                onClick={() => {
+                  if (!user) {
+                    alert("로그인이 필요한 서비스 입니다.");
+                  }
+                  dispatch(openModal());
+                }}
+              >
+                쪽지 보내기
+              </button>
             )}
-            <Modal>
-              <MessageSendBox
-                receiverId={member.id}
-                receiverNickname={member.nickname}
-              />
-            </Modal>
+
+            {user && (
+              <Modal>
+                <MessageSendBox
+                  receiverId={member.id}
+                  receiverNickname={member.nickname}
+                />
+              </Modal>
+            )}
           </div>
         </Profile>
-        {user.id === member.id && (
+        {user && user.id === member.id && (
           <Buttons>
             <Button onClick={handleDelete}>삭제</Button>
             <Button onClick={handleModify}>수정</Button>
