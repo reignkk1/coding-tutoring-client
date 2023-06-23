@@ -12,6 +12,7 @@ import Button from "../components/common/Button";
 import useModal from "../hooks/useModal";
 import { ICategory } from "../types/category";
 import { openModal } from "../store/modal";
+import parse from "html-react-parser";
 
 interface IPost {
   id: string;
@@ -110,10 +111,7 @@ export default function PostDetail({ category }: ICategory) {
           </p>
           <div className="detail">
             <h3>{title}</h3>
-            <div
-              className="description"
-              dangerouslySetInnerHTML={{ __html: content }}
-            ></div>
+            <div>{parse(content)}</div>
           </div>
         </Section>
         <Section id="lesson-info">
