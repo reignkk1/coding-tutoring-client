@@ -1,4 +1,3 @@
-import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/configureStore";
 import { useAppDispatch, useAppSelector } from "../reduxHooks";
 

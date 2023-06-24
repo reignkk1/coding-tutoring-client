@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router";
 
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
@@ -19,6 +20,7 @@ export default function MyPage(): JSX.Element {
     studentPostResponseDtos,
     teacherPostResponseDtos,
   } = user || {};
+  const navigate = useNavigate();
 
   const havePosts =
     studentPostResponseDtos?.length + teacherPostResponseDtos?.length !== 0;
@@ -38,6 +40,13 @@ export default function MyPage(): JSX.Element {
           <p className="career">
             {careerFormat(`${career}`)} / {genderFormat(`${gender}`)}
           </p>
+          <Buttton
+            onClick={() => {
+              navigate("/profile/update", { state: user });
+            }}
+          >
+            수정
+          </Buttton>
         </div>
       </Profile>
 
@@ -129,4 +138,20 @@ const PostContainer = styled.div`
       transform: translateY(-0.5rem);
     }
   }
+`;
+
+const Buttton = styled.button`
+  padding: 0.5rem 0.8rem;
+
+  background-color: #c9fd35;
+  border-radius: 5px;
+
+  font-size: 1rem;
+  font-family: regular;
+  color: #0e1620;
+
+  &:hover {
+    background-color: #93ba27;
+  }
+  transition: all 0.1s ease-in-out;
 `;

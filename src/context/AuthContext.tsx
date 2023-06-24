@@ -21,7 +21,3 @@ export function AuthContextProvider({
     <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
   );
 }
-
-// export function useAuthContext() {
-//   useContext(AuthContext);
-// }

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-interface IGetUser {
+export interface IGetUser {
   id: string;
   img?: string;
   nickname: string;
@@ -193,3 +193,51 @@ export function useGetUserDataById(userId?: string) {
 
   return user;
 }
+
+//카카오 로그인
+export const kakaoSignin = async (access_token: string) => {
+  try {
+    const res = await axios({
+      url: `${baseUrl}/oauth/kakao/${access_token}`,
+      method: "get",
+    });
+    console.log(res);
+
+    if (res.status === 200) {
+      const token = res.data.token;
+
+      localStorage.setItem("token", token);
+      let expiration = new Date();
+      expiration.setHours(expiration.getHours() + 1); //만료시간 30분
+      localStorage.setItem("expiration", expiration.toISOString());
+
+      alert("로그인 되셨습니다");
+      // window.location.replace("/profile/update");
+      window.location.replace("/");
+    }
+  } catch (error: any) {
+    alert(error.response.data.msg);
+  }
+};
+
+//프로필 업데이트
+export const updateProfile = async (userData: any, token: string) => {
+  try {
+    const res = await axios({
+      url: `${baseUrl}/oauth/member/modify-member-info`,
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      data: userData,
+    });
+    if (res.status === 200) {
+      alert("수정 완료되었습니다.");
+      window.location.replace("/view/me");
+    }
+  } catch (error) {
+    console.log(error);
+    alert("수정 실패했습니다.");
+  }
+};

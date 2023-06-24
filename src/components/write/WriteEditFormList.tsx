@@ -16,7 +16,7 @@ import {
   editTitle,
 } from "../../store/editPost";
 
-const TitleInput = styled.input`
+export const TitleInput = styled.input`
   width: 100%;
   padding: 8px 10px;
   border: 1px solid rgba(0, 0, 0, 0.4);
@@ -26,7 +26,7 @@ const TitleInput = styled.input`
     border-color: black;
   }
 `;
-const Label = styled.label`
+export const Label = styled.label`
   display: block;
   margin-bottom: 10px;
   font-family: medium;

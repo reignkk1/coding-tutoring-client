@@ -12,6 +12,7 @@ import Button from "../components/common/Button";
 import useModal from "../hooks/useModal";
 import { ICategory } from "../types/category";
 import { openModal } from "../store/modal";
+import parse from "html-react-parser";
 
 interface IPost {
   id: string;
@@ -73,18 +74,31 @@ export default function PostDetail({ category }: ICategory) {
               {category === "teachers" ? "선생님" : "학생"}
             </p>
             <p className="career">{careerFormat(`${member.career}`)}</p>
-            {user.id !== member.id && (
-              <button onClick={() => dispatch(openModal())}>쪽지 보내기</button>
+
+            {!(user && user.id === member.id) && (
+              <button
+                onClick={() => {
+                  if (!user) {
+                    alert("로그인이 필요한 서비스 입니다.");
+                  }
+                  dispatch(openModal());
+                }}
+              >
+                쪽지 보내기
+              </button>
             )}
-            <Modal>
-              <MessageSendBox
-                receiverId={member.id}
-                receiverNickname={member.nickname}
-              />
-            </Modal>
+
+            {user && (
+              <Modal>
+                <MessageSendBox
+                  receiverId={member.id}
+                  receiverNickname={member.nickname}
+                />
+              </Modal>
+            )}
           </div>
         </Profile>
-        {user.id === member.id && (
+        {user && user.id === member.id && (
           <Buttons>
             <Button onClick={handleDelete}>삭제</Button>
             <Button onClick={handleModify}>수정</Button>
@@ -97,10 +111,7 @@ export default function PostDetail({ category }: ICategory) {
           </p>
           <div className="detail">
             <h3>{title}</h3>
-            <div
-              className="description"
-              dangerouslySetInnerHTML={{ __html: content }}
-            ></div>
+            <div>{parse(content)}</div>
           </div>
         </Section>
         <Section id="lesson-info">
