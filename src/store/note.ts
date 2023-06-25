@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./api";
 import { INote } from "../api/note";
 
@@ -60,8 +59,8 @@ export const loadNotes = (category: string) =>
   apiCallBegan({
     url: `/v1/messages/${category}`,
     method: "GET",
-    onStart: apiRequested.type,
     category: category,
+    onStart: apiRequested.type,
     onSuccess: getNotes.type,
     onError: apiRequestFailed.type,
   });

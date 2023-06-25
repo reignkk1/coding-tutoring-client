@@ -21,6 +21,7 @@ const BannerImg = styled.img`
 
 const BannerTitle = styled.div`
   color: #0e1620;
+  flex-shrink: 0;
 
   h2 {
     font-size: 2rem;
@@ -60,6 +61,8 @@ const Box = styled.div`
   width: 400px;
   height: 300px;
   padding: 2rem;
+
+  flex-shrink: 0;
 
   background-color: #1760fa;
   color: #ffffff;

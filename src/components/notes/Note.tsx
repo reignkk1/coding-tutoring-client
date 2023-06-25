@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../common/Modal";
 import MessageSendBox from "./MessageSendBox";
 import { INote } from "../../api/note";
-import { useEffect } from "react";
 
 import { useNote } from "../../hooks/useNote";
 import useModal from "../../hooks/useModal";

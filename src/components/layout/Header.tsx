@@ -35,12 +35,14 @@ const Logo = styled.h1`
 `;
 
 const Nav = styled.nav`
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 1.5rem;
 `;
 
 const Sign = styled.div`
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 1.5rem;
