@@ -25,20 +25,30 @@ const api = (store: any) => (next: any) => async (action: any) => {
       data,
     });
 
-    console.log(res);
+    console.log(res.data, data);
 
     //dispatch한다.
     if (method === "DELETE") {
       if (window.confirm("정말로 삭제하겠습니까?")) {
-        store.dispatch({ type: onSuccess, payload: data });
+        store.dispatch({
+          type: onSuccess,
+          payload: { category: category, data: data },
+        });
       }
     }
 
-    store.dispatch({
-      type: onSuccess,
-      payload: { category: category, data: res.data },
-    });
+    if (method === "GET") {
+      store.dispatch({
+        type: onSuccess,
+        payload: { category: category, data: res.data },
+      });
+    }
+
     if (method === "POST") {
+      store.dispatch({
+        type: onSuccess,
+        payload: { category: category, data: res.data },
+      });
       store.dispatch(closeModal());
       alert("보내기 완료!");
     }

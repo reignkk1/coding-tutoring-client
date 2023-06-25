@@ -7,8 +7,7 @@ import { useEffect } from "react";
 import { useNote } from "../../hooks/useNote";
 import useModal from "../../hooks/useModal";
 import { openModal } from "../../store/modal";
-// import { deleteNote, loadNotes } from "../../store/note";
-import { loadNotes } from "../../store/note";
+import { deleteNote } from "../../store/note";
 
 export default function Note({
   note,
@@ -27,7 +26,7 @@ export default function Note({
   const [, , , noteDispatch] = useNote();
 
   const handleDelete = () => {
-    // noteDispatch(deleteNote(selected, note.messageId as string));
+    noteDispatch(deleteNote(selected, note.messageId as string));
   };
 
   return (

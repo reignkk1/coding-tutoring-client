@@ -41,29 +41,25 @@ const noteSlice = createSlice({
       state.loading = false;
     },
     addNote: (state, { payload: { category, data } }) => {
-      // state.notes.push(action.payload);
-      if (category === "sent") {
-        state.notes.sent.push = data;
-      } else {
-        state.notes.received.push = data;
-      }
+      state.notes[category].push(data);
     },
-    // removeNote: (state, action) => {
-    //   const index = state.notes.findIndex(
-    //     (note: any) => note.id === action.payload
-    //   );
-    //   state.notes.splice(index, 1);
-    // },
+    removeNote: (state, { payload: { category, data } }) => {
+      const index = state.notes[category].findIndex(
+        (note: any) => note.messageId === data
+      );
+      state.notes[category].splice(index, 1);
+    },
   },
 });
 
-export const { apiRequested, apiRequestFailed, getNotes, addNote } =
+export const { apiRequested, apiRequestFailed, getNotes, removeNote, addNote } =
   noteSlice.actions;
 export default noteSlice.reducer;
 
 export const loadNotes = (category: string) =>
   apiCallBegan({
     url: `/v1/messages/${category}`,
+    method: "GET",
     onStart: apiRequested.type,
     category: category,
     onSuccess: getNotes.type,
@@ -79,10 +75,11 @@ export const addNewNote = (category: string, note: INote) =>
     onSuccess: addNote.type,
   });
 
-// export const deleteNote = (category: string, noteId: string) =>
-//   apiCallBegan({
-//     url: `/v1/message/${category}/${noteId}`,
-//     method: "DELETE",
-//     data: noteId,
-//     onSuccess: removeNote.type,
-//   });
+export const deleteNote = (category: string, noteId: string) =>
+  apiCallBegan({
+    url: `/v1/message/${category}/${noteId}`,
+    method: "DELETE",
+    category: category,
+    data: noteId,
+    onSuccess: removeNote.type,
+  });
