@@ -1,11 +1,10 @@
-import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
+import RootLayout from "./pages/RootLayout";
 import Home from "./pages/Home";
 import MyPage from "./pages/MyPage";
 import UserPage from "./pages/UserPage";
 import Notice from "./pages/Notice";
-import Header from "./components/layout/Header";
-import Footer from "./components/layout/Footer";
 import NotFound from "./pages/NotFound";
 import FindPage from "./pages/FindPage";
 import PostDetail from "./pages/PostDetail";
@@ -21,7 +20,6 @@ import NoticeDetail from "./pages/NoticeDetail";
 import ScrollToTop from "./util/ScrollToTop";
 
 import { tokenLoader } from "./util/sign/auth";
-import { action as logoutAction } from "./pages/Logout";
 import { checkAuthLoader } from "./util/sign/auth";
 import { AuthContextProvider } from "./context/AuthContext";
 import NoticeEdit from "./pages/NoticeEdit";
@@ -31,20 +29,10 @@ import { store } from "./store/configureStore";
 import ProfileUpdate from "./pages/ProfileUpdate";
 
 function App() {
-  const Layout = () => {
-    return (
-      <div className="app">
-        <Header />
-        <Outlet />
-        <Footer />
-      </div>
-    );
-  };
-
   const router = createBrowserRouter([
     {
       path: "/",
-      element: [<Layout />, <ScrollToTop />],
+      element: [<RootLayout />, <ScrollToTop />],
 
       errorElement: <NotFound />,
       id: "root",
@@ -62,7 +50,6 @@ function App() {
           path: "/signin",
           element: <Signin />,
         },
-        { path: "/logout", action: logoutAction },
         {
           path: "/help/user",
           element: <FindPwd />,

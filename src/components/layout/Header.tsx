@@ -1,6 +1,6 @@
 import { Link, useRouteLoaderData } from "react-router-dom";
 import styled from "styled-components";
-import { singout } from "../../api/auth";
+import { signout } from "../../api/auth";
 
 import { TbMessageCircle } from "react-icons/tb";
 
@@ -100,7 +100,7 @@ export default function Header() {
               <NavItem>로그인</NavItem>
             </Link>
           ) : (
-            <NavItem onClick={singout}>로그아웃</NavItem>
+            <NavItem onClick={signout}>로그아웃</NavItem>
           )}
         </Sign>
       </Container>
