@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { sendNotePost } from "../../api/note";
 
-import useModal from "../../hooks/useModal";
+import { useNote } from "../../hooks/useNote";
+import { addNewNote } from "../../store/note";
 
 const Container = styled.div`
   width: 300px;
@@ -91,9 +91,7 @@ export default function MessageSendBox({
   const {
     user: { nickname, id },
   } = useContext(AuthContext);
-
-  const [, dispatch] = useModal();
-  const token = localStorage.getItem("token");
+  const [, , , dispatch] = useNote();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -111,7 +109,7 @@ export default function MessageSendBox({
       senderNickname: nickname,
     };
 
-    sendNotePost(token, data, dispatch);
+    dispatch(addNewNote("sent", data));
   };
 
   return (

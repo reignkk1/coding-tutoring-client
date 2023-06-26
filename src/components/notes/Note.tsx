@@ -3,24 +3,30 @@ import Modal from "../common/Modal";
 import MessageSendBox from "./MessageSendBox";
 import { INote } from "../../api/note";
 
+import { useNote } from "../../hooks/useNote";
 import useModal from "../../hooks/useModal";
 import { openModal } from "../../store/modal";
+import { deleteNote } from "../../store/note";
 
 export default function Note({
   note,
   selected,
-  handleDelete,
   sender,
   setSender,
 }: {
   note: INote;
   selected: string;
-  handleDelete: any;
   sender: string;
   setSender: React.Dispatch<React.SetStateAction<string>>;
 }) {
-  const [, dispatch] = useModal();
+  const [, modalDispatch] = useModal();
   const navigate = useNavigate();
+
+  const [, , , noteDispatch] = useNote();
+
+  const handleDelete = () => {
+    noteDispatch(deleteNote(selected, note.messageId as string));
+  };
 
   return (
     <li key={note.messageId}>
@@ -40,7 +46,7 @@ export default function Note({
       {selected === "received" && (
         <button
           onClick={() => {
-            dispatch(openModal());
+            modalDispatch(openModal());
             // 답장할 사람을 set함
             setSender(note.senderId);
           }}
@@ -48,7 +54,7 @@ export default function Note({
           답장
         </button>
       )}
-      <button onClick={() => handleDelete(note.messageId)}>삭제</button>
+      <button onClick={handleDelete}>삭제</button>
 
       <p>{note.title}</p>
       <p>{note.content}</p>
