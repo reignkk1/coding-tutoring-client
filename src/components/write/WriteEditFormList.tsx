@@ -32,6 +32,10 @@ export const Label = styled.label`
   font-family: medium;
 `;
 
+const LetterCount = styled.div`
+  text-align: end;
+`;
+
 export default function WriteEditFormList() {
   const [state, dispatch] = useWriteEditForm();
   const [, modalDispatch] = useModal();
@@ -83,8 +87,13 @@ export default function WriteEditFormList() {
         value={title}
         maxLength={50}
       />
-
       <Label>본인 소개 *</Label>
+      <LetterCount>
+        <span style={{ color: state.content.length > 255 ? "red" : "white" }}>
+          {state.content.length}
+        </span>{" "}
+        / 255
+      </LetterCount>
       <Editor placeholder="자신을 소개해주세요." />
     </>
   );
