@@ -12,16 +12,24 @@ const Banner = styled.div`
   align-items: center;
 
   background-color: #c9fd35;
+
+  @media (max-width: 850px) {
+    width: 100%;
+    padding-inline: 2rem;
+  }
 `;
 
 const BannerImg = styled.img`
   height: 255px;
   width: 334px;
+
+  @media (max-width: 850px) {
+    display: none;
+  }
 `;
 
 const BannerTitle = styled.div`
   color: #0e1620;
-  flex-shrink: 0;
 
   h2 {
     font-size: 2rem;
@@ -34,32 +42,46 @@ const BannerTitle = styled.div`
 `;
 
 const Intro = styled.section`
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-block: 6rem;
+  padding-inline: 2rem;
 `;
 
 const FirstBox = styled.div`
-  p:first-child {
-    font-family: regular;
-    font-size: 2.5rem;
-    margin-bottom: 24px;
-  }
-  p:last-child {
+  p {
     font-size: 20px;
+
+    &:first-child {
+      font-family: regular;
+      font-size: 2.5rem;
+      margin-bottom: 24px;
+    }
+  }
+
+  @media (max-width: 650px) {
+    p:first-child {
+      font-size: 1.5rem;
+    }
   }
 `;
 
 const SecondBox = styled.div`
-  padding-inline: 8rem;
-
   display: flex;
   justify-content: space-between;
+  gap: 2rem;
   margin-top: 4rem;
+  transition: all 0.3s ease-in;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
 `;
 
 const Box = styled.div`
   width: 400px;
-  height: 300px;
+  min-height: 300px;
   padding: 2rem;
 
   flex-shrink: 0;
@@ -86,13 +108,21 @@ const Box = styled.div`
 
   p {
     &.sub-title {
-      text-align: center;
       font-size: 1.2rem;
       font-weight: bold;
     }
     line-height: 2;
     margin-top: 1rem;
     text-align: start;
+  }
+
+  @media (max-width: 850px) {
+    width: 350px;
+  }
+
+  @media (max-width: 640px) {
+    width: 100%;
+    text-align: center;
   }
 `;
 

@@ -125,7 +125,7 @@ const NavItem = styled.li`
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  console.log(open);
+
   const token = useRouteLoaderData("root");
   const menu = [
     { item: "선생님 찾기", to: "/teachers" },
@@ -133,14 +133,17 @@ export default function Header() {
     { item: "글 작성", to: "/write" },
     { item: "공지사항", to: "/notice" },
   ];
+  const handleOpen = () => {
+    setOpen((open) => !open);
+  };
 
   return (
     <Head>
       <Container>
-        <ToggleBtn onClick={() => setOpen((open) => !open)}>
+        <ToggleBtn onClick={handleOpen}>
           <HiMenu />
         </ToggleBtn>
-        <Link to="/">
+        <Link to="/" onClick={handleOpen}>
           <Logo>코딩바다</Logo>
         </Link>
         <NavContainer className={`${open && "open"}`}>
@@ -148,7 +151,7 @@ export default function Header() {
             <ul>
               {menu.map((list) => (
                 <NavItem>
-                  <Link key={list.item} to={list.to}>
+                  <Link key={list.item} to={list.to} onClick={handleOpen}>
                     {list.item}
                   </Link>
                 </NavItem>
