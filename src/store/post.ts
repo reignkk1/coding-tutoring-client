@@ -26,8 +26,11 @@ const postSlice = createSlice({
     updatePost(state, action: PayloadAction<IPost[]>) {
       state.value = action.payload;
     },
+    reUpdatePost(state, action: PayloadAction<IPost[]>) {
+      state.value = [...state.value, ...action.payload];
+    },
   },
 });
 
-export const { updatePost } = postSlice.actions;
+export const { updatePost, reUpdatePost } = postSlice.actions;
 export default postSlice.reducer;
