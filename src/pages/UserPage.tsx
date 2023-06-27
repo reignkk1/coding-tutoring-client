@@ -103,7 +103,8 @@ const Img = styled.img`
 const PostContainer = styled.div`
   width: 70%;
   margin-inline: auto;
-  margin-block: 6rem;
+  margin-block: 4rem;
+  padding-inline: 4rem;
   div {
     display: flex;
     flex-direction: column;
@@ -140,5 +141,18 @@ const PostContainer = styled.div`
     &:hover {
       transform: translateY(-0.5rem);
     }
+    @media (max-width: 500px) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  transition: all 0.3s ease-in-out;
+
+  @media (max-width: 850px) {
+    width: 100%;
+  }
+  @media (max-width: 450px) {
+    padding-inline: 2rem;
   }
 `;
