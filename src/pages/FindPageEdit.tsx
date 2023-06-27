@@ -61,6 +61,7 @@ export default function FindPageEdit({ category }: ICategory) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (content.length > 255) return alert("255자 이하로 작성해주세요.");
     const data = {
       id: post.id,
       area,
