@@ -10,12 +10,19 @@ import WriteFormList from "../components/write/WriteEditFormList";
 import Button from "../components/common/Button";
 
 const Container = styled.div`
-  height: 200vh;
-  width: 900px;
+  height: 150vh;
+  max-width: 900px;
   margin: 0 auto;
   padding-top: 50px;
+  padding-inline: 2rem;
   button {
     margin-left: 5px;
+  }
+
+  transition: all 0.3s ease-in-out;
+
+  @media (max-width: 450px) {
+    font-size: 0.9rem;
   }
 `;
 
