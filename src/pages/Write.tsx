@@ -37,7 +37,10 @@ export default function Write() {
 
   const { area, content, onOrOff, desiredSubjects, title } = state;
 
-  const checkEmpty = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (content.length > 255) return alert("255자 이하로 입력해주세요.");
     if (
       area === "" ||
       content === "" ||
@@ -45,11 +48,6 @@ export default function Write() {
       title === ""
     )
       return alert("모두 입력해주세요.");
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    checkEmpty();
     const data = {
       area,
       content,

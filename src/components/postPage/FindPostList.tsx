@@ -105,21 +105,23 @@ export default function FindPostList({ category }: IFindPostList) {
 
   const [posts] = usePost();
 
+  console.log(posts);
+
   return (
     <Container>
       <ul>
-        {posts?.map((post) => (
-          <li key={post.id}>
+        {posts?.map((post, index) => (
+          <li key={index}>
             <ImgBox>
               <img
                 src={`${
-                  post.member!.gender === "MALE"
+                  post.member?.gender === "MALE"
                     ? "https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg"
                     : "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg"
                 }`}
                 alt="프로필 사진"
               />
-              <span>{post.member!.nickname}</span>
+              <span>{post.member?.nickname}</span>
             </ImgBox>
             <InfoBox>
               <h2
@@ -135,8 +137,8 @@ export default function FindPostList({ category }: IFindPostList) {
               <span>{firstToUpper(`${post.subject}`)}</span>
               <p>{howFormat(`${post.onOrOff}`)}</p>
               <p>
-                {genderFormat(`${post.member!.gender}`)} /&nbsp;
-                {careerFormat(`${post.member!.career}`)}
+                {genderFormat(`${post.member?.gender}`)} /&nbsp;
+                {careerFormat(`${post.member?.career}`)}
               </p>
               <p className="area">{post.area} 거주</p>
             </InfoBox>

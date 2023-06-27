@@ -8,7 +8,7 @@ import FindPostList from "../components/postPage/FindPostList";
 import { searchSubject, useGetPosts } from "../api/Post";
 import { ICategory } from "../types/category";
 import { usePost } from "../hooks/usePost";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { updatePost } from "../store/post";
 
 const Container = styled.div`
@@ -43,12 +43,33 @@ const Subject = styled.div`
 `;
 
 export default function FindPage({ category }: ICategory) {
-  const [posts] = useGetPosts(category);
   const [, dispatch] = usePost();
+  const [page, setPage] = useState(0);
+
+  console.log("FindPage 재랜더링");
+  useGetPosts(category, page);
 
   useEffect(() => {
-    dispatch(updatePost(posts));
-  }, [dispatch, posts]);
+    setPage(0);
+  }, [category]);
+
+  const handleScroll = () => {
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = document.documentElement.scrollTop;
+    const clientHeight = document.documentElement.clientHeight;
+
+    // 사용자의 스크롤 위치가 맨 밑에 있을 시
+    if (scrollTop + clientHeight >= scrollHeight) {
+      setPage((prev) => prev + 1);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleSubjectClick = (subject: string) =>
     searchSubject(subject, category, dispatch);

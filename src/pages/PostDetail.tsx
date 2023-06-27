@@ -107,7 +107,7 @@ export default function PostDetail({ category }: ICategory) {
 
         <Section id="intro">
           <p className="index">
-            {category === "teachers" ? "교습 소개" : "교습 요청"}
+            {category === "teachers" ? "교습 소개" : "학생 소개"}
           </p>
           <div className="detail">
             <h3>{title}</h3>
@@ -213,7 +213,12 @@ const Section = styled.section`
 
   .detail {
     margin-top: 1rem;
-
+    line-height: 2;
+    h3 {
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
     .description {
       margin-top: 1rem;
     }

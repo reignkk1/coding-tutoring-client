@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useGetPosts } from "./../../api/Post";
+import { usePost } from "../../hooks/usePost";
 
 const Container = styled.div`
   width: 70%;
@@ -89,14 +90,17 @@ const InfoBox = styled.div`
 `;
 
 export default function NoticePostList() {
-  const [posts] = useGetPosts("notice");
   const navigate = useNavigate();
+
+  useGetPosts("notice", 0);
+
+  const [posts] = usePost();
 
   return (
     <Container>
       <ul>
-        {posts?.map((post) => (
-          <li key={post.id}>
+        {posts?.map((post, index) => (
+          <li key={index}>
             <ImgBox>
               <img src="/admin-img.png" alt="프로필 사진" />
               <span>운영자</span>

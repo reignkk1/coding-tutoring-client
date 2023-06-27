@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { AnyAction, Dispatch } from "redux";
-import { updatePost } from "../store/post";
+import { reUpdatePost, updatePost } from "../store/post";
+import { useDispatch } from "react-redux";
 
 const token = localStorage.getItem("token");
 
@@ -56,8 +57,11 @@ export function createPost(
 }
 
 // 모든 게시물 불러오기
-export function useGetPosts(category: "teachers" | "students" | "notice") {
-  const [posts, setPosts] = useState<IPost[]>([]);
+export function useGetPosts(
+  category: "teachers" | "students" | "notice",
+  page?: number
+) {
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const categoryValue =
@@ -67,16 +71,20 @@ export function useGetPosts(category: "teachers" | "students" | "notice") {
         ? "studentPosts"
         : "notices";
     axios
-      .get(`/v1/${categoryValue}`)
+      .get(`/v1/${categoryValue}?page=${page}&size=10`)
       .then((response) => {
         if (response.status === 200) {
-          setPosts(response.data);
+          console.log("data : ", response.data);
+          console.log("page : ", page);
+          dispatch(
+            page === 0 ? updatePost(response.data) : reUpdatePost(response.data)
+          );
         }
       })
       .catch((error) => console.log(error));
-  }, [category]);
+  }, [dispatch, category, page]);
 
-  return [posts, setPosts] as const;
+  return null;
 }
 
 // 게시물 삭제
