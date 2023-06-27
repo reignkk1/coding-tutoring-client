@@ -89,7 +89,6 @@ a {
 
 button{
     font-family: regular;
-    background-color: inherit;
     padding: 0;
     border: none;
     outline: none;

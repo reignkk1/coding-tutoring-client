@@ -208,8 +208,8 @@ export const kakaoSignin = async (access_token: string) => {
       const token = res.data.token;
 
       localStorage.setItem("token", token);
-      let expiration = new Date();
-      expiration.setHours(expiration.getHours() + 1); //만료시간 30분
+      // 만료시간 30분
+      const expiration = new Date(new Date().getTime() + 30 * 60 * 1000);
       localStorage.setItem("expiration", expiration.toISOString());
 
       alert("로그인 되셨습니다");

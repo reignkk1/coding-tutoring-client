@@ -14,7 +14,8 @@ export default function Notes() {
     setSelected(category);
   };
 
-  const [notes, loading, error, dispatch] = useNote();
+  const [notes, loading, , dispatch] = useNote();
+  let reversedNotes = [...notes[selected]].reverse();
 
   useEffect(() => {
     dispatch(loadNotes(selected));
@@ -29,7 +30,7 @@ export default function Notes() {
             <p>loading...</p>
           ) : (
             <>
-              {notes[selected].map((note: any) => (
+              {reversedNotes.map((note: any) => (
                 <Note
                   note={note}
                   selected={selected}
