@@ -9,15 +9,23 @@ import { searchSubject, useGetPosts } from "../api/Post";
 import { ICategory } from "../types/category";
 import { usePost } from "../hooks/usePost";
 import { useEffect, useState } from "react";
-import { updatePost } from "../store/post";
 
 const Container = styled.div`
   margin-top: 4rem;
   padding-inline: 4rem;
+
+  @media (max-width: 650px) {
+    padding-inline: 2rem;
+  }
 `;
 const Top = styled.section`
   display: flex;
+  gap: 2rem;
   justify-content: space-between;
+
+  @media (max-width: 850px) {
+    flex-direction: column;
+  }
 `;
 const Left = styled.div`
   display: flex;
@@ -26,12 +34,28 @@ const Left = styled.div`
 `;
 
 const Subject = styled.div`
-  width: 600px;
+  max-width: 600px;
+  width: 100%;
 
   display: grid;
   grid-template-columns: repeat(6, auto);
   row-gap: 10px;
   column-gap: 10px;
+
+  transition: all 0.3s ease-in-out;
+
+  @media (max-width: 850px) {
+    width: 100%;
+    grid-template-columns: repeat(5, auto);
+  }
+
+  @media (max-width: 650px) {
+    grid-template-columns: repeat(4, auto);
+  }
+
+  @media (max-width: 450px) {
+    grid-template-columns: repeat(3, auto);
+  }
 
   button {
     background-color: #c9fd35;

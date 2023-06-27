@@ -12,7 +12,7 @@ import { usePost } from "../../hooks/usePost";
 const Container = styled.div`
   width: 70%;
   margin-inline: auto;
-  margin-block: 6rem;
+  margin-block: 4rem;
   div {
     display: flex;
     flex-direction: column;
@@ -49,6 +49,15 @@ const Container = styled.div`
     &:hover {
       transform: translateY(-0.5rem);
     }
+
+    @media (max-width: 500px) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 850px) {
+    width: 100%;
   }
 `;
 
@@ -61,6 +70,10 @@ const ImgBox = styled.div`
   span {
     font-family: regular;
     font-size: 14px;
+  }
+
+  @media (max-width: 500px) {
+    margin-right: 0;
   }
 `;
 const InfoBox = styled.div`
@@ -83,6 +96,11 @@ const InfoBox = styled.div`
     font-family: regular;
     line-height: 1.5;
     color: #c9fd35;
+
+    @media (max-width: 500px) {
+      font-size: 0.8rem;
+      align-self: center;
+    }
   }
 
   .area {

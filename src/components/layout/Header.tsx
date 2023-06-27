@@ -161,14 +161,20 @@ export default function Header() {
           <Nav>
             <ul>
               <NavItem>
-                <Link to="/notes">쪽지</Link>
+                <Link to="/notes" onClick={handleOpen}>
+                  쪽지
+                </Link>
               </NavItem>
               <NavItem>
-                <Link to="/view/me">마이페이지</Link>
+                <Link to="/view/me" onClick={handleOpen}>
+                  마이페이지
+                </Link>
               </NavItem>
               {!token ? (
                 <NavItem>
-                  <Link to="/signin">로그인</Link>
+                  <Link to="/signin" onClick={handleOpen}>
+                    로그인
+                  </Link>
                 </NavItem>
               ) : (
                 <NavItem onClick={signout}>로그아웃</NavItem>
