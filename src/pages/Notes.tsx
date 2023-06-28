@@ -19,7 +19,7 @@ export default function Notes() {
 
   useEffect(() => {
     dispatch(loadNotes(selected));
-  }, [selected]);
+  }, [dispatch, selected]);
 
   return (
     <Wrapper>

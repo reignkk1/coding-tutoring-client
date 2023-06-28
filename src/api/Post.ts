@@ -1,8 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { AnyAction, Dispatch } from "redux";
-import { reUpdatePost, updatePost } from "../store/post";
-import { useDispatch } from "react-redux";
 
 const token = localStorage.getItem("token");
 
@@ -54,37 +51,6 @@ export function createPost(
       }
     })
     .catch((error) => console.log(error));
-}
-
-// 모든 게시물 불러오기
-export function useGetPosts(
-  category: "teachers" | "students" | "notice",
-  page?: number
-) {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const categoryValue =
-      category === "teachers"
-        ? "teacherPosts"
-        : category === "students"
-        ? "studentPosts"
-        : "notices";
-    axios
-      .get(`/v1/${categoryValue}?page=${page}&size=10`)
-      .then((response) => {
-        if (response.status === 200) {
-          console.log("data : ", response.data);
-          console.log("page : ", page);
-          dispatch(
-            page === 0 ? updatePost(response.data) : reUpdatePost(response.data)
-          );
-        }
-      })
-      .catch((error) => console.log(error));
-  }, [dispatch, category, page]);
-
-  return null;
 }
 
 // 게시물 삭제
@@ -148,7 +114,6 @@ export function searchTitle(
     .get(`v1/${categoryValue}?content=${title}&searchType=TITLE`)
     .then((response) => {
       console.log(response.data);
-      dispatch(updatePost(response.data));
     })
     .catch((error) => console.log(error));
 }
@@ -169,6 +134,6 @@ export function searchSubject(
 
   axios
     .get(`v1/${categoryValue}?content=${subject}&searchType=SUBJECT`)
-    .then((response) => dispatch(updatePost(response.data)))
+    .then()
     .catch((error) => console.log(error));
 }

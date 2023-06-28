@@ -3,6 +3,7 @@ import Button from "../common/Button";
 import { searchSubject, searchTitle } from "../../api/Post";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import useCategory from "../../hooks/useCategory";
 
 const Form = styled.form`
   display: flex;
@@ -31,11 +32,11 @@ const Input = styled.input`
 
 interface ISearchBar {
   placeholder: string;
-  category: "teachers" | "students" | "notice";
 }
 
-export default function SearchBar({ placeholder, category }: ISearchBar) {
+export default function SearchBar({ placeholder }: ISearchBar) {
   const dispatch = useDispatch();
+  const [category] = useCategory();
   const [value, setValue] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {

@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { IPost } from "../../api/Post";
 import {
   howFormat,
   firstToUpper,
   genderFormat,
   careerFormat,
+  jobFormatPath,
 } from "../../util/format";
 import { usePost } from "../../hooks/usePost";
 
@@ -113,19 +113,14 @@ const InfoBox = styled.div`
   }
 `;
 
-interface IFindPostList {
-  posts?: IPost[];
-  category: string;
-}
-
-export default function FindPostList({ category }: IFindPostList) {
+export default function FindPostList() {
   const navigate = useNavigate();
 
-  const [posts] = usePost();
+  const { posts, isLoading, isError } = usePost();
 
-  console.log(posts);
-
-  return (
+  return isLoading ? (
+    <div>로딩중..</div>
+  ) : (
     <Container>
       <ul>
         {posts?.map((post, index) => (
@@ -144,9 +139,14 @@ export default function FindPostList({ category }: IFindPostList) {
             <InfoBox>
               <h2
                 onClick={() =>
-                  navigate(`/${category}/post/${post.id}`, {
-                    state: post,
-                  })
+                  navigate(
+                    `/${jobFormatPath(post.member?.userClassification)}/post/${
+                      post.id
+                    }`,
+                    {
+                      state: post,
+                    }
+                  )
                 }
               >
                 {post.title}

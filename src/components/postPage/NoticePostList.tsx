@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useGetPosts } from "./../../api/Post";
 import { usePost } from "../../hooks/usePost";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import { getNoticesPost } from "../../store/post/postThunk";
 
 const Container = styled.div`
   width: 70%;
@@ -91,12 +94,17 @@ const InfoBox = styled.div`
 
 export default function NoticePostList() {
   const navigate = useNavigate();
+  const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
 
-  useGetPosts("notice", 0);
+  const { posts, isLoading, isError } = usePost();
 
-  const [posts] = usePost();
+  useEffect(() => {
+    dispatch(getNoticesPost());
+  }, [dispatch]);
 
-  return (
+  return isLoading ? (
+    <div>로딩중..</div>
+  ) : (
     <Container>
       <ul>
         {posts?.map((post, index) => (
