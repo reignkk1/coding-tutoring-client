@@ -12,6 +12,7 @@ const Banner = styled.div`
   align-items: center;
 
   background-color: #c9fd35;
+  transition: all 0.3s ease-out;
 
   @media (max-width: 850px) {
     width: 100%;
@@ -30,6 +31,7 @@ const BannerImg = styled.img`
 
 const BannerTitle = styled.div`
   color: #0e1620;
+  line-height: 1.5;
 
   h2 {
     font-size: 2rem;
@@ -39,6 +41,15 @@ const BannerTitle = styled.div`
   span {
     font-size: 21px;
   }
+
+  @media (max-width: 650px) {
+    h2 {
+      font-size: 1.7rem;
+    }
+    span {
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 const Intro = styled.section`
@@ -47,16 +58,22 @@ const Intro = styled.section`
   align-items: center;
   margin-block: 6rem;
   padding-inline: 2rem;
+  line-height: 1.3;
+
+  @media (max-width: 650px) {
+    margin-block: 4rem;
+  }
 `;
 
 const FirstBox = styled.div`
+  text-align: center;
   p {
-    font-size: 20px;
+    font-size: 1.3rem;
 
     &:first-child {
       font-family: regular;
       font-size: 2.5rem;
-      margin-bottom: 24px;
+      margin-bottom: 1.5rem;
     }
   }
 
@@ -72,16 +89,17 @@ const SecondBox = styled.div`
   justify-content: space-between;
   gap: 2rem;
   margin-top: 4rem;
-  transition: all 0.3s ease-in;
+  transition: all 0.3s ease-out;
 
   @media (max-width: 640px) {
     flex-direction: column;
+    margin-top: 2rem;
   }
 `;
 
 const Box = styled.div`
   width: 400px;
-  min-height: 300px;
+  min-height: 250px;
   padding: 2rem;
 
   flex-shrink: 0;
@@ -100,16 +118,16 @@ const Box = styled.div`
   );
 
   div {
-    font-family: medium;
+    font-family: regular;
     font-size: 1.5rem;
     color: #c9fd35;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 
   p {
     &.sub-title {
       font-size: 1.2rem;
-      font-weight: bold;
+      font-family: regular;
     }
     line-height: 2;
     margin-top: 1rem;
@@ -117,7 +135,7 @@ const Box = styled.div`
   }
 
   @media (max-width: 850px) {
-    width: 350px;
+    width: 300px;
   }
 
   @media (max-width: 640px) {

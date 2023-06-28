@@ -5,8 +5,7 @@ import { closeModal } from "../store/modal";
 
 const token = localStorage.getItem("token");
 
-const baseURL =
-  "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080";
+const baseURL = process.env.REACT_APP_BASE_URL;
 
 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 

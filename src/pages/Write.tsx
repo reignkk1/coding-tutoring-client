@@ -10,7 +10,7 @@ import WriteFormList from "../components/write/WriteEditFormList";
 import Button from "../components/common/Button";
 
 const Container = styled.div`
-  height: 150vh;
+  height: 200vh;
   max-width: 900px;
   margin: 0 auto;
   padding-top: 50px;
