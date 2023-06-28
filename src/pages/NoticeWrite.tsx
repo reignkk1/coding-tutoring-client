@@ -2,9 +2,10 @@ import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
 import Editor from "./../components/write/Editor";
 import Button from "../components/common/Button";
-import { createPost } from "../api/Post";
+
 import useWriteEditForm from "../hooks/useWriteEditForm";
-import { editTitle } from "../store/editPost";
+import { setTitle } from "../store/post/PostWriteEditFormSlice";
+import { createNoticePost } from "../store/post/PostThunk";
 
 const Container = styled.div`
   height: 100vh;
@@ -37,10 +38,11 @@ const ButtonContainer = styled.div`
 
 export default function NoticeWrite() {
   const [state, dispatch] = useWriteEditForm();
+
   const { title, content } = state;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    dispatch(editTitle(e.target.value));
+    dispatch(setTitle(e.target.value));
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,8 +50,8 @@ export default function NoticeWrite() {
       title,
       content,
     };
-    createPost(data, "notice");
-    window.location.assign("/notice");
+
+    dispatch(createNoticePost(data));
   };
   return (
     <Wrapper>

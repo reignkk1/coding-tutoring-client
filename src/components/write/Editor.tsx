@@ -1,12 +1,12 @@
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import useWriteEditForm from "../../hooks/useWriteEditForm";
-import { editContent } from "../../store/editPost";
+import { setContent } from "../../store/post/PostWriteEditFormSlice";
 
 export default function Editor({ placeholder }: { placeholder?: string }) {
   const [state, dispatch] = useWriteEditForm();
 
-  const handleChange = (value: string) => dispatch(editContent(value));
+  const handleChange = (value: string) => dispatch(setContent(value));
 
   return (
     <ReactQuill

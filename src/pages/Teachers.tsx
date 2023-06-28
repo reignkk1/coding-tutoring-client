@@ -5,7 +5,7 @@ import Wrapper from "../components/common/Wrapper";
 import { useEffect } from "react";
 import useCategory from "../hooks/useCategory";
 import usePostScrollPage from "../hooks/usePostScrollPage";
-import { getTeachersPost } from "../store/post/postThunk";
+import { getTeachersPost } from "../store/post/PostThunk";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { setCategory } from "../store/category";

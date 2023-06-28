@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getNoticesPost, getStudentsPost, getTeachersPost } from "./postThunk";
+import { getNoticesPost, getStudentsPost, getTeachersPost } from "./PostThunk";
 
 export interface IPost {
   id?: number;

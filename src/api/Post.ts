@@ -1,12 +1,8 @@
 import axios from "axios";
 import { AnyAction, Dispatch } from "redux";
 
-const token = localStorage.getItem("token");
-
 axios.defaults.baseURL =
   "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080";
-
-axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 export interface IPost {
   id?: number;
@@ -24,33 +20,6 @@ export interface IPost {
     userClassification: string;
     career: string;
   };
-}
-
-// 게시물 작성
-
-export function createPost(
-  data: IPost,
-  category: "TEACHER" | "STUDENT" | "notice",
-  token?: string
-) {
-  const categoryValue =
-    category === "TEACHER"
-      ? "teacherPost"
-      : category === "STUDENT"
-      ? "studentPost"
-      : "notice";
-
-  return axios
-    .post(`/v1/${categoryValue}`, data)
-    .then((response) => {
-      if (response.status === 200) {
-        window.location.assign(
-          category === "STUDENT" ? "/students" : "/teachers"
-        );
-        return alert("작성완료");
-      }
-    })
-    .catch((error) => console.log(error));
 }
 
 // 게시물 삭제

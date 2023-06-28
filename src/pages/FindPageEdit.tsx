@@ -9,7 +9,7 @@ import UserInfo from "./../components/write/UserInfo";
 import EditFormList from "../components/write/WriteEditFormList";
 import Button from "../components/common/Button";
 import { ICategory } from "../types/category";
-import { setEdit } from "../store/editPost";
+import { setInitialState } from "../store/post/PostWriteEditFormSlice";
 
 const Container = styled.div`
   height: 200vh;
@@ -48,7 +48,7 @@ export default function FindPageEdit({ category }: ICategory) {
 
   useEffect(() => {
     dispatch(
-      setEdit({
+      setInitialState({
         onOrOff: post.onOrOff,
         subject: post.subject,
         area: post.area,

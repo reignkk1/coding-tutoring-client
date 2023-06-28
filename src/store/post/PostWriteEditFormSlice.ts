@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-export interface IState {
+export interface IWriteEditForm {
   onOrOff?: string;
   subject?: string;
   area?: string;
@@ -8,8 +7,7 @@ export interface IState {
   desiredSubjects?: string[];
   content: string;
 }
-
-const initialState: IState = {
+const initialState: IWriteEditForm = {
   onOrOff: "ONLINE",
   subject: "JAVASCRIPT",
   area: "",
@@ -18,42 +16,43 @@ const initialState: IState = {
   content: "",
 };
 
-const editPostSlice = createSlice({
-  name: "editPost",
+const writeEditFormSlice = createSlice({
+  name: "writeEditForm",
   initialState,
   reducers: {
-    setEdit: (state, action) => {
-      return { ...state, ...action.payload };
+    setInitialState: (state, action) => {
+      state = action.payload;
     },
-    editOnOff: (state, action) => {
+    setOnOff: (state, action) => {
       state.onOrOff = action.payload;
     },
-    editSubject: (state, action) => {
+    setSubject: (state, action) => {
       state.subject = action.payload;
     },
-    editArea: (state, action) => {
+    setArea: (state, action) => {
       state.area = action.payload;
     },
-    editTitle: (state, action) => {
+    setTitle: (state, action) => {
       state.title = action.payload;
     },
 
-    editDesiredSubjects: (state, action) => {
+    setDesiredSubjects: (state, action) => {
       state.desiredSubjects = action.payload;
     },
-    editContent: (state, action) => {
+    setContent: (state, action) => {
       state.content = action.payload;
     },
   },
 });
 
 export const {
-  setEdit,
-  editArea,
-  editContent,
-  editDesiredSubjects,
-  editOnOff,
-  editSubject,
-  editTitle,
-} = editPostSlice.actions;
-export default editPostSlice.reducer;
+  setArea,
+  setContent,
+  setDesiredSubjects,
+  setInitialState,
+  setOnOff,
+  setSubject,
+  setTitle,
+} = writeEditFormSlice.actions;
+
+export default writeEditFormSlice.reducer;

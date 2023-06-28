@@ -1,8 +1,10 @@
+import { useDispatch } from "react-redux";
 import { useAppDispatch, useAppSelector } from "../reduxHooks";
+import { ThunkDispatch } from "@reduxjs/toolkit";
 
 export default function useWriteEditForm() {
-  const edit = useAppSelector((state) => state.editPost);
-  const dispatch = useAppDispatch();
+  const edit = useAppSelector((state) => state.writeEditForm);
+  const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
 
   return [edit, dispatch] as const;
 }

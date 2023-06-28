@@ -4,7 +4,7 @@ import TopSheet from "../components/postPage/TopSheet";
 import FindPostList from "../components/postPage/FindPostList";
 import styled from "styled-components";
 import usePostScrollPage from "../hooks/usePostScrollPage";
-import { getStudentsPost } from "../store/post/postThunk";
+import { getStudentsPost } from "../store/post/PostThunk";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import useCategory from "../hooks/useCategory";
