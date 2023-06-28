@@ -2,7 +2,8 @@ import KakaoLogin from "react-kakao-login";
 import { kakaoSignin } from "../../api/auth";
 
 const SocialKakao = () => {
-  const kakaoClientId = "33ab9bd4cd0df2fd7fa78884f4b62f2e";
+  const kakaoClientId = process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY;
+
   const kakaoOnSuccess = async (data: any) => {
     console.log(data);
     const idToken = data.response.access_token;
@@ -15,7 +16,7 @@ const SocialKakao = () => {
   return (
     <KakaoLogin
       className="kakao"
-      token={kakaoClientId}
+      token={kakaoClientId!}
       onSuccess={kakaoOnSuccess}
       onFail={kakaoOnFailure}
     />

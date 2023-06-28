@@ -13,13 +13,23 @@ const Container = styled.footer`
 
   background-color: #252c35;
 
-  border-radius: 1rem;
+  border-radius: 0.5rem;
+
+  @media (max-width: 450px) {
+    height: fit-content;
+    padding: 1.5rem;
+    border-radius: 0;
+  }
 `;
 
 const Info = styled.p`
   line-height: 2;
   font-size: 1rem;
   color: #b5b5b5;
+
+  @media (max-width: 450px) {
+    font-size: 0.8rem;
+  }
 `;
 
 export default function Footer() {

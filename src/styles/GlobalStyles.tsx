@@ -112,6 +112,7 @@ input{
 select{
     font-family: regular;
     font-size: 0.9rem;
+    color: #0e1620; 
   
 }
 `;

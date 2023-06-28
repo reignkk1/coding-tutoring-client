@@ -13,13 +13,21 @@ import { setEdit } from "../store/editPost";
 
 const Container = styled.div`
   height: 200vh;
-  width: 900px;
+  max-width: 900px;
   margin: 0 auto;
   padding-top: 50px;
+  padding-inline: 2rem;
   button {
     margin-left: 5px;
   }
+
+  transition: all 0.3s ease-in-out;
+
+  @media (max-width: 450px) {
+    font-size: 0.9rem;
+  }
 `;
+
 const Required = styled.div`
   display: flex;
   justify-content: flex-end;
