@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { useGetUserDataById } from "../api/auth";
 import { useDispatch } from "react-redux";
 import { openModal } from "../store/modal";
+import Button from "../components/common/Button";
 
 export default function UserPage(): JSX.Element {
   const { userId } = useParams();
@@ -46,7 +47,7 @@ export default function UserPage(): JSX.Element {
           <p className="career">
             {careerFormat(`${career}`)} / {genderFormat(`${gender}`)}
           </p>
-          <button onClick={() => dispatch(openModal())}>쪽지 보내기</button>
+          <Button onClick={() => dispatch(openModal())}>쪽지 보내기</Button>
           <Modal>
             <MessageSendBox receiverId={id} receiverNickname={nickname} />
           </Modal>
@@ -86,14 +87,17 @@ export const ImgContainer = styled.div`
     object-fit: cover;
     aspect-ratio: 1/1;
   }
+
+  @media (max-width: 650px) {
+    width: 6rem;
+    height: 6rem;
+  }
 `;
 
 const Posts = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-
-  margin-top: 4rem;
 `;
 
 const Img = styled.img`
@@ -103,7 +107,7 @@ const Img = styled.img`
 const PostContainer = styled.div`
   width: 70%;
   margin-inline: auto;
-  margin-block: 4rem;
+  margin-block: 2rem;
   padding-inline: 4rem;
   div {
     display: flex;
@@ -115,7 +119,7 @@ const PostContainer = styled.div`
     border-radius: 50%;
   }
   li {
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
     padding: 1rem 1.5rem;
 
     overflow: hidden;
@@ -152,7 +156,7 @@ const PostContainer = styled.div`
   @media (max-width: 850px) {
     width: 100%;
   }
-  @media (max-width: 450px) {
+  @media (max-width: 650px) {
     padding-inline: 2rem;
   }
 `;

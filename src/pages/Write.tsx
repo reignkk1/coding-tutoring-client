@@ -1,18 +1,16 @@
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
 import { useContext } from "react";
+import { createPost } from "../api/Post";
 import { AuthContext } from "../context/AuthContext";
 import { useRouteLoaderData } from "react-router-dom";
 import useWriteEditForm from "../hooks/useWriteEditForm";
 import UserInfo from "../components/write/UserInfo";
 import WriteFormList from "../components/write/WriteEditFormList";
 import Button from "../components/common/Button";
-import { useDispatch } from "react-redux";
-import { ThunkDispatch } from "@reduxjs/toolkit";
-import { createStudentPost, createTeacherPost } from "../store/post/PostThunk";
 
 const Container = styled.div`
-  height: 170vh;
+  height: 200vh;
   max-width: 900px;
   margin: 0 auto;
   padding-top: 50px;
@@ -39,12 +37,8 @@ const ButtonBox = styled.div`
 `;
 
 export default function Write() {
-  const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
   const token = useRouteLoaderData("root");
-  const {
-    user,
-    user: { userClassification },
-  } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const [state] = useWriteEditForm();
 
@@ -68,11 +62,7 @@ export default function Write() {
       subject: desiredSubjects?.join(""),
       title,
     };
-
-    if (userClassification === "TEACHER")
-      return dispatch(createTeacherPost(data));
-    if (userClassification === "STUDENT")
-      return dispatch(createStudentPost(data));
+    createPost(data, user.userClassification, token as string);
   };
 
   return (

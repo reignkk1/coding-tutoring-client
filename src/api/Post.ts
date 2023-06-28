@@ -1,8 +1,7 @@
 import axios from "axios";
 import { AnyAction, Dispatch } from "redux";
 
-axios.defaults.baseURL =
-  "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080";
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 export interface IPost {
   id?: number;
