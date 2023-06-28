@@ -14,7 +14,8 @@ export default function Notes() {
     setSelected(category);
   };
 
-  const [notes, loading, error, dispatch] = useNote();
+  const [notes, loading, , dispatch] = useNote();
+  let reversedNotes = [...notes[selected]].reverse();
 
   useEffect(() => {
     dispatch(loadNotes(selected));
@@ -29,7 +30,7 @@ export default function Notes() {
             <p>loading...</p>
           ) : (
             <>
-              {notes[selected].map((note: any) => (
+              {reversedNotes.map((note: any) => (
                 <Note
                   note={note}
                   selected={selected}
@@ -46,9 +47,24 @@ export default function Notes() {
 }
 
 const Container = styled.div`
-  width: 50%;
+  width: 60%;
   margin-inline: auto;
-  margin-block: 8rem;
+  margin-block: 4rem;
+  transition: all 0.4s ease-in-out;
+
+  @media (max-width: 850px) {
+    padding-inline: 4rem;
+    width: 80%;
+  }
+  @media (max-width: 640px) {
+    padding-inline: 1rem;
+  }
+  @media (max-width: 450px) {
+    min-width: 400px;
+    width: 100%;
+    margin-block: 2rem;
+    padding-inline: 0;
+  }
 `;
 
 const MsgBox = styled.ul`

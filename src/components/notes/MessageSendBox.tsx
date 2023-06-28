@@ -72,6 +72,24 @@ const Form = styled.form`
       margin-bottom: 10px;
     }
   }
+
+  .submitBtn {
+    width: 100%;
+    padding: 0.5rem 0.8rem;
+    margin-left: 0;
+
+    background-color: #c9fd35;
+    border-radius: 5px;
+
+    font-size: 1rem;
+    font-family: regular;
+    color: #0e1620;
+
+    &:hover {
+      background-color: #93ba27;
+    }
+    transition: all 0.1s ease-in-out;
+  }
 `;
 
 const Sender = styled.div`
@@ -136,7 +154,7 @@ export default function MessageSendBox({
             onChange={(e) => setContent(e.target.value)}
           />
         </div>
-        <button>전송</button>
+        <button className="submitBtn">전송</button>
       </Form>
     </Container>
   );

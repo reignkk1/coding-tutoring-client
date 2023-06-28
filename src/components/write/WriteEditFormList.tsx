@@ -25,6 +25,10 @@ export const TitleInput = styled.input`
   &:focus {
     border-color: black;
   }
+
+  &.areaInput {
+    width: 250px;
+  }
 `;
 export const Label = styled.label`
   display: block;
@@ -55,7 +59,7 @@ export default function WriteEditFormList() {
       <Label>사는 곳 *</Label>
       <TitleInput
         name="address"
-        style={{ width: "300px" }}
+        className="areaInput"
         defaultValue={area}
         readOnly
       />
@@ -91,10 +95,10 @@ export default function WriteEditFormList() {
       <LetterCount>
         <span style={{ color: state.content.length > 255 ? "red" : "white" }}>
           {state.content.length}
-        </span>{" "}
-        / 255
+        </span>
+        &nbsp;/ 255
       </LetterCount>
-      <Editor placeholder="자신을 소개해주세요." />
+      <Editor placeholder="자신을 소개해주세요. 원하는 장소, 시간, 비용을 자세히 적을수록 매칭 확률이 높아져요." />
     </>
   );
 }

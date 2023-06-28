@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const Form = styled.form`
   width: 100%;
-  padding-block: 4rem;
+  padding-top: 4rem;
+  padding-bottom: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,7 +21,7 @@ export const Form = styled.form`
 
   .auth {
     display: none;
-    width: 250px;
+    width: 222px;
     margin-top: 0.5rem;
     color: #ffffff;
     font-size: 0.8rem;
@@ -38,10 +39,10 @@ export const Form = styled.form`
     margin-top: 1rem;
 
     input {
-      width: 250px;
+      width: 222px;
       padding: 0.8rem 1rem;
       border: none;
-      border-radius: 0.5rem;
+      border-radius: 3px;
 
       background-color: #ffffff;
       font-family: regular;
@@ -65,7 +66,7 @@ export const Form = styled.form`
     }
 
     .error {
-      width: 250px;
+      width: 222px;
       margin-top: 0.5rem;
       color: #ffffff;
       font-size: 0.8rem;
@@ -78,10 +79,10 @@ export const Form = styled.form`
   }
 
   button {
-    width: 250px;
+    width: 222px;
     margin-top: 1rem;
     padding-block: 0.8rem;
-    border-radius: 0.5rem;
+    border-radius: 3px;
 
     background-color: #c9fd35;
     color: #0e1620;
@@ -106,7 +107,7 @@ export const Container = styled.div`
   width: 100%;
   max-width: 1200px;
   margin-inline: auto;
-  padding-block: 10rem;
+  padding-block: 4rem;
   min-height: calc(100vh - 200px);
 
   display: flex;
@@ -132,7 +133,7 @@ export const FormContainer = styled.div`
 `;
 
 export const RadioContainer = styled.fieldset`
-  width: 250px;
+  width: 222px;
   margin-top: 2rem;
 
   legend {
@@ -149,7 +150,7 @@ export const RadioContainer = styled.fieldset`
 
 export const SelectContainer = styled.div`
   padding-top: 1.5rem;
-  width: 250px;
+  width: 222px;
 
   select {
     width: 100%;

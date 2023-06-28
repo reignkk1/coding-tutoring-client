@@ -70,6 +70,10 @@ const ImgBox = styled.div`
     font-family: regular;
     font-size: 14px;
   }
+
+  @media (max-width: 500px) {
+    margin-right: 0;
+  }
 `;
 const InfoBox = styled.div`
   line-height: 1.7;
@@ -91,6 +95,11 @@ const InfoBox = styled.div`
     font-family: regular;
     line-height: 1.5;
     color: #c9fd35;
+
+    @media (max-width: 500px) {
+      font-size: 0.8rem;
+      align-self: center;
+    }
   }
 
   .area {

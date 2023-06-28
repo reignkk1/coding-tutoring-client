@@ -13,14 +13,12 @@ const SocialKakao = () => {
     console.log(error);
   };
   return (
-    <>
-      <KakaoLogin
-        className="kakao"
-        token={kakaoClientId}
-        onSuccess={kakaoOnSuccess}
-        onFail={kakaoOnFailure}
-      />
-    </>
+    <KakaoLogin
+      className="kakao"
+      token={kakaoClientId}
+      onSuccess={kakaoOnSuccess}
+      onFail={kakaoOnFailure}
+    />
   );
 };
 

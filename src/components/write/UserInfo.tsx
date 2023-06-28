@@ -4,6 +4,11 @@ import { ageFormat, genderFormat, jobFormat } from "../../util/format";
 const Container = styled.div`
   text-align: center;
   margin-bottom: 50px;
+  transition: all 0.3s ease-in-out;
+
+  @media (max-width: 450px) {
+    margin-bottom: 1.5rem;
+  }
 `;
 const User = styled.div`
   font-weight: bold;
@@ -15,6 +20,19 @@ const User = styled.div`
   }
   div {
     margin-bottom: 5px;
+  }
+
+  transition: all 0.3s ease-in-out;
+
+  @media (max-width: 450px) {
+    img {
+      width: 100px;
+      height: 100px;
+    }
+
+    div {
+      font-size: 0.9rem;
+    }
   }
 `;
 
