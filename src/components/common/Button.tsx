@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const Btn = styled.button`
-  height: 35px;
-  padding: 6px 12px;
+  height: 2rem;
+  padding: 0.5rem 0.7rem;
   border-radius: 5px;
 
   background-color: #c9fd35;

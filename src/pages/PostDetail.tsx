@@ -76,7 +76,7 @@ export default function PostDetail({ category }: ICategory) {
             <p className="career">{careerFormat(`${member.career}`)}</p>
 
             {!(user && user.id === member.id) && (
-              <button
+              <Button
                 onClick={() => {
                   if (!user) {
                     alert("로그인이 필요한 서비스 입니다.");
@@ -85,7 +85,7 @@ export default function PostDetail({ category }: ICategory) {
                 }}
               >
                 쪽지 보내기
-              </button>
+              </Button>
             )}
 
             {user && (
@@ -107,7 +107,7 @@ export default function PostDetail({ category }: ICategory) {
 
         <Section id="intro">
           <p className="index">
-            {category === "teachers" ? "교습 소개" : "학생 소개"}
+            {category === "teachers" ? "교습 소개" : "학생 소개"} *
           </p>
           <div className="detail">
             <h3>{title}</h3>
@@ -116,7 +116,7 @@ export default function PostDetail({ category }: ICategory) {
         </Section>
         <Section id="lesson-info">
           <p className="index">
-            {category === "teachers" ? "교습 정보" : "교습 희망 정보"}
+            {category === "teachers" ? "교습 정보" : "교습 희망 정보"} *
           </p>
           <div className="detail">
             <span>교습과목</span>
@@ -129,7 +129,7 @@ export default function PostDetail({ category }: ICategory) {
         </Section>
         <Section id="user-nfo">
           <p className="index">
-            {category === "teachers" ? "선생님 정보" : "학생 정보"}
+            {category === "teachers" ? "선생님 정보" : "학생 정보"} *
           </p>
           <div className="detail">
             <span>경력</span>
@@ -154,9 +154,9 @@ export default function PostDetail({ category }: ICategory) {
 
 export const Profile = styled.div`
   display: flex;
+  align-self: center;
   justify-content: center;
-  align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 
   padding-block: 2rem;
 
@@ -166,25 +166,14 @@ export const Profile = styled.div`
 
       &.nickname {
         font-size: 1.2rem;
-        font-weight: 600;
+        line-height: 1.3;
+        font-family: regular;
       }
     }
+  }
 
-    button {
-      padding: 0.5rem 0.8rem;
-
-      background-color: #c9fd35;
-      border-radius: 5px;
-
-      font-size: 1rem;
-      font-family: regular;
-      color: #0e1620;
-
-      &:hover {
-        background-color: #93ba27;
-      }
-      transition: all 0.1s ease-in-out;
-    }
+  @media (max-width: 650px) {
+    width: 80%;
   }
 `;
 
@@ -194,6 +183,15 @@ export const Container = styled.div`
   padding-block: 4rem;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 650px) {
+    width: 80%;
+  }
+
+  @media (max-width: 450px) {
+    width: 90%;
+    padding-block: 2rem;
+  }
 `;
 
 const Section = styled.section`
@@ -208,16 +206,17 @@ const Section = styled.section`
     margin-bottom: 1rem;
 
     font-size: 1.2rem;
-    font-weight: 600;
+    font-family: regular;
+    color: #c9fd35;
   }
 
   .detail {
     margin-top: 1rem;
     line-height: 2;
     h3 {
-      font-weight: bold;
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
+      font-family: regular;
+      font-size: 1.2rem;
+      margin-bottom: 1.3rem;
     }
     .description {
       margin-top: 1rem;
@@ -226,6 +225,7 @@ const Section = styled.section`
     span {
       &:first-child {
         margin-right: 1rem;
+        font-family: regular;
       }
     }
   }
@@ -234,7 +234,5 @@ const Section = styled.section`
 const Buttons = styled.div`
   display: flex;
   justify-content: flex-end;
-  button {
-    margin-right: 10px;
-  }
+  gap: 0.8rem;
 `;

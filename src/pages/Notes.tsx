@@ -48,6 +48,7 @@ export default function Notes() {
 
 const Container = styled.div`
   width: 60%;
+
   margin-inline: auto;
   margin-block: 4rem;
   transition: all 0.4s ease-in-out;
@@ -60,10 +61,11 @@ const Container = styled.div`
     padding-inline: 1rem;
   }
   @media (max-width: 450px) {
-    min-width: 400px;
     width: 100%;
+    height: 400px;
+    overflow-y: scroll;
     margin-block: 2rem;
-    padding-inline: 0;
+    padding-inline: 1rem;
   }
 `;
 
@@ -113,10 +115,16 @@ const MsgBox = styled.ul`
       border-radius: 5px;
       padding: 0.3rem 0.5rem;
       background-color: #0e1620;
-      margin-left: 1rem;
+      margin-left: 0.8rem;
 
       font-family: light;
       color: #c9fd35;
     }
+  }
+
+  @media (max-width: 450px) {
+    overflow-y: scroll;
+    height: 400px;
+    padding: 1rem;
   }
 `;

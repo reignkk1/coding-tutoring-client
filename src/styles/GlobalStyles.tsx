@@ -12,13 +12,18 @@ ${reset}
     font-family: regular;
     background-color: #ffffff;
     font-size:1rem;
+
+    @media (max-width: 650px) {
+      font-size: 0.8rem;
+  }
 }
 .ql-editor strong{
      font-weight:bold;
+
  }
  .quill{
     background-color: #ffffff;
-    border-radius: 0.5rem;
+    border-radius: 5px;
     overflow: hidden;
     font-family:regular;
     color: #0e1620;
@@ -38,6 +43,8 @@ ${reset}
      background-color: #4f504f;
      border-radius: 0.5rem;
     }
+
+    
 }
 
 @font-face {
@@ -73,8 +80,14 @@ ${reset}
 
 body{
     font-family: light;
+    font-size: 16px;
     background-color: #0e1620;
     color: #ffffff;
+
+    @media (max-width: 650px) {
+        font-size: 14px;
+    }
+    
 
 }
 
@@ -93,19 +106,31 @@ button{
     border: none;
     outline: none;
     cursor: pointer;
+
+    @media (max-width: 650px) {
+      font-size: 0.8rem;
+  }
 }
 
 input{
-    font-family: regular;
-    font-size: 0.9rem;
+    font-family: thin;
+    font-size: 1rem;
     border: none;
     outline: none;
 
     line-height: 1.3;
 
     &::placeholder {
-    font-family: regular;
-    font-size: 0.9rem;
+    font-family: thin;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 650px) {
+      font-size: 0.8rem;
+
+      &::placeholder {
+        font-size: 0.8rem;
+    }
   }
 }
 
@@ -113,6 +138,10 @@ select{
     font-family: regular;
     font-size: 0.9rem;
     color: #0e1620; 
+
+    @media (max-width: 650px) {
+      font-size: 0.8rem;
+  }
   
 }
 `;

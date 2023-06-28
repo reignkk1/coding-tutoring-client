@@ -29,6 +29,7 @@ const Top = styled.section`
 `;
 const Left = styled.div`
   display: flex;
+  gap: 1rem;
   flex-direction: column;
   justify-content: space-around;
 `;

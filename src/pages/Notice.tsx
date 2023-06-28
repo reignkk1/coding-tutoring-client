@@ -9,8 +9,9 @@ import useIsAdmin from "./../hooks/useIsAdmin";
 const Container = styled.div`
   margin-top: 4rem;
   padding-inline: 4rem;
-  button {
-    margin-top: 30px;
+
+  @media (max-width: 650px) {
+    padding-inline: 2rem;
   }
 `;
 

@@ -23,6 +23,10 @@ const Container = styled.div`
     0 100%,
     0 23px
   );
+
+  @media (max-width: 450px) {
+    height: 450px;
+  }
 `;
 
 const Form = styled.form`
@@ -39,13 +43,9 @@ const Form = styled.form`
     background-color: transparent;
     padding: 0.5rem 0.8rem;
     border: 1px solid #c9fd35;
-    outline: none;
-    font-family: light;
-    line-height: 1.7;
     color: #ffffff;
 
     &::placeholder {
-      font-family: light;
       color: #ffffff;
     }
 
@@ -53,7 +53,7 @@ const Form = styled.form`
   }
   textarea {
     height: 200px;
-    padding: 10px;
+    padding: 0.5rem;
     border: 1px solid #c9fd35;
     background-color: transparent;
     outline: none;
@@ -63,6 +63,11 @@ const Form = styled.form`
     font-family: light;
     line-height: 1.5;
     color: #ffffff;
+
+    @media (max-width: 450px) {
+      height: 160px;
+      padding: 0.5rem 0.8rem;
+    }
   }
 
   div {
