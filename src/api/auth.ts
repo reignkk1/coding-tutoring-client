@@ -14,8 +14,7 @@ export interface IGetUser {
   teacherPostResponseDtos: any;
 }
 
-const baseUrl =
-  "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080";
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 //이메일 코드 인증
 export const sendCode = async (email: string) => {

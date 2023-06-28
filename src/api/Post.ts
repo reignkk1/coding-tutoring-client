@@ -6,8 +6,7 @@ import { useDispatch } from "react-redux";
 
 const token = localStorage.getItem("token");
 
-axios.defaults.baseURL =
-  "http://ec2-52-79-63-208.ap-northeast-2.compute.amazonaws.com:8080";
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
