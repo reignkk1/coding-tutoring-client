@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
-import TitleBox from "../components/postPage/TitleBox";
+import TitleBox from "../components/post/TitleBox";
 import Button from "../components/common/Button";
 import { useNavigate } from "react-router-dom";
-import NoticePostList from "../components/postPage/NoticePostList";
+import NoticePostList from "../components/post/NoticePostList";
 import useIsAdmin from "./../hooks/useIsAdmin";
 
 const Container = styled.div`

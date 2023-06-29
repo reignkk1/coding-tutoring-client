@@ -5,7 +5,7 @@ import Button from "../components/common/Button";
 
 import useWriteEditForm from "../hooks/useWriteEditForm";
 import { setTitle } from "../store/post/PostWriteEditFormSlice";
-import { createNoticePost } from "../store/post/PostThunk";
+import { createNoticePost } from "../store/post/api/PostCreateThunk";
 
 const Container = styled.div`
   height: 100vh;

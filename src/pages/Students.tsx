@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import Wrapper from "../components/common/Wrapper";
-import TopSheet from "../components/postPage/TopSheet";
-import FindPostList from "../components/postPage/FindPostList";
+import TopSheet from "../components/post/TopSheet";
+import FindPostList from "../components/post/FindPostList";
 import styled from "styled-components";
 import usePostScrollPage from "../hooks/usePostScrollPage";
-import { getStudentsPost } from "../store/post/PostThunk";
+import { getStudentsPost } from "../store/post/api/PostReadThunk";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import useCategory from "../hooks/useCategory";

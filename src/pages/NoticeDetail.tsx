@@ -2,9 +2,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Wrapper from "../components/common/Wrapper";
 import styled from "styled-components";
 import Button from "../components/common/Button";
-import { deletePost } from "../api/Post";
 import Parser from "html-react-parser";
 import useIsAdmin from "../hooks/useIsAdmin";
+import { useDispatch } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
+import { deleteNoticePost } from "../store/post/api/PostDeleteThunk";
 
 const Container = styled.div`
   padding: 100px;
@@ -32,6 +34,7 @@ interface INoticePost {
 }
 
 export default function NoticeDetail() {
+  const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
   const post: INoticePost = useLocation().state;
   const navigate = useNavigate();
 
@@ -39,7 +42,7 @@ export default function NoticeDetail() {
 
   const handleDelete = () => {
     if (window.confirm("정말로 삭제하겠습니까?")) {
-      deletePost(post.id, "notice");
+      dispatch(deleteNoticePost(post.id));
       window.location.assign("/notice");
     }
     return;

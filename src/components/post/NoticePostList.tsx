@@ -4,7 +4,7 @@ import { usePost } from "../../hooks/usePost";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { getNoticesPost } from "../../store/post/PostThunk";
+import { getNoticesPost } from "../../store/post/api/PostReadThunk";
 
 const Container = styled.div`
   width: 70%;

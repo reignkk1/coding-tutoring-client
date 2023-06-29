@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import Button from "../common/Button";
-import { searchSubject } from "../../api/Post";
 import { useDispatch } from "react-redux";
 import { subjects } from "../write/SelectData";
 import TitleBox from "./TitleBox";
 import useCategory from "../../hooks/useCategory";
+import { ThunkDispatch } from "redux-thunk";
+import {
+  searchSubjectStudentPosts,
+  searchSubjectTeacherPosts,
+} from "../../store/post/api/PostReadThunk";
 
 const Top = styled.section`
   display: flex;
@@ -56,11 +60,15 @@ const Subject = styled.div`
 `;
 
 export default function TopSheet() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
   const [category] = useCategory();
 
-  const handleSubjectClick = (subject: string) =>
-    searchSubject(subject, category, dispatch);
+  const handleSubjectClick = (subject: string) => {
+    if (category === "students")
+      return dispatch(searchSubjectStudentPosts(subject));
+    if (category === "teachers")
+      return dispatch(searchSubjectTeacherPosts(subject));
+  };
 
   return (
     <Top>

@@ -21,7 +21,7 @@ const writeEditFormSlice = createSlice({
   initialState,
   reducers: {
     setInitialState: (state, action) => {
-      state = action.payload;
+      return (state = { ...state, ...action.payload });
     },
     setOnOff: (state, action) => {
       state.onOrOff = action.payload;
