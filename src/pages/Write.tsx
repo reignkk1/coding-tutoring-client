@@ -39,11 +39,7 @@ const ButtonBox = styled.div`
 `;
 
 export default function Write() {
-  const {
-    user,
-    user: { userClassification },
-  } = useContext(AuthContext);
-  console.log(user);
+  const { user } = useContext(AuthContext);
 
   const [state, dispatch] = useWriteEditForm();
 
@@ -67,9 +63,9 @@ export default function Write() {
       subject: desiredSubjects?.join(""),
       title,
     };
-    if (userClassification === "STUDENT")
+    if (user?.userClassification === "STUDENT")
       return dispatch(createStudentPost(data));
-    if (userClassification === "TEACHER")
+    if (user?.userClassification === "TEACHER")
       return dispatch(createTeacherPost(data));
   };
 

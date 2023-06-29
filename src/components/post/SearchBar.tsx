@@ -34,11 +34,7 @@ const Input = styled.input`
   }
 `;
 
-interface ISearchBar {
-  placeholder: string;
-}
-
-export default function SearchBar({ placeholder }: ISearchBar) {
+export default function SearchBar() {
   const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
   const [category] = useCategory();
   const [value, setValue] = useState("");
@@ -52,7 +48,7 @@ export default function SearchBar({ placeholder }: ISearchBar) {
     setValue("");
   };
 
-  const handleAllSubject = () => {
+  const handleReset = () => {
     setValue("");
     if (category === "teachers") return dispatch(getTeachersPost(0));
     if (category === "students") return dispatch(getStudentsPost(0));
@@ -61,12 +57,12 @@ export default function SearchBar({ placeholder }: ISearchBar) {
   return (
     <Form onSubmit={handleSubmit}>
       <Input
-        placeholder={placeholder}
+        placeholder="제목을 입력해주세요"
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
       <Button type="submit">검색</Button>
-      <Button onClick={handleAllSubject}>리셋</Button>
+      <Button onClick={handleReset}>리셋</Button>
     </Form>
   );
 }

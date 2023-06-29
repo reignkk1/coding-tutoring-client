@@ -4,7 +4,9 @@ import TitleBox from "../components/post/TitleBox";
 import Button from "../components/common/Button";
 import { useNavigate } from "react-router-dom";
 import NoticePostList from "../components/post/NoticePostList";
-import useIsAdmin from "./../hooks/useIsAdmin";
+// import useIsAdmin from "./../hooks/useIsAdmin";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const Container = styled.div`
   margin-top: 4rem;
@@ -17,7 +19,10 @@ const Container = styled.div`
 
 export default function Notice() {
   const navigate = useNavigate();
-  const isAdmin = useIsAdmin();
+  // const isAdmin = useIsAdmin();
+  const {
+    user: { isAdmin },
+  } = useContext(AuthContext);
 
   return (
     <Wrapper>

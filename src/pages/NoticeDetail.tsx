@@ -1,9 +1,11 @@
+import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Wrapper from "../components/common/Wrapper";
 import styled from "styled-components";
 import Button from "../components/common/Button";
 import Parser from "html-react-parser";
-import useIsAdmin from "../hooks/useIsAdmin";
+import { AuthContext } from "../context/AuthContext";
+// import useIsAdmin from "../hooks/useIsAdmin";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 import { deleteNoticePost } from "../store/post/api/PostDeleteThunk";
@@ -38,7 +40,10 @@ export default function NoticeDetail() {
   const post: INoticePost = useLocation().state;
   const navigate = useNavigate();
 
-  const isAdmin = useIsAdmin();
+  // const isAdmin = useIsAdmin();
+  const {
+    user: { isAdmin },
+  } = useContext(AuthContext);
 
   const handleDelete = () => {
     if (window.confirm("정말로 삭제하겠습니까?")) {

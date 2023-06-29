@@ -133,6 +133,7 @@ export const getMyData = async (token: string) => {
       },
     });
     if (res.status === 200) {
+      console.log(res.data);
       let user = await res.data;
       user = {
         ...user,
@@ -140,7 +141,9 @@ export const getMyData = async (token: string) => {
           user.gender === "MALE"
             ? "https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg"
             : "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg",
+        isAdmin: user.role === "ROLE_ADMIN" ? true : false,
       };
+      console.log(user);
       return user;
     }
   } catch (error) {

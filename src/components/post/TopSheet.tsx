@@ -79,7 +79,7 @@ export default function TopSheet() {
           secondExplain="연락 요청은 5건, 직접 연락은 3건까지 매월 이용할 수 있어요"
         />
 
-        <SearchBar placeholder={"제목을 입력해주세요."} />
+        <SearchBar />
       </Left>
       <Subject>
         {subjects.map((subject, index) => (

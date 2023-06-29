@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 const Btn = styled.button`
@@ -19,14 +20,12 @@ interface IButton {
   type?: "submit" | "reset" | "button";
 }
 
-export default function Button({
-  children,
-  onClick,
-  type = "button",
-}: IButton) {
+function Button({ children, onClick, type = "button" }: IButton) {
   return (
     <Btn type={type} onClick={onClick}>
       {children}
     </Btn>
   );
 }
+
+export default React.memo(Button);
