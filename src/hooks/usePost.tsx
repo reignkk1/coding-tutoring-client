@@ -1,10 +1,10 @@
 import { RootState } from "../store/configureStore";
-import { useAppDispatch, useAppSelector } from "../reduxHooks";
+import { useAppSelector } from "../reduxHooks";
 
 export function usePost() {
-  const dispatch = useAppDispatch();
+  const { posts, isLoading, isError } = useAppSelector(
+    (state: RootState) => state.post
+  );
 
-  const { value } = useAppSelector((state: RootState) => state.post);
-
-  return [value, dispatch] as const;
+  return { posts, isLoading, isError };
 }

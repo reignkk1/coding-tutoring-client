@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ImgContainer } from "./MyPage";
 import Wrapper from "../components/common/Wrapper";
-import { deletePost } from "../api/Post";
 import Modal from "../components/common/Modal";
 import MessageSendBox from "../components/notes/MessageSendBox";
 import { ageFormat, careerFormat, genderFormat } from "../util/format";
@@ -13,6 +12,13 @@ import useModal from "../hooks/useModal";
 import { ICategory } from "../types/category";
 import { openModal } from "../store/modal";
 import parse from "html-react-parser";
+import { useDispatch } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
+import {
+  deleteNoticePost,
+  deleteStudentPost,
+  deleteTeacherPost,
+} from "../store/post/api/PostDeleteThunk";
 
 interface IPost {
   id: string;
@@ -33,8 +39,9 @@ interface IPost {
 
 export default function PostDetail({ category }: ICategory) {
   const { user } = useContext(AuthContext);
+  const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
 
-  const [, dispatch] = useModal();
+  const [, modalDispatch] = useModal();
 
   const navigate = useNavigate();
   const post: IPost = useLocation().state;
@@ -43,7 +50,11 @@ export default function PostDetail({ category }: ICategory) {
 
   const handleDelete = () => {
     if (window.confirm("정말로 삭제하겠습니까?")) {
-      deletePost(post.id, category);
+      category === "notice"
+        ? dispatch(deleteNoticePost(post.id))
+        : category === "students"
+        ? dispatch(deleteStudentPost(post.id))
+        : dispatch(deleteTeacherPost(post.id));
     }
   };
 
@@ -81,7 +92,7 @@ export default function PostDetail({ category }: ICategory) {
                   if (!user) {
                     alert("로그인이 필요한 서비스 입니다.");
                   }
-                  dispatch(openModal());
+                  modalDispatch(openModal());
                 }}
               >
                 쪽지 보내기

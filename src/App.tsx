@@ -6,7 +6,6 @@ import MyPage from "./pages/MyPage";
 import UserPage from "./pages/UserPage";
 import Notice from "./pages/Notice";
 import NotFound from "./pages/NotFound";
-import FindPage from "./pages/FindPage";
 import PostDetail from "./pages/PostDetail";
 import Write from "./pages/Write";
 import Notes from "./pages/Notes";
@@ -27,6 +26,8 @@ import FindPageEdit from "./pages/FindPageEdit";
 import { Provider } from "react-redux";
 import { store } from "./store/configureStore";
 import ProfileUpdate from "./pages/ProfileUpdate";
+import Teachers from "./pages/Teachers";
+import Students from "./pages/Students";
 
 function App() {
   const router = createBrowserRouter([
@@ -57,11 +58,11 @@ function App() {
 
         {
           path: "/teachers",
-          element: <FindPage category="teachers" />,
+          element: <Teachers />,
         },
         {
           path: "/students",
-          element: <FindPage category="students" />,
+          element: <Students />,
         },
         {
           path: "/teachers/post/:postId",

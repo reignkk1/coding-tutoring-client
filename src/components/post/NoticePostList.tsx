@@ -1,13 +1,10 @@
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { IPost } from "../../api/Post";
-import {
-  howFormat,
-  firstToUpper,
-  genderFormat,
-  careerFormat,
-} from "../../util/format";
+import styled from "styled-components";
 import { usePost } from "../../hooks/usePost";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import { getNoticesPost } from "../../store/post/api/PostReadThunk";
 
 const Container = styled.div`
   width: 70%;
@@ -49,13 +46,11 @@ const Container = styled.div`
     &:hover {
       transform: translateY(-0.5rem);
     }
-
     @media (max-width: 500px) {
       flex-direction: column;
       text-align: center;
     }
   }
-
   @media (max-width: 850px) {
     width: 100%;
   }
@@ -71,7 +66,6 @@ const ImgBox = styled.div`
     font-family: regular;
     font-size: 14px;
   }
-
   @media (max-width: 500px) {
     margin-right: 0;
   }
@@ -113,52 +107,37 @@ const InfoBox = styled.div`
   }
 `;
 
-interface IFindPostList {
-  posts?: IPost[];
-  category: string;
-}
-
-export default function FindPostList({ category }: IFindPostList) {
+export default function NoticePostList() {
   const navigate = useNavigate();
+  const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
 
-  const [posts] = usePost();
+  const { posts, isLoading, isError } = usePost();
 
-  console.log(posts);
+  useEffect(() => {
+    dispatch(getNoticesPost());
+  }, [dispatch]);
 
-  return (
+  return isLoading ? (
+    <div>로딩중..</div>
+  ) : (
     <Container>
       <ul>
         {posts?.map((post, index) => (
           <li key={index}>
             <ImgBox>
-              <img
-                src={`${
-                  post.member?.gender === "MALE"
-                    ? "https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg"
-                    : "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg"
-                }`}
-                alt="프로필 사진"
-              />
-              <span>{post.member?.nickname}</span>
+              <img src="/admin-img.png" alt="프로필 사진" />
+              <span>운영자</span>
             </ImgBox>
             <InfoBox>
               <h2
                 onClick={() =>
-                  navigate(`/${category}/post/${post.id}`, {
+                  navigate(`/notice/post/${post.id}`, {
                     state: post,
                   })
                 }
               >
                 {post.title}
               </h2>
-
-              <span>{firstToUpper(`${post.subject}`)}</span>
-              <p>{howFormat(`${post.onOrOff}`)}</p>
-              <p>
-                {genderFormat(`${post.member?.gender}`)} /&nbsp;
-                {careerFormat(`${post.member?.career}`)}
-              </p>
-              <p className="area">{post.area} 거주</p>
             </InfoBox>
           </li>
         ))}

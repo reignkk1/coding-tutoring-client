@@ -1,17 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
-import postSlice from "./post";
-import editPostSlice from "./editPost";
+import postSlice from "./post/PostSlice";
 import modalSlice from "./modal";
 import noteSlice from "./note";
 import api from "./middleware/api";
 import error from "./middleware/error";
+import categorySlice from "./category";
+import writeEditFormSlice from "./post/PostWriteEditFormSlice";
 
 export const store = configureStore({
   reducer: {
     post: postSlice,
-    editPost: editPostSlice,
+    writeEditForm: writeEditFormSlice,
     modal: modalSlice,
     note: noteSlice,
+    category: categorySlice,
   },
   middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), api, error],
 });

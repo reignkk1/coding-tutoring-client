@@ -4,9 +4,12 @@ import { useEffect } from "react";
 import Button from "../components/common/Button";
 import Editor from "../components/write/Editor";
 import { useLocation } from "react-router-dom";
-import { modifyPost } from "../api/Post";
 import useWriteEditForm from "../hooks/useWriteEditForm";
-import { editTitle, setEdit } from "../store/editPost";
+import {
+  setInitialState,
+  setTitle,
+} from "../store/post/PostWriteEditFormSlice";
+import { modifyNoticePost } from "../store/post/api/PostUpdateThunk";
 
 const Container = styled.div`
   height: 100vh;
@@ -51,7 +54,7 @@ export default function NoticeEdit() {
 
   useEffect(() => {
     dispatch(
-      setEdit({
+      setInitialState({
         title: post.title,
         content: post.content,
       })
@@ -59,7 +62,7 @@ export default function NoticeEdit() {
   }, [post, dispatch]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    dispatch(editTitle(e.target.value));
+    dispatch(setTitle(e.target.value));
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -68,7 +71,8 @@ export default function NoticeEdit() {
       title,
       content,
     };
-    modifyPost(data, "notice");
+
+    dispatch(modifyNoticePost(data));
   };
 
   return (

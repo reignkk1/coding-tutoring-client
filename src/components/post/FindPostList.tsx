@@ -1,6 +1,12 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useGetPosts } from "./../../api/Post";
+import { useNavigate } from "react-router-dom";
+import {
+  howFormat,
+  firstToUpper,
+  genderFormat,
+  careerFormat,
+  jobFormatPath,
+} from "../../util/format";
 import { usePost } from "../../hooks/usePost";
 
 const Container = styled.div`
@@ -43,11 +49,13 @@ const Container = styled.div`
     &:hover {
       transform: translateY(-0.5rem);
     }
+
     @media (max-width: 500px) {
       flex-direction: column;
       text-align: center;
     }
   }
+
   @media (max-width: 850px) {
     width: 100%;
   }
@@ -63,6 +71,7 @@ const ImgBox = styled.div`
     font-family: regular;
     font-size: 14px;
   }
+
   @media (max-width: 500px) {
     margin-right: 0;
   }
@@ -104,32 +113,52 @@ const InfoBox = styled.div`
   }
 `;
 
-export default function NoticePostList() {
+export default function FindPostList() {
   const navigate = useNavigate();
 
-  useGetPosts("notice", 0);
+  const { posts, isLoading, isError } = usePost();
 
-  const [posts] = usePost();
-
-  return (
+  return isLoading ? (
+    <div>로딩중..</div>
+  ) : (
     <Container>
       <ul>
         {posts?.map((post, index) => (
           <li key={index}>
             <ImgBox>
-              <img src="/admin-img.png" alt="프로필 사진" />
-              <span>운영자</span>
+              <img
+                src={`${
+                  post.member?.gender === "MALE"
+                    ? "https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg"
+                    : "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg"
+                }`}
+                alt="프로필 사진"
+              />
+              <span>{post.member?.nickname}</span>
             </ImgBox>
             <InfoBox>
               <h2
                 onClick={() =>
-                  navigate(`/notice/post/${post.id}`, {
-                    state: post,
-                  })
+                  navigate(
+                    `/${jobFormatPath(post.member?.userClassification)}/post/${
+                      post.id
+                    }`,
+                    {
+                      state: post,
+                    }
+                  )
                 }
               >
                 {post.title}
               </h2>
+
+              <span>{firstToUpper(`${post.subject}`)}</span>
+              <p>{howFormat(`${post.onOrOff}`)}</p>
+              <p>
+                {genderFormat(`${post.member?.gender}`)} /&nbsp;
+                {careerFormat(`${post.member?.career}`)}
+              </p>
+              <p className="area">{post.area} 거주</p>
             </InfoBox>
           </li>
         ))}

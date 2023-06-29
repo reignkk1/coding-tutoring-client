@@ -3,13 +3,16 @@ import Wrapper from "../components/common/Wrapper";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useLocation } from "react-router-dom";
-import { modifyPost } from "../api/Post";
 import useWriteEditForm from "../hooks/useWriteEditForm";
 import UserInfo from "./../components/write/UserInfo";
 import EditFormList from "../components/write/WriteEditFormList";
 import Button from "../components/common/Button";
 import { ICategory } from "../types/category";
-import { setEdit } from "../store/editPost";
+import { setInitialState } from "../store/post/PostWriteEditFormSlice";
+import {
+  modifyStudentPost,
+  modifyTeacherPost,
+} from "../store/post/api/PostUpdateThunk";
 
 const Container = styled.div`
   height: 200vh;
@@ -56,7 +59,7 @@ export default function FindPageEdit({ category }: ICategory) {
 
   useEffect(() => {
     dispatch(
-      setEdit({
+      setInitialState({
         onOrOff: post.onOrOff,
         subject: post.subject,
         area: post.area,
@@ -78,7 +81,8 @@ export default function FindPageEdit({ category }: ICategory) {
       subject: desiredSubjects?.join(""),
       title,
     };
-    modifyPost(data, category);
+    if (category === "students") return dispatch(modifyStudentPost(data));
+    if (category === "teachers") return dispatch(modifyTeacherPost(data));
   };
 
   return (

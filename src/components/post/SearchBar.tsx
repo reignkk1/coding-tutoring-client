@@ -1,8 +1,15 @@
 import styled from "styled-components";
 import Button from "../common/Button";
-import { searchSubject, searchTitle } from "../../api/Post";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import useCategory from "../../hooks/useCategory";
+import { ThunkDispatch } from "redux-thunk";
+import {
+  getStudentsPost,
+  getTeachersPost,
+  searchTitleStudentPosts,
+  searchTitleTeacherPosts,
+} from "../../store/post/api/PostReadThunk";
 
 const Form = styled.form`
   display: flex;
@@ -29,20 +36,27 @@ const Input = styled.input`
 
 interface ISearchBar {
   placeholder: string;
-  category: "teachers" | "students" | "notice";
 }
 
-export default function SearchBar({ placeholder, category }: ISearchBar) {
-  const dispatch = useDispatch();
+export default function SearchBar({ placeholder }: ISearchBar) {
+  const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
+  const [category] = useCategory();
   const [value, setValue] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    searchTitle(value, dispatch, category);
+    if (category === "teachers")
+      return dispatch(searchTitleTeacherPosts(value));
+    if (category === "students")
+      return dispatch(searchTitleStudentPosts(value));
     setValue("");
   };
 
-  const handleAllSubject = () => searchSubject("", category, dispatch);
+  const handleAllSubject = () => {
+    setValue("");
+    if (category === "teachers") return dispatch(getTeachersPost(0));
+    if (category === "students") return dispatch(getStudentsPost(0));
+  };
 
   return (
     <Form onSubmit={handleSubmit}>

@@ -46,6 +46,15 @@ export const jobFormat = (userClassification?: string) => {
   }
 };
 
+export const jobFormatPath = (userClassification?: string) => {
+  switch (userClassification) {
+    case "STUDENT":
+      return "students";
+    case "TEACHER":
+      return "teachers";
+  }
+};
+
 export const howFormat = (how: string) => {
   switch (how) {
     case "ONLINE":

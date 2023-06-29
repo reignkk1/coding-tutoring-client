@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
 import { useContext } from "react";
-import { createPost } from "../api/Post";
 import { AuthContext } from "../context/AuthContext";
-import { useRouteLoaderData } from "react-router-dom";
 import useWriteEditForm from "../hooks/useWriteEditForm";
 import UserInfo from "../components/write/UserInfo";
 import WriteFormList from "../components/write/WriteEditFormList";
 import Button from "../components/common/Button";
+import {
+  createStudentPost,
+  createTeacherPost,
+} from "../store/post/api/PostCreateThunk";
 
 const Container = styled.div`
   height: 200vh;
@@ -37,10 +39,13 @@ const ButtonBox = styled.div`
 `;
 
 export default function Write() {
-  const token = useRouteLoaderData("root");
-  const { user } = useContext(AuthContext);
+  const {
+    user,
+    user: { userClassification },
+  } = useContext(AuthContext);
+  console.log(user);
 
-  const [state] = useWriteEditForm();
+  const [state, dispatch] = useWriteEditForm();
 
   const { area, content, onOrOff, desiredSubjects, title } = state;
 
@@ -62,7 +67,10 @@ export default function Write() {
       subject: desiredSubjects?.join(""),
       title,
     };
-    createPost(data, user.userClassification, token as string);
+    if (userClassification === "STUDENT")
+      return dispatch(createStudentPost(data));
+    if (userClassification === "TEACHER")
+      return dispatch(createTeacherPost(data));
   };
 
   return (
