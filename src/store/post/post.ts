@@ -1,9 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  getPost,
-  searchSubjectPosts,
-  searchTitlePosts,
-} from "./api/PostReadThunk";
+import { getPost, searchSubjectPosts, searchTitlePosts } from "./postApiAction";
 import { IPost } from "../../types/PostDataType";
 
 const initialState = { posts: [] as IPost[], isLoading: false, isError: false };
@@ -16,20 +12,24 @@ const postSlice = createSlice({
     //모든 게시물
     builder.addCase(getPost.pending, (state, action) => {
       const { arg } = action.meta;
+
       if (arg.page) {
         arg.page === 0 && (state.isLoading = true);
+      } else {
+        state.isLoading = true;
       }
-      state.isLoading = true;
     });
     builder.addCase(getPost.fulfilled, (state, action) => {
       const { arg } = action.meta;
       state.isLoading = false;
+      console.log("페이로드", action.payload, arg.page);
       if (arg.page) {
         arg.page === 0
           ? (state.posts = action.payload)
           : (state.posts = [...state.posts, ...action.payload]);
+      } else if (!arg.page) {
+        state.posts = action.payload;
       }
-      state.posts = action.payload;
     });
     builder.addCase(getPost.rejected, (state, action) => {
       state.isError = true;
@@ -48,7 +48,6 @@ const postSlice = createSlice({
     });
 
     //과목 검색
-
     builder.addCase(searchSubjectPosts.pending, (state, action) => {
       state.isLoading = true;
     });

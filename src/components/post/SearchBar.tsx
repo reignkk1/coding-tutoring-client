@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import useCategory from "../../hooks/useCategory";
 import { ThunkDispatch } from "redux-thunk";
-import { getPost, searchTitlePosts } from "../../store/post/api/PostReadThunk";
+import { getPost, searchTitlePosts } from "../../store/post/postApiAction";
 
 const Form = styled.form`
   display: flex;

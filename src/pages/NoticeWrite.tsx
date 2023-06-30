@@ -5,7 +5,7 @@ import Button from "../components/common/Button";
 
 import useWriteEditForm from "../hooks/useWriteEditForm";
 import { setTitle } from "../store/post/PostWriteEditFormSlice";
-import { createNoticePost } from "../store/post/api/PostCreateThunk";
+import { createPost } from "../store/post/postApiAction";
 
 const Container = styled.div`
   height: 100vh;
@@ -51,7 +51,7 @@ export default function NoticeWrite() {
       content,
     };
 
-    dispatch(createNoticePost(data));
+    dispatch(createPost({ category: "notice", data }));
   };
   return (
     <Wrapper>

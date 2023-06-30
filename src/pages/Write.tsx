@@ -6,7 +6,7 @@ import useWriteEditForm from "../hooks/useWriteEditForm";
 import UserInfo from "../components/write/UserInfo";
 import WriteFormList from "../components/write/WriteEditFormList";
 import Button from "../components/common/Button";
-import { createPost } from "../store/post/api/PostCreateThunk";
+import { createPost } from "../store/post/postApiAction";
 
 const Container = styled.div`
   height: 200vh;

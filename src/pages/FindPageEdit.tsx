@@ -9,7 +9,7 @@ import EditFormList from "../components/write/WriteEditFormList";
 import Button from "../components/common/Button";
 import { ICategory } from "../types/category";
 import { setInitialState } from "../store/post/PostWriteEditFormSlice";
-import { modifyPost } from "../store/post/api/PostUpdateThunk";
+import { modifyPost } from "../store/post/postApiAction";
 
 const Container = styled.div`
   height: 200vh;

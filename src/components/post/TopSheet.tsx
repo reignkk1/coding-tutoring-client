@@ -6,7 +6,7 @@ import { subjects } from "../write/SelectData";
 import TitleBox from "./TitleBox";
 import useCategory from "../../hooks/useCategory";
 import { ThunkDispatch } from "redux-thunk";
-import { searchSubjectPosts } from "../../store/post/api/PostReadThunk";
+import { searchSubjectPosts } from "../../store/post/postApiAction";
 
 const Top = styled.section`
   display: flex;

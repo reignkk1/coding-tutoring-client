@@ -4,7 +4,7 @@ import { usePost } from "../../hooks/usePost";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { getPost } from "../../store/post/api/PostReadThunk";
+import { getPost } from "../../store/post/postApiAction";
 import useCategory from "../../hooks/useCategory";
 import { setCategory } from "../../store/category";
 
@@ -113,18 +113,16 @@ export default function NoticePostList() {
   const navigate = useNavigate();
   const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
 
-  const [category, categoryDispatch] = useCategory();
-  const { posts, isLoading, isError } = usePost();
-
-  console.log(category);
+  const [, categoryDispatch] = useCategory();
+  const { posts, isLoading } = usePost();
 
   useEffect(() => {
-    categoryDispatch(setCategory("notices"));
+    categoryDispatch(setCategory("notice"));
   }, [categoryDispatch]);
 
   useEffect(() => {
-    dispatch(getPost({ category: "notices" }));
-  }, [category]);
+    dispatch(getPost({ category: "notice" }));
+  }, [dispatch]);
 
   return isLoading ? (
     <div>로딩중..</div>

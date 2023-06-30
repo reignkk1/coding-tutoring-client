@@ -8,7 +8,7 @@ import { AuthContext } from "../context/AuthContext";
 // import useIsAdmin from "../hooks/useIsAdmin";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
-import { deletePost } from "../store/post/api/PostDeleteThunk";
+import { deletePost } from "../store/post/postApiAction";
 
 const Container = styled.div`
   padding: 100px;

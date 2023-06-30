@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import postSlice from "./post/postSlice";
+import postSlice from "./post/post";
 import modalSlice from "./modal";
 import noteSlice from "./note";
 import api from "./middleware/api";

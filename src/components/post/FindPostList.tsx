@@ -118,6 +118,7 @@ export default function FindPostList() {
 
   const { posts, isLoading, isError } = usePost();
   console.log(posts);
+
   return isLoading ? (
     <div>로딩중..</div>
   ) : (

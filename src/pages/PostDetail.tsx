@@ -14,7 +14,7 @@ import { openModal } from "../store/modal";
 import parse from "html-react-parser";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
-import { deletePost } from "../store/post/api/PostDeleteThunk";
+import { deletePost } from "../store/post/postApiAction";
 
 interface IPost {
   id: string;

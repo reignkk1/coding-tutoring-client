@@ -9,7 +9,7 @@ import {
   setInitialState,
   setTitle,
 } from "../store/post/PostWriteEditFormSlice";
-import { modifyPost } from "../store/post/api/PostUpdateThunk";
+import { modifyPost } from "../store/post/postApiAction";
 
 const Container = styled.div`
   height: 100vh;

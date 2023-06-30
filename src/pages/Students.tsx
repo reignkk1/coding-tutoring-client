@@ -4,7 +4,7 @@ import TopSheet from "../components/post/TopSheet";
 import FindPostList from "../components/post/FindPostList";
 import styled from "styled-components";
 import usePostScrollPage from "../hooks/usePostScrollPage";
-import { getPost } from "../store/post/api/PostReadThunk";
+import { getPost } from "../store/post/postApiAction";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import useCategory from "../hooks/useCategory";
@@ -21,23 +21,20 @@ const Container = styled.div`
 
 export default function Students() {
   const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
-  // const [category, categoryDispatch] = useCategory();
-
-  const category = window.location.pathname.replace("/", "");
+  const [, categoryDispatch] = useCategory();
 
   const [page, setPage] = usePostScrollPage();
 
-  // useEffect(() => {
-  //   setPage(0);
-  //   categoryDispatch(setCategory("student"));
-  // }, [categoryDispatch, setPage]);
   useEffect(() => {
+    console.log("페이지 처음 마운트", page);
     setPage(0);
-  }, [setPage]);
+    categoryDispatch(setCategory("student"));
+  }, [categoryDispatch, setPage]);
 
   useEffect(() => {
-    dispatch(getPost({ category, page }));
-  }, [page]);
+    console.log("이제야 제대로", page);
+    dispatch(getPost({ category: "student", page }));
+  }, [dispatch, page]);
 
   return (
     <Wrapper>
