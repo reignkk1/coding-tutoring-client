@@ -6,7 +6,7 @@ export default function Loading() {
 
 const Spinner = styled.div`
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 45%;
   transform: translate(-50%, -50%);
 

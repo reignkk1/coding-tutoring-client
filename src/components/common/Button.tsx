@@ -5,6 +5,7 @@ const Btn = styled.button`
   height: 2rem;
   padding: 0.5rem 0.7rem;
   border-radius: 5px;
+  flex-shrink: 0;
 
   background-color: #c9fd35;
   color: #0e1620;

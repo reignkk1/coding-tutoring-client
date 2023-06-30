@@ -17,6 +17,14 @@ const Input = styled.input`
   background-color: transparent;
   padding: 0.5rem 0.7rem;
 
+  @media (max-width: 650px) {
+    width: 230px;
+  }
+
+  @media (max-width: 450px) {
+    width: 200px;
+  }
+
   outline: none;
   border: 0.1px solid #c9fd35;
   border-radius: 5px;

@@ -11,7 +11,6 @@ import { usePost } from "../../hooks/usePost";
 import Loading from "../common/Loading";
 
 const Container = styled.div`
-  position: relative;
   width: 70%;
   min-height: 150px;
   margin-inline: auto;

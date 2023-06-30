@@ -7,9 +7,11 @@ import { ThunkDispatch } from "@reduxjs/toolkit";
 import { getPost } from "../../store/post/postApiAction";
 import useCategory from "../../hooks/useCategory";
 import { setCategory } from "../../store/category";
+import Loading from "../common/Loading";
 
 const Container = styled.div`
   width: 70%;
+  min-height: 150px;
   margin-inline: auto;
   margin-block: 4rem;
   div {
@@ -125,7 +127,9 @@ export default function NoticePostList() {
   }, [dispatch]);
 
   return isLoading ? (
-    <div>로딩중..</div>
+    <Container>
+      <Loading />
+    </Container>
   ) : (
     <Container>
       <ul>

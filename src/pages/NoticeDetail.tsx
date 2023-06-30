@@ -11,16 +11,19 @@ import { ThunkDispatch } from "redux-thunk";
 import { deletePost } from "../store/post/postApiAction";
 
 const Container = styled.div`
-  padding: 100px;
+  padding: 4rem;
+  transition: all 0.3s ease-out;
+
+  @media (max-width: 650px) {
+    padding-inline: 2rem;
+  }
 `;
 const Title = styled.div`
-  margin-bottom: 100px;
-  font-size: 30px;
-  font-weight: bold;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-family: regular;
 `;
 const Content = styled.div`
-  margin-bottom: 100px;
-
   line-height: 1.8;
 `;
 const ButtonContainer = styled.div`
@@ -41,9 +44,7 @@ export default function NoticeDetail() {
   const navigate = useNavigate();
 
   // const isAdmin = useIsAdmin();
-  const {
-    user: { isAdmin },
-  } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const handleDelete = () => {
     if (window.confirm("정말로 삭제하겠습니까?")) {
@@ -59,7 +60,7 @@ export default function NoticeDetail() {
       <Container>
         <Title>{post.title}</Title>
         <Content>{Parser(post.content)}</Content>
-        {isAdmin && (
+        {user && user.isAdmin && (
           <ButtonContainer>
             <Button onClick={handleDelete}>삭제</Button>
             <Button onClick={handleModify}>수정</Button>
