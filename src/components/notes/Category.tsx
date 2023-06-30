@@ -1,10 +1,11 @@
+import React from "react";
 import styled from "styled-components";
 
 interface CategoryProps {
-  selected: string;
   changeSelected: (value: string) => void;
 }
-export default function Category({ selected, changeSelected }: CategoryProps) {
+
+function Category({ changeSelected }: CategoryProps) {
   const categories = [
     { value: "received", text: "받은쪽지" },
     { value: "sent", text: "보낸쪽지" },
@@ -26,6 +27,8 @@ export default function Category({ selected, changeSelected }: CategoryProps) {
     </CategoryContianer>
   );
 }
+
+export default React.memo(Category);
 
 const CategoryContianer = styled.ul`
   display: flex;

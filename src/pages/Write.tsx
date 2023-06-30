@@ -6,10 +6,7 @@ import useWriteEditForm from "../hooks/useWriteEditForm";
 import UserInfo from "../components/write/UserInfo";
 import WriteFormList from "../components/write/WriteEditFormList";
 import Button from "../components/common/Button";
-import {
-  createStudentPost,
-  createTeacherPost,
-} from "../store/post/api/PostCreateThunk";
+import { createPost } from "../store/post/postApiAction";
 
 const Container = styled.div`
   height: 200vh;
@@ -39,11 +36,7 @@ const ButtonBox = styled.div`
 `;
 
 export default function Write() {
-  const {
-    user,
-    user: { userClassification },
-  } = useContext(AuthContext);
-  console.log(user);
+  const { user } = useContext(AuthContext);
 
   const [state, dispatch] = useWriteEditForm();
 
@@ -67,10 +60,7 @@ export default function Write() {
       subject: desiredSubjects?.join(""),
       title,
     };
-    if (userClassification === "STUDENT")
-      return dispatch(createStudentPost(data));
-    if (userClassification === "TEACHER")
-      return dispatch(createTeacherPost(data));
+    dispatch(createPost({ category: user?.userClassification, data }));
   };
 
   return (

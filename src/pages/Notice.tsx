@@ -4,7 +4,9 @@ import TitleBox from "../components/post/TitleBox";
 import Button from "../components/common/Button";
 import { useNavigate } from "react-router-dom";
 import NoticePostList from "../components/post/NoticePostList";
-import useIsAdmin from "./../hooks/useIsAdmin";
+// import useIsAdmin from "./../hooks/useIsAdmin";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const Container = styled.div`
   margin-top: 4rem;
@@ -17,7 +19,8 @@ const Container = styled.div`
 
 export default function Notice() {
   const navigate = useNavigate();
-  const isAdmin = useIsAdmin();
+  // const isAdmin = useIsAdmin();
+  const { user } = useContext(AuthContext);
 
   return (
     <Wrapper>
@@ -26,7 +29,9 @@ export default function Notice() {
           title="공지사항"
           firstExplain="과외바다의 새소식, 이벤트, 행사 정보를 공유하는 공간입니다."
         />
-        {isAdmin && <Button onClick={() => navigate("write")}>작성하기</Button>}
+        {user && user.isAdmin && (
+          <Button onClick={() => navigate("write")}>작성하기</Button>
+        )}
 
         <NoticePostList />
       </Container>

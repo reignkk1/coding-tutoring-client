@@ -4,12 +4,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import useCategory from "../../hooks/useCategory";
 import { ThunkDispatch } from "redux-thunk";
-import {
-  getStudentsPost,
-  getTeachersPost,
-  searchTitleStudentPosts,
-  searchTitleTeacherPosts,
-} from "../../store/post/api/PostReadThunk";
+import { getPost, searchTitlePosts } from "../../store/post/postApiAction";
 
 const Form = styled.form`
   display: flex;
@@ -21,6 +16,14 @@ const Input = styled.input`
   height: 2rem;
   background-color: transparent;
   padding: 0.5rem 0.7rem;
+
+  @media (max-width: 650px) {
+    width: 230px;
+  }
+
+  @media (max-width: 450px) {
+    width: 200px;
+  }
 
   outline: none;
   border: 0.1px solid #c9fd35;
@@ -34,39 +37,33 @@ const Input = styled.input`
   }
 `;
 
-interface ISearchBar {
-  placeholder: string;
-}
-
-export default function SearchBar({ placeholder }: ISearchBar) {
+export default function SearchBar() {
   const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
   const [category] = useCategory();
   const [value, setValue] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (category === "teachers")
-      return dispatch(searchTitleTeacherPosts(value));
-    if (category === "students")
-      return dispatch(searchTitleStudentPosts(value));
+
+    dispatch(searchTitlePosts({ category, title: value }));
+
     setValue("");
   };
 
-  const handleAllSubject = () => {
+  const handleReset = () => {
     setValue("");
-    if (category === "teachers") return dispatch(getTeachersPost(0));
-    if (category === "students") return dispatch(getStudentsPost(0));
+    dispatch(getPost({ category, page: 0 }));
   };
 
   return (
     <Form onSubmit={handleSubmit}>
       <Input
-        placeholder={placeholder}
+        placeholder="제목을 입력해주세요"
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
       <Button type="submit">검색</Button>
-      <Button onClick={handleAllSubject}>리셋</Button>
+      <Button onClick={handleReset}>리셋</Button>
     </Form>
   );
 }

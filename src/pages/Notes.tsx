@@ -1,37 +1,40 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
 import Category from "../components/notes/Category";
 import Note from "../components/notes/Note";
 import { useNote } from "../hooks/useNote";
 import { loadNotes } from "../store/note";
+import { INote } from "../api/note";
 
 export default function Notes() {
+  const [notes, loading, , dispatch] = useNote();
   const [selected, setSelected] = useState("received");
   //메세지를 보낼 사람을 정해줘야 모달창이 모두 뜨지 않음
   const [sender, setSender] = useState("");
-  const changeSelected = (category: string) => {
-    setSelected(category);
-  };
 
-  const [notes, loading, , dispatch] = useNote();
+  const changeSelected = useCallback((category: string) => {
+    setSelected(category);
+  }, []);
+
   let reversedNotes = [...notes[selected]].reverse();
 
   useEffect(() => {
     dispatch(loadNotes(selected));
-  }, [dispatch, selected]);
+  }, [selected]);
 
   return (
     <Wrapper>
       <Container>
-        <Category selected={selected} changeSelected={changeSelected} />
+        <Category changeSelected={changeSelected} />
         <MsgBox className={`${selected === "sent" && "sent"}`}>
           {loading ? (
             <p>loading...</p>
           ) : (
             <>
-              {reversedNotes.map((note: any) => (
+              {reversedNotes.map((note: INote) => (
                 <Note
+                  key={note.messageId}
                   note={note}
                   selected={selected}
                   sender={sender}

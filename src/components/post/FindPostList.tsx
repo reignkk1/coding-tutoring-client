@@ -8,9 +8,11 @@ import {
   jobFormatPath,
 } from "../../util/format";
 import { usePost } from "../../hooks/usePost";
+import Loading from "../common/Loading";
 
 const Container = styled.div`
   width: 70%;
+  min-height: 150px;
   margin-inline: auto;
   margin-block: 4rem;
   div {
@@ -117,9 +119,12 @@ export default function FindPostList() {
   const navigate = useNavigate();
 
   const { posts, isLoading, isError } = usePost();
+  // console.log(posts);
 
   return isLoading ? (
-    <div>로딩중..</div>
+    <Container>
+      <Loading />
+    </Container>
   ) : (
     <Container>
       <ul>

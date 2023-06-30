@@ -1,5 +1,5 @@
 import { Link, useRouteLoaderData } from "react-router-dom";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import styled from "styled-components";
 import { signout } from "../../api/auth";
 
@@ -128,14 +128,14 @@ export default function Header() {
 
   const token = useRouteLoaderData("root");
   const menu = [
-    { item: "선생님 찾기", to: "/teachers" },
-    { item: "학생 찾기", to: "/students" },
+    { item: "선생님 찾기", to: "/teacher" },
+    { item: "학생 찾기", to: "/student" },
     { item: "글 작성", to: "/write" },
     { item: "공지사항", to: "/notice" },
   ];
-  const handleOpen = () => {
+  const handleOpen = useCallback(() => {
     setOpen((open) => !open);
-  };
+  }, []);
 
   return (
     <Head>
@@ -143,7 +143,7 @@ export default function Header() {
         <ToggleBtn onClick={handleOpen}>
           <HiMenu />
         </ToggleBtn>
-        <Link to="/" onClick={handleOpen}>
+        <Link to="/">
           <Logo>코딩바다</Logo>
         </Link>
         <NavContainer className={`${open && "open"}`}>
@@ -160,24 +160,26 @@ export default function Header() {
           </Nav>
           <Nav>
             <ul>
-              <NavItem>
+              <NavItem key="1">
                 <Link to="/notes" onClick={handleOpen}>
                   쪽지
                 </Link>
               </NavItem>
-              <NavItem>
+              <NavItem key="2">
                 <Link to="/view/me" onClick={handleOpen}>
                   마이페이지
                 </Link>
               </NavItem>
               {!token ? (
-                <NavItem>
+                <NavItem key="3">
                   <Link to="/signin" onClick={handleOpen}>
                     로그인
                   </Link>
                 </NavItem>
               ) : (
-                <NavItem onClick={signout}>로그아웃</NavItem>
+                <NavItem key="4" onClick={signout}>
+                  로그아웃
+                </NavItem>
               )}
             </ul>
           </Nav>

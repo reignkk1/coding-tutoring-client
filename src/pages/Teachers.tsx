@@ -5,7 +5,7 @@ import Wrapper from "../components/common/Wrapper";
 import { useEffect } from "react";
 import useCategory from "../hooks/useCategory";
 import usePostScrollPage from "../hooks/usePostScrollPage";
-import { getTeachersPost } from "../store/post/api/PostReadThunk";
+import { getPost } from "../store/post/postApiAction";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { setCategory } from "../store/category";
@@ -26,12 +26,14 @@ export default function Teachers() {
   const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
 
   useEffect(() => {
+    // console.log("페이지 처음 마운트", page);
     setPage(0);
-    categoryDispatch(setCategory("teachers"));
+    categoryDispatch(setCategory("teacher"));
   }, [categoryDispatch, setPage]);
 
   useEffect(() => {
-    dispatch(getTeachersPost(page));
+    // console.log("이제야 제대로", page);
+    dispatch(getPost({ category: "teacher", page }));
   }, [dispatch, page]);
 
   return (

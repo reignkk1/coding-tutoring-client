@@ -99,7 +99,7 @@ export default function WriteEditFormList() {
         </span>
         &nbsp;/ 255
       </LetterCount>
-      <Editor placeholder="자신을 소개해주세요. 원하는 장소, 시간, 비용을 자세히 적을수록 매칭 확률이 높아져요." />
+      <Editor />
     </>
   );
 }
