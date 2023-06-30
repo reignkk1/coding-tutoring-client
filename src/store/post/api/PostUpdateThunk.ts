@@ -10,42 +10,27 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 // 게시물 Modify
 
-export const modifyNoticePost = createAsyncThunk(
-  "modifyNoticePost",
-  async (data: IPost) => {
-    try {
-      const response = await axios.put(`/v1/notice/${data.id}`, data);
-      if (response.status === 200) {
-        alert("수정완료");
-        return window.location.replace(`/notice`);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+//category 포맷
+const categoryFormat = (category: string) => {
+  if (category === "notice") {
+    return `${category}`;
+  } else {
+    return `${category}Post`;
   }
-);
-export const modifyStudentPost = createAsyncThunk(
-  "modifyStudentPost",
-  async (data: IPost) => {
+};
+
+export const modifyPost = createAsyncThunk(
+  "modifyPost",
+  async (param: { category: string; data: IPost }) => {
+    const apiUrl = categoryFormat(param.category);
     try {
-      const response = await axios.put(`/v1/studentPost/${data.id}`, data);
+      const response = await axios.put(
+        `/v1/${apiUrl}/${param.data.id}`,
+        param.data
+      );
       if (response.status === 200) {
         alert("수정완료");
-        return window.location.replace(`/students`);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
-export const modifyTeacherPost = createAsyncThunk(
-  "modifyTeacherPost",
-  async (data: IPost) => {
-    try {
-      const response = await axios.put(`/v1/teacherPost/${data.id}`, data);
-      if (response.status === 200) {
-        alert("수정완료");
-        return window.location.replace(`/teachers`);
+        return window.location.replace(`/${param.category}`);
       }
     } catch (error) {
       console.log(error);

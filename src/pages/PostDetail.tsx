@@ -14,11 +14,7 @@ import { openModal } from "../store/modal";
 import parse from "html-react-parser";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
-import {
-  deleteNoticePost,
-  deleteStudentPost,
-  deleteTeacherPost,
-} from "../store/post/api/PostDeleteThunk";
+import { deletePost } from "../store/post/api/PostDeleteThunk";
 
 interface IPost {
   id: string;
@@ -48,13 +44,10 @@ export default function PostDetail({ category }: ICategory) {
 
   const { title, content, subject, onOrOff, area, member } = post;
 
+  console.log(category);
   const handleDelete = () => {
     if (window.confirm("정말로 삭제하겠습니까?")) {
-      category === "notice"
-        ? dispatch(deleteNoticePost(post.id))
-        : category === "students"
-        ? dispatch(deleteStudentPost(post.id))
-        : dispatch(deleteTeacherPost(post.id));
+      dispatch(deletePost({ category, id: post.id }));
     }
   };
 
@@ -82,7 +75,7 @@ export default function PostDetail({ category }: ICategory) {
           <div className="right">
             <p className="nickname">
               {member.nickname}&nbsp;
-              {category === "teachers" ? "선생님" : "학생"}
+              {category === "teacher" ? "선생님" : "학생"}
             </p>
             <p className="career">{careerFormat(`${member.career}`)}</p>
 
@@ -118,7 +111,7 @@ export default function PostDetail({ category }: ICategory) {
 
         <Section id="intro">
           <p className="index">
-            {category === "teachers" ? "교습 소개" : "학생 소개"} *
+            {category === "teacher" ? "교습 소개" : "학생 소개"} *
           </p>
           <div className="detail">
             <h3>{title}</h3>
@@ -127,7 +120,7 @@ export default function PostDetail({ category }: ICategory) {
         </Section>
         <Section id="lesson-info">
           <p className="index">
-            {category === "teachers" ? "교습 정보" : "교습 희망 정보"} *
+            {category === "teacher" ? "교습 정보" : "교습 희망 정보"} *
           </p>
           <div className="detail">
             <span>교습과목</span>
@@ -140,7 +133,7 @@ export default function PostDetail({ category }: ICategory) {
         </Section>
         <Section id="user-nfo">
           <p className="index">
-            {category === "teachers" ? "선생님 정보" : "학생 정보"} *
+            {category === "teacher" ? "선생님 정보" : "학생 정보"} *
           </p>
           <div className="detail">
             <span>경력</span>

@@ -116,13 +116,15 @@ export default function NoticePostList() {
   const [category, categoryDispatch] = useCategory();
   const { posts, isLoading, isError } = usePost();
 
+  console.log(category);
+
   useEffect(() => {
     categoryDispatch(setCategory("notices"));
   }, [categoryDispatch]);
 
   useEffect(() => {
     dispatch(getPost({ category: "notices" }));
-  }, [dispatch, category]);
+  }, [category]);
 
   return isLoading ? (
     <div>로딩중..</div>

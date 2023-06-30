@@ -8,7 +8,7 @@ import { AuthContext } from "../context/AuthContext";
 // import useIsAdmin from "../hooks/useIsAdmin";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
-import { deleteNoticePost } from "../store/post/api/PostDeleteThunk";
+import { deletePost } from "../store/post/api/PostDeleteThunk";
 
 const Container = styled.div`
   padding: 100px;
@@ -47,7 +47,7 @@ export default function NoticeDetail() {
 
   const handleDelete = () => {
     if (window.confirm("정말로 삭제하겠습니까?")) {
-      dispatch(deleteNoticePost(post.id));
+      dispatch(deletePost({ category: "notice", id: post.id }));
       window.location.assign("/notice");
     }
     return;

@@ -128,8 +128,8 @@ export default function Header() {
 
   const token = useRouteLoaderData("root");
   const menu = [
-    { item: "선생님 찾기", to: "/teachers" },
-    { item: "학생 찾기", to: "/students" },
+    { item: "선생님 찾기", to: "/teacher" },
+    { item: "학생 찾기", to: "/student" },
     { item: "글 작성", to: "/write" },
     { item: "공지사항", to: "/notice" },
   ];

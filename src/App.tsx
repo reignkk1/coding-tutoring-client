@@ -57,28 +57,28 @@ function App() {
         },
 
         {
-          path: "/teachers",
+          path: "/teacher",
           element: <Teachers />,
         },
         {
-          path: "/students",
+          path: "/student",
           element: <Students />,
         },
         {
           path: "/teachers/post/:postId",
-          element: <PostDetail category="teachers" />,
+          element: <PostDetail category="teacher" />,
         },
         {
           path: "/teachers/post/:postId/edit",
-          element: <FindPageEdit category="teachers" />,
+          element: <FindPageEdit category="teacher" />,
         },
         {
           path: "/students/post/:postId",
-          element: <PostDetail category="students" />,
+          element: <PostDetail category="student" />,
         },
         {
           path: "/students/post/:postId/edit",
-          element: <FindPageEdit category="students" />,
+          element: <FindPageEdit category="student" />,
         },
         {
           path: "/notice/post/:postId",

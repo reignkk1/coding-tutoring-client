@@ -21,18 +21,23 @@ const Container = styled.div`
 
 export default function Students() {
   const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
-  const [category, categoryDispatch] = useCategory();
+  // const [category, categoryDispatch] = useCategory();
+
+  const category = window.location.pathname.replace("/", "");
 
   const [page, setPage] = usePostScrollPage();
 
+  // useEffect(() => {
+  //   setPage(0);
+  //   categoryDispatch(setCategory("student"));
+  // }, [categoryDispatch, setPage]);
   useEffect(() => {
     setPage(0);
-    categoryDispatch(setCategory("student"));
-  }, [categoryDispatch, setPage]);
+  }, [setPage]);
 
   useEffect(() => {
     dispatch(getPost({ category, page }));
-  }, [dispatch, page, category]);
+  }, [page]);
 
   return (
     <Wrapper>

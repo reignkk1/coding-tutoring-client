@@ -1,3 +1,3 @@
 export interface ICategory {
-  category: "students" | "teachers" | "notice";
+  category: "student" | "teacher" | "notice";
 }

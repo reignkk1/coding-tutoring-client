@@ -9,6 +9,7 @@ import { getPost } from "../store/post/api/PostReadThunk";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { setCategory } from "../store/category";
+import { useParams } from "react-router-dom";
 
 const Container = styled.div`
   margin-top: 4rem;
@@ -22,6 +23,8 @@ const Container = styled.div`
 export default function Teachers() {
   const [page, setPage] = usePostScrollPage();
   const [category, categoryDispatch] = useCategory();
+  const p = useParams();
+  console.log(p);
 
   const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
 
@@ -32,7 +35,7 @@ export default function Teachers() {
 
   useEffect(() => {
     dispatch(getPost({ category, page }));
-  }, [dispatch, page, category]);
+  }, [dispatch, category, page]);
 
   return (
     <Wrapper>

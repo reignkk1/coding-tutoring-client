@@ -10,6 +10,32 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 // 게시물 POST
 
+//category 포맷
+const categoryFormat = (category: string) => {
+  if (category === "notice") {
+    return `${category}`;
+  } else {
+    return `${category.toLowerCase()}Post`;
+  }
+};
+
+export const createPost = createAsyncThunk(
+  "createPost",
+  async (param: { category: string; data: IPost }) => {
+    const apiUrl = categoryFormat(param.category);
+    try {
+      const response = await axios.post(`/v1/${apiUrl}`, param.data);
+      if (response.status === 200) {
+        window.location.assign(`/${param.category.toLowerCase()}`);
+        return alert("작성완료");
+      }
+    } catch (error: any) {
+      console.log(error);
+      return { error: error.message };
+    }
+  }
+);
+
 export const createTeacherPost = createAsyncThunk(
   "createTeacherPost",
   async (data: IPost) => {

@@ -9,7 +9,7 @@ import {
   setInitialState,
   setTitle,
 } from "../store/post/PostWriteEditFormSlice";
-import { modifyNoticePost } from "../store/post/api/PostUpdateThunk";
+import { modifyPost } from "../store/post/api/PostUpdateThunk";
 
 const Container = styled.div`
   height: 100vh;
@@ -72,7 +72,7 @@ export default function NoticeEdit() {
       content,
     };
 
-    dispatch(modifyNoticePost(data));
+    dispatch(modifyPost({ category: "notice", data }));
   };
 
   return (

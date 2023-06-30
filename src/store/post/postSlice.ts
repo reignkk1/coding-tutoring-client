@@ -27,7 +27,7 @@ const postSlice = createSlice({
       if (arg.page) {
         arg.page === 0
           ? (state.posts = action.payload)
-          : state.posts.push(action.payload);
+          : (state.posts = [...state.posts, ...action.payload]);
       }
       state.posts = action.payload;
     });

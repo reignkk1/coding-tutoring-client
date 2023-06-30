@@ -9,10 +9,7 @@ import EditFormList from "../components/write/WriteEditFormList";
 import Button from "../components/common/Button";
 import { ICategory } from "../types/category";
 import { setInitialState } from "../store/post/PostWriteEditFormSlice";
-import {
-  modifyStudentPost,
-  modifyTeacherPost,
-} from "../store/post/api/PostUpdateThunk";
+import { modifyPost } from "../store/post/api/PostUpdateThunk";
 
 const Container = styled.div`
   height: 200vh;
@@ -81,8 +78,7 @@ export default function FindPageEdit({ category }: ICategory) {
       subject: desiredSubjects?.join(""),
       title,
     };
-    if (category === "students") return dispatch(modifyStudentPost(data));
-    if (category === "teachers") return dispatch(modifyTeacherPost(data));
+    dispatch(modifyPost({ category, data }));
   };
 
   return (
