@@ -42,13 +42,13 @@ export const getPost = createAsyncThunk(
   async (param: { category: string; page?: number }) => {
     const apiUrl = categoryFormat1(param.category);
     try {
-      if (param.page) {
+      if (param.category === "notices") {
+        const response = await axios.get(`/v1/${apiUrl}`);
+        if (response.status === 200) return response.data;
+      } else {
         const response = await axios.get(
           `/v1/${apiUrl}?page=${param.page}&size=10`
         );
-        if (response.status === 200) return response.data;
-      } else {
-        const response = await axios.get(`/v1/${apiUrl}`);
         if (response.status === 200) return response.data;
       }
     } catch (error) {

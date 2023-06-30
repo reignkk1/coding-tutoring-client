@@ -26,13 +26,13 @@ export default function Students() {
   const [page, setPage] = usePostScrollPage();
 
   useEffect(() => {
-    console.log("페이지 처음 마운트", page);
+    //console.log("페이지 처음 마운트", page);
     setPage(0);
     categoryDispatch(setCategory("student"));
   }, [categoryDispatch, setPage]);
 
   useEffect(() => {
-    console.log("이제야 제대로", page);
+    //console.log("이제야 제대로", page);
     dispatch(getPost({ category: "student", page }));
   }, [dispatch, page]);
 
