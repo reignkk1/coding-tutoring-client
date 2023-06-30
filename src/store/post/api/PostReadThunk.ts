@@ -9,47 +9,44 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 // 게시물 GET
 
-export const getTeachersPost = createAsyncThunk(
-  "getTeachersPost",
-  async (page: number) => {
+//category 포맷 함수
+const categoryFormat = (category: string) => {
+  if (category === "notices") {
+    return `${category}`;
+  } else {
+    return `${category}Posts`;
+  }
+};
+
+//모든 게시물
+export const getPost = createAsyncThunk(
+  "getPost",
+  async (param: { category: string; page?: number }) => {
+    const apiUrl = categoryFormat(param.category);
     try {
-      const response = await axios.get(`/v1/teacherPosts?page=${page}&size=10`);
-      if (response.status === 200) return response.data;
+      if (param.page) {
+        const response = await axios.get(
+          `/v1/${apiUrl}?page=${param.page}&size=10`
+        );
+        if (response.status === 200) return response.data;
+      } else {
+        const response = await axios.get(`/v1/${apiUrl}`);
+        if (response.status === 200) return response.data;
+      }
     } catch (error) {
       console.log(error);
     }
   }
 );
-
-export const getStudentsPost = createAsyncThunk(
-  "getStudentsPost",
-  async (page: number) => {
-    try {
-      const response = await axios.get(`/v1/studentPosts?page=${page}&size=10`);
-      if (response.status === 200) return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
-
-export const getNoticesPost = createAsyncThunk("getNoticesPost", async () => {
-  try {
-    const response = await axios.get("/v1/notices");
-    if (response.status === 200) return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-});
 
 // 게시물 제목 Search
-
-export const searchTitleTeacherPosts = createAsyncThunk(
-  "searchTitleTeacherPosts",
-  async (title: string) => {
+export const searchTitlePosts = createAsyncThunk(
+  "seachTitlePosts",
+  async (param: { category: string; title: string }) => {
+    const apiUrl = categoryFormat(param.category);
     try {
       const response = await axios.get(
-        `/v1/teacherPosts?content=${title}&searchType=TITLE`
+        `/v1/${apiUrl}?content=${param.title}&searchType=TITLE`
       );
       if (response.status === 200) return response.data;
     } catch (error) {
@@ -58,42 +55,14 @@ export const searchTitleTeacherPosts = createAsyncThunk(
   }
 );
 
-export const searchTitleStudentPosts = createAsyncThunk(
-  "searchTitleStudentPosts",
-  async (title: string) => {
+// 희망 언어 선택
+export const searchSubjectPosts = createAsyncThunk(
+  "searchSubjectPosts",
+  async (param: { category: string; subject: string }) => {
+    const apiUrl = categoryFormat(param.category);
     try {
       const response = await axios.get(
-        `/v1/studentPosts?content=${title}&searchType=TITLE`
-      );
-      if (response.status === 200) return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
-
-// 희망 언어 선택 시 검색
-
-export const searchSubjectTeacherPosts = createAsyncThunk(
-  "searchSubjectTeacherPosts",
-  async (subject: string) => {
-    try {
-      const response = await axios.get(
-        `/v1/teacherPosts?content=${subject}&searchType=SUBJECT`
-      );
-      if (response.status === 200) return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
-
-export const searchSubjectStudentPosts = createAsyncThunk(
-  "searchSubjectStudentPosts",
-  async (subject: string) => {
-    try {
-      const response = await axios.get(
-        `/v1/studentPosts?content=${subject}&searchType=SUBJECT`
+        `/v1/${apiUrl}?content=${param.subject}&searchType=SUBJECT`
       );
       if (response.status === 200) return response.data;
     } catch (error) {

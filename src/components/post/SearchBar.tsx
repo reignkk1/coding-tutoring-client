@@ -4,12 +4,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import useCategory from "../../hooks/useCategory";
 import { ThunkDispatch } from "redux-thunk";
-import {
-  getStudentsPost,
-  getTeachersPost,
-  searchTitleStudentPosts,
-  searchTitleTeacherPosts,
-} from "../../store/post/api/PostReadThunk";
+import { getPost, searchTitlePosts } from "../../store/post/api/PostReadThunk";
 
 const Form = styled.form`
   display: flex;
@@ -41,17 +36,15 @@ export default function SearchBar() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (category === "teachers")
-      return dispatch(searchTitleTeacherPosts(value));
-    if (category === "students")
-      return dispatch(searchTitleStudentPosts(value));
+
+    dispatch(searchTitlePosts({ category, title: value }));
+
     setValue("");
   };
 
   const handleReset = () => {
     setValue("");
-    if (category === "teachers") return dispatch(getTeachersPost(0));
-    if (category === "students") return dispatch(getStudentsPost(0));
+    dispatch(getPost({ category, page: 0 }));
   };
 
   return (

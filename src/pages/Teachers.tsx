@@ -5,7 +5,7 @@ import Wrapper from "../components/common/Wrapper";
 import { useEffect } from "react";
 import useCategory from "../hooks/useCategory";
 import usePostScrollPage from "../hooks/usePostScrollPage";
-import { getTeachersPost } from "../store/post/api/PostReadThunk";
+import { getPost } from "../store/post/api/PostReadThunk";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { setCategory } from "../store/category";
@@ -21,18 +21,18 @@ const Container = styled.div`
 
 export default function Teachers() {
   const [page, setPage] = usePostScrollPage();
-  const [, categoryDispatch] = useCategory();
+  const [category, categoryDispatch] = useCategory();
 
   const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
 
   useEffect(() => {
     setPage(0);
-    categoryDispatch(setCategory("teachers"));
+    categoryDispatch(setCategory("teacher"));
   }, [categoryDispatch, setPage]);
 
   useEffect(() => {
-    dispatch(getTeachersPost(page));
-  }, [dispatch, page]);
+    dispatch(getPost({ category, page }));
+  }, [dispatch, page, category]);
 
   return (
     <Wrapper>

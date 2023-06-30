@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState = "" as "notice" | "teachers" | "students";
+const initialState = "" as "notices" | "teacher" | "student";
 
 const categorySlice = createSlice({
   name: "category",
@@ -8,7 +8,7 @@ const categorySlice = createSlice({
   reducers: {
     setCategory(
       state,
-      action: PayloadAction<"notice" | "teachers" | "students">
+      action: PayloadAction<"notices" | "teacher" | "student">
     ) {
       return (state = action.payload);
     },

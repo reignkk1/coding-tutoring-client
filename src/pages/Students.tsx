@@ -4,7 +4,7 @@ import TopSheet from "../components/post/TopSheet";
 import FindPostList from "../components/post/FindPostList";
 import styled from "styled-components";
 import usePostScrollPage from "../hooks/usePostScrollPage";
-import { getStudentsPost } from "../store/post/api/PostReadThunk";
+import { getPost } from "../store/post/api/PostReadThunk";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import useCategory from "../hooks/useCategory";
@@ -21,18 +21,18 @@ const Container = styled.div`
 
 export default function Students() {
   const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
-  const [, categoryDispatch] = useCategory();
+  const [category, categoryDispatch] = useCategory();
 
   const [page, setPage] = usePostScrollPage();
 
   useEffect(() => {
     setPage(0);
-    categoryDispatch(setCategory("students"));
+    categoryDispatch(setCategory("student"));
   }, [categoryDispatch, setPage]);
 
   useEffect(() => {
-    dispatch(getStudentsPost(page));
-  }, [dispatch, page]);
+    dispatch(getPost({ category, page }));
+  }, [dispatch, page, category]);
 
   return (
     <Wrapper>
