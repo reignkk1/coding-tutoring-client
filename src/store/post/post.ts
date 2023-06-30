@@ -22,7 +22,7 @@ const postSlice = createSlice({
     builder.addCase(getPost.fulfilled, (state, action) => {
       const { arg } = action.meta;
       state.isLoading = false;
-      console.log("페이로드", action.payload, arg.page);
+      // console.log("페이로드", action.payload, arg.page);
       if (arg.page) {
         arg.page === 0
           ? (state.posts = action.payload)
