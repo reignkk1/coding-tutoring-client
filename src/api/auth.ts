@@ -7,6 +7,7 @@ export interface IGetUser {
   nickname: string;
   career: string;
   userClassification: string;
+  ageGroup: string;
   email: string;
   gender: string;
   role?: string;
