@@ -59,6 +59,7 @@ const Form = styled.form`
     outline: none;
     resize: none;
 
+    font-size: 1rem;
     border-radius: 5px;
     font-family: light;
     line-height: 1.5;

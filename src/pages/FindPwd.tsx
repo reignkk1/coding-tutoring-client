@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { findPwd } from "../api/auth";
-import { Button, FormContainer } from "./Login";
+import { FormContainer, Button } from "../styles/Form";
 import FormInput from "../components/sign/FormInput";
 
 export default function FindPwd() {

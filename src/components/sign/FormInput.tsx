@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { sendCode } from "../../api/auth";
-import { Button } from "../../pages/Login";
+import { Button } from "../../styles/Form";
 
 const FormInput = (props: any) => {
   const [focused, setFocused] = useState(false);
@@ -11,7 +11,7 @@ const FormInput = (props: any) => {
   const [code, setCode] = useState("");
   const [inputCode, setInputCode] = useState("");
   const [authEmail, setAuthEmail] = useState(false);
-  const handleFocus = (e: any) => {
+  const handleFocus = () => {
     setFocused(true);
   };
 

@@ -10,14 +10,14 @@ const Btn = styled.button`
   background-color: #c9fd35;
   color: #0e1620;
 
-  .hide {
-    @media (max-width: 450px) {
-      dispaly: none;
-    }
-  }
-
   &:hover {
     background-color: #b2e22d;
+  }
+
+  &.hide {
+    @media (max-width: 650px) {
+      dispaly: none;
+    }
   }
 `;
 

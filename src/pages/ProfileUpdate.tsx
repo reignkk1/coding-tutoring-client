@@ -4,7 +4,7 @@ import { updateProfile } from "../api/auth";
 import RadioInput from "../components/sign/RadioInput";
 import Select from "../components/sign/Select";
 import FormInput from "../components/sign/FormInput";
-import { Button, FormContainer } from "./Login";
+import { FormContainer, Button } from "../styles/Form";
 import { IGetUser } from "../api/auth";
 
 export default function ProfileUpdate() {
@@ -103,11 +103,9 @@ export default function ProfileUpdate() {
   };
   const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-    console.log(values);
   };
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-    console.log(values);
   };
 
   return (

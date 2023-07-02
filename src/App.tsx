@@ -9,12 +9,9 @@ import NotFound from "./pages/NotFound";
 import PostDetail from "./pages/PostDetail";
 import Write from "./pages/Write";
 import Notes from "./pages/Notes";
-import Signin from "./pages/SignIn";
-import Signup from "./pages/SignUp";
+import Login from "./pages/Signin";
+import Logup from "./pages/Signup";
 import FindPwd from "./pages/FindPwd";
-
-import Login from "./pages/Login";
-import Logup from "./pages/Logup";
 
 import GlobalStyles from "./styles/GlobalStyles";
 import NoticeWrite from "./pages/NoticeWrite";

@@ -4,15 +4,15 @@ import styled from "styled-components";
 export default function RadioInput(props: any) {
   const [focused, setFocused] = useState(false);
   const { label, errorMessage, onChange, id, ...inputProps } = props;
-  const handleFocus = (e: any) => {
+  const handleFocus = () => {
     setFocused(true);
   };
 
   return (
     <RadioContainer>
       <legend>{label}을 선택해주세요*</legend>
-      {inputProps.options?.map((option: any) => (
-        <Radio>
+      {inputProps.options?.map((option: { label: string; value: string }) => (
+        <Radio key={option.value}>
           <input
             {...inputProps}
             onChange={onChange}

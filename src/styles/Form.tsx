@@ -1,171 +1,64 @@
 import styled from "styled-components";
 
-export const Form = styled.form`
-  width: 100%;
-  padding-top: 4rem;
-  padding-bottom: 1rem;
+export const FormContainer = styled.div`
+  max-width: 400px;
+  min-height: calc(100vh - 200px);
+  margin-inline: auto;
+  padding-top: 8rem;
+  padding-bottom: 4rem;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #ffffff;
+  justify-content: center;
+  gap: 1rem;
 
   h1 {
+    width: fit-content;
+    margin-inline: auto;
     font-family: regular;
-    font-size: 1.5rem;
-    color: #c9fd35;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
   }
 
-  span {
-    margin-top: 2rem;
-  }
-
-  .auth {
-    display: none;
-    width: 222px;
-    margin-top: 0.5rem;
-    color: #ffffff;
-    font-size: 0.8rem;
-    line-height: 1.2rem;
-
-    &.show {
-      display: block;
-    }
-  }
-
-  .control {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1rem;
-
-    input {
-      width: 222px;
-      padding: 0.8rem 1rem;
-      border: none;
-      border-radius: 3px;
-
-      background-color: #ffffff;
-      font-family: regular;
-      font-size: 1rem;
-
-      &::placeholder {
-        font-family: regular;
-      }
-
-      &.emailCode {
-        display: none;
-        &.show {
-          display: block;
-          margin-top: 1rem;
-        }
-      }
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-    .error {
-      width: 222px;
-      margin-top: 0.5rem;
-      color: #ffffff;
-      font-size: 0.8rem;
-      line-height: 1.2rem;
-
-      &.show {
-        display: block;
-      }
-    }
-  }
-
-  button {
-    width: 222px;
-    margin-top: 1rem;
-    padding-block: 0.8rem;
-    border-radius: 3px;
-
-    background-color: #c9fd35;
-    color: #0e1620;
-
-    font-size: 1rem;
-
-    &:active {
-      background-color: #c9fd35;
-      color: #0e1620;
-    }
-
-    &:disabled,
-    :disabled:hover,
-    :disabled:active {
+  form {
+    &:invalid .submit {
       background-color: #86ab20;
       cursor: not-allowed;
     }
   }
 `;
 
-export const Container = styled.div`
-  width: 100%;
-  max-width: 1200px;
-  margin-inline: auto;
-  padding-block: 4rem;
-  min-height: calc(100vh - 200px);
-
+export const HelpSign = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
 `;
 
-export const FormContainer = styled.div`
-  max-width: 400px;
-  height: 100%;
-  margin-inline: auto;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .aboutSign {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
-    color: #c9fd35;
-  }
-`;
-
-export const RadioContainer = styled.fieldset`
+export const Button = styled.button`
   width: 222px;
-  margin-top: 2rem;
+  padding-block: 0.8rem;
+  border-radius: 3px;
+  margin-block: 0.5rem;
 
-  legend {
-    font-family: regular;
+  background-color: #c9fd35;
+  color: #0e1620;
+
+  font-size: 1rem;
+
+  &:active {
+    background-color: #c9fd35;
+    color: #0e1620;
   }
 
-  .radioControl {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  &:disabled,
+  :disabled:hover,
+  :disabled:active {
+    background-color: #86ab20;
+    cursor: not-allowed;
+  }
+
+  &.signup {
     margin-top: 1rem;
-  }
-`;
-
-export const SelectContainer = styled.div`
-  padding-top: 1.5rem;
-  width: 222px;
-
-  select {
-    width: 100%;
-    border: 1px solid #eaeaea;
-    padding: 1rem;
-    font-size: inherit;
-    color: inherit;
-    outline: none;
-
-    &:focus {
-      border: 1px solid #5ec8d9;
-      box-shadow: 0 1px 6px 0 rgba(94, 200, 217, 0.36);
-    }
-
-    option {
-    }
   }
 `;
