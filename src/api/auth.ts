@@ -70,7 +70,6 @@ export const findPwd = async (userData: any) => {
       method: "put",
       headers: {
         "Content-Type": "application/json",
-        // "Content-Type": "text/plain;charset-UTF-8",
       },
     });
     if (res.status === 200) {

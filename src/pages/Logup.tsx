@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FormContainer } from "./Login";
 import FormInput from "../components/sign/FormInput";
-import { RadioContainer } from "../styles/Form";
 import { Button } from "./Login";
 import { signup } from "../api/auth";
 import RadioInput from "../components/sign/RadioInput";
@@ -107,6 +106,7 @@ export default function Logup() {
       errorMessage: "연력대를 선택해주세요.",
       label: "연령대",
       options: [
+        { name: "--연령대--", value: "" },
         { name: "20대", value: "TWENTIES" },
         { name: "30대", value: "THIRTIES" },
         { name: "40대", value: "FORTIES" },
@@ -121,6 +121,7 @@ export default function Logup() {
       errorMessage: "경력을 선택해주세요.",
       label: "경력",
       options: [
+        { name: "--경력--", value: "" },
         { name: "취준생", value: "NO_EXPERIENCE" },
         { name: "1-3년", value: "FIRST_TO_THIRD_GRADE" },
         { name: "3-5년", value: "THIRD_TO_FIFTH_GRADE" },
@@ -133,11 +134,15 @@ export default function Logup() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(values);
     signup(values);
   };
-  const onChange = (e: any) => {
+  const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+    console.log(values);
+  };
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+    console.log(values);
   };
 
   return (
@@ -151,17 +156,12 @@ export default function Logup() {
                 key={input.id}
                 {...input}
                 value={values[input.name]}
-                onChange={onChange}
+                onChange={onChangeInput}
               />
             );
           } else if (input.type === "select") {
             return (
-              <Select
-                key={input.id}
-                {...input}
-                value={values[input.name]}
-                onChange={onChange}
-              />
+              <Select key={input.id} {...input} onChange={onChangeSelect} />
             );
           } else {
             return (
@@ -169,12 +169,12 @@ export default function Logup() {
                 key={input.id}
                 {...input}
                 value={values[input.name]}
-                onChange={onChange}
+                onChange={onChangeInput}
               />
             );
           }
         })}
-        <Button>회원가입</Button>
+        <Button className="signup submit">회원가입</Button>
       </form>
     </FormContainer>
   );

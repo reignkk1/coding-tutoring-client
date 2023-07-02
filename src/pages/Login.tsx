@@ -67,7 +67,7 @@ export default function Login() {
           );
         })}
 
-        <Button>로그인</Button>
+        <Button className="submit">로그인</Button>
       </form>
       <p>또는</p>
       <SocialKakao />
@@ -99,6 +99,13 @@ export const FormContainer = styled.div`
     font-size: 1.4rem;
     margin-bottom: 1rem;
   }
+
+  form {
+    &:invalid .submit {
+      background-color: #86ab20;
+      cursor: not-allowed;
+    }
+  }
 `;
 
 const HelpSign = styled.div`
@@ -128,5 +135,9 @@ export const Button = styled.button`
   :disabled:active {
     background-color: #86ab20;
     cursor: not-allowed;
+  }
+
+  &.signup {
+    margin-top: 1rem;
   }
 `;

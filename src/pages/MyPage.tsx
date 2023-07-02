@@ -5,15 +5,17 @@ import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
 import { Profile } from "./PostDetail";
 
-import { careerFormat, genderFormat } from "../util/format";
+import { ageFormat, careerFormat, genderFormat } from "../util/format";
 import PostList from "../components/mypage/PostList";
 import { AuthContext } from "../context/AuthContext";
 
 export default function MyPage(): JSX.Element {
   const { user } = useContext(AuthContext);
+  console.log(user);
   const {
     img,
     nickname,
+    ageGroup,
     career,
     userClassification,
     gender,
@@ -38,7 +40,8 @@ export default function MyPage(): JSX.Element {
             {userClassification === "STUDENT" ? "학생" : "선생님"}
           </p>
           <p className="career">
-            {careerFormat(`${career}`)} / {genderFormat(`${gender}`)}
+            {careerFormat(`${career}`)} / {genderFormat(`${gender}`)} / &nbsp;
+            {ageFormat(`${ageGroup}`)}
           </p>
           <Buttton
             onClick={() => {
