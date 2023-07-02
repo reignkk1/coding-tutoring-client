@@ -113,7 +113,7 @@ button{
 }
 
 input{
-    font-family: thin;
+    font-family: regular;
     font-size: 1rem;
     border: none;
     outline: none;
@@ -121,7 +121,7 @@ input{
     line-height: 1.3;
 
     &::placeholder {
-    font-family: thin;
+    font-family: regular;
     font-size: 1rem;
   }
 
@@ -136,8 +136,11 @@ input{
 
 select{
     font-family: regular;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #0e1620; 
+    border: none;
+    outline: none;
+
 
     @media (max-width: 650px) {
       font-size: 0.8rem;

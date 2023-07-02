@@ -10,6 +10,12 @@ const Btn = styled.button`
   background-color: #c9fd35;
   color: #0e1620;
 
+  .hide {
+    @media (max-width: 450px) {
+      dispaly: none;
+    }
+  }
+
   &:hover {
     background-color: #b2e22d;
   }
@@ -19,11 +25,12 @@ interface IButton {
   children: React.ReactNode;
   onClick?(): void;
   type?: "submit" | "reset" | "button";
+  className?: string;
 }
 
-function Button({ children, onClick, type = "button" }: IButton) {
+function Button({ children, onClick, type = "button", className }: IButton) {
   return (
-    <Btn type={type} onClick={onClick}>
+    <Btn type={type} onClick={onClick} className={className}>
       {children}
     </Btn>
   );

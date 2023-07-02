@@ -13,6 +13,9 @@ import Signin from "./pages/SignIn";
 import Signup from "./pages/SignUp";
 import FindPwd from "./pages/FindPwd";
 
+import Login from "./pages/Login";
+import Logup from "./pages/Logup";
+
 import GlobalStyles from "./styles/GlobalStyles";
 import NoticeWrite from "./pages/NoticeWrite";
 import NoticeDetail from "./pages/NoticeDetail";
@@ -45,11 +48,11 @@ function App() {
         },
         {
           path: "/signup",
-          element: <Signup />,
+          element: <Logup />,
         },
         {
           path: "/signin",
-          element: <Signin />,
+          element: <Login />,
         },
         {
           path: "/help/user",

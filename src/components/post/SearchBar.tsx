@@ -62,7 +62,9 @@ export default function SearchBar() {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <Button type="submit">검색</Button>
+      <Button type="submit" className="hide">
+        검색
+      </Button>
       <Button onClick={handleReset}>리셋</Button>
     </Form>
   );
