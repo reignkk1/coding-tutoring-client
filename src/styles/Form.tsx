@@ -41,10 +41,14 @@ export const Button = styled.button`
   border-radius: 3px;
   margin-block: 0.5rem;
 
+  font-size: 1rem;
+
+  @media (max-width: 650px) {
+    font-size: 0.8rem;
+  }
+
   background-color: #c9fd35;
   color: #0e1620;
-
-  font-size: 1rem;
 
   &:active {
     background-color: #c9fd35;

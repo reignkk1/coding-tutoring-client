@@ -9,8 +9,8 @@ import NotFound from "./pages/NotFound";
 import PostDetail from "./pages/PostDetail";
 import Write from "./pages/Write";
 import Notes from "./pages/Notes";
-import Login from "./pages/Signin";
-import Logup from "./pages/Signup";
+import Signin from "./pages/Signin";
+import Signup from "./pages/SignUp";
 import FindPwd from "./pages/FindPwd";
 
 import GlobalStyles from "./styles/GlobalStyles";
@@ -45,11 +45,11 @@ function App() {
         },
         {
           path: "/signup",
-          element: <Logup />,
+          element: <Signup />,
         },
         {
           path: "/signin",
-          element: <Login />,
+          element: <Signin />,
         },
         {
           path: "/help/user",

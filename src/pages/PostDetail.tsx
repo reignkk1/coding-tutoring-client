@@ -44,7 +44,6 @@ export default function PostDetail({ category }: ICategory) {
 
   const { title, content, subject, onOrOff, area, member } = post;
 
-  console.log(category);
   const handleDelete = () => {
     if (window.confirm("정말로 삭제하겠습니까?")) {
       dispatch(deletePost({ category, id: post.id }));
@@ -72,12 +71,7 @@ export default function PostDetail({ category }: ICategory) {
             />
           </ImgContainer>
 
-          <div
-            className="right"
-            onClick={() => {
-              navigate(`/view/${member.id}`);
-            }}
-          >
+          <div className="right">
             <p className="nickname">
               {member.nickname}&nbsp;
               {category === "teacher" ? "선생님" : "학생"}

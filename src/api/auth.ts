@@ -134,7 +134,6 @@ export const getMyData = async (token: string) => {
       },
     });
     if (res.status === 200) {
-      console.log(res.data);
       let user = await res.data;
       user = {
         ...user,
@@ -144,7 +143,6 @@ export const getMyData = async (token: string) => {
             : "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg",
         isAdmin: user.role === "ROLE_ADMIN" ? true : false,
       };
-      console.log(user);
       return user;
     }
   } catch (error) {

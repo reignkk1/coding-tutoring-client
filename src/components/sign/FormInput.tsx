@@ -69,7 +69,6 @@ const FormInput = (props: any) => {
           onChange={onChange}
           onBlur={handleFocus}
           focused={focused.toString()}
-          onClick={(e) => console.dir(e.target)}
         />
         <span>{errorMessage}</span>
       </InputContainer>

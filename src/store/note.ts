@@ -1,6 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./api";
-import { INote } from "../api/note";
+
+export interface INote {
+  title: string;
+  content: string;
+  messageId?: string;
+  receiverId: string;
+  receiverNickname: string;
+  senderId: string;
+  senderNickname: string;
+}
 
 //index signature
 type ObjType = {

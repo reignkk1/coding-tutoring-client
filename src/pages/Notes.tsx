@@ -5,7 +5,7 @@ import Category from "../components/notes/Category";
 import Note from "../components/notes/Note";
 import { useNote } from "../hooks/useNote";
 import { loadNotes } from "../store/note";
-import { INote } from "../api/note";
+import { INote } from "../store/note";
 import Loading from "../components/common/Loading";
 
 export default function Notes() {

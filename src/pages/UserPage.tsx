@@ -100,10 +100,6 @@ const Posts = styled.ul`
   gap: 1rem;
 `;
 
-const Img = styled.img`
-  opacity: 0.5;
-`;
-
 const PostContainer = styled.div`
   width: 70%;
   margin-inline: auto;
