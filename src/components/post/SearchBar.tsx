@@ -10,6 +10,7 @@ const Form = styled.form`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  margin-top: 1rem;
 `;
 const Input = styled.input`
   width: fit-content;
@@ -18,7 +19,7 @@ const Input = styled.input`
   padding: 0.5rem 0.7rem;
 
   @media (max-width: 650px) {
-    width: 230px;
+    width: 222px;
   }
 
   @media (max-width: 450px) {

@@ -112,6 +112,11 @@ const NavItem = styled.li`
   color: #ffffff;
 
   cursor: pointer;
+
+  a {
+    font-size: 1rem;
+  }
+
   &:hover {
     color: #c9fd35;
   }
@@ -130,7 +135,7 @@ export default function Header() {
   const menu = [
     { item: "선생님 찾기", to: "/teacher" },
     { item: "학생 찾기", to: "/student" },
-    { item: "글 작성", to: "/write" },
+    { item: "요청 작성", to: "/write" },
     { item: "공지사항", to: "/notice" },
   ];
   const handleOpen = useCallback(() => {

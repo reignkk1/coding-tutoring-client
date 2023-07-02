@@ -15,8 +15,8 @@ const Btn = styled.button`
   }
 
   &.hide {
-    @media (max-width: 650px) {
-      dispaly: none;
+    @media (max-width: 900px) {
+      display: none;
     }
   }
 `;

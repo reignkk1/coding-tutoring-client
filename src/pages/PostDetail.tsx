@@ -72,7 +72,12 @@ export default function PostDetail({ category }: ICategory) {
             />
           </ImgContainer>
 
-          <div className="right">
+          <div
+            className="right"
+            onClick={() => {
+              navigate(`/view/${member.id}`);
+            }}
+          >
             <p className="nickname">
               {member.nickname}&nbsp;
               {category === "teacher" ? "선생님" : "학생"}
@@ -169,6 +174,10 @@ export const Profile = styled.div`
       margin-bottom: 1rem;
 
       &.nickname {
+        &:hover {
+          cursor: pointer;
+          text-decoration: underline;
+        }
         font-size: 1.2rem;
         line-height: 1.3;
         font-family: regular;

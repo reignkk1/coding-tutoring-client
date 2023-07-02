@@ -6,6 +6,7 @@ import {
   genderFormat,
   careerFormat,
   jobFormatPath,
+  ageFormat,
 } from "../../util/format";
 import { usePost } from "../../hooks/usePost";
 import Loading from "../common/Loading";
@@ -49,6 +50,7 @@ const Container = styled.div`
     transition: all 0.1s ease-out;
 
     &:hover {
+      cursor: pointer;
       transform: translateY(-0.5rem);
     }
 
@@ -129,7 +131,19 @@ export default function FindPostList() {
     <Container>
       <ul>
         {posts?.map((post, index) => (
-          <li key={index}>
+          <li
+            key={index}
+            onClick={() =>
+              navigate(
+                `/${jobFormatPath(post.member?.userClassification)}/post/${
+                  post.id
+                }`,
+                {
+                  state: post,
+                }
+              )
+            }
+          >
             <ImgBox>
               <img
                 src={`${
@@ -142,26 +156,14 @@ export default function FindPostList() {
               <span>{post.member?.nickname}</span>
             </ImgBox>
             <InfoBox>
-              <h2
-                onClick={() =>
-                  navigate(
-                    `/${jobFormatPath(post.member?.userClassification)}/post/${
-                      post.id
-                    }`,
-                    {
-                      state: post,
-                    }
-                  )
-                }
-              >
-                {post.title}
-              </h2>
+              <h2>{post.title}</h2>
 
               <span>{firstToUpper(`${post.subject}`)}</span>
               <p>{howFormat(`${post.onOrOff}`)}</p>
               <p>
                 {genderFormat(`${post.member?.gender}`)} /&nbsp;
-                {careerFormat(`${post.member?.career}`)}
+                {careerFormat(`${post.member?.career}`)} /&nbsp;
+                {ageFormat(`${post.member?.ageGroup}`)}
               </p>
               <p className="area">{post.area} 거주</p>
             </InfoBox>

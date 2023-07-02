@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
 import { Profile } from "./PostDetail";
-import { careerFormat, genderFormat } from "../util/format";
+import { careerFormat, genderFormat, ageFormat } from "../util/format";
 import PostList from "../components/mypage/PostList";
 import Modal from "../components/common/Modal";
 import MessageSendBox from "../components/notes/MessageSendBox";
@@ -22,6 +22,7 @@ export default function UserPage(): JSX.Element {
     id,
     img,
     nickname,
+    ageGroup,
     gender,
     career,
     userClassification,
@@ -45,7 +46,8 @@ export default function UserPage(): JSX.Element {
             {userClassification === "STUDENT" ? "학생" : "선생님"}
           </p>
           <p className="career">
-            {careerFormat(`${career}`)} / {genderFormat(`${gender}`)}
+            {careerFormat(`${career}`)} / {genderFormat(`${gender}`)} / &nbsp;
+            {ageFormat(`${ageGroup}`)}
           </p>
           <Button onClick={() => dispatch(openModal())}>쪽지 보내기</Button>
           <Modal>
@@ -54,9 +56,7 @@ export default function UserPage(): JSX.Element {
         </div>
       </Profile>
       <PostContainer>
-        {!havePosts && (
-          <Img src={require("../assets/noImg.png")} alt="no-img" />
-        )}
+        {!havePosts && <p className="noPost">작성된 글이 없습니다.</p>}
         {havePosts && userClassification === "STUDENT" && (
           <Posts>
             {studentPostResponseDtos.map((post: any) => (
@@ -109,6 +109,11 @@ const PostContainer = styled.div`
   margin-inline: auto;
   margin-block: 2rem;
   padding-inline: 4rem;
+
+  .noPost {
+    width: fit-content;
+    margin-inline: auto;
+  }
   div {
     display: flex;
     flex-direction: column;
