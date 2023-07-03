@@ -5,7 +5,7 @@ import SocialKakao from "../components/sign/SocialKakao";
 import { signin } from "../api/auth";
 import { FormContainer, HelpSign, Button } from "../styles/Form";
 
-export default function Signin() {
+export default function SignIn() {
   type ObjType = {
     [index: string]: any;
     id: string;

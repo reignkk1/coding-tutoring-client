@@ -5,7 +5,7 @@ import RadioInput from "../components/sign/RadioInput";
 import Select from "../components/sign/Select";
 import { FormContainer, Button } from "../styles/Form";
 
-export default function Signup() {
+export default function SignUp() {
   type ObjType = {
     [index: string]: any;
     email: string;
