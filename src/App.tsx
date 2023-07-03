@@ -9,7 +9,7 @@ import NotFound from "./pages/NotFound";
 import PostDetail from "./pages/PostDetail";
 import Write from "./pages/Write";
 import Notes from "./pages/Notes";
-import Signin from "./pages/SignIn";
+import Signin from "./pages/Signin";
 import Signup from "./pages/SignUp";
 import FindPwd from "./pages/FindPwd";
 

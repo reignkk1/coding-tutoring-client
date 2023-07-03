@@ -7,6 +7,7 @@ export interface IGetUser {
   nickname: string;
   career: string;
   userClassification: string;
+  ageGroup: string;
   email: string;
   gender: string;
   role?: string;
@@ -65,20 +66,20 @@ export const findPwd = async (userData: any) => {
 
   try {
     const res = await axios({
-      url: `${baseUrl}/member/modify-password/${id}`,
-      data: { password: password },
+      url: `${baseUrl}/member/modify-password`,
+      data: { memberId: id, password: password },
       method: "put",
       headers: {
         "Content-Type": "application/json",
-        // "Content-Type": "text/plain;charset-UTF-8",
       },
     });
     if (res.status === 200) {
-      alert("비밀번호가 바뀌었습니다.");
+      alert("비밀번호가 변경되었습니다.");
       window.location.replace("/signin");
     }
   } catch (error) {
     alert("비밀번호 변경에 실패했습니다.");
+    console.log(error);
   }
 };
 
@@ -133,7 +134,6 @@ export const getMyData = async (token: string) => {
       },
     });
     if (res.status === 200) {
-      console.log(res.data);
       let user = await res.data;
       user = {
         ...user,
@@ -143,33 +143,12 @@ export const getMyData = async (token: string) => {
             : "https://i.pinimg.com/236x/11/27/98/11279881d6995a0aef4915b3906aae3f.jpg",
         isAdmin: user.role === "ROLE_ADMIN" ? true : false,
       };
-      console.log(user);
       return user;
     }
   } catch (error) {
     console.log(error);
   }
 };
-
-//userId로 정보 가져오기
-//export const getUserDataById = async (userId: string) => {
-//  try {
-//    const res = await axios({
-//      url: `${baseUrl}/member/info/${userId}`,
-//      method: "get",
-//      headers: {
-//        "Content-Type": "application/json",
-//      },
-//    });
-//
-//    if (res.status === 200) {
-//      const user = await res.data;
-//      return user;
-//    }
-//  } catch (error) {
-//    console.log(error);
-//  }
-//};
 
 // 유저 아이디로 정보 불러오기
 export function useGetUserDataById(userId?: string) {

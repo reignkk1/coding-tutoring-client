@@ -44,7 +44,6 @@ export default function PostDetail({ category }: ICategory) {
 
   const { title, content, subject, onOrOff, area, member } = post;
 
-  console.log(category);
   const handleDelete = () => {
     if (window.confirm("정말로 삭제하겠습니까?")) {
       dispatch(deletePost({ category, id: post.id }));
@@ -169,6 +168,10 @@ export const Profile = styled.div`
       margin-bottom: 1rem;
 
       &.nickname {
+        &:hover {
+          cursor: pointer;
+          text-decoration: underline;
+        }
         font-size: 1.2rem;
         line-height: 1.3;
         font-family: regular;

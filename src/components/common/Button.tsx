@@ -13,17 +13,24 @@ const Btn = styled.button`
   &:hover {
     background-color: #b2e22d;
   }
+
+  &.hide {
+    @media (max-width: 900px) {
+      display: none;
+    }
+  }
 `;
 
 interface IButton {
   children: React.ReactNode;
   onClick?(): void;
   type?: "submit" | "reset" | "button";
+  className?: string;
 }
 
-function Button({ children, onClick, type = "button" }: IButton) {
+function Button({ children, onClick, type = "button", className }: IButton) {
   return (
-    <Btn type={type} onClick={onClick}>
+    <Btn type={type} onClick={onClick} className={className}>
       {children}
     </Btn>
   );

@@ -5,6 +5,7 @@ import {
   careerFormat,
   firstToUpper,
   howFormat,
+  ageFormat,
 } from "../../util/format";
 
 interface PostListProps {
@@ -25,7 +26,14 @@ export default function PostList({ post, category }: PostListProps) {
   const navigate = useNavigate();
 
   return (
-    <li key={id}>
+    <li
+      key={id}
+      onClick={() =>
+        navigate(`/${category}/post/${id}`, {
+          state: post,
+        })
+      }
+    >
       <ImgBox>
         <img
           src={`${
@@ -38,21 +46,14 @@ export default function PostList({ post, category }: PostListProps) {
         <span>{member!.nickname}</span>
       </ImgBox>
       <InfoBox>
-        <h2
-          onClick={() =>
-            navigate(`/${category}/post/${id}`, {
-              state: post,
-            })
-          }
-        >
-          {title}
-        </h2>
+        <h2>{title}</h2>
 
         <span>{firstToUpper(`${subject}`)}</span>
         <p>{howFormat(`${onOrOff}`)}</p>
         <p>
           {genderFormat(`${member!.gender}`)} /&nbsp;
-          {careerFormat(`${member!.career}`)}
+          {careerFormat(`${member!.career}`)} /&nbsp;
+          {ageFormat(`${member!.ageGroup}`)}
         </p>
         <p className="area">{area} 거주</p>
       </InfoBox>

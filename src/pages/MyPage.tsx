@@ -4,16 +4,19 @@ import { useNavigate } from "react-router";
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
 import { Profile } from "./PostDetail";
+import Button from "../components/common/Button";
 
-import { careerFormat, genderFormat } from "../util/format";
+import { ageFormat, careerFormat, genderFormat } from "../util/format";
 import PostList from "../components/mypage/PostList";
 import { AuthContext } from "../context/AuthContext";
 
 export default function MyPage(): JSX.Element {
   const { user } = useContext(AuthContext);
+
   const {
     img,
     nickname,
+    ageGroup,
     career,
     userClassification,
     gender,
@@ -38,22 +41,22 @@ export default function MyPage(): JSX.Element {
             {userClassification === "STUDENT" ? "학생" : "선생님"}
           </p>
           <p className="career">
-            {careerFormat(`${career}`)} / {genderFormat(`${gender}`)}
+            {careerFormat(`${career}`)} / {genderFormat(`${gender}`)} / &nbsp;
+            {ageFormat(`${ageGroup}`)}
           </p>
-          <Buttton
+          <Button
             onClick={() => {
               navigate("/profile/update", { state: user });
             }}
           >
             수정
-          </Buttton>
+          </Button>
         </div>
       </Profile>
 
       <PostContainer>
-        {!havePosts && (
-          <Img src={require("../assets/noImg.png")} alt="no-img" />
-        )}
+        {!havePosts && <p className="noPost">작성된 글이 없습니다.</p>}
+
         {havePosts && userClassification === "STUDENT" && (
           <Posts>
             {studentPostResponseDtos.map((post: any) => (
@@ -89,6 +92,10 @@ export const ImgContainer = styled.div`
     width: 6rem;
     height: 6rem;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const Posts = styled.ul`
   display: flex;
@@ -96,15 +103,16 @@ const Posts = styled.ul`
   gap: 1rem;
 `;
 
-const Img = styled.img`
-  opacity: 0.5;
-`;
-
 const PostContainer = styled.div`
   width: 70%;
   margin-inline: auto;
   margin-block: 2rem;
   padding-inline: 4rem;
+
+  .noPost {
+    width: fit-content;
+    margin-inline: auto;
+  }
   div {
     display: flex;
     flex-direction: column;
@@ -140,6 +148,7 @@ const PostContainer = styled.div`
 
     &:hover {
       transform: translateY(-0.5rem);
+      cursor: pointer;
     }
     @media (max-width: 500px) {
       flex-direction: column;
@@ -155,20 +164,4 @@ const PostContainer = styled.div`
   @media (max-width: 650px) {
     padding-inline: 2rem;
   }
-`;
-
-const Buttton = styled.button`
-  padding: 0.5rem 0.8rem;
-
-  background-color: #c9fd35;
-  border-radius: 5px;
-
-  font-size: 1rem;
-  font-family: regular;
-  color: #0e1620;
-
-  &:hover {
-    background-color: #93ba27;
-  }
-  transition: all 0.1s ease-in-out;
 `;
