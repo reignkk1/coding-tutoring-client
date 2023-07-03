@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormInput from "../components/sign/FormInput";
 import { signup } from "../api/auth";
 import RadioInput from "../components/sign/RadioInput";
 import Select from "../components/sign/Select";
 import { FormContainer, Button } from "../styles/Form";
+import { useAuth } from "../hooks/useAuth";
+import { toggleAuth } from "../store/auth";
 
 export default function SignUp() {
+  const [authEmail, dispatch] = useAuth();
+  useEffect(() => {
+    dispatch(toggleAuth(false));
+  }, [dispatch]);
+
   type ObjType = {
     [index: string]: any;
     email: string;
@@ -171,7 +178,9 @@ export default function SignUp() {
             );
           }
         })}
-        <Button className="signup submit">회원가입</Button>
+        <Button disabled={!authEmail} className="signup submit">
+          회원가입
+        </Button>
       </form>
     </FormContainer>
   );

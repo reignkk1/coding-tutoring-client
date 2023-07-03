@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { findPwd } from "../api/auth";
 import { FormContainer, Button } from "../styles/Form";
 import FormInput from "../components/sign/FormInput";
+import { useAuth } from "../hooks/useAuth";
+import { toggleAuth } from "../store/auth";
 
 export default function FindPwd() {
+  const [authEmail, dispatch] = useAuth();
+  useEffect(() => {
+    dispatch(toggleAuth(false));
+  }, [dispatch]);
+
+  console.log(authEmail);
   type ObjType = {
     [index: string]: any;
     id: string;
@@ -75,7 +83,9 @@ export default function FindPwd() {
             />
           );
         })}
-        <Button className="submit">변경하기</Button>
+        <Button disabled={!authEmail} className="submit">
+          변경하기
+        </Button>
       </form>
     </FormContainer>
   );
