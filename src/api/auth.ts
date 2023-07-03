@@ -194,8 +194,8 @@ export const kakaoSignin = async (access_token: string) => {
       localStorage.setItem("expiration", expiration.toISOString());
 
       alert("로그인 되셨습니다");
-      // window.location.replace("/profile/update");
-      window.location.replace("/");
+      window.location.replace("/profile/update");
+      // window.location.replace("/");
     }
   } catch (error: any) {
     alert(error.response.data.msg);

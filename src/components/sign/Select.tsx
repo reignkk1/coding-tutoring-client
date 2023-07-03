@@ -3,15 +3,23 @@ import styled from "styled-components";
 
 export default function Select(props: any) {
   const { label, errorMessage, onChange, id, ...inputProps } = props;
-
+  // console.log(inputProps);
   return (
     <SelectContainer>
       <label htmlFor={`${label}`}>{label}을 선택해주세요*</label>
       <select id={label} {...inputProps} onChange={onChange}>
         {inputProps.options?.map((option: any) => (
-          <option key={option.value} value={option.value}>
-            {option.name}
-          </option>
+          <>
+            {inputProps.value === option.value ? (
+              <option key={option.value} value={option.value} selected>
+                {option.name}
+              </option>
+            ) : (
+              <option key={option.value} value={option.value}>
+                {option.name}
+              </option>
+            )}
+          </>
         ))}
       </select>
     </SelectContainer>
