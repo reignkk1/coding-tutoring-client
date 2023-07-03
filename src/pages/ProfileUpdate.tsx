@@ -1,14 +1,17 @@
-import { useLocation, useRouteLoaderData } from "react-router";
-import { useState } from "react";
+import { useRouteLoaderData } from "react-router";
+import { useContext, useState } from "react";
 import { updateProfile } from "../api/auth";
 import RadioInput from "../components/sign/RadioInput";
 import Select from "../components/sign/Select";
 import FormInput from "../components/sign/FormInput";
 import { FormContainer, Button } from "../styles/Form";
-import { IGetUser } from "../api/auth";
+// import { IGetUser } from "../api/auth";
+import { AuthContext } from "../context/AuthContext";
 
 export default function ProfileUpdate() {
-  const user: IGetUser = useLocation().state;
+  //카카오 로그인 유저 처음 업데이트 할때 navigate으로 가져올 정보가 없음
+  // const user: IGetUser = useLocation().state;
+  const { user } = useContext(AuthContext);
   console.log(user);
   type ObjType = {
     [index: string]: any;
