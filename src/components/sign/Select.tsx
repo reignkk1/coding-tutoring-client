@@ -7,19 +7,16 @@ export default function Select(props: any) {
   return (
     <SelectContainer>
       <label htmlFor={`${label}`}>{label}을 선택해주세요*</label>
-      <select id={label} {...inputProps} onChange={onChange}>
+      <select
+        id={label}
+        {...inputProps}
+        onChange={onChange}
+        value={inputProps.value}
+      >
         {inputProps.options?.map((option: any) => (
-          <>
-            {inputProps.value === option.value ? (
-              <option key={option.value} value={option.value} selected>
-                {option.name}
-              </option>
-            ) : (
-              <option key={option.value} value={option.value}>
-                {option.name}
-              </option>
-            )}
-          </>
+          <option key={option.value} value={option.value}>
+            {option.name}
+          </option>
         ))}
       </select>
     </SelectContainer>
