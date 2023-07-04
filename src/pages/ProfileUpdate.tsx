@@ -12,6 +12,14 @@ export default function ProfileUpdate() {
   //카카오 로그인 유저 처음 업데이트 할때 navigate으로 가져올 정보가 없음
   // const user: IGetUser = useLocation().state;
   const { user } = useContext(AuthContext);
+  const alertMoreInfo = () => {
+    if (!user.nickname) {
+      window.alert(
+        "교습 요청, 등록 및 쪽지 기능 활성화를 위해 추가 정보를 입력해 주세요."
+      );
+    }
+  };
+  alertMoreInfo();
 
   type ObjType = {
     [index: string]: any;
@@ -114,7 +122,13 @@ export default function ProfileUpdate() {
   return (
     <FormContainer>
       <form onSubmit={handleSubmit}>
-        <h1>회원 정보 수정</h1>
+        <h1>{!user.nickname ? "추가 정보 입력" : "회원 정보 수정"}</h1>
+        {!user.nickname && (
+          <p className="moreInfo">
+            교습 요청, 등록 및 쪽지 기능 활성화를 위해 추가 정보를 입력해
+            주세요.
+          </p>
+        )}
         {inputs.map((input) => {
           if (input.type === "radio") {
             return (

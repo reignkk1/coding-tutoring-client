@@ -21,6 +21,14 @@ export const FormContainer = styled.div`
     margin-bottom: 1rem;
   }
 
+  .moreInfo {
+    width: 222px;
+    margin: 1rem 0 0.8rem 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #c9fd35;
+  }
+
   form {
     &:invalid .submit {
       background-color: #86ab20;

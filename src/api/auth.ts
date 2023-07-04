@@ -185,7 +185,7 @@ export const kakaoSignin = async (access_token: string) => {
     });
 
     if (res.status === 200) {
-      console.log(res);
+      console.dir(res.data.isFirstSignIn);
       const token = res.data.token;
 
       localStorage.setItem("token", token);
@@ -194,7 +194,7 @@ export const kakaoSignin = async (access_token: string) => {
       localStorage.setItem("expiration", expiration.toISOString());
 
       alert("로그인 되셨습니다");
-      if (res.data.isFirstSignIn) {
+      if (res.data.isFirstSignIn === true) {
         window.location.replace("/profile/update");
       } else {
         window.location.replace("/");

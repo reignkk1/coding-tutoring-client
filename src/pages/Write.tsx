@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Wrapper from "../components/common/Wrapper";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import useWriteEditForm from "../hooks/useWriteEditForm";
 import UserInfo from "../components/write/UserInfo";
@@ -37,6 +38,13 @@ const ButtonBox = styled.div`
 
 export default function Write() {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user.nickname) {
+      navigate("/profile/update");
+    }
+  }, []);
 
   const [state, dispatch] = useWriteEditForm();
 
