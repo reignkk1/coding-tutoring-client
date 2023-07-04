@@ -6,7 +6,6 @@ export function getTokenDuration() {
   const now = new Date();
   //로컬스토리지에 저장된 만료 시간을 ms로 환산한 시간에서 현재시간을 ms로 환산한 시간을 뺌
   const duration = expirationDate.getTime() - now.getTime(); //단위 ms
-  console.log(duration);
   return duration;
 }
 
@@ -29,7 +28,6 @@ export function getAuthToken() {
 }
 
 export function tokenLoader() {
-  console.log("이것저것 만지는중");
   return getAuthToken();
 }
 

@@ -40,12 +40,10 @@ const api = (store: any) => (next: any) => async (action: any) => {
       alert("보내기 완료!");
     }
     if (method === "DELETE") {
-      if (window.confirm("정말로 삭제하겠습니까?")) {
-        store.dispatch({
-          type: onSuccess,
-          payload: { category: category, data: data },
-        });
-      }
+      store.dispatch({
+        type: onSuccess,
+        payload: { category: category, data: data },
+      });
     }
   } catch (error: any) {
     store.dispatch({ type: onError, payload: { error: error.message } });

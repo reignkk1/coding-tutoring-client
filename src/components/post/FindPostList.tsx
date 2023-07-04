@@ -121,7 +121,6 @@ export default function FindPostList() {
   const navigate = useNavigate();
 
   const { posts, isLoading } = usePost();
-  // console.log(posts);
 
   return isLoading ? (
     <Container>

@@ -25,7 +25,10 @@ export default function Note({
   const [, , , noteDispatch] = useNote();
 
   const handleDelete = () => {
-    noteDispatch(deleteNote(selected, note.messageId as string));
+    if (window.confirm("정말로 삭제하겠습니까?")) {
+      noteDispatch(deleteNote(selected, note.messageId as string));
+    }
+    return;
   };
 
   return (

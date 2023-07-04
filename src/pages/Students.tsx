@@ -7,8 +7,8 @@ import usePostScrollPage from "../hooks/usePostScrollPage";
 import { getPost } from "../store/post/postApiAction";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import useCategory from "../hooks/useCategory";
 import { setCategory } from "../store/category";
+import { pageReset } from "../store/post/pageSlice";
 
 const Container = styled.div`
   margin-top: 4rem;
@@ -21,18 +21,14 @@ const Container = styled.div`
 
 export default function Students() {
   const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
-  const [, categoryDispatch] = useCategory();
-
-  const [page, setPage] = usePostScrollPage();
+  const [page] = usePostScrollPage();
 
   useEffect(() => {
-    //console.log("페이지 처음 마운트", page);
-    setPage(0);
-    categoryDispatch(setCategory("student"));
-  }, [categoryDispatch, setPage]);
+    dispatch(pageReset());
+    dispatch(setCategory("student"));
+  }, [dispatch]);
 
   useEffect(() => {
-    //console.log("이제야 제대로", page);
     dispatch(getPost({ category: "student", page }));
   }, [dispatch, page]);
 
