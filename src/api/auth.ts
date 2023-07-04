@@ -196,7 +196,9 @@ export const kakaoSignin = async (access_token: string) => {
       alert("로그인 되셨습니다");
       if (res.data.isFirstSignIn) {
         window.location.replace("/profile/update");
-      } else window.location.replace("/");
+      } else {
+        window.location.replace("/");
+      }
     }
   } catch (error: any) {
     alert(error.response.data.msg);

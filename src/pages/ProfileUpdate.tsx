@@ -12,7 +12,7 @@ export default function ProfileUpdate() {
   //카카오 로그인 유저 처음 업데이트 할때 navigate으로 가져올 정보가 없음
   // const user: IGetUser = useLocation().state;
   const { user } = useContext(AuthContext);
-  console.log(user);
+
   type ObjType = {
     [index: string]: any;
 
