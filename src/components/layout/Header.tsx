@@ -155,8 +155,8 @@ export default function Header() {
           <Nav>
             <ul>
               {menu.map((list) => (
-                <NavItem>
-                  <Link key={list.item} to={list.to} onClick={handleOpen}>
+                <NavItem key={list.item}>
+                  <Link to={list.to} onClick={handleOpen}>
                     {list.item}
                   </Link>
                 </NavItem>

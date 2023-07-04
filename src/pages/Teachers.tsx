@@ -3,12 +3,12 @@ import TopSheet from "../components/post/TopSheet";
 import FindPostList from "../components/post/FindPostList";
 import Wrapper from "../components/common/Wrapper";
 import { useEffect } from "react";
-import useCategory from "../hooks/useCategory";
 import usePostScrollPage from "../hooks/usePostScrollPage";
 import { getPost } from "../store/post/postApiAction";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { setCategory } from "../store/category";
+import { pageReset } from "../store/post/pageSlice";
 
 const Container = styled.div`
   margin-top: 4rem;
@@ -20,19 +20,15 @@ const Container = styled.div`
 `;
 
 export default function Teachers() {
-  const [page, setPage] = usePostScrollPage();
-  const [, categoryDispatch] = useCategory();
-
   const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
+  const [page] = usePostScrollPage();
 
   useEffect(() => {
-    // console.log("페이지 처음 마운트", page);
-    setPage(0);
-    categoryDispatch(setCategory("teacher"));
-  }, [categoryDispatch, setPage]);
+    dispatch(pageReset());
+    dispatch(setCategory("teacher"));
+  }, [dispatch]);
 
   useEffect(() => {
-    // console.log("이제야 제대로", page);
     dispatch(getPost({ category: "teacher", page }));
   }, [dispatch, page]);
 

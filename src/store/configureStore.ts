@@ -7,6 +7,7 @@ import error from "./middleware/error";
 import categorySlice from "./category";
 import writeEditFormSlice from "./post/PostWriteEditFormSlice";
 import authSlice from "./auth";
+import pageSlice from "./post/pageSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     modal: modalSlice,
     note: noteSlice,
     category: categorySlice,
+    postPage: pageSlice,
   },
   middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), api, error],
 });

@@ -5,6 +5,7 @@ import { useState } from "react";
 import useCategory from "../../hooks/useCategory";
 import { ThunkDispatch } from "redux-thunk";
 import { getPost, searchTitlePosts } from "../../store/post/postApiAction";
+import { pageReset } from "../../store/post/pageSlice";
 
 const Form = styled.form`
   display: flex;
@@ -47,12 +48,12 @@ export default function SearchBar() {
     e.preventDefault();
 
     dispatch(searchTitlePosts({ category, title: value }));
-
     setValue("");
   };
 
   const handleReset = () => {
     setValue("");
+    dispatch(pageReset());
     dispatch(getPost({ category, page: 0 }));
   };
 
