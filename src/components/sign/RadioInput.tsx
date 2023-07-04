@@ -7,7 +7,7 @@ export default function RadioInput(props: any) {
   const handleFocus = () => {
     setFocused(true);
   };
-
+  // console.log(inputProps);
   return (
     <RadioContainer>
       <legend>{label}을 선택해주세요*</legend>
@@ -20,6 +20,7 @@ export default function RadioInput(props: any) {
             value={option.value}
             onBlur={handleFocus}
             focused={focused.toString()}
+            checked={option.value === inputProps.value && "checked"}
           />
           <label htmlFor={option.value}>{option.label}</label>
         </Radio>

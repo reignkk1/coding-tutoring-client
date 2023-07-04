@@ -57,7 +57,7 @@ export default function Note({
       <button onClick={handleDelete}>삭제</button>
 
       <p>{note.title}</p>
-      <p>{note.content}</p>
+      <p>{note.content.replaceAll("<br/>", "\n")}</p>
       {/* 답장할 사람의 id랑 현재 쪽지의 보낸 사람이 같은 경우만 모달창을 띄움  */}
       {sender === note.senderId && (
         <Modal>

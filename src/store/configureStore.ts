@@ -6,9 +6,11 @@ import api from "./middleware/api";
 import error from "./middleware/error";
 import categorySlice from "./category";
 import writeEditFormSlice from "./post/PostWriteEditFormSlice";
+import authSlice from "./auth";
 
 export const store = configureStore({
   reducer: {
+    auth: authSlice,
     post: postSlice,
     writeEditForm: writeEditFormSlice,
     modal: modalSlice,

@@ -2,15 +2,18 @@ import { useState } from "react";
 import styled from "styled-components";
 import { sendCode } from "../../api/auth";
 import { Button } from "../../styles/Form";
+import { useAuth } from "../../hooks/useAuth";
+import { toggleAuth } from "../../store/auth";
 
 const FormInput = (props: any) => {
   const [focused, setFocused] = useState(false);
   const { label, errorMessage, onChange, id, ...inputProps } = props;
 
+  const [authEmail, dispatch] = useAuth();
   const [requestCode, setRequestCode] = useState(false);
   const [code, setCode] = useState("");
   const [inputCode, setInputCode] = useState("");
-  const [authEmail, setAuthEmail] = useState(false);
+
   const handleFocus = () => {
     setFocused(true);
   };
@@ -47,8 +50,8 @@ const FormInput = (props: any) => {
               type="button"
               disabled={authEmail}
               onClick={() => {
-                if (inputCode === code) {
-                  setAuthEmail(true);
+                if (code === inputCode) {
+                  dispatch(toggleAuth(true));
                   alert("이메일 인증을 성공했습니다.");
                 } else {
                   alert("인증코드가 다릅니다.");

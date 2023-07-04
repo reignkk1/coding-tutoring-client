@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { findPwd } from "../api/auth";
 import { FormContainer, Button } from "../styles/Form";
 import FormInput from "../components/sign/FormInput";
+import { useAuth } from "../hooks/useAuth";
+import { toggleAuth } from "../store/auth";
 
 export default function FindPwd() {
+  const [authEmail, dispatch] = useAuth();
+  useEffect(() => {
+    dispatch(toggleAuth(false));
+  }, [dispatch]);
+
+  // console.log(authEmail);
   type ObjType = {
     [index: string]: any;
     id: string;
@@ -43,8 +51,7 @@ export default function FindPwd() {
       placeholder: "이메일",
       errorMessage: "올바른 이메일 형식이 아니에요",
       label: "이메일",
-      pattern:
-        "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$",
+      pattern: "^[a-z0-9]+@[a-z]+.[a-z]{2,3}$",
       required: true,
     },
 
@@ -56,7 +63,7 @@ export default function FindPwd() {
       errorMessage: "숫자, 영문자, 특수문자 조합으로 8자리 이상 입력해주세요",
       label: "비밀번호",
       pattern:
-        "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$",
+        "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*~])[a-zA-Z0-9!@#$%^&*~]{8,20}$",
       required: true,
     },
   ];
@@ -75,7 +82,9 @@ export default function FindPwd() {
             />
           );
         })}
-        <Button className="submit">변경하기</Button>
+        <Button disabled={!authEmail} className="submit">
+          변경하기
+        </Button>
       </form>
     </FormContainer>
   );

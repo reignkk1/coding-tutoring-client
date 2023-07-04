@@ -183,9 +183,9 @@ export const kakaoSignin = async (access_token: string) => {
       url: `${baseUrl}/oauth/kakao/${access_token}`,
       method: "get",
     });
-    console.log(res);
 
     if (res.status === 200) {
+      console.log(res);
       const token = res.data.token;
 
       localStorage.setItem("token", token);
@@ -194,8 +194,11 @@ export const kakaoSignin = async (access_token: string) => {
       localStorage.setItem("expiration", expiration.toISOString());
 
       alert("로그인 되셨습니다");
-      // window.location.replace("/profile/update");
-      window.location.replace("/");
+      if (res.data.isFirstSignIn) {
+        window.location.replace("/profile/update");
+      } else {
+        window.location.replace("/");
+      }
     }
   } catch (error: any) {
     alert(error.response.data.msg);

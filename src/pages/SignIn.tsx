@@ -5,7 +5,7 @@ import SocialKakao from "../components/sign/SocialKakao";
 import { signin } from "../api/auth";
 import { FormContainer, HelpSign, Button } from "../styles/Form";
 
-export default function Signin() {
+export default function SignIn() {
   type ObjType = {
     [index: string]: any;
     id: string;
@@ -38,7 +38,7 @@ export default function Signin() {
       errorMessage: "숫자, 영문자, 특수문자 조합으로 8자리 이상 입력해주세요",
       label: "비밀번호",
       pattern:
-        "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$",
+        "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*~])[a-zA-Z0-9!@#$%^&*~]{8,20}$",
       required: true,
     },
   ];

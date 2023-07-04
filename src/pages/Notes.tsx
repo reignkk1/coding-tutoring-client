@@ -19,6 +19,7 @@ export default function Notes() {
   }, []);
 
   let reversedNotes = [...notes[selected]].reverse();
+  const haveNotes = notes[selected].length !== 0;
 
   useEffect(() => {
     dispatch(loadNotes(selected));
@@ -33,15 +34,21 @@ export default function Notes() {
             <Loading className="note" />
           ) : (
             <>
-              {reversedNotes.map((note: INote) => (
-                <Note
-                  key={note.messageId}
-                  note={note}
-                  selected={selected}
-                  sender={sender}
-                  setSender={setSender}
-                />
-              ))}
+              {!haveNotes && (
+                <p className="noNotes">
+                  {selected === "received" ? "받은" : "보낸"} 쪽지가 없습니다.
+                </p>
+              )}
+              {haveNotes &&
+                reversedNotes.map((note: INote) => (
+                  <Note
+                    key={note.messageId}
+                    note={note}
+                    selected={selected}
+                    sender={sender}
+                    setSender={setSender}
+                  />
+                ))}
             </>
           )}
         </MsgBox>
