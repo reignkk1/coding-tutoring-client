@@ -104,7 +104,7 @@ export default function PostDetail({ category }: ICategory) {
             )}
           </div>
         </Profile>
-        {user && user.id === member.id && (
+        {user && user.nickcname && user.id === member.id && (
           <Buttons>
             <Button onClick={handleDelete}>삭제</Button>
             <Button onClick={handleModify}>수정</Button>
