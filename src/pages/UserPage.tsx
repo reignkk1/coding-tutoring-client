@@ -1,22 +1,25 @@
 import styled from "styled-components";
+import { useContext } from "react";
 import Wrapper from "../components/common/Wrapper";
 import { Profile } from "./PostDetail";
 import { careerFormat, genderFormat, ageFormat } from "../util/format";
 import PostList from "../components/mypage/PostList";
 import Modal from "../components/common/Modal";
 import MessageSendBox from "../components/notes/MessageSendBox";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useGetUserDataById } from "../api/auth";
 import { useDispatch } from "react-redux";
 import { openModal } from "../store/modal";
 import Button from "../components/common/Button";
+import { AuthContext } from "../context/AuthContext";
 
 export default function UserPage(): JSX.Element {
   const { userId } = useParams();
-
+  const { user } = useContext(AuthContext);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const user = useGetUserDataById(userId);
+  const member = useGetUserDataById(userId);
 
   const {
     id,
@@ -28,7 +31,7 @@ export default function UserPage(): JSX.Element {
     userClassification,
     studentPostResponseDtos,
     teacherPostResponseDtos,
-  } = user || {};
+  } = member || {};
 
   const havePosts =
     studentPostResponseDtos?.length + teacherPostResponseDtos?.length !== 0;
@@ -49,10 +52,27 @@ export default function UserPage(): JSX.Element {
             {careerFormat(`${career}`)} / {genderFormat(`${gender}`)} / &nbsp;
             {ageFormat(`${ageGroup}`)}
           </p>
-          <Button onClick={() => dispatch(openModal())}>쪽지 보내기</Button>
-          <Modal>
-            <MessageSendBox receiverId={id} receiverNickname={nickname} />
-          </Modal>
+          {!(user && user.id === id) && (
+            <Button
+              onClick={() => {
+                if (!user) {
+                  alert("로그인이 필요한 서비스 입니다.");
+                } else if (user && !user.nickname) {
+                  navigate("/profile/update");
+                } else if (user && user.nickname) {
+                  dispatch(openModal());
+                }
+              }}
+            >
+              쪽지 보내기
+            </Button>
+          )}
+
+          {user && user.nickname && (
+            <Modal>
+              <MessageSendBox receiverId={id} receiverNickname={nickname} />
+            </Modal>
+          )}
         </div>
       </Profile>
       <PostContainer>

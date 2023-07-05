@@ -83,15 +83,18 @@ export default function PostDetail({ category }: ICategory) {
                 onClick={() => {
                   if (!user) {
                     alert("로그인이 필요한 서비스 입니다.");
+                  } else if (user && !user.nickname) {
+                    navigate("/profile/update");
+                  } else if (user && user.nickname) {
+                    modalDispatch(openModal());
                   }
-                  modalDispatch(openModal());
                 }}
               >
                 쪽지 보내기
               </Button>
             )}
 
-            {user && (
+            {user && user.nickname && (
               <Modal>
                 <MessageSendBox
                   receiverId={member.id}
