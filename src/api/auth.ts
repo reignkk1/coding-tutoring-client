@@ -192,11 +192,11 @@ export const kakaoSignin = async (access_token: string) => {
       // 만료시간 30분
       const expiration = new Date(new Date().getTime() + 30 * 60 * 1000);
       localStorage.setItem("expiration", expiration.toISOString());
-
+      console.log(res);
       alert("로그인 되셨습니다");
       if (res.data.isFirstSignIn === true) {
         window.location.replace("/profile/update");
-      } else {
+      } else if (res.data.isFirstSignIn === false) {
         window.location.replace("/");
       }
     }

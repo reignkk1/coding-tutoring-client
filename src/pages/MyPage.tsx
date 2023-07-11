@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router";
 
 import styled from "styled-components";
@@ -12,6 +12,19 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function MyPage(): JSX.Element {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const alertMoreInfo = () => {
+      if (!user?.nickname) {
+        window.alert(
+          "교습 요청, 등록 및 쪽지 기능 활성화를 위해 추가 정보를 입력해 주세요."
+        );
+        navigate("/profile/update");
+      }
+    };
+    alertMoreInfo();
+  }, [navigate, user?.nickname]);
 
   const {
     img,
@@ -23,7 +36,6 @@ export default function MyPage(): JSX.Element {
     studentPostResponseDtos,
     teacherPostResponseDtos,
   } = user || {};
-  const navigate = useNavigate();
 
   const havePosts =
     studentPostResponseDtos?.length + teacherPostResponseDtos?.length !== 0;

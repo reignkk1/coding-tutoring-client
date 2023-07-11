@@ -1,25 +1,15 @@
 import { useRouteLoaderData } from "react-router";
-import { useContext, useState } from "react";
+import { useEffect, useContext, useState } from "react";
 import { updateProfile } from "../api/auth";
 import RadioInput from "../components/sign/RadioInput";
 import Select from "../components/sign/Select";
 import FormInput from "../components/sign/FormInput";
 import { FormContainer, Button } from "../styles/Form";
-// import { IGetUser } from "../api/auth";
 import { AuthContext } from "../context/AuthContext";
 
 export default function ProfileUpdate() {
   //카카오 로그인 유저 처음 업데이트 할때 navigate으로 가져올 정보가 없음
-  // const user: IGetUser = useLocation().state;
   const { user } = useContext(AuthContext);
-  const alertMoreInfo = () => {
-    if (!user.nickname) {
-      window.alert(
-        "교습 요청, 등록 및 쪽지 기능 활성화를 위해 추가 정보를 입력해 주세요."
-      );
-    }
-  };
-  alertMoreInfo();
 
   type ObjType = {
     [index: string]: any;
@@ -31,11 +21,11 @@ export default function ProfileUpdate() {
     career: string;
   };
   const [values, setValues] = useState<ObjType>({
-    nickname: user?.nickname,
-    userClassification: user?.userClassification,
-    gender: user?.gender,
-    ageGroup: user?.ageGroup,
-    career: user?.career,
+    nickname: user.nickname ? user.nickname : "",
+    userClassification: user.nickname ? user.userClassification : "",
+    gender: user.nickname ? user.gender : "",
+    ageGroup: user.nickname ? user.ageGroup : "",
+    career: user.nickname ? user.career : "",
   });
   const inputs = [
     {
