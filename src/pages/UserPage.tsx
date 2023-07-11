@@ -58,6 +58,9 @@ export default function UserPage(): JSX.Element {
                 if (!user) {
                   alert("로그인이 필요한 서비스 입니다.");
                 } else if (user && !user.nickname) {
+                  window.alert(
+                    "교습 요청, 등록 및 쪽지 기능 활성화를 위해 추가 정보를 입력해 주세요."
+                  );
                   navigate("/profile/update");
                 } else if (user && user.nickname) {
                   dispatch(openModal());
